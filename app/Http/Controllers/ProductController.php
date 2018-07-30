@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Category;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use  Illuminate\Foundation\Http\FormRequest;
 
@@ -27,5 +28,13 @@ class ProductController extends Controller
         $product->save();
         return $product;
 
+    }
+
+    public function save(Request $request)
+    {
+       $product = Product::create($request->except('_token','category_id'));
+       $category = Category::find($request->category_id);
+       $product->categories()->attach($category);
+       return $product;
     }
 }

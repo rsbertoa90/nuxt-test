@@ -18,11 +18,12 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('code')->unique();
             $table->string('name');
             $table->integer('price')->default(0);
             $table->integer('pck_units')->default(1);
             $table->integer('pck_price')->default(0);
-            $table->string('image')->nullable();
+            $table->string('image')->default('/storage/images/app/no-image.png');
             $table->softDeletes();
             $table->timestamps();
         });

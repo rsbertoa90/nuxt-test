@@ -20,8 +20,12 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 
     Route::put('/product/update','ProductController@update');
 
+    Route::post('/product','ProductController@save');
+
     Route::post('/product/image', 'ProductController@changeImage')->middleware('optimizeImages');
 
+    Route::post('/category/','CategoryController@save');
+    
 });
 
 
@@ -33,3 +37,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/cotizer/send', 'MailController@cotizacion');
 
+Route::get('/logout','HomeController@logout');

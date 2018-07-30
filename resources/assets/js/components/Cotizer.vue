@@ -1,6 +1,9 @@
 <template>
     <div class="container">   
-     
+        <div class="row w-100 d-flex justify-content-center">
+                 <img src="/storage/images/app/MAJU.jpg" style="width : 200px ; height: 150px" alt="logo">
+             </div>
+             <hr>
         <div id="accordion">
             <div v-for="category in categories" :key="category.id" class="card flex-wrap">
                 <div class="card-header" :id="category.id">
@@ -18,6 +21,7 @@
                     <div class="card-body">
                        <table class="table table-striped table-bordered ">
                            <thead class="">
+                               <th v-if="$mq != 'sm'">Foto</th>
                                <th class="nametd">Nombre</th>
                                <th class="">Precio</th>
                                <th  class="">Llevando mas de</th>
@@ -27,17 +31,18 @@
                            </thead>
                            <tbody>
                                <tr v-for="product in category.products" :key="product.id">
+                                   <td v-if="$mq != 'sm'"> <img style="width : 150px" :src="product.image" :alt="product.name" @click="show(product.image)"> </td>
                                    <td style="cursor:pointer" @click="show(product.image)">  {{product.name.trim()}} </td>
-                                   <td class="text-info text-center">${{product.price}} <span class="text-danger" v-if="$mq == 'sm'"> / ${{product.pck_price}}</span></td>
+                                   <td class="text-info text-center">${{product.price | price}} <span class="text-danger" v-if="$mq == 'sm'"> / ${{product.pck_price | price}}</span></td>
                                    <td class="text-center">{{product.pck_units}}</td>
-                                   <td v-if="$mq != 'sm'" class="text-center text-success font-weight-bold">${{product.pck_price}}</td>
+                                   <td v-if="$mq != 'sm'" class="text-center text-success font-weight-bold">${{product.pck_price | price}}</td>
 
                                    <td><input type="text" class="form-control " v-model="product.units">
                                         
                                         <div v-if="$mq == 'sm' && product.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center">
                                             
-                                            <span v-if="product.units < product.pck_units">  ${{(product.price * product.units)}} </span>
-                                            <span v-if="product.units > product.pck_units">  ${{(product.pck_price * product.units)}} </span>
+                                            <span v-if="product.units < product.pck_units">  ${{(product.price * product.units) | price}} </span>
+                                            <span v-if="product.units > product.pck_units">  ${{(product.pck_price * product.units) | price}} </span>
                                             
                                         </div>
                                    
@@ -54,11 +59,11 @@
             </div>
         </div>
         
-        <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">
-            <div v-if="total > 0" id="total"  class="col-12 d-flex justify-content-center">
-                <div  class="bg-success p-1">
+        <transition enter-active-class="animated bounceIn" leave-active-class="animated fadeOutDown">
+            <div v-if="total > 0" id="total"  class="col-12 row d-flex justify-content-center w-100">
+                <div  class="bg-success p-1 col-6 col-lg-2">
                     <div class="col-12 bg-white d-flex justify-content-center">
-                    TOTAL : ${{total.toFixed(2)}}
+                    TOTAL : ${{total | price}}
                     </div>
                 </div>
             </div>    
@@ -92,7 +97,7 @@
                     }
                     
                 });
-                console.log([].concat.apply([], result));
+                // console.log([].concat.apply([], result));
                 
                 vm.list = [].concat.apply([], result);
                 // console.log(vm.list);
@@ -136,6 +141,11 @@
                 content.style.width = '100%';
                 swal({content : content});
             }
+        },
+        filters : {
+            price(value){
+                return  value.toFixed(2);
+            }
         }
     }
 </script>
@@ -144,7 +154,7 @@
    .btn-link {color : black;}
     #total {
         position: fixed;
-        margin:auto;
+        /* margin-left:50vw; */
         bottom: 20px;
         z-index: 100;
     }

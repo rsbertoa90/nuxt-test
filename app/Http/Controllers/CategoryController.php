@@ -16,4 +16,11 @@ class CategoryController extends Controller
     {
         return Category::with('products')->find($id);
     }
+
+    public function save(Request $request)
+    {
+        $category = Category::create(['name' => $request->name]);
+
+        return $category;
+    }
 }
