@@ -11,7 +11,7 @@
         <div v-else>
              <a href="/logout" class="button btn btn-outline-info">Volver</a>
              <div class="row w-100 d-flex justify-content-center">
-                 <img src="/storage/images/app/MAJU.jpg" style="width : 200px ; height: 100px" alt="logo">
+                 <img src="/storage/images/app/MAJU.jpg" style="width : 200px ; height: 110px" alt="logo">
              </div>
              <hr>
                 <admin-create :categories="categories" @productSaved="refresh"></admin-create>
