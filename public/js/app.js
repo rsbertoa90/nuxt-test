@@ -50060,7 +50060,7 @@ var staticRenderFns = [
       { staticClass: "row w-100 d-flex justify-content-center" },
       [
         _c("img", {
-          staticStyle: { width: "200px", height: "150px" },
+          staticStyle: { width: "200px", height: "100px" },
           attrs: { src: "/storage/images/app/MAJU.jpg", alt: "logo" }
         })
       ]
@@ -51800,7 +51800,7 @@ var staticRenderFns = [
       { staticClass: "row w-100 d-flex justify-content-center" },
       [
         _c("img", {
-          staticStyle: { width: "200px", height: "150px" },
+          staticStyle: { width: "200px", height: "100px" },
           attrs: { src: "/storage/images/app/MAJU.jpg", alt: "logo" }
         })
       ]

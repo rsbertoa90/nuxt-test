@@ -1,7 +1,7 @@
 <template>
     <div class="container">   
         <div class="row w-100 d-flex justify-content-center">
-                 <img src="/storage/images/app/MAJU.jpg" style="width : 200px ; height: 150px" alt="logo">
+                 <img src="/storage/images/app/MAJU.jpg" style="width : 200px ; height: 100px" alt="logo">
              </div>
              <hr>
         <div id="accordion">
