@@ -42,7 +42,7 @@
                                         <div v-if="$mq == 'sm' && product.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center">
                                             
                                             <span v-if="product.units < product.pck_units">  ${{(product.price * product.units) | price}} </span>
-                                            <span v-if="product.units > product.pck_units">  ${{(product.pck_price * product.units) | price}} </span>
+                                            <span v-if="product.units >= product.pck_units">  ${{(product.pck_price * product.units) | price}} </span>
                                             
                                         </div>
                                    
