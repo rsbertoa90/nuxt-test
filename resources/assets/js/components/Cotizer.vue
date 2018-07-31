@@ -5,7 +5,7 @@
              </div>
              <hr>
         <div id="accordion">
-            <div v-for="category in categories" :key="category.id" class="card flex-wrap">
+            <div v-for="category in poblatedCategories" :key="category.id" class="card flex-wrap">
                 <div class="card-header" :id="category.id">
                     <h5 class="mb-0">
                         <button class="btn  btn-link w-100 text-left" 
@@ -34,7 +34,7 @@
                                <th v-if="$mq != 'sm'" class="">Subtotal</th>
                            </thead>
                            <tbody>
-                               <tr v-for="product in category.products" :key="product.id">
+                               <tr v-for="product in activeProducts(category)" :key="product.id" >
                                    <td v-if="$mq != 'sm'" > <img style="width : 150px" :src="product.image" :alt="product.name" @click="show(product.image)"> </td>
                                    <td style="cursor:pointer" @click="show(product.image)">  {{product.name.trim()}} </td>
                                    <td class="text-info text-center">${{product.price | price}} <span class="text-danger" v-if="$mq == 'sm'"> / ${{product.pck_price | price}}</span></td>
@@ -111,6 +111,14 @@
             }
         },
         computed: {
+            poblatedCategories(){
+                var vm = this;
+                var c = this.categories.filter(el => {
+                    return (vm.activeProducts(el).length > 0);
+                });
+                return c;
+
+            },
             total() {
                 var vm = this;
                 var tot = 0;
@@ -141,7 +149,13 @@
         },
         methods:
         {
-            
+            activeProducts(category)
+            {
+                var active = category.products.filter(pr => {
+                    return (! pr.paused)
+                });
+                return active;
+            },
             show(url){
                 var content = document.createElement("img");
                 $(content).attr('src',url);

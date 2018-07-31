@@ -49674,6 +49674,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     computed: {
+        poblatedCategories: function poblatedCategories() {
+            var vm = this;
+            var c = this.categories.filter(function (el) {
+                return vm.activeProducts(el).length > 0;
+            });
+            return c;
+        },
         total: function total() {
             var vm = this;
             var tot = 0;
@@ -49702,6 +49709,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        activeProducts: function activeProducts(category) {
+            var active = category.products.filter(function (pr) {
+                return !pr.paused;
+            });
+            return active;
+        },
         show: function show(url) {
             var content = document.createElement("img");
             $(content).attr('src', url);
@@ -49735,7 +49748,7 @@ var render = function() {
       _c(
         "div",
         { attrs: { id: "accordion" } },
-        _vm._l(_vm.categories, function(category) {
+        _vm._l(_vm.poblatedCategories, function(category) {
           return _c(
             "div",
             { key: category.id, staticClass: "card flex-wrap" },
@@ -49810,7 +49823,9 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "tbody",
-                          _vm._l(category.products, function(product) {
+                          _vm._l(_vm.activeProducts(category), function(
+                            product
+                          ) {
                             return _c("tr", { key: product.id }, [
                               _vm.$mq != "sm"
                                 ? _c("td", [
