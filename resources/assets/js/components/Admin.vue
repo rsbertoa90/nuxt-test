@@ -43,7 +43,7 @@
                                 </thead>
                                 <transition-group tag="tbody" 
                                                     enter-active-class="animated slideInLeft faster "
-                                                    leave-active-class="animated fadeOutDown faster ">
+                                                    leave-active-class="animated fadeOutDown faster position-absolute ">
                                     <tr v-for="product in category.products" :key="product.id">
                                         <td >
                                             <img :src="product.image" :alt="product.name" @click="imgModal(product)"> 

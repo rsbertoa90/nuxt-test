@@ -51583,7 +51583,7 @@ var render = function() {
                                     "enter-active-class":
                                       "animated slideInLeft faster ",
                                     "leave-active-class":
-                                      "animated fadeOutDown faster "
+                                      "animated fadeOutDown faster position-absolute "
                                   }
                                 },
                                 _vm._l(category.products, function(product) {
