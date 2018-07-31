@@ -41,7 +41,7 @@
                                    <td class="text-center">{{product.pck_units}}</td>
                                    <td v-if="$mq != 'sm'" class="text-center text-success font-weight-bold">${{product.pck_price | price}}</td>
 
-                                   <td><input type="number" min="0" class="form-control " v-model="product.units">
+                                   <td v-if="!product.paused"><input type="number" min="0" class="form-control " v-model="product.units">
                                         
                                         <div v-if="$mq == 'sm' && product.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center">
                                             
@@ -50,6 +50,9 @@
                                             
                                         </div>
                                    
+                                   </td>
+                                   <td v-else>
+                                       <span class="text-danger">Sin Stock</span>
                                    </td>
                                    
                                    <td v-if="! product.units && $mq != 'sm'"> 0 </td>

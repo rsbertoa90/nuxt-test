@@ -65,9 +65,13 @@
                                             $<input style="width:80%" type="number" v-model.lazy="product.pck_price" @change="saveChange(product,'pck_price')"> 
                                         </td>
                                         <td>
-                                            <button @click.prevent="deleteProduct(product)" class="btn btn-sm btn-outline-danger">
+                                            <button @click.prevent="deleteProduct(product)" class="btn btn-sm btn-outline-danger m-1">
                                                 <i class="fa fa-trash"></i>
                                             </button>
+                                            <button @click.prevent="togglePause(product)" class="btn btn-sm m-1" :class="{'btn-info' : !product.paused, 'btn-success': product.paused}">
+                                                <i :class="{'fa fa-pause-circle' : !product.paused , 'fa fa-play' : product.paused}"></i>
+                                            </button>
+                                            
                                         </td>
                                     </tr>
                                 </transition-group>
@@ -100,6 +104,28 @@ import adminCreate from './Create.vue';
             }
         },
         methods : {
+            togglePause(product){
+                var vm = this;
+                product.paused = !product.paused;
+                vm.saveChange(product,'paused');
+                for (const key in vm.categories) {
+                    if (vm.categories.hasOwnProperty(key)) {
+                        const category = vm.categories[key];
+                        for (const k in category.products) {
+                            if (category.products.hasOwnProperty(k)) {
+                                const prod = category.products[k];
+                                if (prod.id == product.id )
+                                {
+                                    vm.categories[key].products[k].paused = product.paused;
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                
+            },
             deleteProduct(product){
                 var vm = this;
                 this.$http.delete('/admin/product/'+product.id)

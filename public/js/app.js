@@ -49643,6 +49643,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -49893,74 +49896,80 @@ var render = function() {
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
-                              _c("td", [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: product.units,
-                                      expression: "product.units"
-                                    }
-                                  ],
-                                  staticClass: "form-control ",
-                                  attrs: { type: "number", min: "0" },
-                                  domProps: { value: product.units },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
+                              !product.paused
+                                ? _c("td", [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: product.units,
+                                          expression: "product.units"
+                                        }
+                                      ],
+                                      staticClass: "form-control ",
+                                      attrs: { type: "number", min: "0" },
+                                      domProps: { value: product.units },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            product,
+                                            "units",
+                                            $event.target.value
+                                          )
+                                        }
                                       }
-                                      _vm.$set(
-                                        product,
-                                        "units",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _vm.$mq == "sm" && product.units > 0
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center"
-                                      },
-                                      [
-                                        product.units < product.pck_units
-                                          ? _c("span", [
-                                              _vm._v(
-                                                "  $" +
-                                                  _vm._s(
-                                                    _vm._f("price")(
-                                                      product.price *
-                                                        product.units
-                                                    )
-                                                  ) +
-                                                  " "
-                                              )
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        product.units >= product.pck_units
-                                          ? _c("span", [
-                                              _vm._v(
-                                                "  $" +
-                                                  _vm._s(
-                                                    _vm._f("price")(
-                                                      product.pck_price *
-                                                        product.units
-                                                    )
-                                                  ) +
-                                                  " "
-                                              )
-                                            ])
-                                          : _vm._e()
-                                      ]
-                                    )
-                                  : _vm._e()
-                              ]),
+                                    }),
+                                    _vm._v(" "),
+                                    _vm.$mq == "sm" && product.units > 0
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center"
+                                          },
+                                          [
+                                            product.units < product.pck_units
+                                              ? _c("span", [
+                                                  _vm._v(
+                                                    "  $" +
+                                                      _vm._s(
+                                                        _vm._f("price")(
+                                                          product.price *
+                                                            product.units
+                                                        )
+                                                      ) +
+                                                      " "
+                                                  )
+                                                ])
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            product.units >= product.pck_units
+                                              ? _c("span", [
+                                                  _vm._v(
+                                                    "  $" +
+                                                      _vm._s(
+                                                        _vm._f("price")(
+                                                          product.pck_price *
+                                                            product.units
+                                                        )
+                                                      ) +
+                                                      " "
+                                                  )
+                                                ])
+                                              : _vm._e()
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ])
+                                : _c("td", [
+                                    _c("span", { staticClass: "text-danger" }, [
+                                      _vm._v("Sin Stock")
+                                    ])
+                                  ]),
                               _vm._v(" "),
                               !product.units && _vm.$mq != "sm"
                                 ? _c("td", [_vm._v(" 0 ")])
@@ -50650,6 +50659,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -50668,6 +50681,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        togglePause: function togglePause(product) {
+            var vm = this;
+            product.paused = !product.paused;
+            vm.saveChange(product, 'paused');
+            for (var key in vm.categories) {
+                if (vm.categories.hasOwnProperty(key)) {
+                    var category = vm.categories[key];
+                    for (var k in category.products) {
+                        if (category.products.hasOwnProperty(k)) {
+                            var prod = category.products[k];
+                            if (prod.id == product.id) {
+                                vm.categories[key].products[k].paused = product.paused;
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        },
         deleteProduct: function deleteProduct(product) {
             var vm = this;
             this.$http.delete('/admin/product/' + product.id).then(function (response) {
@@ -51786,7 +51818,7 @@ var render = function() {
                                         "button",
                                         {
                                           staticClass:
-                                            "btn btn-sm btn-outline-danger",
+                                            "btn btn-sm btn-outline-danger m-1",
                                           on: {
                                             click: function($event) {
                                               $event.preventDefault()
@@ -51797,6 +51829,31 @@ var render = function() {
                                         [
                                           _c("i", {
                                             staticClass: "fa fa-trash"
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-sm m-1",
+                                          class: {
+                                            "btn-info": !product.paused,
+                                            "btn-success": product.paused
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              _vm.togglePause(product)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            class: {
+                                              "fa fa-pause-circle": !product.paused,
+                                              "fa fa-play": product.paused
+                                            }
                                           })
                                         ]
                                       )
