@@ -49741,7 +49741,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn  btn-link",
+                        staticClass: "btn  btn-link w-100 text-left",
                         attrs: {
                           "data-toggle": "collapse",
                           "data-target": "#" + category.name,
@@ -49900,7 +49900,7 @@ var render = function() {
                                     }
                                   ],
                                   staticClass: "form-control ",
-                                  attrs: { type: "text" },
+                                  attrs: { type: "number", min: "0" },
                                   domProps: { value: product.units },
                                   on: {
                                     input: function($event) {
@@ -51800,7 +51800,7 @@ var staticRenderFns = [
       { staticClass: "row w-100 d-flex justify-content-center" },
       [
         _c("img", {
-          staticStyle: { width: "200px", height: "100px" },
+          staticStyle: { width: "200px", height: "110px" },
           attrs: { src: "/storage/images/app/MAJU.jpg", alt: "logo" }
         })
       ]

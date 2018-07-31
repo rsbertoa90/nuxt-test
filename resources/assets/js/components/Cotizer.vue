@@ -8,7 +8,7 @@
             <div v-for="category in categories" :key="category.id" class="card flex-wrap">
                 <div class="card-header" :id="category.id">
                     <h5 class="mb-0">
-                        <button class="btn  btn-link" 
+                        <button class="btn  btn-link w-100 text-left" 
                                 data-toggle="collapse" 
                                 :data-target="'#'+category.name" 
                                 aria-expanded="true" 
@@ -37,7 +37,7 @@
                                    <td class="text-center">{{product.pck_units}}</td>
                                    <td v-if="$mq != 'sm'" class="text-center text-success font-weight-bold">${{product.pck_price | price}}</td>
 
-                                   <td><input type="text" class="form-control " v-model="product.units">
+                                   <td><input type="number" min="0" class="form-control " v-model="product.units">
                                         
                                         <div v-if="$mq == 'sm' && product.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center">
                                             
