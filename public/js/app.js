@@ -49939,7 +49939,7 @@ var render = function() {
                                             ])
                                           : _vm._e(),
                                         _vm._v(" "),
-                                        product.units > product.pck_units
+                                        product.units >= product.pck_units
                                           ? _c("span", [
                                               _vm._v(
                                                 "  $" +
