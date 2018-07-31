@@ -37,4 +37,24 @@ class ProductController extends Controller
        $product->categories()->attach($category);
        return $product;
     }
+
+    public function delete($id)
+    {
+        $product = Product::find($id);
+        $categories = $product->categories;
+        $deletedCategories = [];
+
+        $product->delete();
+
+        foreach ($categories as $c)
+        {
+            if( $c->products->count() == 0){
+                $deletedCategories[] = $c;
+                $c->delete();
+            }
+        }
+
+        return $deletedCategories;
+
+    }
 }

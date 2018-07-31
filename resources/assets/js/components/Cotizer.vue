@@ -13,7 +13,11 @@
                                 :data-target="'#'+category.name" 
                                 aria-expanded="true" 
                                 :aria-controls="category.name">
-                        {{category.name.ucfirst()}}
+                                
+                                  
+                                   {{category.name.ucfirst()}}
+                                 
+                                
                         </button>
                     </h5>
                 </div>
@@ -31,7 +35,7 @@
                            </thead>
                            <tbody>
                                <tr v-for="product in category.products" :key="product.id">
-                                   <td v-if="$mq != 'sm'"> <img style="width : 150px" :src="product.image" :alt="product.name" @click="show(product.image)"> </td>
+                                   <td v-if="$mq != 'sm'" > <img style="width : 150px" :src="product.image" :alt="product.name" @click="show(product.image)"> </td>
                                    <td style="cursor:pointer" @click="show(product.image)">  {{product.name.trim()}} </td>
                                    <td class="text-info text-center">${{product.price | price}} <span class="text-danger" v-if="$mq == 'sm'"> / ${{product.pck_price | price}}</span></td>
                                    <td class="text-center">{{product.pck_units}}</td>
@@ -168,7 +172,7 @@
             font-weight: bold;
         }
        
-        .card-body,table th, table td{padding:0}
+        .card-body,table th, table td{padding:5px;}
     }
     
     @media(min-width: 600px){

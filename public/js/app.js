@@ -49518,7 +49518,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n.btn-link[data-v-746d283f] {color : black;\n}\n#total[data-v-746d283f] {\n     position: fixed;\n     /* margin-left:50vw; */\n     bottom: 20px;\n     z-index: 100;\n}\nimg[data-v-746d283f]{width:100%\n}\n@media(max-width: 600px){\ntd[data-v-746d283f] { white-space :nowrap;\n}\ntable[data-v-746d283f] {\n         font-size: 0.66rem;\n         font-weight: bold;\n}\n.card-body[data-v-746d283f],table th[data-v-746d283f], table td[data-v-746d283f]{padding:0\n}\n}\n@media(min-width: 600px){\ntable[data-v-746d283f]{ font-size: 1rem; font-weight: normal\n}\ntd[data-v-746d283f] {white-space: normal;\n}\n.card-body[data-v-746d283f],.container[data-v-746d283f]{padding:1.25rem\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.btn-link[data-v-746d283f] {color : black;\n}\n#total[data-v-746d283f] {\n     position: fixed;\n     /* margin-left:50vw; */\n     bottom: 20px;\n     z-index: 100;\n}\nimg[data-v-746d283f]{width:100%\n}\n@media(max-width: 600px){\ntd[data-v-746d283f] { white-space :nowrap;\n}\ntable[data-v-746d283f] {\n         font-size: 0.66rem;\n         font-weight: bold;\n}\n.card-body[data-v-746d283f],table th[data-v-746d283f], table td[data-v-746d283f]{padding:5px;\n}\n}\n@media(min-width: 600px){\ntable[data-v-746d283f]{ font-size: 1rem; font-weight: normal\n}\ntd[data-v-746d283f] {white-space: normal;\n}\n.card-body[data-v-746d283f],.container[data-v-746d283f]{padding:1.25rem\n}\n}\n\n", ""]);
 
 // exports
 
@@ -49562,6 +49562,10 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -49751,9 +49755,9 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                    " +
+                          "\n                            \n                              \n                               " +
                             _vm._s(category.name.ucfirst()) +
-                            "\n                    "
+                            "\n                             \n                            \n                    "
                         )
                       ]
                     )
@@ -50644,6 +50648,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -50662,6 +50668,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        deleteProduct: function deleteProduct(product) {
+            var vm = this;
+            this.$http.delete('/admin/product/' + product.id).then(function (response) {
+                // console.log(response);
+                for (var key in vm.categories) {
+                    if (vm.categories.hasOwnProperty(key)) {
+                        var cat = vm.categories[key];
+                        for (var k in cat.products) {
+                            if (cat.products.hasOwnProperty(k)) {
+                                var prod = cat.products[k];
+                                if (prod.id == product.id) {
+                                    vm.categories[key].products.splice(k, 1);
+                                    if (vm.categories[key].products.length == 0) {
+                                        vm.categories.splice(key, 1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        },
         logme: function logme(e) {
             console.log(e);
         },
@@ -51506,7 +51534,8 @@ var render = function() {
                           _c(
                             "button",
                             {
-                              staticClass: "btn  btn-link",
+                              staticClass:
+                                "btn  btn-link w-100 btn-block text-left",
                               attrs: {
                                 "data-toggle": "collapse",
                                 "data-target": "#" + category.name,
@@ -51547,7 +51576,16 @@ var render = function() {
                               _vm._m(1, true),
                               _vm._v(" "),
                               _c(
-                                "tbody",
+                                "transition-group",
+                                {
+                                  attrs: {
+                                    tag: "tbody",
+                                    "enter-active-class":
+                                      "animated slideInLeft faster ",
+                                    "leave-active-class":
+                                      "animated fadeOutDown faster "
+                                  }
+                                },
                                 _vm._l(category.products, function(product) {
                                   return _c("tr", { key: product.id }, [
                                     _c("td", [
@@ -51766,7 +51804,8 @@ var render = function() {
                                   ])
                                 })
                               )
-                            ]
+                            ],
+                            1
                           )
                         ])
                       ]

@@ -20,7 +20,7 @@
                     <div v-for="category in categories" :key="category.id" class="card flex-wrap">
                         <div class="card-header" :id="category.id">
                             <h5 class="mb-0">
-                                <button class="btn  btn-link" 
+                                <button class="btn  btn-link w-100 btn-block text-left" 
                                         data-toggle="collapse" 
                                         :data-target="'#'+category.name" 
                                         aria-expanded="true" 
@@ -41,7 +41,9 @@
                                     <th >Unidades x bulto</th>
                                     <th >Precio x mayor</th>
                                 </thead>
-                                <tbody>
+                                <transition-group tag="tbody" 
+                                                    enter-active-class="animated slideInLeft faster "
+                                                    leave-active-class="animated fadeOutDown faster ">
                                     <tr v-for="product in category.products" :key="product.id">
                                         <td >
                                             <img :src="product.image" :alt="product.name" @click="imgModal(product)"> 
@@ -68,7 +70,7 @@
                                             </button>
                                         </td>
                                     </tr>
-                                </tbody>
+                                </transition-group>
                             </table>
                             </div>
                         </div>
@@ -98,6 +100,31 @@ import adminCreate from './Create.vue';
             }
         },
         methods : {
+            deleteProduct(product){
+                var vm = this;
+                this.$http.delete('/admin/product/'+product.id)
+                    .then(response => {
+                        // console.log(response);
+                        for (const key in vm.categories) {
+                            if (vm.categories.hasOwnProperty(key)) {
+                                const cat = vm.categories[key];
+                                for (const k in cat.products) {
+                                    if (cat.products.hasOwnProperty(k)) {
+                                        const prod = cat.products[k];
+                                        if(prod.id == product.id)
+                                        {
+                                            vm.categories[key].products.splice(k,1);
+                                            if (vm.categories[key].products.length == 0){
+                                                vm.categories.splice(key,1);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                    });
+            },
             logme(e){console.log(e)},
             refresh(){
                 var vm = this;
