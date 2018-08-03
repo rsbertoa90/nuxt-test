@@ -42,29 +42,31 @@
              </div>
          
              <!-- producto -->
-             <div class="col-3 row">
+             <div class="col-2 row">
                  <label for="" class="col-12">Producto</label>
                  <input  required  v-model.trim="formData.name" 
                         type="text" class="col-12">
              </div>
             <!-- precio -->
-             <div  class="col-1 row">
+             <div  class="col-2 row">
                  <label for="" class="col-12">Precio</label>
                  <input min='0' required v-model.trim="formData.price"  
                  type="number" class="col-12">
              </div>
              <!-- unidades x bulto -->
-             <div  class="col-1 row">
+             <div  class="col-2 row">
                  <label for="" class="col-12">Unidades x bulto</label>
                  <input   min='0' required  v-model.trim="formData.pck_units" type="number" class="col-12">
              </div>
              <!-- precio x mayor -->
-             <div class="col-1 row">
+             <div class="col-2 row">
                  <label for="" class="col-12">Precio x mayor</label>
                  <input   min='0' required v-model.trim="formData.pck_price"  
                  type="number" class="col-12">
              </div>
-             <button type="submit" class="btn btn-outline-success align-self-end justify-self-end"> GUARDAR </button>
+             <div class="offset-11">
+                <button type="submit" class="btn btn-outline-success align-self-end justify-self-end"> GUARDAR </button>
+             </div>
          </form>
     </div>
 </template>

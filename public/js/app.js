@@ -53264,6 +53264,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['categories', 'supliers'],
@@ -53617,7 +53619,7 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-3 row" }, [
+        _c("div", { staticClass: "col-2 row" }, [
           _c("label", { staticClass: "col-12", attrs: { for: "" } }, [
             _vm._v("Producto")
           ]),
@@ -53649,7 +53651,7 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-1 row" }, [
+        _c("div", { staticClass: "col-2 row" }, [
           _c("label", { staticClass: "col-12", attrs: { for: "" } }, [
             _vm._v("Precio")
           ]),
@@ -53681,7 +53683,7 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-1 row" }, [
+        _c("div", { staticClass: "col-2 row" }, [
           _c("label", { staticClass: "col-12", attrs: { for: "" } }, [
             _vm._v("Unidades x bulto")
           ]),
@@ -53713,7 +53715,7 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-1 row" }, [
+        _c("div", { staticClass: "col-2 row" }, [
           _c("label", { staticClass: "col-12", attrs: { for: "" } }, [
             _vm._v("Precio x mayor")
           ]),
@@ -53745,20 +53747,29 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "btn btn-outline-success align-self-end justify-self-end",
-            attrs: { type: "submit" }
-          },
-          [_vm._v(" GUARDAR ")]
-        )
+        _vm._m(0)
       ]
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "offset-11" }, [
+      _c(
+        "button",
+        {
+          staticClass:
+            "btn btn-outline-success align-self-end justify-self-end",
+          attrs: { type: "submit" }
+        },
+        [_vm._v(" GUARDAR ")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -54415,6 +54426,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -54679,24 +54707,32 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          attrs: { contenteditable: "true" },
-                          on: {
-                            blur: function($event) {
-                              _vm.saveChange(product, "code")
+                      _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.lazy",
+                              value: product.code,
+                              expression: "product.code",
+                              modifiers: { lazy: true }
                             }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: product.code },
+                          on: {
+                            change: [
+                              function($event) {
+                                _vm.$set(product, "code", $event.target.value)
+                              },
+                              function($event) {
+                                _vm.saveChange(product, "code")
+                              }
+                            ]
                           }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                       " +
-                              _vm._s(product.code) +
-                              "\n                                   "
-                          )
-                        ]
-                      ),
+                        })
+                      ]),
                       _vm._v(" "),
                       _c("td", { attrs: { contenteditable: "true" } }, [
                         _c(
@@ -54820,81 +54856,153 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          attrs: { contenteditable: "true" },
-                          on: {
-                            blur: function($event) {
-                              _vm.saveChange(product, "name")
+                      _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.lazy",
+                              value: product.name,
+                              expression: "product.name",
+                              modifiers: { lazy: true }
                             }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: product.name },
+                          on: {
+                            change: [
+                              function($event) {
+                                _vm.$set(product, "name", $event.target.value)
+                              },
+                              function($event) {
+                                _vm.saveChange(product, "name")
+                              }
+                            ]
                           }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                       " +
-                              _vm._s(product.name) +
-                              "\n                                   "
-                          )
-                        ]
-                      ),
+                        })
+                      ]),
                       _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          attrs: { contenteditable: "true" },
-                          on: {
-                            blur: function($event) {
-                              _vm.saveChange(product, "price")
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                       " +
-                              _vm._s(product.price) +
-                              "\n                                   "
-                          )
-                        ]
-                      ),
+                      _c("td", [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "row w-100 d-flex align-items-center"
+                          },
+                          [
+                            _c("span", { staticClass: "col-2" }, [
+                              _vm._v(
+                                "\n                                               $\n                                           "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model.lazy",
+                                  value: product.price,
+                                  expression: "product.price",
+                                  modifiers: { lazy: true }
+                                }
+                              ],
+                              staticClass: "form-control col-7",
+                              attrs: { type: "number" },
+                              domProps: { value: product.price },
+                              on: {
+                                change: [
+                                  function($event) {
+                                    _vm.$set(
+                                      product,
+                                      "price",
+                                      $event.target.value
+                                    )
+                                  },
+                                  function($event) {
+                                    _vm.saveChange(product, "price")
+                                  }
+                                ]
+                              }
+                            })
+                          ]
+                        )
+                      ]),
                       _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          attrs: { contenteditable: "true" },
-                          on: {
-                            blur: function($event) {
-                              _vm.saveChange(product, "pck_units")
+                      _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.lazy",
+                              value: product.pck_units,
+                              expression: "product.pck_units",
+                              modifiers: { lazy: true }
                             }
+                          ],
+                          staticClass: "form-control ",
+                          attrs: { type: "number" },
+                          domProps: { value: product.pck_units },
+                          on: {
+                            change: [
+                              function($event) {
+                                _vm.$set(
+                                  product,
+                                  "pck_units",
+                                  $event.target.value
+                                )
+                              },
+                              function($event) {
+                                _vm.saveChange(product, "pck_units")
+                              }
+                            ]
                           }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                       " +
-                              _vm._s(product.pck_units) +
-                              "\n                                   "
-                          )
-                        ]
-                      ),
+                        })
+                      ]),
                       _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          attrs: { contenteditable: "true" },
-                          on: {
-                            blur: function($event) {
-                              _vm.saveChange(product, "pck_price")
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                       " +
-                              _vm._s(product.pck_price) +
-                              "\n                                   "
-                          )
-                        ]
-                      ),
+                      _c("td", [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "row w-100 d-flex align-items-center"
+                          },
+                          [
+                            _c("span", { staticClass: "col-2" }, [
+                              _vm._v(
+                                "\n                                               $\n                                           "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model.lazy",
+                                  value: product.pck_price,
+                                  expression: "product.pck_price",
+                                  modifiers: { lazy: true }
+                                }
+                              ],
+                              staticClass: "form-control col-7",
+                              attrs: { type: "number" },
+                              domProps: { value: product.pck_price },
+                              on: {
+                                change: [
+                                  function($event) {
+                                    _vm.$set(
+                                      product,
+                                      "pck_price",
+                                      $event.target.value
+                                    )
+                                  },
+                                  function($event) {
+                                    _vm.saveChange(product, "pck_price")
+                                  }
+                                ]
+                              }
+                            })
+                          ]
+                        )
+                      ]),
                       _vm._v(" "),
                       _c("td", [
                         _c(

@@ -44,8 +44,9 @@
                                        <td>
                                            <img :src="product.image" style="width :150px" :alt="product.name" @click="imgModal(product)">
                                        </td>
-                                       <td contenteditable="true" @blur="saveChange(product,'code')">
-                                           {{product.code}}
+                                       <td>
+                                           <input v-model.lazy="product.code" @change="saveChange(product,'code')" 
+                                                  type="text" class="form-control">
                                        </td>
                                        <td contenteditable="true">
                                             <select class="form-control" v-model="product.suplier_id" 
@@ -70,17 +71,33 @@
                                                 </option>
                                            </select>
                                        </td>
-                                       <td contenteditable="true" @blur="saveChange(product,'name')">
-                                           {{product.name}}
+                                       <td >
+                                           <input type="text" v-model.lazy="product.name" 
+                                                  @change="saveChange(product,'name')" class="form-control">
                                        </td>
-                                       <td contenteditable="true" @blur="saveChange(product,'price')">
-                                           {{product.price}}
+                                       <td>
+                                           <div class="row w-100 d-flex align-items-center">
+                                               <span class="col-2">
+                                                   $
+                                               </span>
+                                                <input v-model.lazy="product.price" @change="saveChange(product,'price')"
+                                                type="number" class="form-control col-7">
+                                           </div>
+                                        
                                        </td>
-                                       <td contenteditable="true" @blur="saveChange(product,'pck_units')">
-                                           {{product.pck_units}}
+                                       <td>
+                                           <input v-model.lazy="product.pck_units" @change="saveChange(product,'pck_units')"
+                                                type="number" class="form-control ">
                                        </td>
-                                       <td contenteditable="true" @blur="saveChange(product,'pck_price')">
-                                           {{product.pck_price}}
+                                      <td>
+                                           <div class="row w-100 d-flex align-items-center">
+                                               <span class="col-2">
+                                                   $
+                                               </span>
+                                                <input v-model.lazy="product.pck_price" @change="saveChange(product,'pck_price')"
+                                                type="number" class="form-control col-7">
+                                           </div>
+                                        
                                        </td>
                                         <td>
                                             <button @click.prevent="deleteProduct(product)" class="btn btn-sm btn-outline-danger m-1">
