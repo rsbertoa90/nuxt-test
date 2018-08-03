@@ -24,11 +24,26 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('con
 
 
 import VueMq from 'vue-mq'
+Vue.use(VueMq, {
+    breakpoints: {
+        sm: 600,
+        md: 1250,
+        lg: Infinity,
+    }
+});
+
+
+import DatatableFactory from 'vuejs-datatable';
+
+Vue.use(DatatableFactory);
+
+
 
 Vue.component('app-cotizer', require('./components/Cotizer.vue'));
 Vue.component('cotizer-form', require('./components/Cotizer-form.vue'));
 Vue.component('csrf', require('./components/csrf.vue'));
 Vue.component('app-admin', require('./components/Admin.vue'));
+Vue.component('app-dtadmin', require('./components/DatatableAdmin.vue'));
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 import swal from 'sweetalert';
@@ -42,13 +57,6 @@ $.ajaxSetup({
 
 
 
-Vue.use(VueMq, {
-    breakpoints: {
-        sm: 600,
-        md: 1250,
-        lg: Infinity,
-    }
-});
  
 String.prototype.ucfirst = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);

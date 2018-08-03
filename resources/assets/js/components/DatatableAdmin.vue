@@ -14,29 +14,25 @@
                  <img src="/storage/images/app/MAJU.jpg" style="width : 200px ; height: 110px" alt="logo">
              </div>
              <hr>
-                <admin-create :categories="categories" :supliers="supliers" @productSaved="refresh"></admin-create>
+                <admin-create :supliers="supliers" :categories="categories" @productSaved="refresh"></admin-create>
                 <hr>
-                <div id="accordion">
-                    <div v-for="category in categories" :key="category.id" class="card flex-wrap">
-                        <div class="card-header" :id="category.id">
-                            <h5 class="mb-0">
-                                <button class="btn  btn-link w-100 btn-block text-left" 
-                                        data-toggle="collapse" 
-                                        :data-target="'#'+category.name" 
-                                        aria-expanded="true" 
-                                        :aria-controls="category.name"
-                                       >
-                                {{category.name.ucfirst()}}
-                                </button>
-                            </h5>
-                        </div>
-                        <div :id="category.name" class="collapse collapsed " aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="card-body">
-                            <table class="table table-striped table-bordered ">
+                <div class="row">
+                    <label class="text-info font-weight-bold col-2">Ordenar por</label>
+                    <select class="form-control col-3" v-model="orderBy" id="">
+                        <option value="suplier.name">Proveedor</option>
+                        <option value="category.name">Categoria</option>
+                        <option value="name">Producto</option>
+                        <option value="price">Precio</option>
+                    </select>
+                </div>
+
+                <table id="table" class="table table-striped table-bordered ">
                                 <thead class="">
-                                    <th >imagen</th>
+                                    <th>imagen</th>
                                     <th>Codigo</th>
-                                    <th>Nombre</th>
+                                    <th>Proveedor</th>
+                                    <th>Categoria</th>
+                                    <th>Producto</th>
                                     <th>Precio</th>
                                     <th >Unidades x bulto</th>
                                     <th >Precio x mayor</th>
@@ -44,26 +40,48 @@
                                 <transition-group tag="tbody" 
                                                     enter-active-class="animated slideInLeft faster "
                                                     leave-active-class="animated fadeOutDown faster position-absolute ">
-                                    <tr v-for="product in category.products" :key="product.id">
-                                        <td >
-                                            <img :src="product.image" :alt="product.name" @click="imgModal(product)"> 
-                                        </td>
-                                        <td>  
-                                            <input v-model.lazy="product.code" @change="saveChange(product,'code')" type="text" class="nametd"> 
-                                        </td>
-                                        <td>  
-                                            <input v-model.lazy="product.name" @change="saveChange(product,'name')" type="text" class="nametd"> 
-                                        </td>
-                                        
-                                        <td class="text-info text-center"> 
-                                            $<input style="width:80%" type="number" v-model.lazy="product.price" @change="saveChange(product,'price')"> 
-                                            </td>
-                                        <td class="text-center">
-                                            <input type="number" v-model.lazy="product.pck_units" @change="saveChange(product,'pck_units')"> 
-                                        </td>
-                                        <td class="text-center text-success font-weight-bold">
-                                            $<input style="width:80%" type="number" v-model.lazy="product.pck_price" @change="saveChange(product,'pck_price')"> 
-                                        </td>
+                                    <tr v-for="(product,productKey) in products" :key="product.id">
+                                       <td>
+                                           <img :src="product.image" style="width :150px" :alt="product.name" @click="imgModal(product)">
+                                       </td>
+                                       <td contenteditable="true" @blur="saveChange(product,'code')">
+                                           {{product.code}}
+                                       </td>
+                                       <td contenteditable="true">
+                                            <select class="form-control" v-model="product.suplier_id" 
+                                                    @change="changed(productKey,'suplier')">
+                                               <option v-for="suplier in supliers" 
+                                                        :key="suplier.id" 
+                                                        :value="suplier.id"
+                                                        :selected="suplier.id == product.suplier_id"> 
+                                                    {{suplier.name}} 
+                                                </option>
+                                           </select>
+                                       </td>
+                                       <td>
+                                           <select class="form-control" v-model="product.category_id"
+                                                    @change="changed(productKey,'category')" >
+                                               <option v-for="category in categories" 
+                                                        :key="category.id" 
+                                                        :value="category.id"
+                                                        :selected ="product.category.id == category.id"
+                                                        > 
+                                                    {{category.name}} 
+                                                </option>
+                                           </select>
+                                       </td>
+                                       <td contenteditable="true" @blur="saveChange(product,'name')">
+                                           {{product.name}}
+                                       </td>
+                                       <td contenteditable="true" @blur="saveChange(product,'price')">
+                                           {{product.price}}
+                                       </td>
+                                       <td contenteditable="true" @blur="saveChange(product,'pck_units')">
+                                           {{product.pck_units}}
+                                       </td>
+                                       <td contenteditable="true" @blur="saveChange(product,'pck_price')">
+                                           {{product.pck_price}}
+                                       </td>
                                         <td>
                                             <button @click.prevent="deleteProduct(product)" class="btn btn-sm btn-outline-danger m-1">
                                                 <i class="fa fa-trash"></i>
@@ -75,11 +93,8 @@
                                         </td>
                                     </tr>
                                 </transition-group>
-                            </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </table>
+                          
                 <image-modal :product="product"  ref="modal" @refresh="refresh()"></image-modal>
         </div>
 
@@ -97,15 +112,27 @@ import adminCreate from './Create.vue';
         },
         data(){
             return {
-                categories : [],
-                supliers : [],
+                products : [],
+                categories :[],
                 list : [],
+                supliers : [],
                 product : null,
                 showModal : false,
+                orderBy : 'suplier.name'
             }
         },
-       
+      
+         watch : {
+            orderBy(){
+                this.products = _.sortBy(this.products,this.orderBy);
+                // console.log(this.products);
+            },
+        },
         methods : {
+            changed(productKey,field){ 
+               this.saveChange(this.products[productKey],field+'_id')
+                
+            },
             togglePause(product){
                 var vm = this;
                 product.paused = !product.paused;
@@ -133,22 +160,12 @@ import adminCreate from './Create.vue';
                 this.$http.delete('/admin/product/'+product.id)
                     .then(response => {
                         // console.log(response);
-                        for (const key in vm.categories) {
-                            if (vm.categories.hasOwnProperty(key)) {
-                                const cat = vm.categories[key];
-                                for (const k in cat.products) {
-                                    if (cat.products.hasOwnProperty(k)) {
-                                        const prod = cat.products[k];
-                                        if(prod.id == product.id)
-                                        {
-                                            vm.categories[key].products.splice(k,1);
-                                            if (vm.categories[key].products.length == 0){
-                                                vm.categories.splice(key,1);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                        for (const key in vm.products) {
+                            if (vm.products.hasOwnProperty(key)) {
+                                const element = vm.products[key];
+                                vm.products.splice(key,1);
+                                
+                            }   
                         }
                         
                     });
@@ -166,9 +183,15 @@ import adminCreate from './Create.vue';
                     url : 'api/supliers',
                     success(response){
                         vm.supliers = response;
-                        console.log(response);
                     }
                 });
+                $.ajax({
+                url : 'api/products',
+                success(response){
+                    vm.products = response;
+                    vm.products = _.sortBy(vm.products, vm.orderBy);
+                }
+            });
             },
             saveChange(product,field){
                 var data = {
@@ -176,6 +199,7 @@ import adminCreate from './Create.vue';
                     field : field,
                     value : product[field]
                 }
+                // console.log(data);
                 $.ajax({
                     method : 'put',
                     data : data,
@@ -191,21 +215,7 @@ import adminCreate from './Create.vue';
             }
         },
         created(){
-            var vm = this;
-            $.ajax({
-                url : 'api/categories',
-                success(response){
-                    vm.categories = response;
-                }
-            });
-            $.ajax({
-                url : 'api/supliers',
-                success(response){
-                    vm.supliers = response;
-                }
-            });
-
-            
+            this.refresh();
         },
         filters : {
             price(value){

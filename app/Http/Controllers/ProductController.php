@@ -10,6 +10,13 @@ use  Illuminate\Foundation\Http\FormRequest;
 
 class ProductController extends Controller
 {
+
+    public function getAll()
+    {
+        return Product::with('category')->with('suplier')->get();
+
+    }
+
     public function update(Request $request) 
     {
         $product = Product::find($request->product);
@@ -36,29 +43,24 @@ class ProductController extends Controller
 
     public function save(Request $request)
     {
-       $product = Product::create($request->except('_token','category_id'));
-       $category = Category::find($request->category_id);
-       $product->categories()->attach($category);
+       $product = Product::create($request->except('_token'));
+       $product = Product::with('category')->find($product->id);
        return $product;
     }
 
     public function delete($id)
     {
         $product = Product::find($id);
-        $categories = $product->categories;
-        $deletedCategories = [];
-
+        $category = $product->category;
         $product->delete();
 
-        foreach ($categories as $c)
-        {
-            if( $c->products->count() == 0){
-                $deletedCategories[] = $c;
-                $c->delete();
+        
+            if( $category->products->count() == 0){
+                $category->delete();
             }
-        }
+        
 
-        return $deletedCategories;
+        return $category;
 
     }
 }

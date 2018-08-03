@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Category;
+use App\Suplier;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -32,8 +33,13 @@ class Product extends Model
         return $value / 100 ;
     }
 
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsTo(Category::class);
+    }
+
+    public function suplier()
+    {
+        return $this->belongsTo(Suplier::class);
     }
 }

@@ -1,16 +1,14 @@
 <?php
 
 namespace App;
-use App\Product;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Product;
 
-class Category extends Model
+class Suplier extends Model
 {
-    use SoftDeletes;
     //
-     protected $guarded =[];
+    protected $guarded =[];
 
     public function products()
     {

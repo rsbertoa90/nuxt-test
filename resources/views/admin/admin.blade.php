@@ -2,6 +2,10 @@
 
 @section('content')
     <div>
-        <app-admin></app-admin>
+        <app-dtadmin></app-dtadmin>
     </div>
+@endsection
+
+@section('js')
+
 @endsection

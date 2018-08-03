@@ -16,12 +16,8 @@ class ProductsTableSeeder extends Seeder
          $categories = Category::all();
         foreach ($categories as $category) {
             
-            $products = factory(App\Product::class,5)->create();
-            foreach ($products as $product)
-             {
-               $product->categories()->attach($category);
-              
-             }
+            $products = factory(App\Product::class,5)->create(['category_id'=> $category->id]);
+           
         }
     }
 }

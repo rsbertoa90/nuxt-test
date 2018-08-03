@@ -14,6 +14,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'price'=>$price,
         'pck_price'=>$pck_price,
         'pck_units'=>6,
-        'image'=>$path
+        'image'=>$path,
+        'suplier_id' => rand(1,4),
     ];
 });

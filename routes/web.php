@@ -26,6 +26,8 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
     Route::post('/product/image', 'ProductController@changeImage')->middleware('optimizeImages');
 
     Route::post('/category/','CategoryController@save');
+
+    Route::post('/suplier/','SuplierController@save');
     
 });
 

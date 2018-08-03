@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/categories','CategoryController@getAll');
+Route::get('/products','ProductController@getAll');
 
 Route::get('/categories/{category}','CategoryController@get');
 
+Route::get('/supliers', 'SuplierController@getAll');
