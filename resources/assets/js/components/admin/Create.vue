@@ -50,7 +50,7 @@
             <!-- precio -->
              <div  class="col-2 row">
                  <label for="" class="col-12">Precio</label>
-                 <input min='0' required v-model.trim="formData.price"  
+                 <input min='0' step=".01" required v-model.trim="formData.price"  
                  type="number" class="col-12">
              </div>
              <!-- unidades x bulto -->
@@ -61,7 +61,7 @@
              <!-- precio x mayor -->
              <div class="col-2 row">
                  <label for="" class="col-12">Precio x mayor</label>
-                 <input   min='0' required v-model.trim="formData.pck_price"  
+                 <input  step=".01" min='0' required v-model.trim="formData.pck_price"  
                  type="number" class="col-12">
              </div>
              <div class="offset-11">

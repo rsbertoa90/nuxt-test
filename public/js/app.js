@@ -71077,7 +71077,7 @@ var render = function() {
               }
             ],
             staticClass: "col-12",
-            attrs: { min: "0", required: "", type: "number" },
+            attrs: { min: "0", step: ".01", required: "", type: "number" },
             domProps: { value: _vm.formData.price },
             on: {
               input: function($event) {
@@ -71141,7 +71141,7 @@ var render = function() {
               }
             ],
             staticClass: "col-12",
-            attrs: { min: "0", required: "", type: "number" },
+            attrs: { step: ".01", min: "0", required: "", type: "number" },
             domProps: { value: _vm.formData.pck_price },
             on: {
               input: function($event) {
@@ -71747,7 +71747,7 @@ var render = function() {
                                 }
                               ],
                               staticClass: " form-control smallField",
-                              attrs: { type: "number" },
+                              attrs: { type: "number", step: ".01" },
                               domProps: { value: product.price },
                               on: {
                                 change: [
@@ -71820,7 +71820,7 @@ var render = function() {
                                 }
                               ],
                               staticClass: "form-control smallField",
-                              attrs: { type: "number" },
+                              attrs: { type: "number", step: ".01" },
                               domProps: { value: product.pck_price },
                               on: {
                                 change: [

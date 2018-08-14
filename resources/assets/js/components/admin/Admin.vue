@@ -82,7 +82,7 @@
                                        <td>
                                            <div class="row w-100 d-flex align-items-center">
                                                 $<input v-model.lazy="product.price" @change="saveChange(product,'price')"
-                                                        type="number" class=" form-control smallField">
+                                                        type="number" step=".01" class=" form-control smallField">
                                                         
                                            </div>
                                         
@@ -97,7 +97,7 @@
                                                $<input  v-model.lazy="product.pck_price" 
                                                         @change="saveChange(product,'pck_price')"
                                                      
-                                                type="number" class="form-control smallField">
+                                                type="number" step=".01" class="form-control smallField">
                                            </div>
                                         
                                        </td>
