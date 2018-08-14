@@ -93,14 +93,14 @@
         methods : {
             valid(){
                 var vm = this;
-                if (vm.formData.category_id.trim() == 'new'){
+                if (vm.formData.category_id == 'new'){
                     
                     if (!vm.newCategory){
                         swal('error','No ingreso un nombre para la nueva categoria','error');
                         return false;
                     }
                 }
-                if (vm.formData.suplier_id.trim() == 'new'){
+                if (vm.formData.suplier_id == 'new'){
                    
                     if (!vm.newSuplier){
                         swal('error','No ingreso un nombre para el nuevo proveedor','error');

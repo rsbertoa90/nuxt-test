@@ -12,7 +12,7 @@
         </div>
         <div v-else>
              <a href="/" class="button btn btn-outline-info">Volver</a>
-             <a href="/logout" class="button btn btn-outline-info">Salir de modo Admin</a>
+             <!-- <a href="/logout" class="button btn btn-outline-info">Salir de modo Admin</a> -->
              <!-- <a href="/admin/reporte" class="button btn btn-outline-info">Reporte</a> -->
              <div class="row w-100 d-flex justify-content-center">
                  <img src="/storage/images/app/MAJU.jpg" style="width : 200px ; height: 110px" alt="logo">

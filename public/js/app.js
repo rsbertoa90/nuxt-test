@@ -68675,10 +68675,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     result.push(prods);
                 }
             });
-            // console.log([].concat.apply([], result));
 
             vm.list = [].concat.apply([], result);
-            // console.log(vm.list);
         }
     },
     computed: {
@@ -68725,7 +68723,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         userRole: function userRole() {
-            console.log(this.user);
+
             if (this.user) {
                 return this.user.role_id;
             }
@@ -68822,7 +68820,7 @@ var render = function() {
                   on: {
                     click: function($event) {
                       $event.preventDefault()
-                      return _vm.GoReport($event)
+                      return _vm.goReport($event)
                     }
                   }
                 },
@@ -70686,14 +70684,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         valid: function valid() {
             var vm = this;
-            if (vm.formData.category_id.trim() == 'new') {
+            if (vm.formData.category_id == 'new') {
 
                 if (!vm.newCategory) {
                     swal('error', 'No ingreso un nombre para la nueva categoria', 'error');
                     return false;
                 }
             }
-            if (vm.formData.suplier_id.trim() == 'new') {
+            if (vm.formData.suplier_id == 'new') {
 
                 if (!vm.newSuplier) {
                     swal('error', 'No ingreso un nombre para el nuevo proveedor', 'error');
@@ -71452,15 +71450,6 @@ var render = function() {
                 attrs: { href: "/" }
               },
               [_vm._v("Volver")]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "button btn btn-outline-info",
-                attrs: { href: "/logout" }
-              },
-              [_vm._v("Salir de modo Admin")]
             ),
             _vm._v(" "),
             _vm._m(0),

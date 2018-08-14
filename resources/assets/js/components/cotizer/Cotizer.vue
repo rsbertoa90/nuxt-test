@@ -19,7 +19,7 @@
                 </button>
                 <button v-if=" userRole() == 1" 
                         class="btn btn-outline-info btn-lg" 
-                        @click.prevent="GoReport">
+                        @click.prevent="goReport">
                     Stats
                 </button>
                 <a v-if="userRole() < 3" 
@@ -139,10 +139,10 @@
                     }
                     
                 });
-                // console.log([].concat.apply([], result));
+                
                 
                 vm.list = [].concat.apply([], result);
-                // console.log(vm.list);
+               
             }
         },
         computed: {
@@ -193,7 +193,7 @@
         methods:
         {
             userRole(){
-                console.log(this.user);
+                
                 if (this.user){
                     return this.user.role_id;
                 }
