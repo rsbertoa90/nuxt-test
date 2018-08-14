@@ -50,6 +50,7 @@ export default{
     }},
 
     methods : {
+        
         send(){
             if (this.formData.email.length > 4 & this.list.length > 0){
 
@@ -69,7 +70,10 @@ export default{
                     url : '/cotizer/send',
                     success(){
                         vm.loading = false;
-                        swal('Enviamos tu presupuesto', 'Te estaremos contactando a la brevedad', 'success');
+                        swal('Enviamos tu presupuesto', 'Te estaremos contactando a la brevedad', 'success')
+                            .then(() => {
+                                window.location.replace('/');
+                            });
                     } 
                 });
             }

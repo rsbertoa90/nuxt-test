@@ -16,7 +16,7 @@ use View;
 class MailController extends Controller
 {
 
-    private static function mailAdmin($email){
+    public static function mailAdmin($email){
                     Mail::to('multibazarmaju@gmail.com')
                     ->cc('gisellaRomina678@gmail.com')
                     ->cc('rsbertoa90@gmail.com')

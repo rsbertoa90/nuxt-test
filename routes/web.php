@@ -19,6 +19,8 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
     Route::get('/','AdminController@admin');
     Route::get('/reporte','AdminController@report');
 
+    Route::get('/pedidos','OrderController@panel');
+
     Route::put('/product/update','ProductController@update');
 
     Route::post('/product','ProductController@save');
@@ -32,6 +34,9 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 
     Route::post('/cotizacion','OrderController@adminOrder');
     
+    Route::get('/pdf/{order}', 'OrderController@toPDF');
+
+    Route::put('/order','OrderController@update');
 });
 
 Route::get('/getuser','UserController@get');

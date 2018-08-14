@@ -158,7 +158,7 @@
                          if (duplicated != null){
                              swal ('Error', `Ya existe la categoria ${vm.newCategory}`,'error');
                          }else {
-                             vm.$http.post('/admin/category/',{name : this.newCategory})
+                             vm.$http.post('/admin/category/',{name : this.newCategory, _token : csrf})
                                 .then(response => {
                                     var category = response.data;
                                     vm.formData.category_id = category.id;

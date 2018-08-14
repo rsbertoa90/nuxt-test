@@ -17,6 +17,21 @@ use View;
 
 class OrderController extends Controller
 {
+
+    public function update(Request $request)
+    {
+        $order = Order::find($request->order);
+        $field = $request->field;
+        $order->$field = $request->value;
+        $order->save();
+        return $order;
+    }
+
+    public function panel(){
+        return view('admin.orders');
+    }
+
+
     public function get()
     {
         return Order::with('orderProducts.product.category')->get();
@@ -40,7 +55,7 @@ class OrderController extends Controller
           'phone'=>$phone,
           'message'=>$request->message,
           'name'=>$request->name,
-          'source'=>'user'
+          'source'=>'online'
       ]);
 
       foreach ($products as $p)
@@ -81,7 +96,7 @@ class OrderController extends Controller
           'message'=>$request->message,
           'name'=>$request->name,
           'seller' => $request->seller,
-          'source'=>'admin'
+          'source'=>'local'
       ]);
 
       $products = json_decode($request->list);
@@ -113,6 +128,20 @@ class OrderController extends Controller
           
       return $pdf->stream("{$date}-Cotizacion.pdf");
             
+    }
+
+    public function toPDF($order)
+    {
+        $order = Order::find($order);
+
+        $today = $order->created_at->format('d-m-Y H:i');
+
+        $html = View::make('pdf.Cotizacion',compact('order','today'))->render();
+       
+        $pdf = PDF::loadHTML($html);
+        
+        return $pdf->stream("{$today}-Cotizacion.pdf");
+
     }
 
     

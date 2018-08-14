@@ -5,7 +5,7 @@
         </div>
 
        
-        <form formtarget="_blank" class="col-12" target="_blank" action="/admin/cotizacion" method="post"  >
+        <form  formtarget="_blank" class="col-12" target="_blank" action="/admin/cotizacion" method="post"  >
                 <csrf></csrf>
                 <input type="hidden" name="list" :value="stringList">
                 <input type="hidden" name="total" :value="total">
@@ -15,7 +15,7 @@
                 </div> 
                <div class="col-12 row form-group-row">
                    <label class="col-4 col-lg-2" for="">Nombre del cliente</label>
-                   <input  type="text" name="name"  class="form-control col-8 col-lg-4">
+                   <input  required type="text" name="name"  class="form-control col-8 col-lg-4">
                 </div> 
                <div class="col-12 row form-group-row">
                    <label class="col-4 col-lg-2" for="">Email</label>

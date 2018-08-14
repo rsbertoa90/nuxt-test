@@ -1,5 +1,5 @@
 <template>
-    <div class="container">   
+    <div class="container" :class="{'bg-white' : user != null && user.role_id > 2}">   
         <div class="row w-100 d-flex justify-content-center">
             <div class="col-12 offset-lg-4 col-lg-4">
                 <img src="/storage/images/app/MAJU.jpg" 
@@ -11,24 +11,11 @@
                 <button class="btn btn-outline-info btn-lg" 
                         @click.prevent="downloadPrices">
                     Descargar lista de precios
-                </button>
-                <button v-if=" userRole() < 3" 
-                        class="btn btn-outline-info btn-lg" 
-                        @click.prevent="goAdmin">
-                    Administrar Productos
-                </button>
-                <button v-if=" userRole() == 1" 
-                        class="btn btn-outline-info btn-lg" 
-                        @click.prevent="goReport">
-                    Stats
-                </button>
-                <a v-if="userRole() < 3" 
-                    href="/logout" 
-                   class="button btn btn-outline-danger">
-                   Salir de modo Admin
-                </a>
-         
-                
+                </button> 
+                <a class="btn btn-outline-warning btn-lg" 
+                    href="/">
+                    Resetear Cotizador
+                </a> 
             </div>
         </div>
        
@@ -199,12 +186,7 @@
                 }
                 return 3;
             },
-            goReport(){
-                window.location.replace('/admin/reporte');
-            },
-            goAdmin(){
-                window.location.replace('/admin');
-            },
+          
             downloadPrices(){
                 window.location.replace('/descargar-lista-de-precios');
             },
@@ -231,6 +213,8 @@
 </script>
 
 <style scoped>
+
+
    .btn-link {color : black;}
     #total {
         position: fixed;
