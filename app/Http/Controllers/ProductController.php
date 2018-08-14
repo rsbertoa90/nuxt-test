@@ -54,6 +54,9 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $category = $product->category;
+        
+        $product->code = "del".$product->code;
+        $product->save();
         $product->delete();
 
         

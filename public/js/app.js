@@ -70042,7 +70042,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.btn-link[data-v-10ddd0a8] {color : black;\n}\ntd img[data-v-10ddd0a8] {\n        width: 10vw;\n}\n@media(max-width: 600px){\ntable[data-v-10ddd0a8],.container[data-v-10ddd0a8],.card[data-v-10ddd0a8],.card-body[data-v-10ddd0a8] {font-size: 0.66rem ; padding : 0\n}\nth[data-v-10ddd0a8],td[data-v-10ddd0a8], input[data-v-10ddd0a8]{\n           white-space:nowrap;\n           width: 13vw;\n           padding: 2px;\n}\n.form-control[data-v-10ddd0a8]{width: 20vw;\n}\n.nametd[data-v-10ddd0a8] {width: 25vw;\n}\n}\n", ""]);
+exports.push([module.i, "\n.smallField[data-v-10ddd0a8]{width: 70px;\n}\ntd[data-v-10ddd0a8] {min-width: 110px;\n}\n.btn-link[data-v-10ddd0a8] {color : black;\n}\ntd img[data-v-10ddd0a8] {\n        width: 10vw;\n}\n@media(max-width: 600px){\ntable[data-v-10ddd0a8],.container[data-v-10ddd0a8],.card[data-v-10ddd0a8],.card-body[data-v-10ddd0a8] {font-size: 0.66rem ; padding : 0\n}\nth[data-v-10ddd0a8],td[data-v-10ddd0a8], input[data-v-10ddd0a8]{\n           white-space:nowrap;\n           width: 13vw;\n           padding: 2px;\n}\n.nametd[data-v-10ddd0a8] {width: 25vw;\n}\n}\n", ""]);
 
 // exports
 
@@ -70059,8 +70059,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Create_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Create_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Report_vue__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Report_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Report_vue__);
-//
-//
 //
 //
 //
@@ -70210,7 +70208,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         orderBy: function orderBy() {
             this.products = _.sortBy(this.products, this.orderBy);
-            // console.log(this.products);
         }
     },
     methods: {
@@ -70239,17 +70236,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         deleteProduct: function deleteProduct(product) {
             var vm = this;
             this.$http.delete('/admin/product/' + product.id).then(function (response) {
-                // console.log(response);
-                for (var key in vm.products) {
-                    if (vm.products.hasOwnProperty(key)) {
-                        var element = vm.products[key];
-                        vm.products.splice(key, 1);
-                    }
-                }
+
+                vm.refresh();
             });
-        },
-        logme: function logme(e) {
-            console.log(e);
         },
         refresh: function refresh() {
             var vm = this;
@@ -70278,8 +70267,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 product: product.id,
                 field: field,
                 value: product[field]
-                // console.log(data);
-            };$.ajax({
+            };
+
+            $.ajax({
                 method: 'put',
                 data: data,
                 url: '/admin/product/update'
@@ -70696,6 +70686,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         valid: function valid() {
             var vm = this;
+            if (vm.formData.category_id.trim() == 'new') {
+
+                if (!vm.newCategory) {
+                    swal('error', 'No ingreso un nombre para la nueva categoria', 'error');
+                    return false;
+                }
+            }
+            if (vm.formData.suplier_id.trim() == 'new') {
+
+                if (!vm.newSuplier) {
+                    swal('error', 'No ingreso un nombre para el nuevo proveedor', 'error');
+                    return false;
+                }
+            }
             var duplicated = null;
             vm.categories.forEach(function (el) {
                 var e = el.products.find(function (p) {
@@ -70708,6 +70712,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (duplicated != null) {
                 swal('error', 'ya existe un producto con el codigo' + vm.formData.code, 'error');
+                return false;
             } else {
                 return true;
             }
@@ -70727,8 +70732,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var vm = this;
             vm.$http.post('/admin/product/', vm.formData).then(function (response) {
                 vm.$emit('productSaved', response.data);
-                //   console.log(response.data);
-                swal('Product guardado', '', 'success');
+
+                swal('Producto guardado', '', 'success');
                 vm.resetForm();
                 vm.$emit('productSaved');
             });
@@ -71567,7 +71572,7 @@ var render = function() {
                               modifiers: { lazy: true }
                             }
                           ],
-                          staticClass: "form-control",
+                          staticClass: "form-control smallField",
                           attrs: { type: "text" },
                           domProps: { value: product.code },
                           on: {
@@ -71583,7 +71588,7 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c("td", { attrs: { contenteditable: "true" } }, [
+                      _c("td", [
                         _c(
                           "select",
                           {
@@ -71739,12 +71744,9 @@ var render = function() {
                             staticClass: "row w-100 d-flex align-items-center"
                           },
                           [
-                            _c("span", { staticClass: "col-2" }, [
-                              _vm._v(
-                                "\n                                               $\n                                           "
-                              )
-                            ]),
-                            _vm._v(" "),
+                            _vm._v(
+                              "\n                                            $"
+                            ),
                             _c("input", {
                               directives: [
                                 {
@@ -71755,7 +71757,7 @@ var render = function() {
                                   modifiers: { lazy: true }
                                 }
                               ],
-                              staticClass: "form-control col-7",
+                              staticClass: " form-control smallField",
                               attrs: { type: "number" },
                               domProps: { value: product.price },
                               on: {
@@ -71777,7 +71779,7 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c("td", [
+                      _c("td", { staticClass: "smallField" }, [
                         _c("input", {
                           directives: [
                             {
@@ -71788,7 +71790,7 @@ var render = function() {
                               modifiers: { lazy: true }
                             }
                           ],
-                          staticClass: "form-control ",
+                          staticClass: "form-control smallField ",
                           attrs: { type: "number" },
                           domProps: { value: product.pck_units },
                           on: {
@@ -71815,12 +71817,9 @@ var render = function() {
                             staticClass: "row w-100 d-flex align-items-center"
                           },
                           [
-                            _c("span", { staticClass: "col-2" }, [
-                              _vm._v(
-                                "\n                                               $\n                                           "
-                              )
-                            ]),
-                            _vm._v(" "),
+                            _vm._v(
+                              "\n                                           \n                                           $"
+                            ),
                             _c("input", {
                               directives: [
                                 {
@@ -71831,7 +71830,7 @@ var render = function() {
                                   modifiers: { lazy: true }
                                 }
                               ],
-                              staticClass: "form-control col-7",
+                              staticClass: "form-control smallField",
                               attrs: { type: "number" },
                               domProps: { value: product.pck_price },
                               on: {
@@ -71853,46 +71852,53 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-sm btn-outline-danger m-1",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.deleteProduct(product)
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "d-flex flex-column justify-content-center align-items-center p-0"
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-outline-danger m-1",
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.deleteProduct(product)
+                                }
                               }
-                            }
-                          },
-                          [_c("i", { staticClass: "fa fa-trash" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-sm m-1",
-                            class: {
-                              "btn-info": !product.paused,
-                              "btn-success": product.paused
                             },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.togglePause(product)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", {
+                            [_c("i", { staticClass: "fa fa-trash" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm m-1",
                               class: {
-                                "fa fa-pause-circle": !product.paused,
-                                "fa fa-play": product.paused
+                                "btn-info": !product.paused,
+                                "btn-success": product.paused
+                              },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.togglePause(product)
+                                }
                               }
-                            })
-                          ]
-                        )
-                      ])
+                            },
+                            [
+                              _c("i", {
+                                class: {
+                                  "fa fa-pause-circle": !product.paused,
+                                  "fa fa-play": product.paused
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
                     ])
                   })
                 )

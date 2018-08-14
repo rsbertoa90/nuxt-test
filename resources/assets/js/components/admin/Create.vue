@@ -93,6 +93,20 @@
         methods : {
             valid(){
                 var vm = this;
+                if (vm.formData.category_id.trim() == 'new'){
+                    
+                    if (!vm.newCategory){
+                        swal('error','No ingreso un nombre para la nueva categoria','error');
+                        return false;
+                    }
+                }
+                if (vm.formData.suplier_id.trim() == 'new'){
+                   
+                    if (!vm.newSuplier){
+                        swal('error','No ingreso un nombre para el nuevo proveedor','error');
+                        return false;
+                    }
+                }
                 var duplicated = null;
                 vm.categories.forEach(el => {
                     let e = el.products.find(p => {
@@ -105,6 +119,7 @@
 
                 if (duplicated!=null){
                     swal('error','ya existe un producto con el codigo'+vm.formData.code,'error');
+                    return false;
                 } 
                 else {return true;}
             },
@@ -125,8 +140,8 @@
                       vm.$http.post('/admin/product/',vm.formData)
                                         .then(response => {
                                         vm.$emit('productSaved',response.data);
-                                        //   console.log(response.data);
-                                         swal('Product guardado','','success');
+                                    
+                                         swal('Producto guardado','','success');
                                           vm.resetForm();
                                           vm.$emit('productSaved');
                                         

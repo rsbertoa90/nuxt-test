@@ -50,9 +50,9 @@
                                        </td>
                                        <td>
                                            <input v-model.lazy="product.code" @change="saveChange(product,'code')" 
-                                                  type="text" class="form-control">
+                                                  type="text" class="form-control smallField">
                                        </td>
-                                       <td contenteditable="true">
+                                       <td >
                                             <select class="form-control" v-model="product.suplier_id" 
                                                     @change="changed(productKey,'suplier')">
                                                <option v-for="suplier in supliers" 
@@ -81,29 +81,27 @@
                                        </td>
                                        <td>
                                            <div class="row w-100 d-flex align-items-center">
-                                               <span class="col-2">
-                                                   $
-                                               </span>
-                                                <input v-model.lazy="product.price" @change="saveChange(product,'price')"
-                                                type="number" class="form-control col-7">
+                                                $<input v-model.lazy="product.price" @change="saveChange(product,'price')"
+                                                        type="number" class=" form-control smallField">
+                                                        
                                            </div>
                                         
                                        </td>
-                                       <td>
+                                       <td    class="smallField">
                                            <input v-model.lazy="product.pck_units" @change="saveChange(product,'pck_units')"
-                                                type="number" class="form-control ">
+                                                type="number" class="form-control smallField ">
                                        </td>
                                       <td>
                                            <div class="row w-100 d-flex align-items-center">
-                                               <span class="col-2">
-                                                   $
-                                               </span>
-                                                <input v-model.lazy="product.pck_price" @change="saveChange(product,'pck_price')"
-                                                type="number" class="form-control col-7">
+                                               
+                                               $<input  v-model.lazy="product.pck_price" 
+                                                        @change="saveChange(product,'pck_price')"
+                                                     
+                                                type="number" class="form-control smallField">
                                            </div>
                                         
                                        </td>
-                                        <td>
+                                        <td class="d-flex flex-column justify-content-center align-items-center p-0">
                                             <button @click.prevent="deleteProduct(product)" class="btn btn-sm btn-outline-danger m-1">
                                                 <i class="fa fa-trash"></i>
                                             </button>
@@ -148,7 +146,7 @@ import adminReport from './Report.vue';
          watch : {
             orderBy(){
                 this.products = _.sortBy(this.products,this.orderBy);
-                // console.log(this.products);
+               
             },
         },
         methods : {
@@ -182,18 +180,11 @@ import adminReport from './Report.vue';
                 var vm = this;
                 this.$http.delete('/admin/product/'+product.id)
                     .then(response => {
-                        // console.log(response);
-                        for (const key in vm.products) {
-                            if (vm.products.hasOwnProperty(key)) {
-                                const element = vm.products[key];
-                                vm.products.splice(key,1);
-                                
-                            }   
-                        }
-                        
+                     
+                        vm.refresh();   
                     });
             },
-            logme(e){console.log(e)},
+         
             refresh(){
                 var vm = this;
                 $.ajax({
@@ -222,7 +213,7 @@ import adminReport from './Report.vue';
                     field : field,
                     value : product[field]
                 }
-                // console.log(data);
+               
                 $.ajax({
                     method : 'put',
                     data : data,
@@ -250,6 +241,8 @@ import adminReport from './Report.vue';
 </script>
 
 <style scoped>
+.smallField{width: 70px;}
+td {min-width: 110px;}
 .btn-link {color : black;}
     td img {
         width: 10vw;
@@ -262,7 +255,9 @@ import adminReport from './Report.vue';
            width: 13vw;
            padding: 2px;
        }
-       .form-control{width: 20vw;}
+       
+       
+        
        .nametd {width: 25vw;}
    }
 </style>
