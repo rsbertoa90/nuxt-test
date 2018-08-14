@@ -31200,6 +31200,7 @@ window.Vue = __webpack_require__(167);
 var VueResource = __webpack_require__(169);
 Vue.use(VueResource);
 Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
+window.csrf = $('meta[name="csrf-token"]').attr('content');
 // Vue.http.interceptors.push(function (request, next) {
 //     request.headers['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
 //     next();
