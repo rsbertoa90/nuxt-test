@@ -23,3 +23,7 @@ Route::get('/products','ProductController@getAll');
 Route::get('/categories/{category}','CategoryController@get');
 
 Route::get('/supliers', 'SuplierController@getAll');
+
+Route::get('/orders','OrderController@get');
+
+

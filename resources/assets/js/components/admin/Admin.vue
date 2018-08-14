@@ -6,10 +6,14 @@
                 Lo sentimos. El administrador no esta disponible en dispositivos moviles.
             </h2>
             <br><br>
-            <a href="/logout" class="button btn btn-outline-info">Volver</a>
+            <a href="/" class="button btn btn-outline-info">Volver</a>
+               <br><br>
+            <!-- <a href="/admin/reporte" class="button btn btn-outline-info">Reporte</a> -->
         </div>
         <div v-else>
-             <a href="/logout" class="button btn btn-outline-info">Volver</a>
+             <a href="/" class="button btn btn-outline-info">Volver</a>
+             <a href="/logout" class="button btn btn-outline-info">Salir de modo Admin</a>
+             <!-- <a href="/admin/reporte" class="button btn btn-outline-info">Reporte</a> -->
              <div class="row w-100 d-flex justify-content-center">
                  <img src="/storage/images/app/MAJU.jpg" style="width : 200px ; height: 110px" alt="logo">
              </div>
@@ -115,15 +119,17 @@
                 <image-modal :product="product"  ref="modal" @refresh="refresh()"></image-modal>
         </div>
 
-        
+         
     </div>
 </template>
 
 <script>
 import imageModal from './Img-modal.vue';
 import adminCreate from './Create.vue';
+import adminReport from './Report.vue';
     export default {
         components : {
+            adminReport,
             imageModal : imageModal,
             adminCreate : adminCreate
         },
@@ -234,11 +240,12 @@ import adminCreate from './Create.vue';
         created(){
             this.refresh();
         },
-        filters : {
-            price(value){
-                return  value.toFixed(2);
-            }
-        }
+        mounted() {
+              this.$http.get('/getuser')
+                .then(response => {
+                    this.user = response.data;
+                });
+        },
     }
 </script>
 

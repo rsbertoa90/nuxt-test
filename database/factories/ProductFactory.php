@@ -4,8 +4,8 @@ use Faker\Generator as Faker;
 use App\Product;
 
 $factory->define(Product::class, function (Faker $faker) {
-    $path = $faker->image(public_path('/storage/images/products/'));
-    $path = strstr($path, '/storage');
+   
+  
     $price = $faker->randomNumber(2);
     $pck_price = $price - ($price*0.2);
     return [
@@ -14,7 +14,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'price'=>$price,
         'pck_price'=>$pck_price,
         'pck_units'=>6,
-        'image'=>$path,
         'suplier_id' => rand(1,4),
     ];
 });

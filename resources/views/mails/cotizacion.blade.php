@@ -1,58 +1,67 @@
-{{-- @extends('default')
+@extends('mails.base')
 
-@section('main') --}}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>-</title>
-</head>
-<body>
-    <style>
-        td {border: 1px solid:black; align-text:center}
-        table{border:1px solid black}
+@section('content')
 
-    </style>
-    <div class="d-flex justify-content-center align-items-center flex-column">
     <div>
-        <h5>Pedido de confirmacion de presupuesto</h5>
-        <br>
-         <h5>de : {{$email}}</h5>
-        <h5>TEL: {{$phone}}</h5>
+        <p>Hola! Gracias por tu pedido. En las siguientes 24 hs hábiles lo estaremos confirmando . Te dejamos nuestros nro de contacto:
+            <ul>
+                <li>Whatsapp: 11 2708 2683</li>
+                <li>Tel fijo: (11) 4951- 6400. Saludos!</li>
+            </ul>    
+        </p> 
+    
     </div>
-    <hr>
-    @if ($msg)
-        <div>
-            <h5>Mensaje adjunto:</h5>
-                <p>{{$msg}}  </p>
-        </div>
-        @endif
+
     <div>
         <table  class="table table-striped table-bordered">
             <thead>
-                <th >Codigo</th>
-                <th >Nombre</th>
-                <th >Precio x unidad</th>
-                <th >Unidades x bulto</th>
-                <th >Cantidad pedida</th>
+                <tr>
+                    <td >Codigo</td>
+                    <td >Nombre</td>
+                    <td >Cantidad pedida</td>
+                    <td>Precio</td>
+                    <td>Subtotal</td>
+                </tr>
             </thead>
             <tbody>
-                @foreach ($products as $item)
+                @php
+                    $total =0;
+                @endphp
+                @foreach ($order->orderProducts as $item)
                 <tr>
-                    <td >{{$item->code}}</td>            
-                    <td >{{$item->name}}</td>            
-                    <td> {{$items->units}}</td>                  
+                    <td >{{$item->product->code}}</td>            
+                    <td >{{$item->product->name}}</td>            
+                    <td> {{$item->units}}</td>                  
+                    <td> ${{$item->price}}</td>                  
+                    <td> ${{$item->price * $item->units}}</td>  
+                    @php
+                        $total += ($item->price * $item->units);
+                    @endphp                
                 </tr>
                 @endforeach
             </tbody>
         </table>
-        <span stye="text:red ; font-weight:bold ; font-size :40px ; margin-top:15px">TOTAL: ${{total}} </span>
+        <span stye="color:blue ; 
+                    font-weight:bold ; 
+                    font-size :40px ; 
+                    margin-top:15px">
+                    TOTAL: ${{$total}} 
+        </span>
     </div>
-</div>
-</body>
-</html>
-    
-
-{{-- @endsection --}}
+    <hr>
+    <div>
+        <h5>Informacion Adjunta:</h5>
+        <br>
+        <h5> De : {{$order->name}}</h5>
+         <h5>mail : {{$order->email}}</h5> <br>
+         <h5>TEL:  {{$order->phone}}</h5>
+    </div>
+    <hr>
+    @if ($order->message)
+        <div>
+            <h5>Mensaje adjunto:</h5>
+                <p>{{$order->message}}  </p>
+        </div>
+    @endif
+   
+@endsection

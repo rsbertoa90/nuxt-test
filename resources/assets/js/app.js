@@ -37,14 +37,20 @@ import DatatableFactory from 'vuejs-datatable';
 
 Vue.use(DatatableFactory);
 
+import moment from 'moment';
+window.moment = moment;
 
-
-Vue.component('app-cotizer', require('./components/Cotizer.vue'));
-Vue.component('cotizer-form', require('./components/Cotizer-form.vue'));
+Vue.component('dot-loader', require('vue-spinner/src/DotLoader.vue'));
+Vue.component('app-cotizer', require('./components/cotizer/Cotizer.vue'));
+Vue.component('cotizer-form', require('./components/cotizer/Cotizer-form.vue'));
+Vue.component('admin-form', require('./components/admin/Form.vue'));
 Vue.component('csrf', require('./components/csrf.vue'));
-Vue.component('app-admin', require('./components/Admin.vue'));
-Vue.component('app-dtadmin', require('./components/DatatableAdmin.vue'));
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('app-admin', require('./components/admin/Admin.vue'));
+Vue.component('admin-report', require('./components/admin/Report.vue'));
+Vue.filter('price', val => {
+    if (val % 1 != 0){return val.toFixed(2);}
+    return val;
+});
 
 import swal from 'sweetalert';
 window.swal = swal;

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Category;
 use App\Suplier;
+use App\OrderProduct;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -41,5 +42,10 @@ class Product extends Model
     public function suplier()
     {
         return $this->belongsTo(Suplier::class);
+    }
+
+    public function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class);
     }
 }

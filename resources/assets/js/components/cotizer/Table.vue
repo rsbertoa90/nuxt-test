@@ -1,9 +1,6 @@
 <template>
-    <div class="container">   
-        <div class="row w-100 d-flex justify-content-center">
-                 <img src="/storage/images/app/MAJU.jpg" style="width : 200px ; height: 100px" alt="logo">
-             </div>
-             <hr>
+    <div>
+        <hr>
         <div id="accordion">
             <div v-for="category in poblatedCategories" :key="category.id" class="card flex-wrap">
                 <div class="card-header" :id="category.id">
@@ -76,11 +73,9 @@
             </div>    
         </transition>
         <hr>
-        <div>
-            <cotizer-form :list="list" :total="total"></cotizer-form>
-        </div>
     </div>
 </template>
+
 
 <script>
     export default {
@@ -149,6 +144,7 @@
         },
         methods:
         {
+   
             activeProducts(category)
             {
                 var active = category.products.filter(pr => {
@@ -163,11 +159,7 @@
                 swal({content : content});
             }
         },
-        filters : {
-            price(value){
-                return  value.toFixed(2);
-            }
-        }
+   
     }
 </script>
 
@@ -200,3 +192,4 @@
     }
    
 </style>
+

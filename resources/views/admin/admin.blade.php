@@ -2,7 +2,7 @@
 
 @section('content')
     <div>
-        <app-dtadmin></app-dtadmin>
+        <app-admin></app-admin>
     </div>
 @endsection
 

@@ -13,11 +13,20 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
+        $images = [
+            '/storage/images/products/1.png',
+            '/storage/images/products/2.jpg',
+        ];
+
+        $index = 0;
          $categories = Category::all();
         foreach ($categories as $category) {
             
-            $products = factory(App\Product::class,5)->create(['category_id'=> $category->id]);
-           
+            $products = factory(App\Product::class,5)
+                ->create(['category_id'=> $category->id,
+                          'image'=>$images[$index]]);
+           if ($index == 1){$index = 0;}
+           else {$index=1;}
         }
     }
 }

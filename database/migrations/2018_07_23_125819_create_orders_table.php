@@ -15,10 +15,16 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('mail');
-            $table->string('phone');
-            $table->string ('city');
-            $table->string('cp');
+            $table->string('source')->default('user');
+            $table->text('message')->nullable();
+            $table->text('comments')->nullable();
+            $table->string('name')->nullable();
+            $table->string('seller')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string ('city')->nullable();
+            $table->string('cp')->nullable();
+            $table->string('status')->default('pendiente');
             $table->softDeletes();
             $table->timestamps();
         });

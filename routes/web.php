@@ -17,6 +17,7 @@ Auth::routes();
 Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
     
     Route::get('/','AdminController@admin');
+    Route::get('/reporte','AdminController@report');
 
     Route::put('/product/update','ProductController@update');
 
@@ -28,9 +29,12 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
     Route::post('/category/','CategoryController@save');
 
     Route::post('/suplier/','SuplierController@save');
+
+    Route::post('/cotizacion','OrderController@adminOrder');
     
 });
 
+Route::get('/getuser','UserController@get');
 
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -38,6 +42,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/cotizer/send', 'MailController@cotizacion');
+Route::post('/cotizer/send', 'OrderController@userOrder');
 
 Route::get('/logout','HomeController@logout');
+
+Route::get('/descargar-lista-de-precios','PDFController@pricesList');

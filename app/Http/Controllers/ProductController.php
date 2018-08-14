@@ -32,6 +32,8 @@ class ProductController extends Controller
     public function changeImage(Request $request)
     {
         $file = $request->file('image');
+        
+
         $path = $file->storePublicly('/images/products');
         $path = '/storage/'.$path;
         $product = Product::find($request->product);
