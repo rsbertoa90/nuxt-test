@@ -185,12 +185,14 @@ import adminReport from './Report.vue';
                     url : 'api/categories',
                     success(response){
                         vm.categories = response;
+                        vm.categories = _.sortBy(vm.categories,'name');
                     }
                 });
                 $.ajax({
                     url : 'api/supliers',
                     success(response){
                         vm.supliers = response;
+                         vm.supliers = _.sortBy(vm.supliers,'name');
                     }
                 });
                 $.ajax({
@@ -198,6 +200,7 @@ import adminReport from './Report.vue';
                 success(response){
                     vm.products = response;
                     vm.products = _.sortBy(vm.products, vm.orderBy);
+                    
                 }
             });
             },

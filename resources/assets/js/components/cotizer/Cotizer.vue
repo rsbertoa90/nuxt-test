@@ -166,6 +166,8 @@
                 url : 'api/categories',
                 success(response){
                     vm.categories = response;
+                    vm.categories = _.sortBy(vm.categories,'name');
+                   
                 }
             });
 
@@ -195,6 +197,7 @@
                 var active = category.products.filter(pr => {
                     return (! pr.paused)
                 });
+                active = _.sortBy(active,'name');
                 return active;
             },
             show(url){
@@ -226,7 +229,7 @@
 
     @media(max-width: 600px){
 
-        td { white-space :normal;}
+        td { white-space : normal;}
         table {
             font-size: 0.66rem;
             font-weight: bold;

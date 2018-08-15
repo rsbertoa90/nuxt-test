@@ -68527,7 +68527,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.btn-link[data-v-731ed9d6] {color : black;\n}\n#total[data-v-731ed9d6] {\n     position: fixed;\n     /* margin-left:50vw; */\n     bottom: 20px;\n     z-index: 100;\n}\nimg[data-v-731ed9d6]{width:100%\n}\n@media(max-width: 600px){\ntd[data-v-731ed9d6] { white-space :normal;\n}\ntable[data-v-731ed9d6] {\n         font-size: 0.66rem;\n         font-weight: bold;\n}\ninput[type=\"number\"][data-v-731ed9d6]{\n         max-width: 70px;\n}\n.card-body[data-v-731ed9d6],table th[data-v-731ed9d6], table td[data-v-731ed9d6]{padding:5px;\n}\n}\n@media(min-width: 600px){\ntable[data-v-731ed9d6]{ font-size: 1rem; font-weight: normal\n}\ntd[data-v-731ed9d6] {white-space: normal;\n}\n.card-body[data-v-731ed9d6],.container[data-v-731ed9d6]{padding:1.25rem\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.btn-link[data-v-731ed9d6] {color : black;\n}\n#total[data-v-731ed9d6] {\n     position: fixed;\n     /* margin-left:50vw; */\n     bottom: 20px;\n     z-index: 100;\n}\nimg[data-v-731ed9d6]{width:100%\n}\n@media(max-width: 600px){\ntd[data-v-731ed9d6] { white-space : normal;\n}\ntable[data-v-731ed9d6] {\n         font-size: 0.66rem;\n         font-weight: bold;\n}\ninput[type=\"number\"][data-v-731ed9d6]{\n         max-width: 70px;\n}\n.card-body[data-v-731ed9d6],table th[data-v-731ed9d6], table td[data-v-731ed9d6]{padding:5px;\n}\n}\n@media(min-width: 600px){\ntable[data-v-731ed9d6]{ font-size: 1rem; font-weight: normal\n}\ntd[data-v-731ed9d6] {white-space: normal;\n}\n.card-body[data-v-731ed9d6],.container[data-v-731ed9d6]{padding:1.25rem\n}\n}\n\n", ""]);
 
 // exports
 
@@ -68699,6 +68699,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             url: 'api/categories',
             success: function success(response) {
                 vm.categories = response;
+                vm.categories = _.sortBy(vm.categories, 'name');
             }
         });
     },
@@ -68725,6 +68726,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var active = category.products.filter(function (pr) {
                 return !pr.paused;
             });
+            active = _.sortBy(active, 'name');
             return active;
         },
         show: function show(url) {
@@ -70188,12 +70190,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 url: 'api/categories',
                 success: function success(response) {
                     vm.categories = response;
+                    vm.categories = _.sortBy(vm.categories, 'name');
                 }
             });
             $.ajax({
                 url: 'api/supliers',
                 success: function success(response) {
                     vm.supliers = response;
+                    vm.supliers = _.sortBy(vm.supliers, 'name');
                 }
             });
             $.ajax({
@@ -72070,6 +72074,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        setSource: function setSource(src) {
+            this.source = src;
+            this.selected = null;
+        },
         statusChanged: function statusChanged(event) {
             this.status = event.status;
         }
@@ -72486,7 +72494,7 @@ var render = function() {
               },
               on: {
                 click: function($event) {
-                  _vm.source = "online"
+                  _vm.setSource("online")
                 }
               }
             },
@@ -72504,7 +72512,7 @@ var render = function() {
               },
               on: {
                 click: function($event) {
-                  _vm.source = "local"
+                  _vm.setSource("local")
                 }
               }
             },

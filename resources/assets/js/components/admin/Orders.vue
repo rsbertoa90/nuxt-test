@@ -3,14 +3,14 @@
         <div class="row">
             <div class="col-12 row">
                 <div class="col-6 p-0">
-                    <button @click="source = 'online'" 
+                    <button @click="setSource('online')" 
                         :class="{'btn btn-block btn-outline-primary': source != 'online',
                                 'btn btn-block btn-primary' : source == 'online'}">
                         Ordenes Online
                     </button>
                 </div>
                 <div class="col-6 p-0">
-                    <button @click="source = 'local'" 
+                    <button @click="setSource('local')" 
                         :class="{'btn btn-block btn-outline-primary' : source != 'local',
                                 'btn btn-block btn-primary' : source == 'local'}">
                         Ordenes tomadas en el local
@@ -91,6 +91,10 @@ export default {
         }
     },
     methods : {
+        setSource(src){
+            this.source = src;
+            this.selected = null;
+        },
         statusChanged(event){
             this.status = event.status;
         }
