@@ -16,7 +16,7 @@
                         Ordenes tomadas en el local
                     </button>
                 </div>
-            </div>}
+            </div>
             <div class="col-12 row mt-2">
                    <div class="col-4 m-0 p-0">
                     <button @click="status = 'pendiente'" 
