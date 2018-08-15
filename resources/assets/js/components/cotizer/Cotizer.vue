@@ -226,10 +226,13 @@
 
     @media(max-width: 600px){
 
-        td { white-space :nowrap;}
+        td { white-space :normal;}
         table {
             font-size: 0.66rem;
             font-weight: bold;
+        }
+        input[type="number"]{
+            max-width: 70px;
         }
        
         .card-body,table th, table td{padding:5px;}
