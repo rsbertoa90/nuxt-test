@@ -56,7 +56,8 @@
                         <tr  v-for="order in filteredOrders" 
                                 :key="'order'+order.id"
                                 @click ="selected = order"
-                                style="cursor:pointer">
+                                style="cursor:pointer"
+                                :class="{'bg-info' : order == selected}">
                             <td>{{order.created_at | datetime}}</td>
                             <td>{{order.name}}</td>
                         </tr>

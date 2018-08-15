@@ -72056,6 +72056,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -72524,7 +72525,7 @@ var render = function() {
           )
         ])
       ]),
-      _vm._v("}\n        "),
+      _vm._v(" "),
       _c("div", { staticClass: "col-12 row mt-2" }, [
         _c("div", { staticClass: "col-4 m-0 p-0" }, [
           _c(
@@ -72597,6 +72598,7 @@ var render = function() {
                 "tr",
                 {
                   key: "order" + order.id,
+                  class: { "bg-info": order == _vm.selected },
                   staticStyle: { cursor: "pointer" },
                   on: {
                     click: function($event) {
