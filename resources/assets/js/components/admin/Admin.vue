@@ -82,7 +82,7 @@
                                         
                                        </td>
                                        <td    class="smallField">
-                                           <input v-model.lazy="product.pck_units" @change="saveChange(product,'pck_units')"
+                                           <input step="1" v-model.lazy="product.pck_units" @change="saveChange(product,'pck_units')"
                                                 type="number" class="form-control smallField ">
                                        </td>
                                       <td>
