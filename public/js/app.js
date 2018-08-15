@@ -71053,7 +71053,7 @@ var render = function() {
               }
             ],
             staticClass: "col-12",
-            attrs: { min: "0", required: "", type: "number" },
+            attrs: { min: "0", required: "", type: "number", step: "1" },
             domProps: { value: _vm.formData.pck_units },
             on: {
               input: function($event) {
@@ -71700,7 +71700,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control smallField ",
-                          attrs: { type: "number" },
+                          attrs: { step: "1", type: "number" },
                           domProps: { value: product.pck_units },
                           on: {
                             change: [

@@ -56,7 +56,7 @@
              <!-- unidades x bulto -->
              <div  class="col-2 row">
                  <label for="" class="col-12">Unidades x bulto</label>
-                 <input   min='0' required  v-model.trim="formData.pck_units" type="number" class="col-12">
+                 <input   min='0' required  v-model.trim="formData.pck_units" type="number" step="1" class="col-12">
              </div>
              <!-- precio x mayor -->
              <div class="col-2 row">
