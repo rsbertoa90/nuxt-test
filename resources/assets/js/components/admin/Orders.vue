@@ -18,27 +18,39 @@
                 </div>
             </div>
             <div class="col-12 row mt-2">
-                   <div class="col-4 m-0 p-0">
-                    <button @click="status = 'pendiente'" 
+                   <div class="col-6 col-lg-3 m-0 p-0">
+                    <button @click="changestatus('pendiente')" 
                         class="btn btn-block "
-                        :class="{'btn-outline-info':status != 'pendiente',
-                                'btn-info' : status == 'pendiente'}">
+                        :class="{'btn-outline-warning':status != 'pendiente',
+                                'btn-warning' : status == 'pendiente'}">
+                        <span class="far fa-clock"></span>
                         Pendientes
                     </button>
                 </div>
-                 <div class="col-4 m-0 p-0">
-                    <button @click="status = 'confirmado'" 
+                 <div class="col-6 col-lg-3 m-0 p-0">
+                    <button @click="changestatus('pagado')" 
                         class="btn btn-block"
-                        :class="{'btn-outline-success':status != 'confirmado',
-                                'btn-success' : status == 'confirmado'}">
-                        Confirmadas
+                        :class="{'btn-outline-success':status != 'pagado',
+                                'btn-success' : status == 'pagado'}">
+                        <span class="fa fa-dollar-sign"></span>
+                        Pagadas
                     </button>
                 </div>
-                <div class="col-4 m-0 p-0">
-                    <button @click="status = 'cancelado'" 
+                 <div class="col-6 col-lg-3 m-0 p-0">
+                    <button @click="changestatus('enviado')" 
+                        class="btn btn-block"
+                        :class="{'btn-outline-info':status != 'enviado',
+                                'btn-info' : status == 'enviado'}">
+                        <span class="fa fa-truck"></span>
+                        Enviadas
+                    </button>
+                </div>
+                <div class="col-6 col-lg-3 m-0 p-0">
+                    <button @click="changestatus('cancelado')" 
                         class="btn btn-block"
                         :class="{'btn-outline-danger':status != 'cancelado',
                                 'btn-danger' : status == 'cancelado'}">
+                      <span class="fa fa-times"></span>
                        Canceladas
                     </button>
                 </div>
@@ -98,6 +110,11 @@ export default {
         },
         statusChanged(event){
             this.status = event.status;
+        },
+        changestatus(status)
+        {
+            this.status = status;
+            this.selected = null;
         }
     },
    
