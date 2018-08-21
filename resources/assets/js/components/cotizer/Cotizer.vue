@@ -217,7 +217,9 @@
 
 <style scoped>
 
-
+    .form-control{
+        max-width: 80px;
+    }
    .btn-link {color : black;}
     #total {
         position: fixed;

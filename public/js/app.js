@@ -68527,7 +68527,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.btn-link[data-v-731ed9d6] {color : black;\n}\n#total[data-v-731ed9d6] {\n     position: fixed;\n     /* margin-left:50vw; */\n     bottom: 20px;\n     z-index: 100;\n}\nimg[data-v-731ed9d6]{width:100%\n}\n@media(max-width: 600px){\ntd[data-v-731ed9d6] { white-space : normal;\n}\ntable[data-v-731ed9d6] {\n         font-size: 0.66rem;\n         font-weight: bold;\n}\ninput[type=\"number\"][data-v-731ed9d6]{\n         max-width: 70px;\n}\n.card-body[data-v-731ed9d6],table th[data-v-731ed9d6], table td[data-v-731ed9d6]{padding:5px;\n}\n}\n@media(min-width: 600px){\ntable[data-v-731ed9d6]{ font-size: 1rem; font-weight: normal\n}\ntd[data-v-731ed9d6] {white-space: normal;\n}\n.card-body[data-v-731ed9d6],.container[data-v-731ed9d6]{padding:1.25rem\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.form-control[data-v-731ed9d6]{\n     max-width: 80px;\n}\n.btn-link[data-v-731ed9d6] {color : black;\n}\n#total[data-v-731ed9d6] {\n     position: fixed;\n     /* margin-left:50vw; */\n     bottom: 20px;\n     z-index: 100;\n}\nimg[data-v-731ed9d6]{width:100%\n}\n@media(max-width: 600px){\ntd[data-v-731ed9d6] { white-space : normal;\n}\ntable[data-v-731ed9d6] {\n         font-size: 0.66rem;\n         font-weight: bold;\n}\ninput[type=\"number\"][data-v-731ed9d6]{\n         max-width: 70px;\n}\n.card-body[data-v-731ed9d6],table th[data-v-731ed9d6], table td[data-v-731ed9d6]{padding:5px;\n}\n}\n@media(min-width: 600px){\ntable[data-v-731ed9d6]{ font-size: 1rem; font-weight: normal\n}\ntd[data-v-731ed9d6] {white-space: normal;\n}\n.card-body[data-v-731ed9d6],.container[data-v-731ed9d6]{padding:1.25rem\n}\n}\n\n", ""]);
 
 // exports
 
