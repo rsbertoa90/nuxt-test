@@ -6,7 +6,7 @@
                 Lo sentimos. El administrador no esta disponible en dispositivos moviles.
             </h2>
         </div>
-        <div v-else>
+        <div v-else class="w-100">
             
              <div class="row w-100 d-flex justify-content-center">
                  <img src="/storage/images/app/MAJU.jpg" style="width : 200px ; height: 110px" alt="logo">

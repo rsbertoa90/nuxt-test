@@ -68642,13 +68642,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             categories: [],
             list: [],
-            user: null
+            user: null,
+            config: null
         };
     },
 
@@ -68702,6 +68728,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 vm.categories = _.sortBy(vm.categories, 'name');
             }
         });
+
+        this.$http.get('/config').then(function (response) {
+            vm.config = response.data;
+        });
     },
     mounted: function mounted() {
         var _this = this;
@@ -68712,6 +68742,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        toggleMaintenance: function toggleMaintenance() {
+            if (this.config.maintenance) {
+                this.config.maintenance = 0;
+            } else {
+                this.config.maintenance = 1;
+            }
+
+            this.$http.put('/admin/config', { field: 'maintenance', value: this.config.maintenance });
+        },
         userRole: function userRole() {
 
             if (this.user) {
@@ -68751,388 +68790,469 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "container",
-      class: { "bg-white": _vm.user != null && _vm.user.role_id > 2 }
-    },
-    [
-      _c("div", { staticClass: "row w-100 d-flex justify-content-center" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-12 col-lg-2" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-info btn-lg",
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.downloadPrices($event)
-                }
-              }
-            },
-            [
-              _vm._v(
-                "\n                Descargar lista de precios\n            "
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-outline-warning btn-lg",
-              attrs: { href: "/" }
-            },
-            [_vm._v("\n                Resetear Cotizador\n            ")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c(
-        "div",
-        { attrs: { id: "accordion" } },
-        _vm._l(_vm.poblatedCategories, function(category) {
-          return _c(
-            "div",
-            { key: category.id, staticClass: "card flex-wrap" },
-            [
-              _c(
-                "div",
-                { staticClass: "card-header", attrs: { id: category.id } },
-                [
-                  _c("h5", { staticClass: "mb-0" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn  btn-link w-100 text-left",
-                        attrs: {
-                          "data-toggle": "collapse",
-                          "data-target": "#" + category.name,
-                          "aria-expanded": "true",
-                          "aria-controls": category.name
+  return _c("div", { staticClass: "w-100" }, [
+    _vm.config && _vm.user && _vm.config.maintenance && _vm.user.role_id > 2
+      ? _c("div", [_vm._m(0)])
+      : _c(
+          "div",
+          {
+            staticClass: "container w-100",
+            class: { "bg-white": _vm.user != null && _vm.user.role_id > 2 }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "row w-100 d-flex justify-content-center" },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-lg-2" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-info btn-lg",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.downloadPrices($event)
                         }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            \n                              \n                               " +
-                            _vm._s(category.name.ucfirst()) +
-                            "\n                             \n                            \n                    "
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "collapse collapsed ",
-                  attrs: {
-                    id: category.name,
-                    "aria-labelledby": "headingOne",
-                    "data-parent": "#accordion"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "card-body" }, [
-                    _c(
-                      "table",
-                      { staticClass: "table table-striped table-bordered " },
-                      [
-                        _c("thead", {}, [
-                          _vm.$mq != "sm"
-                            ? _c("th", [_vm._v("Foto")])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("th", { staticClass: "nametd" }, [
-                            _vm._v("Nombre")
-                          ]),
-                          _vm._v(" "),
-                          _c("th", {}, [_vm._v("Precio")]),
-                          _vm._v(" "),
-                          _c("th", {}, [_vm._v("Llevando mas de")]),
-                          _vm._v(" "),
-                          _vm.$mq != "sm"
-                            ? _c("th", {}, [_vm._v("Precio x mayor")])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("th", {}, [_vm._v("Quiero")]),
-                          _vm._v(" "),
-                          _vm.$mq != "sm"
-                            ? _c("th", {}, [_vm._v("Subtotal")])
-                            : _vm._e()
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "tbody",
-                          _vm._l(_vm.activeProducts(category), function(
-                            product
-                          ) {
-                            return _c("tr", { key: product.id }, [
-                              _vm.$mq != "sm"
-                                ? _c("td", [
-                                    _c("img", {
-                                      staticStyle: { width: "150px" },
-                                      attrs: {
-                                        src: product.image,
-                                        alt: product.name
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.show(product.image)
-                                        }
-                                      }
-                                    })
-                                  ])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                {
-                                  staticStyle: { cursor: "pointer" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.show(product.image)
-                                    }
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "  " + _vm._s(product.name.trim()) + " "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "text-info text-center" },
-                                [
-                                  _vm._v(
-                                    "$" +
-                                      _vm._s(_vm._f("price")(product.price)) +
-                                      " "
-                                  ),
-                                  _vm.$mq == "sm"
-                                    ? _c(
-                                        "span",
-                                        { staticClass: "text-danger" },
-                                        [
-                                          _vm._v(
-                                            " / $" +
-                                              _vm._s(
-                                                _vm._f("price")(
-                                                  product.pck_price
-                                                )
-                                              )
-                                          )
-                                        ]
-                                      )
-                                    : _vm._e()
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "text-center" }, [
-                                _vm._v(_vm._s(product.pck_units))
-                              ]),
-                              _vm._v(" "),
-                              _vm.$mq != "sm"
-                                ? _c(
-                                    "td",
-                                    {
-                                      staticClass:
-                                        "text-center text-success font-weight-bold"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "$" +
-                                          _vm._s(
-                                            _vm._f("price")(product.pck_price)
-                                          )
-                                      )
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              !product.paused
-                                ? _c("td", [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: product.units,
-                                          expression: "product.units"
-                                        }
-                                      ],
-                                      staticClass: "form-control ",
-                                      attrs: { type: "number", min: "0" },
-                                      domProps: { value: product.units },
-                                      on: {
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.$set(
-                                            product,
-                                            "units",
-                                            $event.target.value
-                                          )
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _vm.$mq == "sm" && product.units > 0
-                                      ? _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center"
-                                          },
-                                          [
-                                            product.units < product.pck_units
-                                              ? _c("span", [
-                                                  _vm._v(
-                                                    "  $" +
-                                                      _vm._s(
-                                                        _vm._f("price")(
-                                                          product.price *
-                                                            product.units
-                                                        )
-                                                      ) +
-                                                      " "
-                                                  )
-                                                ])
-                                              : _vm._e(),
-                                            _vm._v(" "),
-                                            product.units >= product.pck_units
-                                              ? _c("span", [
-                                                  _vm._v(
-                                                    "  $" +
-                                                      _vm._s(
-                                                        _vm._f("price")(
-                                                          product.pck_price *
-                                                            product.units
-                                                        )
-                                                      ) +
-                                                      " "
-                                                  )
-                                                ])
-                                              : _vm._e()
-                                          ]
-                                        )
-                                      : _vm._e()
-                                  ])
-                                : _c("td", [
-                                    _c("span", { staticClass: "text-danger" }, [
-                                      _vm._v("Sin Stock")
-                                    ])
-                                  ]),
-                              _vm._v(" "),
-                              !product.units && _vm.$mq != "sm"
-                                ? _c("td", [_vm._v(" 0 ")])
-                                : (product.units < product.pck_units) &
-                                  (_vm.$mq != "sm")
-                                  ? _c("td", [
-                                      _vm._v(
-                                        "$ " +
-                                          _vm._s(
-                                            (
-                                              product.units * product.price
-                                            ).toFixed(2)
-                                          ) +
-                                          "  "
-                                      )
-                                    ])
-                                  : _vm.$mq != "sm"
-                                    ? _c("td", [
-                                        _vm._v(
-                                          " $" +
-                                            _vm._s(
-                                              (
-                                                product.units *
-                                                product.pck_price
-                                              ).toFixed(2)
-                                            ) +
-                                            " "
-                                        )
-                                      ])
-                                    : _vm._e()
-                            ])
-                          })
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ]
-          )
-        })
-      ),
-      _vm._v(" "),
-      _c(
-        "transition",
-        {
-          attrs: {
-            "enter-active-class": "animated bounceIn",
-            "leave-active-class": "animated fadeOutDown"
-          }
-        },
-        [
-          _vm.total > 0
-            ? _c(
-                "div",
-                {
-                  staticClass: "col-12 row d-flex justify-content-center w-100",
-                  attrs: { id: "total" }
-                },
-                [
-                  _c("div", { staticClass: "bg-success p-1 col-6 col-lg-2" }, [
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    Descargar lista de precios\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-outline-warning btn-lg",
+                      attrs: { href: "/" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    Resetear Cotizador\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.user && _vm.user.role_id < 3
+                    ? _c("div", [
+                        _vm.config && !_vm.config.maintenance
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-outline-danger btn-lg",
+                                on: { click: _vm.toggleMaintenance }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        Ocultar cotizador al publico        \n                    "
+                                )
+                              ]
+                            )
+                          : _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-outline-success btn-lg",
+                                on: { click: _vm.toggleMaintenance }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        Mostrar cotizador al publico\n                    "
+                                )
+                              ]
+                            )
+                      ])
+                    : _vm._e()
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "div",
+              { attrs: { id: "accordion" } },
+              _vm._l(_vm.poblatedCategories, function(category) {
+                return _c(
+                  "div",
+                  { key: category.id, staticClass: "card flex-wrap" },
+                  [
                     _c(
                       "div",
                       {
-                        staticClass:
-                          "col-12 bg-white d-flex justify-content-center"
+                        staticClass: "card-header",
+                        attrs: { id: category.id }
                       },
                       [
-                        _vm._v(
-                          "\n                TOTAL : $" +
-                            _vm._s(_vm._f("price")(_vm.total)) +
-                            "\n                "
+                        _c("h5", { staticClass: "mb-0" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn  btn-link w-100 text-left",
+                              attrs: {
+                                "data-toggle": "collapse",
+                                "data-target": "#" + category.name,
+                                "aria-expanded": "true",
+                                "aria-controls": category.name
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                \n                                  \n                                   " +
+                                  _vm._s(category.name.ucfirst()) +
+                                  "\n                                 \n                                \n                        "
+                              )
+                            ]
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "collapse collapsed ",
+                        attrs: {
+                          id: category.name,
+                          "aria-labelledby": "headingOne",
+                          "data-parent": "#accordion"
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "card-body" }, [
+                          _c(
+                            "table",
+                            {
+                              staticClass: "table table-striped table-bordered "
+                            },
+                            [
+                              _c("thead", {}, [
+                                _vm.$mq != "sm"
+                                  ? _c("th", [_vm._v("Foto")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _c("th", { staticClass: "nametd" }, [
+                                  _vm._v("Nombre")
+                                ]),
+                                _vm._v(" "),
+                                _c("th", {}, [_vm._v("Precio")]),
+                                _vm._v(" "),
+                                _c("th", {}, [_vm._v("Llevando mas de")]),
+                                _vm._v(" "),
+                                _vm.$mq != "sm"
+                                  ? _c("th", {}, [_vm._v("Precio x mayor")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _c("th", {}, [_vm._v("Quiero")]),
+                                _vm._v(" "),
+                                _vm.$mq != "sm"
+                                  ? _c("th", {}, [_vm._v("Subtotal")])
+                                  : _vm._e()
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "tbody",
+                                _vm._l(_vm.activeProducts(category), function(
+                                  product
+                                ) {
+                                  return _c("tr", { key: product.id }, [
+                                    _vm.$mq != "sm"
+                                      ? _c("td", [
+                                          _c("img", {
+                                            staticStyle: { width: "150px" },
+                                            attrs: {
+                                              src: product.image,
+                                              alt: product.name
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.show(product.image)
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c(
+                                      "td",
+                                      {
+                                        staticStyle: { cursor: "pointer" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.show(product.image)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "  " +
+                                            _vm._s(product.name.trim()) +
+                                            " "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "td",
+                                      { staticClass: "text-info text-center" },
+                                      [
+                                        _vm._v(
+                                          "$" +
+                                            _vm._s(
+                                              _vm._f("price")(product.price)
+                                            ) +
+                                            " "
+                                        ),
+                                        _vm.$mq == "sm"
+                                          ? _c(
+                                              "span",
+                                              { staticClass: "text-danger" },
+                                              [
+                                                _vm._v(
+                                                  " / $" +
+                                                    _vm._s(
+                                                      _vm._f("price")(
+                                                        product.pck_price
+                                                      )
+                                                    )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-center" }, [
+                                      _vm._v(_vm._s(product.pck_units))
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm.$mq != "sm"
+                                      ? _c(
+                                          "td",
+                                          {
+                                            staticClass:
+                                              "text-center text-success font-weight-bold"
+                                          },
+                                          [
+                                            _vm._v(
+                                              "$" +
+                                                _vm._s(
+                                                  _vm._f("price")(
+                                                    product.pck_price
+                                                  )
+                                                )
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    !product.paused
+                                      ? _c("td", [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: product.units,
+                                                expression: "product.units"
+                                              }
+                                            ],
+                                            staticClass: "form-control ",
+                                            attrs: { type: "number", min: "0" },
+                                            domProps: { value: product.units },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  product,
+                                                  "units",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _vm.$mq == "sm" && product.units > 0
+                                            ? _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center"
+                                                },
+                                                [
+                                                  product.units <
+                                                  product.pck_units
+                                                    ? _c("span", [
+                                                        _vm._v(
+                                                          "  $" +
+                                                            _vm._s(
+                                                              _vm._f("price")(
+                                                                product.price *
+                                                                  product.units
+                                                              )
+                                                            ) +
+                                                            " "
+                                                        )
+                                                      ])
+                                                    : _vm._e(),
+                                                  _vm._v(" "),
+                                                  product.units >=
+                                                  product.pck_units
+                                                    ? _c("span", [
+                                                        _vm._v(
+                                                          "  $" +
+                                                            _vm._s(
+                                                              _vm._f("price")(
+                                                                product.pck_price *
+                                                                  product.units
+                                                              )
+                                                            ) +
+                                                            " "
+                                                        )
+                                                      ])
+                                                    : _vm._e()
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ])
+                                      : _c("td", [
+                                          _c(
+                                            "span",
+                                            { staticClass: "text-danger" },
+                                            [_vm._v("Sin Stock")]
+                                          )
+                                        ]),
+                                    _vm._v(" "),
+                                    !product.units && _vm.$mq != "sm"
+                                      ? _c("td", [_vm._v(" 0 ")])
+                                      : (product.units < product.pck_units) &
+                                        (_vm.$mq != "sm")
+                                        ? _c("td", [
+                                            _vm._v(
+                                              "$ " +
+                                                _vm._s(
+                                                  (
+                                                    product.units *
+                                                    product.price
+                                                  ).toFixed(2)
+                                                ) +
+                                                "  "
+                                            )
+                                          ])
+                                        : _vm.$mq != "sm"
+                                          ? _c("td", [
+                                              _vm._v(
+                                                " $" +
+                                                  _vm._s(
+                                                    (
+                                                      product.units *
+                                                      product.pck_price
+                                                    ).toFixed(2)
+                                                  ) +
+                                                  " "
+                                              )
+                                            ])
+                                          : _vm._e()
+                                  ])
+                                })
+                              )
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  ]
+                )
+              })
+            ),
+            _vm._v(" "),
+            _c(
+              "transition",
+              {
+                attrs: {
+                  "enter-active-class": "animated bounceIn",
+                  "leave-active-class": "animated fadeOutDown"
+                }
+              },
+              [
+                _vm.total > 0
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col-12 row d-flex justify-content-center w-100",
+                        attrs: { id: "total" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "bg-success p-1 col-6 col-lg-2" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "col-12 bg-white d-flex justify-content-center"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    TOTAL : $" +
+                                    _vm._s(_vm._f("price")(_vm.total)) +
+                                    "\n                    "
+                                )
+                              ]
+                            )
+                          ]
                         )
                       ]
                     )
-                  ])
-                ]
-              )
-            : _vm._e()
-        ]
-      ),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c(
-        "div",
-        [
-          _vm.userRole() > 2
-            ? _c("cotizer-form", {
-                attrs: { list: _vm.list, total: _vm.total }
-              })
-            : _c("admin-form", { attrs: { list: _vm.list, total: _vm.total } })
-        ],
-        1
-      )
-    ],
-    1
-  )
+                  : _vm._e()
+              ]
+            ),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _vm.userRole() > 2
+                  ? _c("cotizer-form", {
+                      attrs: { list: _vm.list, total: _vm.total }
+                    })
+                  : _c("admin-form", {
+                      attrs: { list: _vm.list, total: _vm.total }
+                    })
+              ],
+              1
+            )
+          ],
+          1
+        )
+  ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex flex-column text-center w-100" }, [
+      _c("h1", [
+        _vm._v(
+          "\n                Estamos Actualizando nuestros precios\n            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h2", [
+        _vm._v("\n                Vuelve a intentar mas adelante\n            ")
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -71375,6 +71495,7 @@ var render = function() {
         )
       : _c(
           "div",
+          { staticClass: "w-100" },
           [
             _vm._m(0),
             _vm._v(" "),

@@ -1,5 +1,18 @@
 <template>
-    <div class="container" :class="{'bg-white' : user != null && user.role_id > 2}">   
+<div class="w-100">
+    
+    <div v-if="config && user && config.maintenance && user.role_id > 2">
+        <div class="d-flex flex-column text-center w-100">
+            <h1>
+                Estamos Actualizando nuestros precios
+            </h1>
+            <h2>
+                Vuelve a intentar mas adelante
+            </h2>
+        </div>
+    </div>
+
+    <div v-else class="container w-100" :class="{'bg-white' : user != null && user.role_id > 2}">   
         <div class="row w-100 d-flex justify-content-center">
             <div class="col-12 offset-lg-4 col-lg-4">
                 <img src="/storage/images/app/MAJU.jpg" 
@@ -16,6 +29,17 @@
                     href="/">
                     Resetear Cotizador
                 </a> 
+                <div v-if="user && user.role_id < 3">
+                    <button v-if="config && !config.maintenance" @click="toggleMaintenance"
+                    class="btn btn-outline-danger btn-lg" >
+                        Ocultar cotizador al publico        
+                    </button> 
+
+                    <button v-else @click="toggleMaintenance"
+                    class="btn btn-outline-success btn-lg" >
+                        Mostrar cotizador al publico
+                    </button> 
+                </div>
             </div>
         </div>
        
@@ -100,6 +124,7 @@
 
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -109,6 +134,7 @@
                 categories : [],
                 list : [],
                 user : null,
+                config:null
             }
         },
         watch : {
@@ -171,6 +197,11 @@
                 }
             });
 
+            this.$http.get('/config')
+                .then(response => {
+                    vm.config = response.data;
+                }); 
+
           
         },
         mounted() {
@@ -181,6 +212,13 @@
         },
         methods:
         {
+            toggleMaintenance(){
+                if (this.config.maintenance){
+                    this.config.maintenance = 0;
+                }else {this.config.maintenance =1;}
+
+                this.$http.put('/admin/config',{field:'maintenance',value:this.config.maintenance})
+            },
             userRole(){
                 
                 if (this.user){
