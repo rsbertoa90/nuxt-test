@@ -44,8 +44,8 @@
              <!-- producto -->
              <div class="col-2 row">
                  <label for="" class="col-12">Producto</label>
-                 <input  required  v-model.trim="formData.name" 
-                        type="text" class="col-12">
+                 <textarea rows="2"  required  v-model.trim="formData.name" 
+                        type="text" class="col-12"></textarea>
              </div>
             <!-- precio -->
              <div  class="col-2 row">

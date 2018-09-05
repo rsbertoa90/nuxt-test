@@ -70112,7 +70112,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.smallField[data-v-10ddd0a8]{width: 70px;\n}\ntd[data-v-10ddd0a8] {min-width: 110px;\n}\n.btn-link[data-v-10ddd0a8] {color : black;\n}\ntd img[data-v-10ddd0a8] {\n        width: 10vw;\n}\n@media(max-width: 600px){\ntable[data-v-10ddd0a8],.container[data-v-10ddd0a8],.card[data-v-10ddd0a8],.card-body[data-v-10ddd0a8] {font-size: 0.66rem ; padding : 0\n}\nth[data-v-10ddd0a8],td[data-v-10ddd0a8], input[data-v-10ddd0a8]{\n           white-space:nowrap;\n           width: 13vw;\n           padding: 2px;\n}\n.nametd[data-v-10ddd0a8] {width: 25vw;\n}\n}\n", ""]);
+exports.push([module.i, "\ninput[type=\"checkbox\"][data-v-10ddd0a8]{\n    width: 25px;\n    margin:  10px;\n    height: 20px;\n}\n.smallField[data-v-10ddd0a8]{width: 70px;\n}\ntd[data-v-10ddd0a8] {min-width: 110px;\n}\n.btn-link[data-v-10ddd0a8] {color : black;\n}\ntd img[data-v-10ddd0a8] {\n        width: 10vw;\n}\n@media(max-width: 600px){\ntable[data-v-10ddd0a8],.container[data-v-10ddd0a8],.card[data-v-10ddd0a8],.card-body[data-v-10ddd0a8] {font-size: 0.66rem ; padding : 0\n}\nth[data-v-10ddd0a8],td[data-v-10ddd0a8], input[data-v-10ddd0a8]{\n           white-space:nowrap;\n           width: 13vw;\n           padding: 2px;\n}\n.nametd[data-v-10ddd0a8] {width: 25vw;\n}\n}\n", ""]);
 
 // exports
 
@@ -70246,6 +70246,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -70258,6 +70274,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
+            variation: 0,
             products: [],
             categories: [],
             list: [],
@@ -70268,7 +70285,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-
+    computed: {
+        selectedProducts: function selectedProducts() {
+            var list = [];
+            this.products.forEach(function (prod) {
+                if (prod.selected) {
+                    list.push(prod);
+                }
+            });
+            return list;
+        }
+    },
     watch: {
         orderBy: function orderBy() {
             this.products = _.sortBy(this.products, this.orderBy);
@@ -70347,6 +70374,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var element = this.$refs.modal.$el;
 
             $(element).modal('show');
+        },
+        selectAllProducts: function selectAllProducts() {
+            this.products.forEach(function (prod) {
+                if (prod.selected == undefined) {
+                    Vue.set(prod, 'selected', true);
+                } else {
+                    prod.selected = true;
+                }
+            });
+        },
+        applyVariation: function applyVariation() {
+            var vm = this;
+            var variation = 1 + this.variation / 100;
+            this.selectedProducts.forEach(function (prod) {
+                prod.price = prod.price * variation;
+                prod.pck_price = prod.pck_price * variation;
+                vm.saveChange(prod, 'price');
+                vm.saveChange(prod, 'pck_price');
+            });
+            vm.refresh();
+            vm.variation = 0;
         }
     },
     created: function created() {
@@ -71102,7 +71150,7 @@ var render = function() {
             _vm._v("Producto")
           ]),
           _vm._v(" "),
-          _c("input", {
+          _c("textarea", {
             directives: [
               {
                 name: "model",
@@ -71113,7 +71161,7 @@ var render = function() {
               }
             ],
             staticClass: "col-12",
-            attrs: { required: "", type: "text" },
+            attrs: { rows: "2", required: "", type: "text" },
             domProps: { value: _vm.formData.name },
             on: {
               input: function($event) {
@@ -71508,6 +71556,110 @@ var render = function() {
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "row d-flex flex-column justify-content-center align-items-center"
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-4 d-flex flex-column justify-content-center align-items-center"
+                  },
+                  [
+                    _c("h4", [_vm._v("Cambiar precios masivo")]),
+                    _vm._v(" "),
+                    _c("h5", [
+                      _vm._v(
+                        " " +
+                          _vm._s(_vm.selectedProducts.length) +
+                          " Productos seleccionados "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-outline-danger mb-2",
+                        on: { click: _vm.selectAllProducts }
+                      },
+                      [_vm._v("Seleccionar todos")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "d-flex justify-content-center" },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "mr-2",
+                            on: {
+                              click: function($event) {
+                                _vm.variation -= 1
+                              }
+                            }
+                          },
+                          [_vm._v("-")]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.variation,
+                              expression: "variation"
+                            }
+                          ],
+                          staticStyle: { width: "45px" },
+                          attrs: { type: "number" },
+                          domProps: { value: _vm.variation },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.variation = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" %\n                        "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "ml-2",
+                            on: {
+                              click: function($event) {
+                                _vm.variation += 1
+                              }
+                            }
+                          },
+                          [_vm._v("+")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.variation != 0 && _vm.selectedProducts.length > 0
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-md btn-outline-success mt-1",
+                            on: { click: _vm.applyVariation }
+                          },
+                          [_vm._v("Aplicar")]
+                        )
+                      : _vm._e()
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
             _c("div", { staticClass: "row" }, [
               _c("label", { staticClass: "text-info font-weight-bold col-2" }, [
                 _vm._v("Ordenar por")
@@ -71745,7 +71897,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", [
-                        _c("input", {
+                        _c("textarea", {
                           directives: [
                             {
                               name: "model",
@@ -71756,7 +71908,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "text" },
+                          attrs: { rows: "4", type: "text" },
                           domProps: { value: product.name },
                           on: {
                             change: [
@@ -71893,6 +72045,54 @@ var render = function() {
                             "d-flex flex-column justify-content-center align-items-center p-0"
                         },
                         [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: product.selected,
+                                expression: "product.selected"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(product.selected)
+                                ? _vm._i(product.selected, null) > -1
+                                : product.selected
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = product.selected,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        product,
+                                        "selected",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        product,
+                                        "selected",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(product, "selected", $$c)
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
                           _c(
                             "button",
                             {

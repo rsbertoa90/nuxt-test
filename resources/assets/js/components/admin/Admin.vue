@@ -14,6 +14,21 @@
              <hr>
                 <admin-create :supliers="supliers" :categories="categories" @productSaved="refresh"></admin-create>
                 <hr>
+                <div class="row d-flex flex-column justify-content-center align-items-center">
+                         <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                        <h4>Cambiar precios masivo</h4>
+                        <h5> {{selectedProducts.length}} Productos seleccionados </h5>
+                        <button @click="selectAllProducts" class="btn btn-sm btn-outline-danger mb-2">Seleccionar todos</button>
+                        <div class="d-flex justify-content-center"> 
+                            <button class="mr-2" @click="variation-=1">-</button>
+                            <input style="width:45px; text-align-center" type="number" v-model="variation"> %
+                            <button class="ml-2" @click="variation+=1">+</button>
+                        
+                        </div>
+                            <button class="btn btn-md btn-outline-success mt-1" v-if="variation != 0 && selectedProducts.length > 0" @click="applyVariation">Aplicar</button>
+                    </div>
+                </div>
+                <hr>
                 <div class="row">
                     <label class="text-info font-weight-bold col-2">Ordenar por</label>
                     <select class="form-control col-3" v-model="orderBy" id="">
@@ -70,8 +85,8 @@
                                            </select>
                                        </td>
                                        <td >
-                                           <input type="text" v-model.lazy="product.name" 
-                                                  @change="saveChange(product,'name')" class="form-control">
+                                           <textarea rows="4" type="text" v-model.lazy="product.name" 
+                                                  @change="saveChange(product,'name')" class="form-control"></textarea>
                                        </td>
                                        <td>
                                            <div class="row w-100 d-flex align-items-center">
@@ -96,6 +111,7 @@
                                         
                                        </td>
                                         <td class="d-flex flex-column justify-content-center align-items-center p-0">
+                                            <input class="form-control" type="checkbox" v-model="product.selected">
                                             <button @click.prevent="deleteProduct(product)" class="btn btn-sm btn-outline-danger m-1">
                                                 <i class="fa fa-trash"></i>
                                             </button>
@@ -127,6 +143,7 @@ import adminReport from './Report.vue';
         },
         data(){
             return {
+                variation:0,
                 products : [],
                 categories :[],
                 list : [],
@@ -136,7 +153,19 @@ import adminReport from './Report.vue';
                 orderBy : 'suplier.name'
             }
         },
-      
+        computed:{
+            selectedProducts()
+            {
+                var list =[];
+                    this.products.forEach(prod => {
+                        if (prod.selected)
+                        {
+                            list.push(prod);
+                        }
+                    });
+                return list;
+            }
+        },
          watch : {
             orderBy(){
                 this.products = _.sortBy(this.products,this.orderBy);
@@ -223,6 +252,31 @@ import adminReport from './Report.vue';
                 let element = this.$refs.modal.$el
                 
                 $(element).modal('show')
+            },
+               selectAllProducts()
+            {
+                    this.products.forEach(prod => {
+                        if (prod.selected == undefined)
+                        {
+                            Vue.set(prod,'selected',true)
+                        }
+                        else {
+                            prod.selected = true;
+                        }
+                    });
+            },
+            applyVariation()
+            {
+                var vm =this;
+                var variation = 1+(this.variation/100);
+                this.selectedProducts.forEach(prod => {
+                    prod.price = prod.price * variation;
+                    prod.pck_price = prod.pck_price * variation;
+                    vm.saveChange(prod,'price');
+                    vm.saveChange(prod,'pck_price');
+                });
+                vm.refresh();
+                vm.variation = 0;
             }
         },
         created(){
@@ -238,6 +292,14 @@ import adminReport from './Report.vue';
 </script>
 
 <style scoped>
+
+input[type="checkbox"]{
+    width: 25px;
+    margin:  10px;
+    height: 20px;
+}
+
+
 .smallField{width: 70px;}
 td {min-width: 110px;}
 .btn-link {color : black;}
