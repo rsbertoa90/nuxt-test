@@ -70112,7 +70112,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\ninput[type=\"checkbox\"][data-v-10ddd0a8]{\n    width: 25px;\n    margin:  10px;\n    height: 20px;\n}\n.smallField[data-v-10ddd0a8]{width: 70px;\n}\ntd[data-v-10ddd0a8] {min-width: 110px;\n}\n.btn-link[data-v-10ddd0a8] {color : black;\n}\ntd img[data-v-10ddd0a8] {\n        width: 10vw;\n}\n@media(max-width: 600px){\ntable[data-v-10ddd0a8],.container[data-v-10ddd0a8],.card[data-v-10ddd0a8],.card-body[data-v-10ddd0a8] {font-size: 0.66rem ; padding : 0\n}\nth[data-v-10ddd0a8],td[data-v-10ddd0a8], input[data-v-10ddd0a8]{\n           white-space:nowrap;\n           width: 13vw;\n           padding: 2px;\n}\n.nametd[data-v-10ddd0a8] {width: 25vw;\n}\n}\n", ""]);
+exports.push([module.i, "\ninput[type=\"checkbox\"][data-v-10ddd0a8]{\n    width: 25px;\n    margin:  10px;\n    height: 20px;\n}\n.smallField[data-v-10ddd0a8]{width: 80px;\n}\ntd[data-v-10ddd0a8] {min-width: 120px;\n}\n.btn-link[data-v-10ddd0a8] {color : black;\n}\ntd img[data-v-10ddd0a8] {\n        width: 10vw;\n}\n@media(max-width: 600px){\ntable[data-v-10ddd0a8],.container[data-v-10ddd0a8],.card[data-v-10ddd0a8],.card-body[data-v-10ddd0a8] {font-size: 0.66rem ; padding : 0\n}\nth[data-v-10ddd0a8],td[data-v-10ddd0a8], input[data-v-10ddd0a8]{\n           white-space:nowrap;\n           width: 13vw;\n           padding: 2px;\n}\n.nametd[data-v-10ddd0a8] {width: 25vw;\n}\n}\n", ""]);
 
 // exports
 

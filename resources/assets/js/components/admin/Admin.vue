@@ -397,8 +397,8 @@ input[type="checkbox"]{
 }
 
 
-.smallField{width: 70px;}
-td {min-width: 110px;}
+.smallField{width: 80px;}
+td {min-width: 120px;}
 .btn-link {color : black;}
     td img {
         width: 10vw;
