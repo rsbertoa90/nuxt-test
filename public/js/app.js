@@ -70352,7 +70352,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         resetCheckboxes: function resetCheckboxes() {
             this.selector.checked = false;
             this.products.forEach(function (prod) {
-                prod.selected = false;
+                if (prod.selected == undefined) {
+                    Vue.set(prod, 'selected', false);
+                } else {
+
+                    prod.selected = false;
+                }
             });
         },
         checkSelect: function checkSelect() {

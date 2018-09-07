@@ -220,7 +220,13 @@ import adminReport from './Report.vue';
             resetCheckboxes(){
                 this.selector.checked =false;
                 this.products.forEach(prod => {
-                    prod.selected = false;
+                    if (prod.selected == undefined)
+                    {
+                        Vue.set(prod,'selected',false);
+                    }else {
+
+                        prod.selected = false;
+                    }
                 });
             },
             checkSelect(){
