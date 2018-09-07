@@ -17,8 +17,7 @@
                 <div class="row d-flex flex-column justify-content-center align-items-center">
                          <div class="col-4 d-flex flex-column justify-content-center align-items-center">
                         <h4>Cambiar precios masivo</h4>
-                        <h5> {{selectedProducts.length}} Productos seleccionados </h5>
-                        <button @click="selectAllProducts" class="btn btn-sm btn-outline-danger mb-2">Seleccionar todos</button>
+                        <h5>  <span class="text-info">{{selectedProducts.length}}</span>  Productos seleccionados </h5>
                         <div class="d-flex justify-content-center"> 
                             <button class="mr-2" @click="variation-=1">-</button>
                             <input style="width:45px; text-align-center" type="number" v-model="variation"> %
@@ -30,13 +29,32 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <label class="text-info font-weight-bold col-2">Ordenar por</label>
-                    <select class="form-control col-3" v-model="orderBy" id="">
-                        <option value="suplier.name">Proveedor</option>
-                        <option value="category.name">Categoria</option>
-                        <option value="name">Producto</option>
-                        <option value="price">Precio</option>
-                    </select>
+                    <div class="col-6 row">
+                        <label class="text-info font-weight-bold col-4">Ordenar por</label>
+                        <select class="form-control col-6" v-model="orderBy" id="">
+                            <option value="suplier.name">Proveedor</option>
+                            <option value="category.name">Categoria</option>
+                            <option value="name">Producto</option>
+                            <option value="price">Precio</option>
+                        </select>
+                    </div>
+                    <div  class="col-6 d-flex flex-column">
+                        <div class="d-flex align-items-center ">
+                             <label class="text-info font-weight-bold">Filtrar</label>
+                            <input type="checkbox" class="form-control" v-model="selector.checked" @change="checkSelect">
+                            <select class="form-control col-4"  v-model="selector.id">
+                                <option value="all"> Todo</option>
+                                <option v-if="orderBy == 'category.name'" 
+                                        v-for="category in categories" :key="category.id" :value="category.id"> 
+                                        {{category.name}}
+                                </option>
+                                <option v-if="orderBy == 'suplier.name'" 
+                                        v-for="suplier in supliers" :key="suplier.id" :value="suplier.id"> 
+                                        {{suplier.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <table id="table" class="table table-striped table-bordered ">
@@ -52,8 +70,8 @@
                                 </thead>
                                 <transition-group tag="tbody" 
                                                     enter-active-class="animated slideInLeft faster "
-                                                    leave-active-class="animated fadeOutDown faster position-absolute ">
-                                    <tr v-for="(product,productKey) in products" :key="product.id">
+                                                    leave-active-class="animated slideOutRight faster position-absolute ">
+                                    <tr v-for="(product,productKey) in filteredProducts" :key="product.id">
                                        <td>
                                            <img :src="product.image" style="width :150px" :alt="product.name" @click="imgModal(product)">
                                        </td>
@@ -143,6 +161,7 @@ import adminReport from './Report.vue';
         },
         data(){
             return {
+                selector : {id :'all', checked : false},
                 variation:0,
                 products : [],
                 categories :[],
@@ -164,15 +183,72 @@ import adminReport from './Report.vue';
                         }
                     });
                 return list;
+            },
+            filteredProducts()
+            {
+                if (this.products.length > 0)
+                {
+                    var prop = null;
+                    if (this.orderBy == 'category.name'){prop = 'category'}
+                    else if (this.orderBy == 'suplier.name'){prop = 'suplier'}
+                    
+                    if (prop && this.selector.id != 'all'){
+                        var filtered = this.products.filter(prod => {
+                                return prod[prop].id == this.selector.id;     
+                        });
+                        return _.orderBy(filtered,this.orderBy)
+                    } else{ return _.orderBy(this.products,this.orderBy) }
+                }
+                return [];
             }
         },
          watch : {
             orderBy(){
                 this.products = _.sortBy(this.products,this.orderBy);
-               
             },
+
         },
         methods : {
+            checkSelect(){
+                if (this.selector.id == 'all')
+                {
+                    this.products.forEach(prod => {
+                        if (prod.selected == undefined)
+                        {
+                            Vue.set(prod,'selected',true);
+                        }
+                        prod.selected = this.selector.checked;
+                    });
+                }else{
+                    if (this.orderBy == 'category.name')
+                    {
+                        this.products.forEach(prod => {
+                            if (prod.category.id == this.selector.id)
+                            {
+                                if (prod.selected == undefined)
+                                {
+                                    Vue.set(prod,'selected',true);
+                                }
+                                prod.selected = this.selector.checked;
+                            }
+                        });
+                    } else if (this.orderBy == 'suplier.name')
+                    {
+                         this.products.forEach(prod => {
+                            if (prod.suplier.id == this.selector.id)
+                            {
+                                if (prod.selected == undefined)
+                                {
+                                    Vue.set(prod,'selected',true);
+                                }
+                                prod.selected = this.selector.checked;
+                            }
+                        });
+                    }
+                }
+
+
+            },
             changed(productKey,field){ 
                this.saveChange(this.products[productKey],field+'_id')
                 

@@ -70262,6 +70262,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -70274,6 +70292,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
+            selector: { id: 'all', checked: false },
             variation: 0,
             products: [],
             categories: [],
@@ -70294,6 +70313,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
             return list;
+        },
+        filteredProducts: function filteredProducts() {
+            var _this = this;
+
+            if (this.products.length > 0) {
+                var prop = null;
+                if (this.orderBy == 'category.name') {
+                    prop = 'category';
+                } else if (this.orderBy == 'suplier.name') {
+                    prop = 'suplier';
+                }
+
+                if (prop && this.selector.id != 'all') {
+                    var filtered = this.products.filter(function (prod) {
+                        return prod[prop].id == _this.selector.id;
+                    });
+                    return _.orderBy(filtered, this.orderBy);
+                } else {
+                    return _.orderBy(this.products, this.orderBy);
+                }
+            }
+            return [];
         }
     },
     watch: {
@@ -70302,6 +70343,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
+        checkSelect: function checkSelect() {
+            var _this2 = this;
+
+            if (this.selector.id == 'all') {
+                this.products.forEach(function (prod) {
+                    if (prod.selected == undefined) {
+                        Vue.set(prod, 'selected', true);
+                    }
+                    prod.selected = _this2.selector.checked;
+                });
+            } else {
+                if (this.orderBy == 'category.name') {
+                    this.products.forEach(function (prod) {
+                        if (prod.category.id == _this2.selector.id) {
+                            if (prod.selected == undefined) {
+                                Vue.set(prod, 'selected', true);
+                            }
+                            prod.selected = _this2.selector.checked;
+                        }
+                    });
+                } else if (this.orderBy == 'suplier.name') {
+                    this.products.forEach(function (prod) {
+                        if (prod.suplier.id == _this2.selector.id) {
+                            if (prod.selected == undefined) {
+                                Vue.set(prod, 'selected', true);
+                            }
+                            prod.selected = _this2.selector.checked;
+                        }
+                    });
+                }
+            }
+        },
         changed: function changed(productKey, field) {
             this.saveChange(this.products[productKey], field + '_id');
         },
@@ -70401,10 +70474,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.refresh();
     },
     mounted: function mounted() {
-        var _this = this;
+        var _this3 = this;
 
         this.$http.get('/getuser').then(function (response) {
-            _this.user = response.data;
+            _this3.user = response.data;
         });
     }
 });
@@ -71573,21 +71646,11 @@ var render = function() {
                     _c("h4", [_vm._v("Cambiar precios masivo")]),
                     _vm._v(" "),
                     _c("h5", [
-                      _vm._v(
-                        " " +
-                          _vm._s(_vm.selectedProducts.length) +
-                          " Productos seleccionados "
-                      )
+                      _c("span", { staticClass: "text-info" }, [
+                        _vm._v(_vm._s(_vm.selectedProducts.length))
+                      ]),
+                      _vm._v("  Productos seleccionados ")
                     ]),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-sm btn-outline-danger mb-2",
-                        on: { click: _vm.selectAllProducts }
-                      },
-                      [_vm._v("Seleccionar todos")]
-                    ),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -71661,57 +71724,196 @@ var render = function() {
             _c("hr"),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
-              _c("label", { staticClass: "text-info font-weight-bold col-2" }, [
-                _vm._v("Ordenar por")
+              _c("div", { staticClass: "col-6 row" }, [
+                _c(
+                  "label",
+                  { staticClass: "text-info font-weight-bold col-4" },
+                  [_vm._v("Ordenar por")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.orderBy,
+                        expression: "orderBy"
+                      }
+                    ],
+                    staticClass: "form-control col-6",
+                    attrs: { id: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.orderBy = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "suplier.name" } }, [
+                      _vm._v("Proveedor")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "category.name" } }, [
+                      _vm._v("Categoria")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "name" } }, [
+                      _vm._v("Producto")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "price" } }, [
+                      _vm._v("Precio")
+                    ])
+                  ]
+                )
               ]),
               _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
+              _c("div", { staticClass: "col-6 d-flex flex-column" }, [
+                _c("div", { staticClass: "d-flex align-items-center " }, [
+                  _c("label", { staticClass: "text-info font-weight-bold" }, [
+                    _vm._v("Filtrar")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selector.checked,
+                        expression: "selector.checked"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "checkbox" },
+                    domProps: {
+                      checked: Array.isArray(_vm.selector.checked)
+                        ? _vm._i(_vm.selector.checked, null) > -1
+                        : _vm.selector.checked
+                    },
+                    on: {
+                      change: [
+                        function($event) {
+                          var $$a = _vm.selector.checked,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  _vm.selector,
+                                  "checked",
+                                  $$a.concat([$$v])
+                                )
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  _vm.selector,
+                                  "checked",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
+                          } else {
+                            _vm.$set(_vm.selector, "checked", $$c)
+                          }
+                        },
+                        _vm.checkSelect
+                      ]
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "select",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.orderBy,
-                      expression: "orderBy"
-                    }
-                  ],
-                  staticClass: "form-control col-3",
-                  attrs: { id: "" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.orderBy = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "suplier.name" } }, [
-                    _vm._v("Proveedor")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "category.name" } }, [
-                    _vm._v("Categoria")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "name" } }, [
-                    _vm._v("Producto")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "price" } }, [
-                    _vm._v("Precio")
-                  ])
-                ]
-              )
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selector.id,
+                          expression: "selector.id"
+                        }
+                      ],
+                      staticClass: "form-control col-4",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.selector,
+                            "id",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "all" } }, [
+                        _vm._v(" Todo")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.categories, function(category) {
+                        return _vm.orderBy == "category.name"
+                          ? _c(
+                              "option",
+                              {
+                                key: category.id,
+                                domProps: { value: category.id }
+                              },
+                              [
+                                _vm._v(
+                                  " \n                                    " +
+                                    _vm._s(category.name) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      }),
+                      _vm._v(" "),
+                      _vm._l(_vm.supliers, function(suplier) {
+                        return _vm.orderBy == "suplier.name"
+                          ? _c(
+                              "option",
+                              {
+                                key: suplier.id,
+                                domProps: { value: suplier.id }
+                              },
+                              [
+                                _vm._v(
+                                  " \n                                    " +
+                                    _vm._s(suplier.name) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
             ]),
             _vm._v(" "),
             _c(
@@ -71730,10 +71932,10 @@ var render = function() {
                       tag: "tbody",
                       "enter-active-class": "animated slideInLeft faster ",
                       "leave-active-class":
-                        "animated fadeOutDown faster position-absolute "
+                        "animated slideOutRight faster position-absolute "
                     }
                   },
-                  _vm._l(_vm.products, function(product, productKey) {
+                  _vm._l(_vm.filteredProducts, function(product, productKey) {
                     return _c("tr", { key: product.id }, [
                       _c("td", [
                         _c("img", {
