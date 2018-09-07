@@ -207,6 +207,7 @@ import adminReport from './Report.vue';
             orderBy(){
                 this.products = _.sortBy(this.products,this.orderBy);
                 this.resetCheckboxes();
+                this.selector.id ='all';
             },
             'selector.id'()
             {

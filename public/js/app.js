@@ -70342,6 +70342,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         orderBy: function orderBy() {
             this.products = _.sortBy(this.products, this.orderBy);
             this.resetCheckboxes();
+            this.selector.id = 'all';
         },
         'selector.id': function selectorId() {
             this.resetCheckboxes();
