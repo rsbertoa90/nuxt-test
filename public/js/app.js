@@ -70280,6 +70280,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -70340,9 +70341,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         orderBy: function orderBy() {
             this.products = _.sortBy(this.products, this.orderBy);
+            this.resetCheckboxes();
+        },
+        'selector.id': function selectorId() {
+            this.resetCheckboxes();
         }
     },
     methods: {
+        resetCheckboxes: function resetCheckboxes() {
+            this.selector.checked = false;
+            this.products.forEach(function (prod) {
+                prod.selected = false;
+            });
+        },
         checkSelect: function checkSelect() {
             var _this2 = this;
 
@@ -70466,8 +70477,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 vm.saveChange(prod, 'price');
                 vm.saveChange(prod, 'pck_price');
             });
-            vm.refresh();
             vm.variation = 0;
+            vm.resetCheckboxes();
+            vm.refresh();
         }
     },
     created: function created() {
@@ -71621,6 +71633,8 @@ var render = function() {
             _vm._m(0),
             _vm._v(" "),
             _c("hr"),
+            _vm._v(" "),
+            _c("h4", [_vm._v("Nuevo Producto:")]),
             _vm._v(" "),
             _c("admin-create", {
               attrs: { supliers: _vm.supliers, categories: _vm.categories },

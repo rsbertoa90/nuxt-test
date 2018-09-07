@@ -12,6 +12,7 @@
                  <img src="/storage/images/app/MAJU.jpg" style="width : 200px ; height: 110px" alt="logo">
              </div>
              <hr>
+             <h4>Nuevo Producto:</h4>
                 <admin-create :supliers="supliers" :categories="categories" @productSaved="refresh"></admin-create>
                 <hr>
                 <div class="row d-flex flex-column justify-content-center align-items-center">
@@ -205,10 +206,22 @@ import adminReport from './Report.vue';
          watch : {
             orderBy(){
                 this.products = _.sortBy(this.products,this.orderBy);
+                this.resetCheckboxes();
             },
+            'selector.id'()
+            {
+                this.resetCheckboxes();
+            }
+
 
         },
         methods : {
+            resetCheckboxes(){
+                this.selector.checked =false;
+                this.products.forEach(prod => {
+                    prod.selected = false;
+                });
+            },
             checkSelect(){
                 if (this.selector.id == 'all')
                 {
@@ -351,8 +364,9 @@ import adminReport from './Report.vue';
                     vm.saveChange(prod,'price');
                     vm.saveChange(prod,'pck_price');
                 });
-                vm.refresh();
                 vm.variation = 0;
+                vm.resetCheckboxes();
+                vm.refresh();
             }
         },
         created(){
