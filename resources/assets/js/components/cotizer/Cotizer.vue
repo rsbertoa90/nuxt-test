@@ -44,6 +44,29 @@
         </div>
        
 
+             <hr v-if="user && user.role_id < 3">
+             <div v-if="user && user.role_id < 3" class="row">
+                <form   @submit.prevent="addSelectorProduct"
+                        class="form form-inline w-100 d-flex  " 
+                        :class="{'flex-column align-items-start justify-items-between':$mq != 'lg'}">
+                    <div class=" d-flex ml-3 mt-2 " >
+                        <label for="">Codigo</label>
+                        <input type="text" v-model="selector.code" class="form-control ml-2">
+                    </div>
+                    <div class=" d-flex ml-3 mt-2 " >
+                        <label for="">Producto</label>
+                        <label class="text-info ml-4"> {{selector.name}} </label>
+                    </div>
+                    <div class=" d-flex ml-3 mt-2 " >
+                        <label class="mr-2" for="">Unidades</label>
+                        <input type="number" min="0"  class="form-control" v-model="selector.units">
+                    </div>
+                    <button type="submit" class="btn btn-md btn-secondary ml-2" :class="{'btn-outline-success':selector.product && selector.units > 0}"> <span class="fa fa-plus"></span> </button>
+                </form>
+                <div class="w-100">
+                   <pedido @change="listChange" v-if="list && list.length > 0" :list=list></pedido>
+                </div>
+             </div>
              <hr>
         <div id="accordion">
             <div v-for="category in poblatedCategories" :key="category.id" class="card flex-wrap">
@@ -66,7 +89,8 @@
                     <div class="card-body">
                        <table class="table table-striped table-bordered ">
                            <thead class="">
-                               <th v-if="$mq != 'sm'">Foto</th>
+                               <th>Foto</th>
+                               <th v-if="user && user.role_id < 3">Codigo</th>
                                <th class="nametd">Nombre</th>
                                <th class="">Precio</th>
                                <th  class="">Llevando mas de</th>
@@ -76,7 +100,8 @@
                            </thead>
                            <tbody>
                                <tr v-for="product in activeProducts(category)" :key="product.id" >
-                                   <td v-if="$mq != 'sm'" > <img style="width : 150px" :src="product.image" :alt="product.name" @click="show(product.image)"> </td>
+                                   <td> <img class="sampleImage" :src="product.image" :alt="product.name" @click="show(product.image)"> </td>
+                                   <td v-if="user && user.role_id < 3"> {{product.code}} </td>
                                    <td style="cursor:pointer" @click="show(product.image)">  {{product.name.trim()}} </td>
                                    <td class="text-info text-center">${{product.price | price}} <span class="text-danger" v-if="$mq == 'sm'"> / ${{product.pck_price | price}}</span></td>
                                    <td class="text-center">{{product.pck_units}}</td>
@@ -102,7 +127,12 @@
                                </tr>
                            </tbody>
                        </table>
-                    </div>
+               <table>
+                        <thead>
+                            <th>Codigo</th>
+                            <th>Producto</th>
+                        </thead>
+                    </table>      </div>
                 </div>
             </div>
         </div>
@@ -120,17 +150,23 @@
         <div>
             <cotizer-form v-if="userRole() > 2" :list="list" :total="total"></cotizer-form>
             <admin-form v-else :list="list" :total="total"></admin-form>
-            
-
         </div>
     </div>
 </div>
 </template>
 
 <script>
+import pedido from './pedido.vue'
     export default {
+        components:{pedido},
         data(){
             return {
+                selector:{
+                    code:'',
+                    name:'',
+                    product:null,
+                    units:0
+                },
                 categories : [],
                 list : [],
                 user : null,
@@ -138,7 +174,23 @@
             }
         },
         watch : {
-            
+            'selector.code'(){
+                var  vm = this;
+                var res =false;
+                this.categories.forEach(cat => {
+                    cat.products.forEach(prod => {
+                        if (vm.selector.code == prod.code){
+                            vm.selector.product = prod;
+                            vm.selector.name = prod.name;
+                            res = true;
+                        }
+                    });
+                });
+                if (!res){
+                    vm.selector.product = null;
+                    vm.selector.name='';
+                }
+            },
             total() {
                    var result = [];
                    var vm = this;
@@ -212,6 +264,29 @@
         },
         methods:
         {
+            listChange(event){
+                let product = this.list.find(prod => {
+                    return prod.id == event.id;
+                });
+                product.units = event.units;
+
+            },
+            addSelectorProduct(){
+                var vm = this;
+                if (vm.selector.units > 0 && vm.selector.product != null ){
+                    let prod = this.selector.product;
+                    if (prod.units == undefined)
+                    {
+                        Vue.set(prod,'units',0);
+                    }
+                   prod.units = this.selector.units;
+                   vm.selector.product = null;
+                   vm.selector.code = '';
+                   vm.selector.units = 0;
+                   vm.selector.name ='';
+                   
+                }
+            },
             toggleMaintenance(){
                 if (this.config.maintenance){
                     this.config.maintenance = 0;
@@ -254,6 +329,9 @@
 </script>
 
 <style scoped>
+    .sampleImage{
+        width: 50px;
+    }
 
     .form-control{
         max-width: 80px;
@@ -268,7 +346,7 @@
     img{width:100%}
 
     @media(max-width: 600px){
-
+        
         td { white-space : normal;}
         table {
             font-size: 0.66rem;
@@ -282,6 +360,9 @@
     }
     
     @media(min-width: 600px){
+         .sampleImage{
+            width: 150px;
+        }
         table{ font-size: 1rem; font-weight: normal}
         td {white-space: normal;}
         .card-body,.container{padding:1.25rem}
