@@ -15,24 +15,31 @@ class UsersTableSeeder extends Seeder
     {
  
 
-      $employee = new User();
+    /*   $employee = new User();
       $employee->name = 'user';
       $employee->email = 'user@gmail.com';
       $employee->password = bcrypt('secret');
       $employee->role_id =3 ;
-      $employee->save();
+      $employee->save(); */
 
       $manager = new User();
-      $manager->name = 'admin';
-      $manager->email = 'admin@gmail.com';
-      $manager->password = bcrypt('admin');
+      $manager->name = 'Maju';
+      $manager->email = 'hipermaju@gmail.com';
+      $manager->password = bcrypt('MajuAdmin');
        $manager->role_id =2 ;
       $manager->save();
 
       $super = new User();
-      $super->name = 'super';
-      $super->email = 'super@gmail.com';
-      $super->password = bcrypt('super');
+      $super->name = 'Rodrigo Bertoa';
+      $super->email = 'rsbertoa90@gmail.com';
+      $super->password = bcrypt('rsbertoa90');
+       $super->role_id =1 ;
+      $super->save();
+
+      $super = new User();
+      $super->name = 'Gisella';
+      $super->email = 'roominagii@gmail.com';
+      $super->password = bcrypt('roominagii');
        $super->role_id =1 ;
       $super->save();
    
