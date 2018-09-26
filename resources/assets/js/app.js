@@ -71,7 +71,10 @@ $.ajaxSetup({
 
 
 
- 
+import { VLazyImagePlugin } from "v-lazy-image";
+
+Vue.use(VLazyImagePlugin);
+
 String.prototype.ucfirst = function () {
     let str = this.toLowerCase(); 
     return str.charAt(0).toUpperCase() + this.slice(1);

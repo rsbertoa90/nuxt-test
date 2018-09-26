@@ -100,7 +100,7 @@
                            </thead>
                            <tbody>
                                <tr v-for="product in activeProducts(category)" :key="product.id" >
-                                   <td> <img class="sampleImage" :src="product.image" :alt="product.name" @click="show(product.image)"> </td>
+                                   <td> <v-lazy-image class="sampleImage" :src="product.image" :alt="product.name" @click="show(product.image)"/> </td>
                                    <td v-if="user && user.role_id < 3"> {{product.code}} </td>
                                    <td style="cursor:pointer" @click="show(product.image)">  {{product.name | ucFirst}} </td>
                                    <td class="text-info text-center"> 
@@ -161,6 +161,9 @@
         <div>
             <cotizer-form v-if="userRole() > 2" :list="list" :total="total"></cotizer-form>
             <admin-form v-else :list="list" :total="total"></admin-form>
+        </div>
+        <div v-if="!user || user.role_id > 2">
+             <pedido @change="listChange" v-if="list && list.length > 0" :list=list></pedido>
         </div>
     </div>
 </div>

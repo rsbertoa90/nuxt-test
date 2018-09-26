@@ -5,7 +5,7 @@
         </div>
 
        
-        <form  formtarget="_blank" class="col-12" target="_blank" action="/admin/cotizacion" method="post"  >
+        <form  id="form" formtarget="_blank" class="col-12" target="_blank" action="/admin/cotizacion" method="post"  >
                 <csrf></csrf>
                 <input type="hidden" name="list" :value="stringList">
                 <input type="hidden" name="total" :value="total">
