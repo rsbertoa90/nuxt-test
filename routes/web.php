@@ -39,6 +39,9 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
     Route::put('/order','OrderController@update');
 
     Route::put('/config','ConfigController@update');
+
+    Route::get('/metadata','MetadataController@page');
+    Route::put('/metadata','MetadataController@update');
 });
 Route::get('/config','ConfigController@get');
 

@@ -26,4 +26,5 @@ Route::get('/supliers', 'SuplierController@getAll');
 
 Route::get('/orders','OrderController@get');
 
+Route::get('/metadata/{page}', 'MetadataController@get');
 

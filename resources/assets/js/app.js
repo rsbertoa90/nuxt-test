@@ -49,6 +49,7 @@ Vue.component('csrf', require('./components/csrf.vue'));
 Vue.component('app-admin', require('./components/admin/Admin.vue'));
 Vue.component('admin-report', require('./components/admin/Report.vue'));
 Vue.component('admin-orders', require('./components/admin/Orders.vue'));
+Vue.component('admin-meta', require('./components/admin/Meta.vue'));
 Vue.filter('price', val => {
     if (val % 1 != 0){return val.toFixed(2);}
     return val;

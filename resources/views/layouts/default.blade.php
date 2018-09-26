@@ -8,8 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <title>{{ App\Metadata::findOrCreate('home')->metatitle }}</title>
+    <meta name="description" content="{{App\Metadata::findOrCreate('home')->metadescription }}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     {{-- font awesome --}}
@@ -39,6 +39,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/pedidos">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/metadata">Metadata</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Salir</a>
