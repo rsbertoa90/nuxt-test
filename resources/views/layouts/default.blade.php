@@ -8,8 +8,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ App\Metadata::findOrCreate('home')->metatitle }}</title>
-    <meta name="description" content="{{App\Metadata::findOrCreate('home')->metadescription }}">
+    @if ($meta =  App\Metadata::findOrCreate('home'))
+        <title>{{$meta->metatitle }}</title>
+        <meta name="description" content="{{$meta->metadescription }}">
+    @endif
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     {{-- font awesome --}}
