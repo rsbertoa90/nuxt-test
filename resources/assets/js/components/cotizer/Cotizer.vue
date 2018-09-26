@@ -103,9 +103,19 @@
                                    <td> <img class="sampleImage" :src="product.image" :alt="product.name" @click="show(product.image)"> </td>
                                    <td v-if="user && user.role_id < 3"> {{product.code}} </td>
                                    <td style="cursor:pointer" @click="show(product.image)">  {{product.name | ucFirst}} </td>
-                                   <td class="text-info text-center">${{product.price | price}} <span class="text-danger" v-if="$mq == 'sm'"> / ${{product.pck_price | price}}</span></td>
-                                   <td class="text-center">{{product.pck_units}}</td>
-                                   <td v-if="$mq != 'sm'" class="text-center text-success font-weight-bold">${{product.pck_price | price}}</td>
+                                   <td class="text-info text-center"> 
+                                       <span v-if="product.price > 0"> ${{product.price | price}} </span>
+                                       <span v-else> - </span> 
+                                       <span class="text-danger" v-if="$mq == 'sm'"> / ${{product.pck_price | price}}</span>
+                                    </td>
+                                   <td class="text-center">
+                                      <span v-if="product.pck_units > 1"> {{product.pck_units}} </span>
+                                      <span v-else> Venta x unidad </span>
+                                    </td>
+                                   <td v-if="$mq != 'sm'" class="text-center text-success font-weight-bold"> 
+                                        <span v-if="product.pck_units > 1"> ${{product.pck_price | price}} </span>
+                                        <span v-else> - </span>
+                                    </td>
 
                                    <td v-if="!product.paused"><input type="number" min="0" class="form-control " v-model="product.units">
                                         
@@ -127,12 +137,7 @@
                                </tr>
                            </tbody>
                        </table>
-               <table>
-                        <thead>
-                            <th>Codigo</th>
-                            <th>Producto</th>
-                        </thead>
-                    </table>      </div>
+                </div>
                 </div>
             </div>
         </div>

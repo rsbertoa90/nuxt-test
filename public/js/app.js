@@ -68703,6 +68703,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -69462,13 +69467,20 @@ var render = function() {
                                       "td",
                                       { staticClass: "text-info text-center" },
                                       [
-                                        _vm._v(
-                                          "$" +
-                                            _vm._s(
-                                              _vm._f("price")(product.price)
-                                            ) +
-                                            " "
-                                        ),
+                                        product.price > 0
+                                          ? _c("span", [
+                                              _vm._v(
+                                                " $" +
+                                                  _vm._s(
+                                                    _vm._f("price")(
+                                                      product.price
+                                                    )
+                                                  ) +
+                                                  " "
+                                              )
+                                            ])
+                                          : _c("span", [_vm._v(" - ")]),
+                                        _vm._v(" "),
                                         _vm.$mq == "sm"
                                           ? _c(
                                               "span",
@@ -69489,7 +69501,17 @@ var render = function() {
                                     ),
                                     _vm._v(" "),
                                     _c("td", { staticClass: "text-center" }, [
-                                      _vm._v(_vm._s(product.pck_units))
+                                      product.pck_units > 1
+                                        ? _c("span", [
+                                            _vm._v(
+                                              " " +
+                                                _vm._s(product.pck_units) +
+                                                " "
+                                            )
+                                          ])
+                                        : _c("span", [
+                                            _vm._v(" Venta x unidad ")
+                                          ])
                                     ]),
                                     _vm._v(" "),
                                     _vm.$mq != "sm"
@@ -69500,14 +69522,19 @@ var render = function() {
                                               "text-center text-success font-weight-bold"
                                           },
                                           [
-                                            _vm._v(
-                                              "$" +
-                                                _vm._s(
-                                                  _vm._f("price")(
-                                                    product.pck_price
+                                            product.pck_units > 1
+                                              ? _c("span", [
+                                                  _vm._v(
+                                                    " $" +
+                                                      _vm._s(
+                                                        _vm._f("price")(
+                                                          product.pck_price
+                                                        )
+                                                      ) +
+                                                      " "
                                                   )
-                                                )
-                                            )
+                                                ])
+                                              : _c("span", [_vm._v(" - ")])
                                           ]
                                         )
                                       : _vm._e(),
@@ -69625,9 +69652,7 @@ var render = function() {
                                 })
                               )
                             ]
-                          ),
-                          _vm._v(" "),
-                          _vm._m(2, true)
+                          )
                         ])
                       ]
                     )
@@ -69726,18 +69751,6 @@ var staticRenderFns = [
         staticStyle: { width: "200px", height: "100px" },
         attrs: { src: "/storage/images/app/MAJU.jpg", alt: "logo" }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("table", [
-      _c("thead", [
-        _c("th", [_vm._v("Codigo")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Producto")])
-      ])
     ])
   }
 ]
