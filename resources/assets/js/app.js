@@ -53,6 +53,11 @@ Vue.filter('price', val => {
     if (val % 1 != 0){return val.toFixed(2);}
     return val;
 });
+Vue.filter('ucFirst', val => {
+    val = val.toLowerCase();
+
+    return val.charAt(0).toUpperCase() + val.slice(1);
+});
 
 import swal from 'sweetalert';
 window.swal = swal;
@@ -67,9 +72,9 @@ $.ajaxSetup({
 
  
 String.prototype.ucfirst = function () {
-    return this.charAt(0).toUpperCase() + this.slice(1);
+    let str = this.toLowerCase(); 
+    return str.charAt(0).toUpperCase() + this.slice(1);
 }
-
 const app = new Vue({
     el: '#app'
 });

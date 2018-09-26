@@ -74,18 +74,18 @@
                     <h5 class="mb-0">
                         <button class="btn  btn-link w-100 text-left" 
                                 data-toggle="collapse" 
-                                :data-target="'#'+category.name" 
+                                :data-target="'#cat'+category.id" 
                                 aria-expanded="true" 
-                                :aria-controls="category.name">
+                                :aria-controls="category.id">
                                 
                                   
-                                   {{category.name.ucfirst()}}
+                                   {{category.name | ucFirst}}
                                  
                                 
                         </button>
                     </h5>
                 </div>
-                <div :id="category.name" class="collapse collapsed " aria-labelledby="headingOne" data-parent="#accordion">
+                <div :id="'cat'+category.id" class="collapse collapsed " aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
                        <table class="table table-striped table-bordered ">
                            <thead class="">
@@ -102,7 +102,7 @@
                                <tr v-for="product in activeProducts(category)" :key="product.id" >
                                    <td> <img class="sampleImage" :src="product.image" :alt="product.name" @click="show(product.image)"> </td>
                                    <td v-if="user && user.role_id < 3"> {{product.code}} </td>
-                                   <td style="cursor:pointer" @click="show(product.image)">  {{product.name.trim()}} </td>
+                                   <td style="cursor:pointer" @click="show(product.image)">  {{product.name | ucFirst}} </td>
                                    <td class="text-info text-center">${{product.price | price}} <span class="text-danger" v-if="$mq == 'sm'"> / ${{product.pck_price | price}}</span></td>
                                    <td class="text-center">{{product.pck_units}}</td>
                                    <td v-if="$mq != 'sm'" class="text-center text-success font-weight-bold">${{product.pck_price | price}}</td>
