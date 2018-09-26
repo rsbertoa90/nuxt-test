@@ -6,7 +6,7 @@
 
         <h5>Envianos tu pedido</h5>
         <p>Recibiras confirmacion de tu presupuesto por email</p>
-        <form class="col-12">
+        <form class="col-12" id="form">
                 <csrf></csrf>
               
                <div class="col-12 row form-group-row">

@@ -366,10 +366,10 @@
 
     
         tbody:before, tbody:after, thead:before,thead:after { display: none; } 
-        div.breakNow { page-break-inside:avoid; page-break-after:always; }
+       /*  div.breakNow { page-break-inside:avoid; page-break-after:always; }
         ul, img, table {
             page-break-inside: avoid;
-        }
+        } */
 
     thead:before, thead:after, tr:before, tr:after { display: none; }
     tbody:before, tbody:after { display: none; }

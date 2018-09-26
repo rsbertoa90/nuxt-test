@@ -34,9 +34,19 @@
                       <tr>
                           <td> {{$product->code}} </td>
                           <td> {{$product->name}} </td>
-                          <td> ${{number_format($product->price,2)}} </td>
-                          <td> ${{$product->pck_units}} </td>
-                          <td> ${{number_format($product->pck_price,2)}} </td>
+                          @if ($product->price > 0)
+                            <td> ${{number_format($product->price,2)}} </td>  
+                          @else
+                              <td> - </td>
+                          @endif
+
+                          @if ($product->pck_units > 1)
+                            <td> {{$product->pck_units}} </td>  
+                            <td> ${{number_format($product->pck_price,2)}} </td>
+                          @else
+                              <td> Venta X unidad </td>
+                              <td> - </td>
+                          @endif
                       </tr>
                       @endforeach
                   </tbody>
