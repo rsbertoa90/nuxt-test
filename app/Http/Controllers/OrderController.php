@@ -76,10 +76,10 @@ class OrderController extends Controller
 
       $order = Order::find($order->id);
        
-       Mail::to($order->email)
+      /*  Mail::to($order->email)
             ->send(new Cotizacion($order));
 
-       MailController::mailAdmin(new Aviso());
+       MailController::mailAdmin(new Aviso()); */
             
     }
 
