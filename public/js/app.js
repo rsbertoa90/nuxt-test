@@ -68539,7 +68539,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.sampleImage[data-v-731ed9d6]{\n     width: 50px;\n}\n.form-control[data-v-731ed9d6]{\n     max-width: 80px;\n}\n.btn-link[data-v-731ed9d6] {color : black;\n}\n#total[data-v-731ed9d6] {\n     position: fixed;\n     /* margin-left:50vw; */\n     bottom: 20px;\n     z-index: 100;\n}\nimg[data-v-731ed9d6]{width:100%\n}\n@media(max-width: 600px){\ntd[data-v-731ed9d6] { white-space : normal;\n}\ntable[data-v-731ed9d6] {\n         font-size: 0.66rem;\n         font-weight: bold;\n}\ninput[type=\"number\"][data-v-731ed9d6]{\n         max-width: 70px;\n}\n.card-body[data-v-731ed9d6],table th[data-v-731ed9d6], table td[data-v-731ed9d6]{padding:5px;\n}\n}\n@media(min-width: 600px){\n.sampleImage[data-v-731ed9d6]{\n         width: 150px;\n}\ntable[data-v-731ed9d6]{ font-size: 1rem; font-weight: normal\n}\ntd[data-v-731ed9d6] {white-space: normal;\n}\n.card-body[data-v-731ed9d6],.container[data-v-731ed9d6]{padding:1.25rem\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.sampleImage[data-v-731ed9d6]{\n     width: 50px;\n}\n.form-control[data-v-731ed9d6]{\n     max-width: 80px;\n}\n.btn-link[data-v-731ed9d6] {color : black;\n}\n#total[data-v-731ed9d6] {\n     position: fixed;\n     /* margin-left:50vw; */\n     bottom: 20px;\n     z-index: 100;\n}\nimg[data-v-731ed9d6]{width:100%\n}\n@media(max-width: 600px){\ntd[data-v-731ed9d6] { white-space : normal;\n}\n#accordion[data-v-731ed9d6]{\n         margin: 0 -3%;\n}\ntable[data-v-731ed9d6] {\n         table-layout: fixed;\n         width:95vw;\n         font-size: 0.66rem;\n         font-weight: bold;\n}\ninput[type=\"number\"][data-v-731ed9d6]{\n         max-width: 70px;\n}\n.card-body[data-v-731ed9d6],table th[data-v-731ed9d6], table td[data-v-731ed9d6]{padding:5px;\n}\n}\n@media(min-width: 600px){\n.sampleImage[data-v-731ed9d6]{\n         width: 150px;\n}\ntable[data-v-731ed9d6]{ font-size: 1rem; font-weight: normal\n}\ntd[data-v-731ed9d6] {white-space: normal;\n}\n.card-body[data-v-731ed9d6],.container[data-v-731ed9d6]{padding:1.25rem\n}\n}\n\n", ""]);
 
 // exports
 
@@ -69436,6 +69436,7 @@ var render = function() {
                                   return _c("tr", { key: product.id }, [
                                     _c(
                                       "td",
+                                      { attrs: { width: "10%" } },
                                       [
                                         _c("v-lazy-image", {
                                           staticClass: "sampleImage",
@@ -69748,13 +69749,9 @@ var render = function() {
             _c(
               "div",
               [
-                _vm.userRole() > 2
-                  ? _c("cotizer-form", {
-                      attrs: { list: _vm.list, total: _vm.total }
-                    })
-                  : _c("admin-form", {
-                      attrs: { list: _vm.list, total: _vm.total }
-                    })
+                _c("cotizer-form", {
+                  attrs: { user: _vm.user, list: _vm.list, total: _vm.total }
+                })
               ],
               1
             ),
@@ -69835,7 +69832,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-54f6f00b"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -69878,13 +69875,13 @@ var content = __webpack_require__(223);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("0c89de0c", content, false, {});
+var update = __webpack_require__(4)("132e5b92", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-54f6f00b\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Cotizer-form.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-54f6f00b\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Cotizer-form.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-54f6f00b\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Cotizer-form.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-54f6f00b\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Cotizer-form.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -69902,7 +69899,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.loader {\n    position : fixed;\n    height: 100%;\n    width: 100%;\n    z-index: 110;\n    background-color: #ddddddaa;\n    left: 0;\n    top: 0;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: start;\n    padding-top: 5%;\n}\n", ""]);
+exports.push([module.i, "\n.loader[data-v-54f6f00b] {\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  z-index: 110;\n  background-color: #ddddddaa;\n  left: 0;\n  top: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: start;\n  padding-top: 5%;\n}\ninput[type=\"radio\"][data-v-54f6f00b] {\n  -webkit-appearance: checkbox;\n  /* Chrome, Safari, Opera */\n  -moz-appearance: checkbox;\n  /* Firefox */\n  -ms-appearance: checkbox;\n  /* not currently supported */\n  -ms-transform: scale(2);\n  /* IE */\n  -moz-transform: scale(2);\n  /* FF */\n  -webkit-transform: scale(2);\n  /* Safari and Chrome */\n  -o-transform: scale(2);\n  /* Opera */\n  padding: 10px;\n  margin-right: 15px;\n}\n.radioText[data-v-54f6f00b] {\n  font-size: 1.2rem;\n}\n", ""]);
 
 // exports
 
@@ -69947,21 +69944,94 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         list: { default: [] },
-        total: { default: 0 }
+        total: { default: 0 },
+        user: { default: {} }
     },
 
     data: function data() {
         return {
+            states: [],
+            state: null,
+            cities: [],
             loading: false,
             formData: {
                 name: '',
+                seller: '',
                 msg: '',
                 phone: '',
-                email: ''
+                email: '',
+                shipping: false,
+                city: null,
+                address: '',
+                transport: '',
+                cp: ''
+
             }
         };
     },
@@ -69971,29 +70041,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         send: function send() {
             if (this.formData.email.length > 4 & this.list.length > 0) {
 
-                var data = {
-                    name: this.formData.name,
-                    msg: this.formData.msg,
-                    phone: this.formData.phone,
-                    email: this.formData.email,
-                    list: JSON.stringify(this.list),
-                    total: this.total
-                };
+                var data = this.formData;
+                if (data.shipping) {
+                    data.shipping = 1;
+                }
+                data.list = JSON.stringify(this.list);
+                data.total = this.total;
+
                 var vm = this;
                 vm.loading = true;
-                $.ajax({
-                    method: 'post',
-                    data: data,
-                    url: '/cotizer/send',
-                    success: function success() {
-                        vm.loading = false;
-                        swal('Enviamos tu presupuesto', 'Te estaremos contactando a la brevedad', 'success').then(function () {
-                            window.location.replace('/');
-                        });
-                    }
-                });
+                if (this.user && this.user.role_id < 3) {
+                    $.ajax({
+                        method: 'post',
+                        data: data,
+                        url: '/admin/cotizacion',
+                        success: function success() {
+                            vm.loading = false;
+                            swal('Pedido guardado', 'Podras hacer seguimiento desde el panel de pedidos', 'success').then(function () {
+                                window.location.replace('/');
+                            });
+                        }
+                    });
+                } else {
+
+                    $.ajax({
+                        method: 'post',
+                        data: data,
+                        url: '/cotizer/send',
+                        success: function success() {
+                            vm.loading = false;
+                            swal('Enviamos tu presupuesto', 'Te estaremos contactando a la brevedad', 'success').then(function () {
+                                window.location.replace('/');
+                            });
+                        }
+                    });
+                }
             }
         }
+    },
+    created: function created() {
+        var vm = this;
+        this.$http.get('/api/states').then(function (response) {
+            vm.states = response.data;
+        });
     }
 });
 
@@ -70019,7 +70109,9 @@ var render = function() {
     _vm._v(" "),
     _c("h5", [_vm._v("Envianos tu pedido")]),
     _vm._v(" "),
-    _c("p", [_vm._v("Recibiras confirmacion de tu presupuesto por email")]),
+    _c("p", [
+      _vm._v("Nos estaremos comunicando para confirmar tu presupuesto")
+    ]),
     _vm._v(" "),
     _c(
       "form",
@@ -70027,9 +70119,130 @@ var render = function() {
       [
         _c("csrf"),
         _vm._v(" "),
+        _c("div", { staticClass: "col-12 row form-group-row mb-3" }, [
+          _c("div", { staticClass: "col-12 col-lg-4" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.shipping,
+                  expression: "formData.shipping"
+                }
+              ],
+              attrs: { type: "radio" },
+              domProps: {
+                value: false,
+                checked: _vm._q(_vm.formData.shipping, false)
+              },
+              on: {
+                change: function($event) {
+                  _vm.$set(_vm.formData, "shipping", false)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "text-secondary radioText",
+                class: { "text-success": !_vm.formData.shipping },
+                on: {
+                  click: function($event) {
+                    _vm.formData.shipping = false
+                  }
+                }
+              },
+              [
+                _c("span", { staticClass: "fa fa-building" }),
+                _vm._v(" Retiro en el local\n                 ")
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 row form-group-row mb-3" }, [
+          _c("div", { staticClass: "col-12 col-lg-4" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.shipping,
+                  expression: "formData.shipping"
+                }
+              ],
+              attrs: { type: "radio" },
+              domProps: {
+                value: true,
+                checked: _vm._q(_vm.formData.shipping, true)
+              },
+              on: {
+                change: function($event) {
+                  _vm.$set(_vm.formData, "shipping", true)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "text-secondary radioText",
+                class: { "text-success": _vm.formData.shipping },
+                on: {
+                  click: function($event) {
+                    _vm.formData.shipping = true
+                  }
+                }
+              },
+              [
+                _c("span", { staticClass: "fa fa-truck" }),
+                _vm._v(" Envio por transporte\n                ")
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.user && _vm.user.role_id < 3
+          ? _c("div", { staticClass: "col-12 row form-group-row" }, [
+              _c(
+                "label",
+                { staticClass: "col-4 col-lg-2", attrs: { for: "" } },
+                [_vm._v("Nombre del Vendedor")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.formData.seller,
+                    expression: "formData.seller"
+                  }
+                ],
+                staticClass: "form-control col-8 col-lg-4",
+                attrs: { type: "text" },
+                domProps: { value: _vm.formData.seller },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.formData, "seller", $event.target.value)
+                  }
+                }
+              })
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("div", { staticClass: "col-12 row form-group-row" }, [
           _c("label", { staticClass: "col-4 col-lg-2", attrs: { for: "" } }, [
-            _vm._v("Nombre")
+            _vm._v(
+              "\n                   Nombre y Apellido \n                   "
+            ),
+            _vm.user && _vm.user.role_id < 3
+              ? _c("span", [_vm._v(" (del cliente) ")])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("input", {
@@ -70054,6 +70267,210 @@ var render = function() {
             }
           })
         ]),
+        _vm._v(" "),
+        _vm.formData.shipping
+          ? _c("div", [
+              _c("div", { staticClass: "col-12 row form-group-row" }, [
+                _c(
+                  "label",
+                  { staticClass: "col-4 col-lg-2", attrs: { for: "" } },
+                  [_vm._v(" Provincia ")]
+                ),
+                _vm._v(" "),
+                _vm.states.length > 0
+                  ? _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.state,
+                            expression: "state"
+                          }
+                        ],
+                        staticClass: "form-control col-8 col-lg-4",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.state = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      _vm._l(_vm.states, function(opt) {
+                        return _c(
+                          "option",
+                          { key: opt.id, domProps: { value: opt } },
+                          [
+                            _vm._v(
+                              " \n                            " +
+                                _vm._s(opt.name) +
+                                "\n                        "
+                            )
+                          ]
+                        )
+                      })
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-12 row form-group-row" }, [
+                _c(
+                  "label",
+                  { staticClass: "col-4 col-lg-2", attrs: { for: "" } },
+                  [_vm._v(" Ciudad ")]
+                ),
+                _vm._v(" "),
+                _vm.state
+                  ? _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.formData.city,
+                            expression: "formData.city"
+                          }
+                        ],
+                        staticClass: "form-control col-8 col-lg-4",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.formData,
+                              "city",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.state.cities, function(opt) {
+                        return _c(
+                          "option",
+                          { key: opt.id, domProps: { value: opt.id } },
+                          [
+                            _vm._v(
+                              " \n                            " +
+                                _vm._s(opt.name) +
+                                "\n                        "
+                            )
+                          ]
+                        )
+                      })
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-12 row form-group-row" }, [
+                _c(
+                  "label",
+                  { staticClass: "col-4 col-lg-2", attrs: { for: "" } },
+                  [_vm._v(" Direccion ")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.address,
+                      expression: "formData.address"
+                    }
+                  ],
+                  staticClass: "form-control col-8 col-lg-4",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.formData.address },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.formData, "address", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-12 row form-group-row" }, [
+                _c(
+                  "label",
+                  { staticClass: "col-4 col-lg-2", attrs: { for: "" } },
+                  [_vm._v(" Transporte ")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.transport,
+                      expression: "formData.transport"
+                    }
+                  ],
+                  staticClass: "form-control col-8 col-lg-4",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.formData.transport },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.formData, "transport", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-12 row form-group-row" }, [
+                _c(
+                  "label",
+                  { staticClass: "col-4 col-lg-2", attrs: { for: "" } },
+                  [_vm._v(" Codigo Postal ")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.cp,
+                      expression: "formData.cp"
+                    }
+                  ],
+                  staticClass: "form-control col-8 col-lg-4",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.formData.cp },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.formData, "cp", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "col-12 row form-group-row" }, [
           _c("label", { staticClass: "col-4 col-lg-2", attrs: { for: "" } }, [
@@ -70303,6 +70720,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -70374,9 +70848,297 @@ var render = function() {
           domProps: { value: _vm.total }
         }),
         _vm._v(" "),
+        _c("div", { staticClass: "col-12 row form-group-row mb-3" }, [
+          _c("div", { staticClass: "col-12 col-lg-4" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.shipping,
+                  expression: "formData.shipping"
+                }
+              ],
+              attrs: { type: "radio" },
+              domProps: {
+                value: false,
+                checked: _vm._q(_vm.formData.shipping, false)
+              },
+              on: {
+                change: function($event) {
+                  _vm.$set(_vm.formData, "shipping", false)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "text-secondary radioText",
+                class: { "text-success": !_vm.formData.shipping },
+                on: {
+                  click: function($event) {
+                    _vm.formData.shipping = false
+                  }
+                }
+              },
+              [
+                _c("span", { staticClass: "fa fa-building" }),
+                _vm._v(" Retiro en el local\n                 ")
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 row form-group-row mb-3" }, [
+          _c("div", { staticClass: "col-12 col-lg-4" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.shipping,
+                  expression: "formData.shipping"
+                }
+              ],
+              attrs: { type: "radio" },
+              domProps: {
+                value: true,
+                checked: _vm._q(_vm.formData.shipping, true)
+              },
+              on: {
+                change: function($event) {
+                  _vm.$set(_vm.formData, "shipping", true)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "text-secondary radioText",
+                class: { "text-success": _vm.formData.shipping },
+                on: {
+                  click: function($event) {
+                    _vm.formData.shipping = true
+                  }
+                }
+              },
+              [
+                _c("span", { staticClass: "fa fa-truck" }),
+                _vm._v(" Envio por transporte\n                ")
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
         _vm._m(0),
         _vm._v(" "),
         _vm._m(1),
+        _vm._v(" "),
+        _vm.formData.shipping
+          ? _c("div", [
+              _c("div", { staticClass: "col-12 row form-group-row" }, [
+                _c(
+                  "label",
+                  { staticClass: "col-4 col-lg-2", attrs: { for: "" } },
+                  [_vm._v(" Provincia ")]
+                ),
+                _vm._v(" "),
+                _vm.states.length > 0
+                  ? _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.state,
+                            expression: "state"
+                          }
+                        ],
+                        staticClass: "form-control col-8 col-lg-4",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.state = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      _vm._l(_vm.states, function(opt) {
+                        return _c(
+                          "option",
+                          { key: opt.id, domProps: { value: opt } },
+                          [
+                            _vm._v(
+                              " \n                            " +
+                                _vm._s(opt.name) +
+                                "\n                        "
+                            )
+                          ]
+                        )
+                      })
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-12 row form-group-row" }, [
+                _c(
+                  "label",
+                  { staticClass: "col-4 col-lg-2", attrs: { for: "" } },
+                  [_vm._v(" Ciudad ")]
+                ),
+                _vm._v(" "),
+                _vm.state
+                  ? _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.formData.city,
+                            expression: "formData.city"
+                          }
+                        ],
+                        staticClass: "form-control col-8 col-lg-4",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.formData,
+                              "city",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.state.cities, function(opt) {
+                        return _c(
+                          "option",
+                          { key: opt.id, domProps: { value: opt.id } },
+                          [
+                            _vm._v(
+                              " \n                            " +
+                                _vm._s(opt.name) +
+                                "\n                        "
+                            )
+                          ]
+                        )
+                      })
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-12 row form-group-row" }, [
+                _c(
+                  "label",
+                  { staticClass: "col-4 col-lg-2", attrs: { for: "" } },
+                  [_vm._v(" Direccion ")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.address,
+                      expression: "formData.address"
+                    }
+                  ],
+                  staticClass: "form-control col-8 col-lg-4",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.formData.address },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.formData, "address", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-12 row form-group-row" }, [
+                _c(
+                  "label",
+                  { staticClass: "col-4 col-lg-2", attrs: { for: "" } },
+                  [_vm._v(" Transporte ")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.transport,
+                      expression: "formData.transport"
+                    }
+                  ],
+                  staticClass: "form-control col-8 col-lg-4",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.formData.transport },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.formData, "transport", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-12 row form-group-row" }, [
+                _c(
+                  "label",
+                  { staticClass: "col-4 col-lg-2", attrs: { for: "" } },
+                  [_vm._v(" Codigo Postal ")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.cp,
+                      expression: "formData.cp"
+                    }
+                  ],
+                  staticClass: "form-control col-8 col-lg-4",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.formData.cp },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.formData, "cp", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _vm._m(2),
         _vm._v(" "),
@@ -73359,11 +74121,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['order'],
     data: function data() {
-        return {};
+        return {
+            city: null
+        };
     },
 
     methods: {
@@ -73396,6 +74173,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     filters: {
         datetime: function datetime(val) {
             return moment(val).format('DD/MM/YYYY H:mm');
+        }
+    },
+
+    created: function created() {
+        var vm = this;
+        if (this.order.shipping) {
+            this.$http.get('/api/city/' + vm.order.city_id).then(function (res) {
+                vm.city = res.data;
+            });
         }
     }
 });
@@ -73491,7 +74277,37 @@ var render = function() {
               _vm._v("Mensaje adjunto: " + _vm._s(_vm.order.message) + " ")
             ])
           : _vm._e()
-      ])
+      ]),
+      _vm._v(" "),
+      _vm.order.shipping
+        ? _c("div", [
+            _c("h4", [_vm._v("Datos de envío")]),
+            _vm._v(" "),
+            _c("ul", [
+              _vm.city
+                ? _c("li", [
+                    _vm._v("  Provincia: " + _vm._s(_vm.city.state.name) + " ")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.city
+                ? _c("li", [_vm._v(" Ciudad: " + _vm._s(_vm.city.name) + " ")])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("li", [_vm._v(" CP: " + _vm._s(_vm.order.cp) + "  ")]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._v(" Direccion: " + _vm._s(_vm.order.address) + " ")
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._v("Transporte: " + _vm._s(_vm.order.transport) + "  ")
+              ])
+            ])
+          ])
+        : _c("div", [
+            _vm._v("\n                - Retira en local.\n            ")
+          ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [

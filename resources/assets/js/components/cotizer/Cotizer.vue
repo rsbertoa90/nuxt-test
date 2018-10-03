@@ -100,7 +100,7 @@
                            </thead>
                            <tbody>
                                <tr v-for="product in activeProducts(category)" :key="product.id" >
-                                   <td> <v-lazy-image class="sampleImage" :src="product.image" :alt="product.name" @click="show(product.image)"/> </td>
+                                   <td width="10%"> <v-lazy-image class="sampleImage" :src="product.image" :alt="product.name" @click="show(product.image)"/> </td>
                                    <td v-if="user && user.role_id < 3"> {{product.code}} </td>
                                    <td style="cursor:pointer" @click="show(product.image)">  {{product.name | ucFirst}} </td>
                                    <td class="text-info text-center"> 
@@ -159,8 +159,8 @@
         </transition>
         <hr>
         <div>
-            <cotizer-form v-if="userRole() > 2" :list="list" :total="total"></cotizer-form>
-            <admin-form v-else :list="list" :total="total"></admin-form>
+            <cotizer-form :user="user" :list="list" :total="total"></cotizer-form>
+            
         </div>
         <div v-if="!user || user.role_id > 2">
              <pedido @change="listChange" v-if="list && list.length > 0" :list=list></pedido>
@@ -362,7 +362,12 @@ import pedido from './pedido.vue'
     @media(max-width: 600px){
         
         td { white-space : normal;}
+        #accordion{
+            margin: 0 -3%;
+        }
         table {
+            table-layout: fixed;
+            width:95vw;
             font-size: 0.66rem;
             font-weight: bold;
         }

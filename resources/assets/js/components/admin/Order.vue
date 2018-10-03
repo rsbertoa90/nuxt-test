@@ -46,6 +46,19 @@
                     <li v-if="order.email">Email: {{order.email}} </li>
                     <li v-if="order.message">Mensaje adjunto: {{order.message}} </li>
                 </ul>
+                <div v-if="order.shipping">
+                    <h4>Datos de envío</h4>
+                    <ul>
+                        <li v-if="city">  Provincia: {{city.state.name}} </li>
+                        <li v-if="city"> Ciudad: {{city.name}} </li>
+                        <li> CP: {{order.cp}}  </li>
+                        <li> Direccion: {{order.address}} </li>
+                        <li>Transporte: {{order.transport}}  </li>
+                    </ul>
+                </div>
+                <div v-else>
+                    - Retira en local.
+                </div>
         </div>
         <div class="row">
             <div class="col-12 offset-lg-9 col-lg-3">
@@ -94,7 +107,7 @@ export default {
     props : ['order'],
     data(){
         return {
-
+            city:null
         }        
     },
     methods : {
@@ -128,6 +141,17 @@ export default {
      filters : {
         datetime(val){
             return moment(val).format('DD/MM/YYYY H:mm')
+        }
+    },
+
+    created(){
+        var vm = this;
+        if (this.order.shipping)
+        {
+            this.$http.get('/api/city/'+vm.order.city_id)
+                .then(res => {
+                    vm.city = res.data;
+                });
         }
     }
 }

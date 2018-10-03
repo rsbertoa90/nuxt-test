@@ -28,3 +28,6 @@ Route::get('/orders','OrderController@get');
 
 Route::get('/metadata/{page}', 'MetadataController@get');
 
+Route::get('/states','StateController@get');
+
+Route::get('/city/{id}','StateController@getCity');

@@ -53,8 +53,23 @@
                     <li>Nombre: {{$order->name}} </li>
                     <li>Telefono: {{$order->phone}} </li>
                     <li>Email: {{$order->email}} </li>
+                    <li>Mensaje: {{$order->message}} </li>
                 </ul>
             </p>
+            @if ($order->shipping)
+                <p>
+                   Datos de envio:
+                   <ul>
+                       @if ($order->City)    
+                            <li> Provincia: {{$order->City->state->name}} </li> 
+                            <li> Ciudad: {{$order->City->name}} </li> 
+                       @endif
+                        <li> CP: {{$order->cp}} </li> 
+                        <li> direccion: {{$order->address}} </li> 
+                        <li> transporte: {{$order->transport}} </li> 
+                   </ul> 
+                </p>
+            @endif
         </div>
         
     </main>

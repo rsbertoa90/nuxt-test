@@ -5,14 +5,76 @@
         </div>
 
         <h5>Envianos tu pedido</h5>
-        <p>Recibiras confirmacion de tu presupuesto por email</p>
+        <p>Nos estaremos comunicando para confirmar tu presupuesto</p>
         <form class="col-12" id="form">
                 <csrf></csrf>
-              
-               <div class="col-12 row form-group-row">
-                   <label class="col-4 col-lg-2" for="">Nombre</label>
-                   <input required type="text" v-model="formData.name"  class="form-control col-8 col-lg-4">
+
+              <div class="col-12 row form-group-row mb-3">
+                  <div class="col-12 col-lg-4">
+                    <input  type="radio"
+                           v-model="formData.shipping" :value="false"> 
+                     <span @click="formData.shipping=false"  class="text-secondary radioText" :class="{'text-success':!formData.shipping}">
+                        <span class="fa fa-building"></span> Retiro en el local
+                     </span>
+                  </div>
+              </div>
+              <div class="col-12 row form-group-row mb-3">
+                  <div class="col-12 col-lg-4">
+                    <input  type="radio"
+                           v-model="formData.shipping" :value="true"> 
+                    <span  @click="formData.shipping=true" class="text-secondary radioText" :class="{'text-success':formData.shipping}">
+                        <span class="fa fa-truck"></span> Envio por transporte
+                    </span>
+                  </div>
+               </div> 
+
+                <div v-if="user && user.role_id < 3" class="col-12 row form-group-row">
+                   <label class="col-4 col-lg-2" for="">Nombre del Vendedor</label>
+                   <input  type="text" v-model="formData.seller"  class="form-control col-8 col-lg-4">
                 </div> 
+
+               <div class="col-12 row form-group-row">
+                   <label class="col-4 col-lg-2" for="">
+                       Nombre y Apellido 
+                       <span v-if="user && user.role_id < 3"> (del cliente) </span> 
+                    </label>
+                   <input required type="text" v-model="formData.name"  class="form-control col-8 col-lg-4">
+                </div>
+
+                <!-- DATOS DE ENVIO -->
+                <div v-if="formData.shipping">
+                    
+                    <div class="col-12 row form-group-row">
+                        <label class="col-4 col-lg-2" for=""> Provincia </label>
+                        <select v-if="states.length > 0" v-model="state" class="form-control col-8 col-lg-4">
+                            <option v-for="opt in states" :key="opt.id" :value="opt"> 
+                                {{opt.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-12 row form-group-row">
+                        <label class="col-4 col-lg-2" for=""> Ciudad </label>
+                        <select v-if="state" v-model="formData.city" class="form-control col-8 col-lg-4">
+                            <option v-for="opt in state.cities" :key="opt.id" :value="opt.id"> 
+                                {{opt.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-12 row form-group-row">
+                        <label class="col-4 col-lg-2" for=""> Direccion </label>
+                        <input  type="text" v-model="formData.address"  class="form-control col-8 col-lg-4">
+                    </div>
+                    <div class="col-12 row form-group-row">
+                        <label class="col-4 col-lg-2" for=""> Transporte </label>
+                        <input  type="text" v-model="formData.transport"  class="form-control col-8 col-lg-4">
+                    </div>
+                    <div class="col-12 row form-group-row">
+                        <label class="col-4 col-lg-2" for=""> Codigo Postal </label>
+                        <input  type="text" v-model="formData.cp"  class="form-control col-8 col-lg-4">
+                    </div>
+                </div>
+                <!-- /DATOS DE ENVIO -->
+
                <div class="col-12 row form-group-row">
                    <label class="col-4 col-lg-2" for="">Email</label>
                    <input required type="email" v-model="formData.email"  class="form-control col-8 col-lg-4">
@@ -36,16 +98,27 @@
 export default{
     props : {
         list : {default : []},
-        total : {default : 0}
+        total : {default : 0},
+        user: {default:{}},
     },
 
     data(){return{
+        states:[],
+        state:null,
+        cities:[],
         loading : false,
         formData : {
             name : '',
+            seller:'',
             msg : '',
             phone : '',
-            email : ''
+            email : '',
+            shipping: false,
+            city: null,
+            address:'',
+            transport:'',
+            cp:'',
+
         }
     }},
 
@@ -54,36 +127,61 @@ export default{
         send(){
             if (this.formData.email.length > 4 & this.list.length > 0){
 
-                var data = {
-                    name : this.formData.name,
-                    msg : this.formData.msg,
-                    phone : this.formData.phone,
-                    email : this.formData.email,
-                    list : JSON.stringify(this.list),
-                    total : this.total
-                };
+                var data = this.formData;
+                if (data.shipping)
+                {
+                    data.shipping = 1;
+                }
+                data.list = JSON.stringify(this.list);
+                data.total = this.total
+                
                 var vm = this;
                 vm.loading = true;
-                $.ajax({
-                    method : 'post',
-                    data : data,
-                    url : '/cotizer/send',
-                    success(){
-                        vm.loading = false;
-                        swal('Enviamos tu presupuesto', 'Te estaremos contactando a la brevedad', 'success')
-                            .then(() => {
-                                window.location.replace('/');
-                            });
-                    } 
-                });
+                if (this.user && this.user.role_id < 3){
+                     $.ajax({
+                        method : 'post',
+                        data : data,
+                        url : '/admin/cotizacion',
+                        success(){
+                            vm.loading = false;
+                            swal('Pedido guardado', 'Podras hacer seguimiento desde el panel de pedidos', 'success')
+                                .then(() => {
+                                    window.location.replace('/');
+                                });
+                        } 
+                    });
+                }
+                else {
+
+                    $.ajax({
+                        method : 'post',
+                        data : data,
+                        url : '/cotizer/send',
+                        success(){
+                            vm.loading = false;
+                            swal('Enviamos tu presupuesto', 'Te estaremos contactando a la brevedad', 'success')
+                                .then(() => {
+                                    window.location.replace('/');
+                                });
+                        } 
+                    });
+                }
             }
         }
+    },
+    created()
+    {
+        var vm = this;
+        this.$http.get('/api/states')
+            .then(response => {
+                vm.states = response.data;
+            });
     }
 }
 
 </script>
 
-<style>
+<style lang="scss" scoped>
 .loader {
     position : fixed;
     height: 100%;
@@ -96,5 +194,20 @@ export default{
     justify-content: center;
     align-items: start;
     padding-top: 5%;
+}
+
+input[type="radio"] {
+  -webkit-appearance: checkbox; /* Chrome, Safari, Opera */
+  -moz-appearance: checkbox;    /* Firefox */
+  -ms-appearance: checkbox;     /* not currently supported */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+  margin-right: 15px;
+}
+.radioText{
+    font-size:1.2rem;
 }
 </style>

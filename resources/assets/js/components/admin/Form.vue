@@ -9,6 +9,26 @@
                 <csrf></csrf>
                 <input type="hidden" name="list" :value="stringList">
                 <input type="hidden" name="total" :value="total">
+
+              <div class="col-12 row form-group-row mb-3">
+                  <div class="col-12 col-lg-4">
+                    <input  type="radio"
+                           v-model="formData.shipping" :value="false"> 
+                     <span @click="formData.shipping=false"  class="text-secondary radioText" :class="{'text-success':!formData.shipping}">
+                        <span class="fa fa-building"></span> Retiro en el local
+                     </span>
+                  </div>
+              </div>
+              <div class="col-12 row form-group-row mb-3">
+                  <div class="col-12 col-lg-4">
+                    <input  type="radio"
+                           v-model="formData.shipping" :value="true"> 
+                    <span  @click="formData.shipping=true" class="text-secondary radioText" :class="{'text-success':formData.shipping}">
+                        <span class="fa fa-truck"></span> Envio por transporte
+                    </span>
+                  </div>
+               </div> 
+
                <div class="col-12 row form-group-row">
                    <label class="col-4 col-lg-2" for="">Nombre del Vendedor</label>
                    <input  type="text" name="seller"  class="form-control col-8 col-lg-4">
@@ -17,6 +37,43 @@
                    <label class="col-4 col-lg-2" for="">Nombre del cliente</label>
                    <input  required type="text" name="name"  class="form-control col-8 col-lg-4">
                 </div> 
+
+                  <!-- DATOS DE ENVIO -->
+                <div v-if="formData.shipping">
+                    
+                    <div class="col-12 row form-group-row">
+                        <label class="col-4 col-lg-2" for=""> Provincia </label>
+                        <select v-if="states.length > 0" v-model="state" class="form-control col-8 col-lg-4">
+                            <option v-for="opt in states" :key="opt.id" :value="opt"> 
+                                {{opt.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-12 row form-group-row">
+                        <label class="col-4 col-lg-2" for=""> Ciudad </label>
+                        <select v-if="state" v-model="formData.city" class="form-control col-8 col-lg-4">
+                            <option v-for="opt in state.cities" :key="opt.id" :value="opt.id"> 
+                                {{opt.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-12 row form-group-row">
+                        <label class="col-4 col-lg-2" for=""> Direccion </label>
+                        <input  type="text" v-model="formData.address"  class="form-control col-8 col-lg-4">
+                    </div>
+                    <div class="col-12 row form-group-row">
+                        <label class="col-4 col-lg-2" for=""> Transporte </label>
+                        <input  type="text" v-model="formData.transport"  class="form-control col-8 col-lg-4">
+                    </div>
+                    <div class="col-12 row form-group-row">
+                        <label class="col-4 col-lg-2" for=""> Codigo Postal </label>
+                        <input  type="text" v-model="formData.cp"  class="form-control col-8 col-lg-4">
+                    </div>
+                </div>
+                <!-- /DATOS DE ENVIO -->
+
+                
+
                <div class="col-12 row form-group-row">
                    <label class="col-4 col-lg-2" for="">Email</label>
                    <input  type="email" name="email"  class="form-control col-8 col-lg-4">
