@@ -17,8 +17,7 @@
             <div class="col-12 offset-lg-4 col-lg-4">
                 <img src="/storage/images/app/MAJU.jpg" 
                 style="width : 200px ; height: 100px" 
-                alt="logo"
-                >
+                alt="logo" >
             </div>
             <div class="col-12 col-lg-2">
                 <button class="btn btn-outline-info btn-lg" 
@@ -100,7 +99,7 @@
                            </thead>
                            <tbody>
                                <tr v-for="product in activeProducts(category)" :key="product.id" >
-                                   <td width="10%"> <v-lazy-image class="sampleImage" :src="product.image" :alt="product.name" @click="show(product.image)"/> </td>
+                                   <td width="10%" @click="show(product.image)"> <v-lazy-image class="sampleImage" :src="product.image" :alt="product.name" /> </td>
                                    <td v-if="user && user.role_id < 3"> {{product.code}} </td>
                                    <td style="cursor:pointer" @click="show(product.image)">  {{product.name | ucFirst}} </td>
                                    <td class="text-info text-center"> 
