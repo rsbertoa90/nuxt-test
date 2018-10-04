@@ -23,11 +23,11 @@
             <div class="col-12 col-lg-2">
                 <button class="btn btn-outline-info btn-lg" 
                         @click.prevent="downloadPrices">
-                    Descargar lista de precios
+                    <span class="fa fa-download"></span> Descargar lista de precios
                 </button> 
                 <a class="btn btn-outline-warning btn-lg" 
                     href="/">
-                    Resetear Cotizador
+                     <span class="fa fa-sync-alt"></span> Resetear Cotizador
                 </a> 
                 <div v-if="user && user.role_id < 3">
                     <button v-if="config && !config.maintenance" @click="toggleMaintenance"
