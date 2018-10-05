@@ -33,6 +33,9 @@
 
         gtag('config', 'UA-126973762-1');
     </script>
+
+      {{-- Google search panel --}}
+   <meta name="google-site-verification" content="y8lLm8a1Q9LWzq7c8pQ8w-01zPjhn-GfdxpOSaKanCM" />
 </head>
 <body>
     @if (Auth::check())
