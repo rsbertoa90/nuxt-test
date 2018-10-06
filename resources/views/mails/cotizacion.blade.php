@@ -3,65 +3,32 @@
 @section('content')
 
     <div>
-        <p>Hola! Gracias por tu pedido. En las siguientes 24 hs hábiles lo estaremos confirmando . Te dejamos nuestros nro de contacto:
+        <p>Hola {{$order->name}}! recibimos tu pedido. 
+            En las siguientes 24 hs habiles nos estaremos comunicando con vos. </p>
+        </p> 
+        <p>
+            Te dejamos nuestros nro de contacto por cualquier consulta
             <ul>
                 <li>Whatsapp: 11 2708 2683</li>
                 <li>Tel fijo: (11) 4951- 6400. Saludos!</li>
             </ul>    
         </p> 
-    
+        
+        <p>
+            Si queres descargar una copia en pdf de tu pedido hace click en el siguiente enlace:
+        </p>
+        <p>
+            <a href="https://mayoristamaju.com/pdf/{{$order->id}}">   Descargar copia de pedido  </a>
+        </p>
+
+        <p>
+            Gracias por elegir Bazar Mayorista MAJU!
+        </p>
+
     </div>
 
-    <div>
-        <table  class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <td >Codigo</td>
-                    <td >Nombre</td>
-                    <td >Cantidad pedida</td>
-                    <td>Precio</td>
-                    <td>Subtotal</td>
-                </tr>
-            </thead>
-            <tbody>
-                @php
-                    $total =0;
-                @endphp
-                @foreach ($order->orderProducts as $item)
-                <tr>
-                    <td >{{$item->product->code}}</td>            
-                    <td >{{$item->product->name}}</td>            
-                    <td> {{$item->units}}</td>                  
-                    <td> ${{$item->price}}</td>                  
-                    <td> ${{$item->price * $item->units}}</td>  
-                    @php
-                        $total += ($item->price * $item->units);
-                    @endphp                
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <span stye="color:blue ; 
-                    font-weight:bold ; 
-                    font-size :40px ; 
-                    margin-top:15px">
-                    TOTAL: ${{$total}} 
-        </span>
-    </div>
-    <hr>
-    <div>
-        <h5>Informacion Adjunta:</h5>
-        <br>
-        <h5> De : {{$order->name}}</h5>
-         <h5>mail : {{$order->email}}</h5> <br>
-         <h5>TEL:  {{$order->phone}}</h5>
-    </div>
-    <hr>
-    @if ($order->message)
-        <div>
-            <h5>Mensaje adjunto:</h5>
-                <p>{{$order->message}}  </p>
-        </div>
-    @endif
+ 
+  
+
    
 @endsection

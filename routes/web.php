@@ -43,6 +43,10 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
     Route::get('/metadata','MetadataController@page');
     Route::put('/metadata','MetadataController@update');
 });
+
+Route::get('/pdf/{order}', 'OrderController@toPDF');
+
+
 Route::get('/config','ConfigController@get');
 
 Route::get('/getuser','UserController@get');

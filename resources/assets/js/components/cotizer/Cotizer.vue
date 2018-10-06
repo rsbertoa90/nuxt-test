@@ -14,16 +14,32 @@
 
     <div v-else class="container w-100" :class="{'bg-white' : user != null && user.role_id > 2}">   
         <div class="row w-100 d-flex justify-content-center">
-            <div class="col-12 offset-lg-4 col-lg-4">
+            <div class="col-12 col-lg-4 text-center">
                 <img src="/storage/images/app/MAJU.jpg" 
-                style="width : 200px ; height: 100px" 
+                :class="{'smlogo':$mq != 'lg',
+                         lglogo:$mq == 'lg'}" 
                 alt="logo" >
             </div>
-            <div class="col-12 col-lg-2">
+            <div class="col-12 col-lg-4 text-center" v-if="$mq=='lg'">
+                <h2 v-if="!user || user.role_id > 2" class="mt-4 text-info">
+                    <span class="fa fa-arrow-down"></span>
+                    Hace tu pedido
+                    <span class="fa fa-arrow-down"></span>
+                </h2>
+            </div>
+            <div class="col-12 col-lg-4">
+                
+                <a class="btn btn-outline-primary btn-lg" target="_blank"
+                    href="https://drive.google.com/file/d/1PRSqHX-70Eh7uAqOaF8xV-CAZ3BhqPL9/view">
+                     <span class="fa fa-download"></span> Descargar catalogo digital
+                </a> 
+
                 <button class="btn btn-outline-info btn-lg" 
                         @click.prevent="downloadPrices">
                     <span class="fa fa-download"></span> Descargar lista de precios
                 </button> 
+                
+
                 <a class="btn btn-outline-warning btn-lg" 
                     href="/">
                      <span class="fa fa-sync-alt"></span> Resetear Cotizador
@@ -39,6 +55,13 @@
                         Mostrar cotizador al publico
                     </button> 
                 </div>
+            </div>
+            <div class="col-12 col-lg-4 text-center" v-if="$mq!='lg'">
+                <h2 v-if="!user || user.role_id > 2" class="mt-4 text-info">
+                    <span class="fa fa-arrow-down"></span>
+                    Hace tu pedido
+                    <span class="fa fa-arrow-down"></span>
+                </h2>
             </div>
         </div>
        
@@ -93,9 +116,9 @@
                                <th class="nametd">Nombre</th>
                                <th class="">Precio</th>
                                <th  class="">Llevando mas de</th>
-                               <th v-if="$mq != 'sm'"  class="">Precio x mayor</th>
+                               <th v-if="$mq == 'lg'"  class="">Precio x mayor</th>
                                <th class="">Quiero</th>
-                               <th v-if="$mq != 'sm'" class="">Subtotal</th>
+                               <th v-if="$mq == 'lg'" class="">Subtotal</th>
                            </thead>
                            <tbody>
                                <tr v-for="product in activeProducts(category)" :key="product.id" >
@@ -105,20 +128,20 @@
                                    <td class="text-info text-center"> 
                                        <span v-if="product.price > 0"> ${{product.price | price}} </span>
                                        <span v-else> - </span> 
-                                       <span class="text-danger" v-if="$mq == 'sm'"> / ${{product.pck_price | price}}</span>
+                                       <span class="text-danger" v-if="$mq != 'lg'"> / ${{product.pck_price | price}}</span>
                                     </td>
                                    <td class="text-center">
                                       <span v-if="product.pck_units > 1"> {{product.pck_units}} </span>
                                       <span v-else> Venta x unidad </span>
                                     </td>
-                                   <td v-if="$mq != 'sm'" class="text-center text-success font-weight-bold"> 
+                                   <td v-if="$mq == 'lg'" class="text-center text-success font-weight-bold"> 
                                         <span v-if="product.pck_units > 1"> ${{product.pck_price | price}} </span>
                                         <span v-else> - </span>
                                     </td>
 
                                    <td v-if="!product.paused"><input type="number" min="0" class="form-control " v-model="product.units">
                                         
-                                        <div v-if="$mq == 'sm' && product.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center">
+                                        <div v-if="$mq != 'lg' && product.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center">
                                             
                                             <span v-if="product.units < product.pck_units">  ${{(product.price * product.units) | price}} </span>
                                             <span v-if="product.units >= product.pck_units">  ${{(product.pck_price * product.units) | price}} </span>
@@ -130,9 +153,9 @@
                                        <span class="text-danger">Sin Stock</span>
                                    </td>
                                    
-                                   <td v-if="! product.units && $mq != 'sm'"> 0 </td>
-                                   <td v-else-if="product.units < product.pck_units & $mq != 'sm'">$ {{ (product.units * product.price).toFixed(2) }}  </td>
-                                   <td v-else-if="$mq != 'sm'"> ${{ (product.units * product.pck_price).toFixed(2) }} </td>
+                                   <td v-if="! product.units && $mq == 'lg'"> 0 </td>
+                                   <td v-else-if="product.units < product.pck_units & $mq == 'lg'">$ {{ (product.units * product.price).toFixed(2) }}  </td>
+                                   <td v-else-if="$mq == 'lg'"> ${{ (product.units * product.pck_price).toFixed(2) }} </td>
                                </tr>
                            </tbody>
                        </table>
@@ -342,6 +365,19 @@ import pedido from './pedido.vue'
 </script>
 
 <style scoped>
+
+    .lglogo{
+        width : 200px ; 
+        height: 100px;
+    }
+    .smlogo{
+        width : 100px ; 
+        height: 50px;
+        margin-bottom: 15px;
+        margin-top: 10px;
+    
+    }
+
     .sampleImage{
         width: 50px;
     }
