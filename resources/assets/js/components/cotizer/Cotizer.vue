@@ -1,5 +1,8 @@
 <template>
 <div class="w-100">
+     <div v-if="loading" class="loader">
+            <dot-loader :loading="loading" size="200px"></dot-loader>
+    </div>
     
     <div v-if="config && user && config.maintenance && user.role_id > 2">
         <div class="d-flex flex-column text-center w-100">
@@ -197,6 +200,7 @@ import pedido from './pedido.vue'
         components:{pedido},
         data(){
             return {
+                loading:false,
                 selector:{
                     code:'',
                     name:'',
@@ -339,7 +343,8 @@ import pedido from './pedido.vue'
             },
           
             downloadPrices(){
-                window.location.replace('/descargar-lista-de-precios');
+               
+                window.open('/descargar-lista-de-precios','_blank');
             },
             activeProducts(category)
             {
@@ -422,5 +427,19 @@ import pedido from './pedido.vue'
         .card-body,.container{padding:1.25rem}
         
     }
+
+    .loader {
+    position : fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 110;
+    background-color: #ddddddaa;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding-top: 5%;
+}
    
 </style>
