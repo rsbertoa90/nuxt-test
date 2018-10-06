@@ -85,7 +85,7 @@
                 </div> 
                <div class="col-12 row form-group-row">
                    <label class="col-4 col-lg-2" for="">Mensaje</label>
-                   <textarea v-model="formData.msg" name="msg" class="form-control col-8 col-lg-4"></textarea>
+                   <textarea v-model="formData.message" name="msg" class="form-control col-8 col-lg-4"></textarea>
                 </div> 
                 <button class="button btn-lg btn-outline-success offset-2 mt-2" @click.prevent.stop="send">Enviar</button>
 
@@ -110,7 +110,7 @@ export default{
         formData : {
             name : '',
             seller:'',
-            msg : '',
+            message : '',
             phone : '',
             email : '',
             shipping: false,
