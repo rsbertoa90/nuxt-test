@@ -30,7 +30,7 @@ class Cotizacion extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.cotizacion')
+        return $this->from('hipermaju@gmail.com')->subject('Recinimos tu pedido!')->view('mails.cotizacion')
             ->with(['order'=>$this->order]);
     }
 }
