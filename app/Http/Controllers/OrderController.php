@@ -87,8 +87,8 @@ class OrderController extends Controller
 
       $order = Order::find($order->id);
        
-      /*  Mail::to($order->email)
-            ->send(new Cotizacion($order)); */
+       Mail::to($order->email)
+            ->send(new Cotizacion($order));
 
       
             
