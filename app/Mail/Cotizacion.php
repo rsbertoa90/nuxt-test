@@ -34,4 +34,3 @@ class Cotizacion extends Mailable
             ->with(['order'=>$this->order]);
     }
 }
-b
