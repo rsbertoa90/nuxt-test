@@ -29,6 +29,9 @@
                     Hace tu pedido
                     <span class="fa fa-arrow-down"></span>
                 </h2>
+                <h4>
+                    Compra mínima en el local $1500, para envíos $4000.
+                </h4>
             </div>
             <div class="col-12 col-lg-4">
                 
@@ -65,6 +68,9 @@
                     Hace tu pedido
                     <span class="fa fa-arrow-down"></span>
                 </h2>
+                <h4>
+                    Compra mínima en el local $1500, para envíos $4000.
+                </h4>
             </div>
         </div>
        
@@ -168,20 +174,23 @@
         </div>
         
         <transition enter-active-class="animated bounceIn" leave-active-class="animated fadeOutDown">
-            <div v-if="total > 0" id="total"  class="col-12 row d-flex flex-column align-items-center justify-content-center w-100">
-                <div  class="bg-success p-1 col-6 col-lg-2">
-                    <div class="col-12 bg-white d-flex justify-content-center">
+            <div v-if="total > 0" id="total">
+                <div  class="bg-success p-1">
+                    <div class=" bg-white d-flex justify-content-center p-1">
                     TOTAL : ${{total | price}}
                     </div>
                 </div>
                
-                <div  class="bg-success p-1 col-6 col-lg-2">
-                    <div class="col-12 bg-white d-flex justify-content-center">
+                <div  class="bg-success p-1">
+                    <div class="bg-white d-flex justify-content-center p-1">
                         <a href="#form"> Terminar pedido </a>
                     </div>
                 </div>
             </div>    
         </transition>
+        <div class="whatsapp">
+            <a href="https://web.whatsapp.com/send?phone=+5491127082683" target="_blank" rel="noreferrer"> <i class="fab fa-whatsapp"></i> Atencion por WhatsApp =)</a>
+        </div>
         <hr>
         <div>
             <cotizer-form :user="user" :list="list" :total="total"></cotizer-form>
@@ -369,7 +378,7 @@ import pedido from './pedido.vue'
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
     .lglogo{
         width : 200px ; 
@@ -394,8 +403,23 @@ import pedido from './pedido.vue'
     #total {
         position: fixed;
         /* margin-left:50vw; */
-        bottom: 20px;
+        bottom: 25px;
+        left: 33%;
         z-index: 100;
+    }
+    .whatsapp{
+        position:fixed;
+       
+        bottom:0px;
+        right:0px;
+        z-index:110;
+        background: #fff;
+        border: 1px solid #65BC54;
+        padding: 2px;
+        a{color:#65BC54};
+    }
+    .fa-whatsapp{
+      font-size: 1.3rem;
     }
     img{width:100%}
 
@@ -419,6 +443,9 @@ import pedido from './pedido.vue'
     }
     
     @media(min-width: 600px){
+         #total {
+             left:45%;
+         }
          .sampleImage{
             width: 150px;
         }
