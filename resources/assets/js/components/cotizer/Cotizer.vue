@@ -189,7 +189,7 @@
             </div>    
         </transition>
         <div class="whatsapp">
-            <a href="https://web.whatsapp.com/send?phone=+5491127082683" target="_blank" rel="noreferrer"> <i class="fab fa-whatsapp"></i> Atencion por WhatsApp =)</a>
+            <a href="https://web.whatsapp.com/send?phone=+5491127082683" target="_blank" rel="noreferrer"> <i class="fab fa-whatsapp"></i>  <span v-if="$mq=='lg'"> Atencion por WhatsApp =) </span> </a>
         </div>
         <hr>
         <div>
@@ -425,6 +425,14 @@ import pedido from './pedido.vue'
 
     @media(max-width: 600px){
         
+          .fa-whatsapp{
+            font-size: 3rem;
+        }
+        .whatsapp{
+            border:none;
+        }
+
+
         td { white-space : normal;}
         #accordion{
             margin: 0 -3%;
