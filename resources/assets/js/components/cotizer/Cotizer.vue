@@ -189,7 +189,7 @@
             </div>    
         </transition>
         <div class="whatsapp">
-            <a href="https://web.whatsapp.com/send?phone=+5491127082683" target="_blank" rel="noreferrer"> <i class="fab fa-whatsapp"></i>  <span v-if="$mq=='lg'"> Atencion por WhatsApp =) </span> </a>
+            <a href="https://web.whatsapp.com/send?phone=+5491127082683" > <i class="fab fa-whatsapp"></i>  <span v-if="$mq=='lg'"> Atencion por WhatsApp =) </span> </a>
         </div>
         <hr>
         <div>
