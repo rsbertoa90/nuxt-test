@@ -101,6 +101,14 @@ export default{
         total : {default : 0},
         user: {default:{}},
     },
+    computed:{
+        minBuy(){
+            if (this.formData.shipping){
+                return 4000;
+            }
+            return 1500;
+        }
+    },
 
     data(){return{
         states:[],
@@ -123,9 +131,29 @@ export default{
     }},
 
     methods : {
-        
+        formValid()
+        {
+            if(!this.formData.name || this.formData.name.trim() == '')
+            {
+                 swal('El campo "Nombre y Apellido" es obligatorio ','','error');
+                 return false; 
+            }
+            else if (this.formData.email.length < 4 && this.user.role_id > 2)
+            {
+                swal('Hay algo mal con el mail','','error');
+                return false;
+            }else if (this.list.length <= 0) 
+            {   
+                swal('No hay productos seleccionados','','error');
+                return false;
+            } else if (this.total < this.minBuy)
+            {
+                swal('El minimo de compra es de $'+this.minBuy,'','error');
+                return false;
+            } else {return true;}
+        },
         send(){
-            if (this.formData.email.length > 4 & this.list.length > 0){
+            if (this.formValid()){
 
                 var data = this.formData;
                 if (data.shipping)
