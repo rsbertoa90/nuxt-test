@@ -22,9 +22,9 @@
                     :key="'op'+op.product.id">
                     <td> {{op.product.code}} </td>
                     <td> {{op.product.name}} </td>
-                    <td> ${{op.price}} </td>
+                    <td> ${{op.price | price}} </td>
                     <td> {{op.units}} </td>
-                    <td> ${{op.units * op.price}} </td>
+                    <td> ${{op.units * op.price | price}} </td>
                 </tr>
             
             </tbody>
@@ -34,7 +34,7 @@
                     <td></td>
                     <td></td>
                     <td style="color : blue">TOTAL</td>
-                    <td style="color : blue"> ${{total}} </td>
+                    <td style="color : blue"> ${{total | price}} </td>
                     </tr>
             </tfoot>
         </table>

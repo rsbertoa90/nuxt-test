@@ -23,4 +23,14 @@ class OrderProduct extends Model
         return $this->belongsTo(Order::class);
     }
 
+      public function setPriceAttribute($value)
+    {
+        $this->attributes['price'] = $value * 100;
+    }
+
+    public function getPriceAttribute($value)
+    {
+        return $value / 100 ;
+    }
+
 }
