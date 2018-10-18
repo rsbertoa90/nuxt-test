@@ -124,8 +124,8 @@
                                <th v-if="user && user.role_id < 3">Codigo</th>
                                <th class="nametd">Nombre</th>
                                <th class="">Precio</th>
-                               <th  class="">Llevando mas de</th>
-                               <th v-if="$mq == 'lg'"  class="">Precio x mayor</th>
+                               <!-- <th  class="">Llevando mas de</th> -->
+                               <th   class="">Precio x mayor</th>
                                <th class="">Quiero</th>
                                <th v-if="$mq == 'lg'" class="">Subtotal</th>
                            </thead>
@@ -137,18 +137,24 @@
                                    <td class="text-info text-center"> 
                                        <span v-if="product.price > 0"> ${{product.price | price}} </span>
                                        <span v-else> - </span> 
-                                       <span class="text-danger" v-if="$mq != 'lg'"> / ${{product.pck_price | price}}</span>
+                                       <br>
+                                        <span> - de {{product.pck_units}}  </span>
+                                        <br>
+                                        <span>Unidades</span>
                                     </td>
-                                   <td class="text-center">
+                               <!--     <td class="text-center">
                                       <span v-if="product.pck_units > 1"> {{product.pck_units}} </span>
                                       <span v-else> Venta x unidad </span>
-                                    </td>
-                                   <td v-if="$mq == 'lg'" class="text-center text-success font-weight-bold"> 
+                                    </td> -->
+                                   <td  class="text-center text-success font-weight-bold"> 
                                         <span v-if="product.pck_units > 1"> ${{product.pck_price | price}} </span>
-                                        <span v-else> - </span>
+                                        <span v-else> - </span> <br>
+                                        <span> + de {{product.pck_units}}  </span>
+                                        <br>
+                                        <span>Unidades</span>
                                     </td>
 
-                                   <td v-if="!product.paused"><input type="number" min="0" class="form-control " v-model="product.units">
+                                   <td><input type="number" min="0" class="form-control " v-model="product.units">
                                         
                                         <div v-if="$mq != 'lg' && product.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center">
                                             
@@ -157,9 +163,6 @@
                                             
                                         </div>
                                    
-                                   </td>
-                                   <td v-else>
-                                       <span class="text-danger">Sin Stock</span>
                                    </td>
                                    
                                    <td v-if="! product.units && $mq == 'lg'"> 0 </td>
