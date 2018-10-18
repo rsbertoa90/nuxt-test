@@ -138,9 +138,11 @@
                                        <span v-if="product.price > 0"> ${{product.price | price}} </span>
                                        <span v-else> - </span> 
                                        <br>
-                                        <span> - de {{product.pck_units}}  </span>
-                                        <br>
-                                        <span>Unidades</span>
+                                       <div v-if="product.pck_units > 1">
+                                            <span> - de {{product.pck_units}}  </span>
+                                            <br>
+                                            <span>Unidades</span>
+                                       </div>
                                     </td>
                                <!--     <td class="text-center">
                                       <span v-if="product.pck_units > 1"> {{product.pck_units}} </span>
@@ -149,9 +151,11 @@
                                    <td  class="text-center text-success font-weight-bold"> 
                                         <span v-if="product.pck_units > 1"> ${{product.pck_price | price}} </span>
                                         <span v-else> - </span> <br>
-                                        <span> + de {{product.pck_units}}  </span>
-                                        <br>
-                                        <span>Unidades</span>
+                                        <div v-if="product.pck_units > 1">
+                                            <span> + de {{product.pck_units}}  </span>
+                                            <br>
+                                            <span>Unidades</span>
+                                        </div>
                                     </td>
 
                                    <td><input type="number" min="0" class="form-control " v-model="product.units">
