@@ -102,12 +102,7 @@ export default{
         user: {default:{}},
     },
     computed:{
-        minBuy(){
-            if (this.formData.shipping){
-                return 4000;
-            }
-            return 1500;
-        }
+       
     },
 
     data(){return{
@@ -131,9 +126,20 @@ export default{
     }},
 
     methods : {
+         minBuy(){
+            if (this.formData.shipping){
+                return 4000;
+            }
+            else {return 1500;}
+        },
         formValid()
-        {
-            if(!this.formData.name || this.formData.name.trim() == '')
+        {   
+            if (this.formData.shipping && !this.formData.city)
+            {
+                  swal('Por favor selecciones una localidad ','','error');
+                 return false; 
+            }
+            else if(!this.formData.name || this.formData.name.trim() == '')
             {
                  swal('El campo "Nombre y Apellido" es obligatorio ','','error');
                  return false; 
@@ -146,9 +152,9 @@ export default{
             {   
                 swal('No hay productos seleccionados','','error');
                 return false;
-            } else if (this.total < this.minBuy)
+            } else if (this.total < this.minBuy())
             {
-                swal('El minimo de compra es de $'+this.minBuy,'','error');
+                swal('El minimo de compra es de $'+this.minBuy(),'','error');
                 return false;
             } else {return true;}
         },
