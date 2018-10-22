@@ -73,7 +73,7 @@
                                 :class="{'bg-info' : order == selected}">
                             <td>{{order.created_at | datetime}}</td>
                             <td>{{order.name}}</td>
-                            <td> <input type="checkbox" v-model="order.viewed" @change="viewed(order)" class="form-control"> </td>
+                            <td> <input type="checkbox" v-model="order.viewed" @change="viewed(order)" class="form-control checkbox"> </td>
                         </tr>
                     </tbody>
                 </table>
@@ -162,6 +162,10 @@ export default {
 </script>
 
 <style>
+.checkbox{
+    width: 30px;
+    height: 20px;
+}
     .cursor-pointer {
         cursor: pointer;
     }
