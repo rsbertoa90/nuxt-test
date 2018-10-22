@@ -24,7 +24,7 @@
                 alt="logo" >
             </div>
             <div class="col-12 col-lg-4 text-center" v-if="$mq=='lg'">
-                <h2 v-if="!user || user.role_id > 2" class="mt-4 text-info">
+                <h2  class="mt-4 text-info">
                     <span class="fa fa-arrow-down"></span>
                     Hace tu pedido
                     <span class="fa fa-arrow-down"></span>
