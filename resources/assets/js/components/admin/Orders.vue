@@ -63,6 +63,7 @@
                     <thead>
                         <th>Fecha</th>
                         <th>Cliente</th>
+                        <th>Visto</th>
                     </thead>
                     <tbody>
                         <tr  v-for="order in filteredOrders" 
@@ -72,6 +73,7 @@
                                 :class="{'bg-info' : order == selected}">
                             <td>{{order.created_at | datetime}}</td>
                             <td>{{order.name}}</td>
+                            <td> <input type="checkbox" v-model="order.viewed" @change="viewed(order)" class="form-control"> </td>
                         </tr>
                     </tbody>
                 </table>
@@ -104,6 +106,19 @@ export default {
         }
     },
     methods : {
+        viewed(order){
+            if (order.viewed)
+            {
+                order.viewed = 1;
+            }else { order.viewed = 0;}
+            let data = {
+                order:order.id,
+                id: order.id,
+                field: 'viewed',
+                value: order.viewed
+            }
+            this.$http.put('/admin/order',data);
+        },
         setSource(src){
             this.source = src;
             this.selected = null;
