@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="neg-margins">
       <h2  class="mt-4 font-weight-bold"
             :class="{dared:pos,dablue:!pos}">
         <span class="fa fa-arrow-down"
@@ -51,5 +51,10 @@ export default {
          color:blue;
         transition: ease 1s;
     }
+
+    .neg-margins{
+    margin-right: -7%;
+    margin-left: -3%;
+}
 
 </style>

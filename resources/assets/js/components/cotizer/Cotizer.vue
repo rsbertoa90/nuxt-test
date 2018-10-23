@@ -55,7 +55,7 @@
                     </button> 
                 </div>
             </div>
-            <div class="col-12 col-lg-4 text-center" v-if="$mq!='lg'">
+            <div class="col-12 col-lg-4 text-center neg-margins" v-if="$mq!='lg'">
                 <app-banner></app-banner>
             </div>
         </div>
@@ -473,6 +473,8 @@ import appBanner from './banner.vue'
 
 .big{
     font-size: 1.7rem;
+    white-space: normal;
 }
-   
+
+
 </style>
