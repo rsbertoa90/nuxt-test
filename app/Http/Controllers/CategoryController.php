@@ -23,4 +23,12 @@ class CategoryController extends Controller
 
         return $category;
     }
+
+    public function update(Request $request)
+    {
+        $category = Category::find($request->id);
+        $field = $request->field;
+        $category->$field = $request->value;
+        $category->save();
+    }
 }

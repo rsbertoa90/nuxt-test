@@ -29,8 +29,10 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
     Route::post('/product/image', 'ProductController@changeImage')->middleware('optimizeImages');
 
     Route::post('/category','CategoryController@save');
+    Route::put('/category','CategoryController@update');
 
     Route::post('/suplier','SuplierController@save');
+    Route::put('/suplier','SuplierController@update');
 
     Route::post('/cotizacion','OrderController@adminOrder');
     

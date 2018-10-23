@@ -17,4 +17,12 @@ class SuplierController extends Controller
 
         return $suplier;
     }
+
+     public function update(Request $request)
+    {
+        $suplier = Suplier::find($request->id);
+        $field = $request->field;
+        $suplier->$field = $request->value;
+        $suplier->save();
+    }
 }

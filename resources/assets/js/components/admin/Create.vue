@@ -9,7 +9,7 @@
              </div>
                  <!-- proveedor -->
              <div class="col-2 row">
-                 <label for="" class="col-12">Proveedor</label>
+                 <label class="col-12">Proveedor</label>
                  <select required   v-model.trim="formData.suplier_id" 
                         class="col-12 form-control">
                      <option  v-for="suplier in supliers" 
@@ -23,6 +23,8 @@
                         v-if="formData.suplier_id=='new'" 
                         placeholder="Nuevo proveedor" 
                         type="text">
+                
+              
              </div>
              <!-- categoria -->
              <div class="col-2 row">
@@ -76,6 +78,8 @@
         props : ['categories','supliers'],
         data(){
             return {
+                editProvider:false,
+                editCategory:false,
                 newCategory :null,
                 newSuplier :null,
                 formData: {
