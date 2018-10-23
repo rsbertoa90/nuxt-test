@@ -17,23 +17,16 @@
 
     <div v-else class="container w-100" :class="{'bg-white' : user != null && user.role_id > 2}">   
         <div class="row w-100 d-flex justify-content-center">
-            <div class="col-12 col-lg-4 text-center">
+            <div class="col-12 col-lg-3 text-center">
                 <img src="/storage/images/app/MAJU.jpg" 
                 :class="{'smlogo':$mq != 'lg',
                          lglogo:$mq == 'lg'}" 
                 alt="logo" >
             </div>
-            <div class="col-12 col-lg-4 text-center" v-if="$mq=='lg'">
-                <h2  class="mt-4 text-info">
-                    <span class="fa fa-arrow-down"></span>
-                    Hace tu pedido
-                    <span class="fa fa-arrow-down"></span>
-                </h2>
-                <h4>
-                    Compra mínima en el local $1500, para envíos $4000.
-                </h4>
+            <div class="col-12 col-lg-5 text-center" v-if="$mq=='lg'">
+              <app-banner></app-banner>
             </div>
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-3">
                 
                 <a class="btn btn-outline-primary btn-lg" target="_blank"
                     href="https://drive.google.com/file/d/1PRSqHX-70Eh7uAqOaF8xV-CAZ3BhqPL9/view">
@@ -63,14 +56,7 @@
                 </div>
             </div>
             <div class="col-12 col-lg-4 text-center" v-if="$mq!='lg'">
-                <h2 v-if="!user || user.role_id > 2" class="mt-4 text-info">
-                    <span class="fa fa-arrow-down"></span>
-                    Hace tu pedido
-                    <span class="fa fa-arrow-down"></span>
-                </h2>
-                <h4>
-                    Compra mínima en el local $1500, para envíos $4000.
-                </h4>
+                <app-banner></app-banner>
             </div>
         </div>
        
@@ -103,14 +89,14 @@
             <div v-for="category in poblatedCategories" :key="category.id" class="card flex-wrap">
                 <div class="card-header" :id="category.id">
                     <h5 class="mb-0">
-                        <button class="btn  btn-link w-100 text-left" 
+                        <button class="btn  btn-link w-100 text-left big" 
                                 data-toggle="collapse" 
                                 :data-target="'#cat'+category.id" 
                                 aria-expanded="true" 
                                 :aria-controls="category.id">
                                 
                                   
-                                   {{category.name | ucFirst}}
+                                   {{category.name | uc}}
                                  
                                 
                         </button>
@@ -212,8 +198,9 @@
 
 <script>
 import pedido from './pedido.vue'
+import appBanner from './banner.vue'
     export default {
-        components:{pedido},
+        components:{pedido,appBanner},
         data(){
             return {
                 loading:false,
@@ -482,6 +469,10 @@ import pedido from './pedido.vue'
     justify-content: center;
     align-items: start;
     padding-top: 5%;
+}
+
+.big{
+    font-size: 1.7rem;
 }
    
 </style>

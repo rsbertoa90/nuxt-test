@@ -59,6 +59,9 @@ Vue.filter('ucFirst', val => {
 
     return val.charAt(0).toUpperCase() + val.slice(1);
 });
+Vue.filter('uc', val => {
+    return val.toUpperCase();
+});
 
 import swal from 'sweetalert';
 window.swal = swal;
