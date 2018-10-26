@@ -30,7 +30,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
     .todaright{
         transform: rotate(15deg);
         color:blue;
@@ -55,6 +55,9 @@ export default {
     .neg-margins{
     margin-right: -7%;
     margin-left: -3%;
+}
+h2{
+    white-space: nowrap;
 }
 
 </style>
