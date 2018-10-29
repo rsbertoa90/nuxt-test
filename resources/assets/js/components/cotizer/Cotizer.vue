@@ -288,6 +288,10 @@ import appBanner from './banner.vue'
                 success(response){
                     vm.categories = response;
                     vm.categories = _.sortBy(vm.categories,'name');
+
+                    vm.categories.forEach(category => {
+                        category.products = _.sortBy(category.products,'name');
+                    });
                    
                 }
             });
