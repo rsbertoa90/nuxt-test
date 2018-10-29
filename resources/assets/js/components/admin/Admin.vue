@@ -72,7 +72,7 @@
                                 <transition-group tag="tbody" 
                                                     enter-active-class="animated slideInLeft faster "
                                                     leave-active-class="animated slideOutRight faster position-absolute ">
-                                    <tr v-for="(product,productKey) in filteredProducts" :key="product.id">
+                                    <tr v-for="product in filteredProducts" :key="product.id">
                                        <td>
                                            <img :src="product.image" style="width :150px" :alt="product.name" @click="imgModal(product)">
                                        </td>
@@ -82,7 +82,7 @@
                                        </td>
                                        <td >
                                             <select class="form-control" v-model="product.suplier_id" 
-                                                    @change="changed(productKey,'suplier')">
+                                                    @change="changed(product,'suplier')">
                                                <option v-for="suplier in supliers" 
                                                         :key="suplier.id" 
                                                         :value="suplier.id"
@@ -93,7 +93,7 @@
                                        </td>
                                        <td>
                                            <select class="form-control" v-model="product.category_id"
-                                                    @change="changed(productKey,'category')" >
+                                                    @change="changed(product,'category')" >
                                                <option v-for="category in categories" 
                                                         :key="category.id" 
                                                         :value="category.id"
@@ -269,8 +269,8 @@ import adminReport from './Report.vue';
 
 
             },
-            changed(productKey,field){ 
-               this.saveChange(this.products[productKey],field+'_id')
+            changed(product,field){ 
+               this.saveChange(product,field+'_id');
                 
             },
             togglePause(product){

@@ -26,7 +26,7 @@ class ProductController extends Controller
         }
         $product->$field = $request->value;
         $product->save();
-        return $request->value;
+        return $request->all();
     }
 
     public function changeImage(Request $request)
