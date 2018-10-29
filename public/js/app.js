@@ -75189,16 +75189,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            newcat: null,
+            newsup: null,
             categories: [],
             supliers: []
         };
     },
 
     methods: {
+        destroyCat: function destroyCat(cat) {},
+        destroySup: function destroySup(sup) {},
+        newCategory: function newCategory() {
+            var vm = this;
+            if (this.newcat) {
+                var data = {
+                    name: this.newcat
+                };
+                this.$http.post('/admin/category', data).then(function (res) {
+                    vm.refresh();
+                    vm.newcat = null;
+                });
+            }
+        },
+        newSuplier: function newSuplier() {
+            var vm = this;
+            if (this.newsup) {
+                var data = {
+                    name: this.newsup
+                };
+                this.$http.post('/admin/suplier', data).then(function (res) {
+                    vm.refresh();
+                    vm.newsup = null;
+                });
+            }
+        },
         update: function update(type, obj) {
             var data = {
                 id: obj.id,
@@ -75206,17 +75253,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 value: obj.name
             };
             this.$http.put('/admin/' + type, data);
+        },
+        refresh: function refresh() {
+            var _this = this;
+
+            this.$http.get('/api/categories').then(function (response) {
+                _this.categories = response.data;
+            });
+            this.$http.get('/api/supliers').then(function (response) {
+                _this.supliers = response.data;
+            });
         }
     },
     created: function created() {
-        var _this = this;
-
-        this.$http.get('/api/categories').then(function (response) {
-            _this.categories = response.data;
-        });
-        this.$http.get('/api/supliers').then(function (response) {
-            _this.supliers = response.data;
-        });
+        this.refresh();
     }
 });
 
@@ -75241,31 +75291,97 @@ var render = function() {
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
-            _vm._l(_vm.categories, function(category) {
-              return _c("div", { key: category.id }, [
+            _c(
+              "div",
+              {
+                staticClass: "border border-success p-2 m-3 d-flex flex-column"
+              },
+              [
+                _c("h4", { staticClass: "text-success" }, [
+                  _vm._v("Nueva categoria")
+                ]),
+                _vm._v(" "),
                 _c("textarea", {
                   directives: [
                     {
                       name: "model",
-                      rawName: "v-model.lazy",
-                      value: category.name,
-                      expression: "category.name",
-                      modifiers: { lazy: true }
+                      rawName: "v-model",
+                      value: _vm.newcat,
+                      expression: "newcat"
                     }
                   ],
-                  domProps: { value: category.name },
+                  domProps: { value: _vm.newcat },
                   on: {
-                    change: [
-                      function($event) {
-                        _vm.$set(category, "name", $event.target.value)
-                      },
-                      function($event) {
-                        _vm.update("category", category)
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
-                    ]
+                      _vm.newcat = $event.target.value
+                    }
                   }
-                })
-              ])
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-lg btn-outline-info",
+                    on: {
+                      click: function($event) {
+                        _vm.newCategory()
+                      }
+                    }
+                  },
+                  [_vm._v("Guardar")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _vm._l(_vm.categories, function(category) {
+              return _c(
+                "div",
+                { key: category.id, staticClass: "d-flex flex-column m-2" },
+                [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.lazy",
+                        value: category.name,
+                        expression: "category.name",
+                        modifiers: { lazy: true }
+                      }
+                    ],
+                    domProps: { value: category.name },
+                    on: {
+                      change: [
+                        function($event) {
+                          _vm.$set(category, "name", $event.target.value)
+                        },
+                        function($event) {
+                          _vm.update("category", category)
+                        }
+                      ]
+                    }
+                  }),
+                  _vm._v(" "),
+                  !category.products || !category.products.length
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          on: {
+                            click: function($event) {
+                              _vm.destroyCat(category)
+                            }
+                          }
+                        },
+                        [_vm._v("BORRAR")]
+                      )
+                    : _vm._e()
+                ]
+              )
             })
           ],
           2
@@ -75284,31 +75400,97 @@ var render = function() {
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
-            _vm._l(_vm.supliers, function(suplier) {
-              return _c("div", { key: suplier.id }, [
+            _c(
+              "div",
+              {
+                staticClass: "border border-success p-2 m-3 d-flex flex-column"
+              },
+              [
+                _c("h4", { staticClass: "text-success" }, [
+                  _vm._v("Nuevo proveedor")
+                ]),
+                _vm._v(" "),
                 _c("textarea", {
                   directives: [
                     {
                       name: "model",
-                      rawName: "v-model.lazy",
-                      value: suplier.name,
-                      expression: "suplier.name",
-                      modifiers: { lazy: true }
+                      rawName: "v-model",
+                      value: _vm.newsup,
+                      expression: "newsup"
                     }
                   ],
-                  domProps: { value: suplier.name },
+                  domProps: { value: _vm.newsup },
                   on: {
-                    change: [
-                      function($event) {
-                        _vm.$set(suplier, "name", $event.target.value)
-                      },
-                      function($event) {
-                        _vm.update("suplier", suplier)
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
-                    ]
+                      _vm.newsup = $event.target.value
+                    }
                   }
-                })
-              ])
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-lg btn-outline-info",
+                    on: {
+                      click: function($event) {
+                        _vm.newSuplier()
+                      }
+                    }
+                  },
+                  [_vm._v("Guardar")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _vm._l(_vm.supliers, function(suplier) {
+              return _c(
+                "div",
+                { key: suplier.id, staticClass: "d-flex flex-column m-2" },
+                [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.lazy",
+                        value: suplier.name,
+                        expression: "suplier.name",
+                        modifiers: { lazy: true }
+                      }
+                    ],
+                    domProps: { value: suplier.name },
+                    on: {
+                      change: [
+                        function($event) {
+                          _vm.$set(suplier, "name", $event.target.value)
+                        },
+                        function($event) {
+                          _vm.update("suplier", suplier)
+                        }
+                      ]
+                    }
+                  }),
+                  _vm._v(" "),
+                  !suplier.products || !suplier.products.length
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          on: {
+                            click: function($event) {
+                              _vm.destroySup(suplier)
+                            }
+                          }
+                        },
+                        [_vm._v("BORRAR")]
+                      )
+                    : _vm._e()
+                ]
+              )
             })
           ],
           2
