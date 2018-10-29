@@ -31,4 +31,8 @@ class CategoryController extends Controller
         $category->$field = $request->value;
         $category->save();
     }
+
+    public function destroy($id){
+        Category::destroy($id);
+    }
 }

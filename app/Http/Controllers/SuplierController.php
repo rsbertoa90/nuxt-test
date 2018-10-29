@@ -25,4 +25,9 @@ class SuplierController extends Controller
         $suplier->$field = $request->value;
         $suplier->save();
     }
+
+    public function destroy($id)
+    {
+        Suplier::destroy($id);
+    }
 }

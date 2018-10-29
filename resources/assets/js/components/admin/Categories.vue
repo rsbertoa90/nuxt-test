@@ -48,10 +48,16 @@ export default {
     },
     methods:{
         destroyCat(cat){
-
+             this.$http.delete('/admin/category/'+cat.id)
+                .then(res => {
+                    this.refresh();
+                });   
         },
         destroySup(sup){
-
+            this.$http.delete('/admin/suplier/'+sup.id)
+                .then(res => {
+                    this.refresh();
+                });
         },
         newCategory(){
             var vm=this;

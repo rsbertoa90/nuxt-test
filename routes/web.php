@@ -30,9 +30,11 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 
     Route::post('/category','CategoryController@save');
     Route::put('/category','CategoryController@update');
+    Route::delete('/category/{id}','CategoryController@destroy');
 
     Route::post('/suplier','SuplierController@save');
     Route::put('/suplier','SuplierController@update');
+     Route::delete('/suplier/{id}','SuplierController@destroy');
 
     Route::post('/cotizacion','OrderController@adminOrder');
     
