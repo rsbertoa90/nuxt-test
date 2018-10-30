@@ -46,6 +46,10 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 
     Route::get('/metadata','MetadataController@page');
     Route::put('/metadata','MetadataController@update');
+    
+    Route::put('/customtext','CustomTextController@update');
+
+
 });
 
 Route::get('/pdf/{order}', 'OrderController@toPDF');

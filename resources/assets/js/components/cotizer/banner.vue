@@ -8,9 +8,14 @@
         <span class="fa fa-arrow-down"
             :class="{todaright:!pos, todaleft:pos}"></span>
     </h2>
-    <h4>
+    <h4 :class="{colorBlue:pos, colorRed:!pos}">
         Compra mínima en el local $1500, para envíos $4000.
     </h4>
+    <div v-if="customText">
+        <h5 :class="{colorBlue:!pos, colorRed:pos}">
+            {{ customText.text }}
+        </h5>
+    </div>
 </div>
 </template>}
 
@@ -19,9 +24,16 @@ export default {
     data(){
         return{
             pos:true,
+            customText:null
         }
     },
     created(){
+
+        this.$http.get('/api/custom-text/banner')
+            .then(res => {
+                this.customText = res.data;
+            });
+
         setInterval(()=>{
             this.pos = !this.pos;
         },1000)
@@ -31,6 +43,14 @@ export default {
 
 
 <style scoped>
+.colorRed{
+    color:red;
+     transition: ease 1s;
+}
+.colorBlue{
+    color:blue;
+     transition: ease 1s;
+}
     .todaright{
         transform: rotate(15deg);
         color:blue;

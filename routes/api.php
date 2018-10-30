@@ -31,3 +31,6 @@ Route::get('/metadata/{page}', 'MetadataController@get');
 Route::get('/states','StateController@get');
 
 Route::get('/city/{id}','StateController@getCity');
+
+Route::get('/custom-text/{code}','CustomTextController@get');
+Route::get('/custom-texts','CustomTextController@getAll');

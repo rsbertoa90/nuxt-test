@@ -23,13 +23,17 @@
     <div>
         <admin-categories></admin-categories>
     </div>
+    <div>
+        <admin-customtexts></admin-customtexts>
+    </div>
 </div>
 </template>
 
 <script>
 import adminCategories from './Categories.vue';
+import adminCustomtexts from './customs.vue';
 export default {
-    components:{adminCategories},
+    components:{adminCategories, adminCustomtexts},
     data(){
         return {
             meta:null
