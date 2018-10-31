@@ -8,11 +8,11 @@
         <span class="fa fa-arrow-down"
             :class="{todaright:!pos, todaleft:pos}"></span>
     </h2>
-    <h4 :class="{colorBlue:pos, colorRed:!pos}">
+    <h4 >
         Compra mínima en el local $1500, para envíos $4000.
     </h4>
     <div v-if="customText">
-        <h5 :class="{colorBlue:!pos, colorRed:pos}">
+        <h5 >
             {{ customText.text }}
         </h5>
     </div>
