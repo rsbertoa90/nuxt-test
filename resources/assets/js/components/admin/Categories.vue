@@ -13,6 +13,23 @@
             <hr>
             <div v-for="category in categories" :key="category.id" class="d-flex flex-column m-2">
                 <textarea v-model.lazy="category.name" @change="update('category',category)"> </textarea>
+                <div>
+                    <div v-if="category.image">
+                        <v-lazy-image width="150px" :src="category.image" :alt="category.name"></v-lazy-image>
+                    </div>
+                    <form action="/admin/categories/image" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" :value="csrf">
+                        <input type="hidden" name="id" :value="category.id">
+                        <label class="btn "
+                                :class="{'btn-primary':category.uploaded,
+                                         'btn-outline-primary':!category.uploaded}">
+                            Subir imagen
+                            <input name="image" style="display:none" type="file" 
+                                    @change="setUploaded(category)">
+                        </label>
+                        <button v-if="category.uploaded" type="submit" class="btn btn-outline-success">GUARDAR</button>
+                    </form>
+                </div>
                 <button @click="destroyCat(category)" v-if="!category.products || !category.products.length" class="btn btn-danger">BORRAR</button>
             </div>
         </div>
@@ -40,6 +57,7 @@
 export default {
     data(){
         return{
+            csrf:window.csrf,
             newcat:null,
             newsup:null,
             categories:[],
@@ -47,6 +65,9 @@ export default {
         }
     },
     methods:{
+        setUploaded(cat){
+            Vue.set(cat,'uploaded',true);
+        },
         destroyCat(cat){
              this.$http.delete('/admin/category/'+cat.id)
                 .then(res => {

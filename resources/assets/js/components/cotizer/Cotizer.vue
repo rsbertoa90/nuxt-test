@@ -88,17 +88,23 @@
         <div id="accordion">
             <div v-for="category in poblatedCategories" :key="category.id" class="card flex-wrap">
                 <div class="card-header" :id="category.id">
-                    <h5 class="mb-0">
+                    <h5 class="mb-0 w-100">
                         <button class="btn  btn-link w-100 text-left big" 
                                 data-toggle="collapse" 
                                 :data-target="'#cat'+category.id" 
                                 aria-expanded="true" 
                                 :aria-controls="category.id">
                                 
-                                  
-                                   {{category.name | uc}}
-                                 
-                                
+                                <div class="d-flex">
+                                    <div class="category-image-container ml-lg-2">
+                                        <v-lazy-image v-if="category.image" :src="category.image" 
+                                        :alt="category.name" class="category-image">
+                                        </v-lazy-image>
+                                    </div>
+                                    <span class="d-flex align-items-center" style="width:65%">
+                                        {{category.name | uc}}
+                                    </span>
+                                </div>
                         </button>
                     </h5>
                 </div>
@@ -378,6 +384,26 @@ import appBanner from './banner.vue'
 
 <style scoped lang="scss">
 
+    .category-image-container{
+        margin-right: 15px;
+        height:100%;
+    
+        min-width:70px;
+    }
+
+    .category-image{
+       
+    }
+
+    .card-header{
+        padding: 5px;
+        display: flex;
+        align-items:center;
+    }
+
+ 
+
+
     .lglogo{
         width : 200px ; 
         height: 100px;
@@ -449,6 +475,7 @@ import appBanner from './banner.vue'
     }
     
     @media(min-width: 600px){
+        
          #total {
              left:45%;
          }
@@ -478,6 +505,7 @@ import appBanner from './banner.vue'
 .big{
     font-size: 1.7rem;
     white-space: normal;
+    padding: 0;
 }
 
 

@@ -16,6 +16,8 @@ Auth::routes();
 
 Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
     
+    Route::post('/categories/image','CategoryController@uploadImage');
+
     Route::get('/','AdminController@admin');
     Route::get('/reporte','AdminController@report');
 

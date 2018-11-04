@@ -35,4 +35,20 @@ class CategoryController extends Controller
     public function destroy($id){
         Category::destroy($id);
     }
+
+      public function uploadImage(Request $request)
+    {   
+        
+       
+        $category = Category::find($request->id);
+        $file = $request->file('image');
+        if ($file){
+            $ext = $file->getClientOriginalExtension();
+            $path = $file->storeAs('/images/categories',$category->slug.'.'.$ext);
+            $category->image = '/storage/'.$path;
+            $category->save();
+        }
+        return redirect('/admin/metadata');
+    }
+
 }
