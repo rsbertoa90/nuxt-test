@@ -44,7 +44,7 @@ class CategoryController extends Controller
         $file = $request->file('image');
         if ($file){
             $ext = $file->getClientOriginalExtension();
-            $path = $file->storeAs('/images/categories',$category->slug.'.'.$ext);
+            $path = $file->storeAs('/images/categories',str_slug($category->name).'.'.$ext);
             $category->image = '/storage/'.$path;
             $category->save();
         }
