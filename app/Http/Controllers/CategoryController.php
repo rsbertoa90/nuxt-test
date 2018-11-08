@@ -43,7 +43,18 @@ class CategoryController extends Controller
         $category = Category::find($request->id);
         $file = $request->file('image');
         if ($file){
+           
             $ext = $file->getClientOriginalExtension();
+            
+             $filename = public_path('storage/images/categories/'.str_slug($category->name).'.'.$ext) ;
+            
+            if(file_exists($filename)){
+
+                unlink($filename);
+   
+            }
+            
+            
             $path = $file->storeAs('/images/categories',str_slug($category->name).'.'.$ext);
             $category->image = '/storage/'.$path;
             $category->save();
