@@ -437,7 +437,7 @@ import cotizerTutorial from './tutorial.vue';
         position:fixed;
        
         bottom:0px;
-        right:0px;
+        right:15px;
         z-index:110;
         background: #fff;
         border: 1px solid #65BC54;
