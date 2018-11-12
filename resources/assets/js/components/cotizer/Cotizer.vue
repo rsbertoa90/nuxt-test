@@ -199,14 +199,16 @@
              <pedido @change="listChange" v-if="list && list.length > 0" :list=list></pedido>
         </div>
     </div>
+    <cotizer-tutorial></cotizer-tutorial>
 </div>
 </template>
 
 <script>
-import pedido from './pedido.vue'
-import appBanner from './banner.vue'
+import pedido from './pedido.vue';
+import appBanner from './banner.vue';
+import cotizerTutorial from './tutorial.vue';
     export default {
-        components:{pedido,appBanner},
+        components:{pedido,appBanner,cotizerTutorial},
         data(){
             return {
                 loading:false,
