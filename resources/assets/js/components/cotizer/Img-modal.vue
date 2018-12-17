@@ -1,11 +1,10 @@
-<template>
-    <div class="modal fade" id="image-modal" tabindex="-1" role="dialog">
+<template >
+    <div  ref="modal" class="modal fade" id="image-modal" tabindex="-1" role="dialog">
    <div class="modal-dialog" role="document">
     <div  v-if="product" class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title"> {{product.name}} </h5>
-        <button @click="closedModal()" type="button" class="close" 
-                data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="close()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -26,17 +25,14 @@
                 <span class="fa fa-chevron-right text-info" @click="changeImage('next')" ></span>
             </div>
 
-            <form v-if="product.images && product.images.length > 0"  action="/admin/product/deleteImage" method="POST">
+          <!--   <form v-if="product.images && product.images.length > 0"  action="/admin/product/deleteImage" method="POST">
                 <input type="hidden" name="_token" :value="csrf">
                 <input type="hidden" name="id"  :value="product.images[i].id">
                 <button type="submit" class="close-button btn btn-danger btn-sm">X</button>
-            </form>
-
-            <button v-if="product.images && product.images.length > 0"   
-                    @click="setFirst()" class="btn btn-info set-first">Definir primera imagen</button>
+            </form> -->
 
           </div>
-          <form enctype="multipart/form-data" name="uploader" >
+         <!--  <form enctype="multipart/form-data" name="uploader" >
           <csrf></csrf>
             <div class="d-flex flex-column">
                 <label class="text-info text-center">  
@@ -45,13 +41,13 @@
                  <input type="file" name="file"  accept="image/x-png,image/gif,image/jpeg" class="display-none" >
             </div>   
            
-          </form>
+          </form> -->
        
       </div>
-      <div class="modal-footer">
+     <!--  <div class="modal-footer">
         <button type="button" class="btn btn-primary" @click="save">Guardar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
@@ -73,34 +69,12 @@
         watch:{
             product(){
                 this.show=true;
-        
             }
         },
         methods : {
-           setFirst(){
-               var vm = this;
-               this.product.images.forEach(image => {
-                   image.first = 0;
-               });
-
-               this.product.images[this.i].first = 1;
-               
-               let data = {
-                   product : this.product.id,
-                   first : this.product.images[this.i].id
-               }
-               this.$http.put('/admin/product/setFirstImage',data).then(res => {
-                   $('#image-modal').modal('hide');
-                        vm.$emit('closedModal');
-                        vm.$emit('refresh');
-               })
-
-               ;
-           },
-            closedModal(){
+            close(){
                 this.i = 0;
-                this.$emit('closedModal');
-               
+                this.$emit('close');
             },
 
             save :  function(event){
@@ -127,7 +101,6 @@
                     files : true,
                     success: function () {
                        $('#image-modal').modal('hide');
-                        vm.$emit('closedModal');
                         vm.$emit('refresh');
                     },
                 });
@@ -151,7 +124,7 @@
             
         
     },
-    
+  
 }
 </script>
 
@@ -181,12 +154,6 @@
             cursor: pointer;
         }
 
-    }
-
-    .set-first{
-        position:absolute;
-        top:10px;
-        left:50%;
     }
 
 </style>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\ProductImage;
 use App\Category;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use  Illuminate\Foundation\Http\FormRequest;
@@ -13,7 +14,7 @@ class ProductController extends Controller
 
     public function getAll()
     {
-        return Product::with('category')->with('suplier')->get();
+        return Product::with('category')->with('suplier')->with('images')->get();
 
     }
 
@@ -29,7 +30,7 @@ class ProductController extends Controller
         return $request->all();
     }
 
-    public function changeImage(Request $request)
+    public function uploadImage(Request $request)
     {
         $file = $request->file('image');
         
@@ -37,9 +38,13 @@ class ProductController extends Controller
         $path = $file->storePublicly('/images/products');
         $path = '/storage/'.$path;
         $product = Product::find($request->product);
-        $product->image = $path;
-        $product->save();
-        return $product;
+        
+        $productImage = ProductImage::create([
+            'url' => $path,
+            'product_id' => $product->id
+            ]);
+        
+        return;
 
     }
 
@@ -67,5 +72,28 @@ class ProductController extends Controller
 
         return $category;
 
+    }
+
+    public function deleteImage(Request $request){
+
+        $pi = ProductImage::find($request->id);
+        $pi->delete();
+
+        return redirect('/admin');
+
+    }
+
+    public function setFirstImage(Request $request){
+        $product =Product::find($request->product);
+
+        foreach ($product->images as  $image) {
+            if ($image->id == $request->first){
+                $image->first = 1;
+                $image->save();
+            }else{
+                $image->first = 0;
+                $image->save();
+            }
+        }
     }
 }

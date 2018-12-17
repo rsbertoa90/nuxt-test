@@ -5,6 +5,7 @@ namespace App;
 use App\Category;
 use App\Suplier;
 use App\OrderProduct;
+use App\ProductImage;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -47,5 +48,10 @@ class Product extends Model
     public function orderProducts()
     {
         return $this->hasMany(OrderProduct::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class)->orderBy('first','desc');
     }
 }

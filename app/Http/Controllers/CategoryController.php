@@ -9,12 +9,12 @@ use app\Product;
 class CategoryController extends Controller
 {
     public function getAll(){
-        return Category::with('products')->get();
+        return Category::with('products.images')->get();
     }
 
     public function get($id)
     {
-        return Category::with('products')->find($id);
+        return Category::with('products.images')->find($id);
     }
 
     public function save(Request $request)

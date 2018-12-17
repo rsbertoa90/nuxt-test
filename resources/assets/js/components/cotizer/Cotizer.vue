@@ -123,9 +123,17 @@
                            </thead>
                            <tbody>
                                <tr v-for="product in activeProducts(category)" :key="product.id" >
-                                   <td width="10%" @click="show(product.image)"> <v-lazy-image class="sampleImage" :src="product.image" :alt="product.name" /> </td>
+                                   <td width="10%" @click="show(product)"> 
+                                       <v-lazy-image v-if="product.images && product.images.length > 0" 
+                                                    class="sampleImage" 
+                                                    :src="product.images[0].url" 
+                                                    :alt="product.name" />
+                                        <v-lazy-image v-else :alt="product.name" 
+                                                    src="/storage/images/app/no-image.png" /> 
+                                                    
+                                    </td>
                                    <td v-if="user && user.role_id < 3"> {{product.code}} </td>
-                                   <td style="cursor:pointer" @click="show(product.image)">  {{product.name | ucFirst}} </td>
+                                   <td style="cursor:pointer" @click="show(product)">  {{product.name | ucFirst}} </td>
                                    <td class="text-info text-center"> 
                                        <span v-if="product.price > 0"> ${{product.price | price}} </span>
                                        <span v-else> - </span> 
@@ -200,6 +208,11 @@
         </div>
     </div>
     <cotizer-tutorial></cotizer-tutorial>
+
+      <image-modal @close="closedModal" v-if="this.showModal"
+                    :product="modalProduct"  ref="modal" ></image-modal>
+
+
 </div>
 </template>
 
@@ -207,10 +220,13 @@
 import pedido from './pedido.vue';
 import appBanner from './banner.vue';
 import cotizerTutorial from './tutorial.vue';
+import imageModal from './Img-modal.vue';
     export default {
-        components:{pedido,appBanner,cotizerTutorial},
+        components:{imageModal,pedido,appBanner,cotizerTutorial},
         data(){
             return {
+                showModal : true,
+                modalProduct:null,
                 loading:false,
                 selector:{
                     code:'',
@@ -319,6 +335,7 @@ import cotizerTutorial from './tutorial.vue';
         },
         methods:
         {
+           
             listChange(event){
                 let product = this.list.find(prod => {
                     return prod.id == event.id;
@@ -369,12 +386,21 @@ import cotizerTutorial from './tutorial.vue';
                 active = _.sortBy(active,'name');
                 return active;
             },
-            show(url){
-                var content = document.createElement("img");
-                $(content).attr('src',url);
-                content.style.width = '100%';
-                swal({content : content});
-            }
+            show(product){
+               this.showModal = true;
+               this.modalProduct = product;
+               /* this.$refs.modal.$forceUpdate(); */
+               
+               let element = this.$refs.modal.$el;
+               $(element).modal('show');
+            },
+             closedModal(){
+                 this.modalProduct = null;
+                 this.showModal = false;
+                setTimeout(() => {
+                    this.showModal=true;
+                }, 100);
+             },
         },
         filters : {
             price(value){

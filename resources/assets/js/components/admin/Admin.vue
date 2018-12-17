@@ -74,7 +74,12 @@
                                                     leave-active-class="animated slideOutRight faster position-absolute ">
                                     <tr v-for="product in filteredProducts" :key="product.id">
                                        <td>
-                                           <img :src="product.image" style="width :150px" :alt="product.name" @click="imgModal(product)">
+                                           <img v-if="product.images && product.images.length > 0" 
+                                                :src="product.images[0].url" 
+                                                style="width :150px" 
+                                                :alt="product.name" 
+                                                @click="imgModal(product)">
+                                            <img v-else src="/storage/images/app/no-image.png" :alt="product.name"  @click="imgModal(product)">
                                        </td>
                                        <td>
                                            <input v-model.lazy="product.code" @change="saveChange(product,'code')" 
@@ -143,7 +148,12 @@
                                 </transition-group>
                 </table>
                           
-                <image-modal :product="product"  ref="modal" @refresh="refresh()"></image-modal>
+               
+                
+                    <image-modal :product="product"  
+                            ref="modal" @refresh="refresh()"
+                            @closedModal="closedModal()"></image-modal>
+                 
         </div>
 
          
@@ -217,6 +227,10 @@ import adminReport from './Report.vue';
 
         },
         methods : {
+            closedModal(){
+                this.product = null;
+                
+            },
             resetCheckboxes(){
                 this.selector.checked =false;
                 this.products.forEach(prod => {
@@ -297,11 +311,31 @@ import adminReport from './Report.vue';
             },
             deleteProduct(product){
                 var vm = this;
-                this.$http.delete('/admin/product/'+product.id)
-                    .then(response => {
-                     
-                        vm.refresh();   
+                swal({
+                    title: "¿Estas seguro de elimiar este producto?",
+                    text: "",
+                    type: "warning",
+                    buttons: [
+                        'Cancelar',
+                        'Borrar!'
+                    ],
+                    dangerMode: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Borrar!',
+                    cancelButtonText: "Cancelar!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }).then((isConfirm) => {
+                    if (isConfirm){
+                         this.$http.delete('/admin/product/'+product.id)
+                            .then(response => {
+                         vm.refresh();   
                     });
+
+                    } 
+                })      
+                
+               
             },
          
             refresh(){
@@ -343,11 +377,14 @@ import adminReport from './Report.vue';
                 });
             },
             imgModal(product){
+
+                
+               
                 this.product = product;
                 this.showModal = true;
-                let element = this.$refs.modal.$el
-                
-                $(element).modal('show')
+               
+                let element = this.$refs.modal.$el;
+                $(element).modal('show');
             },
                selectAllProducts()
             {
