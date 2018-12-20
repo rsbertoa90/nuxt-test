@@ -77,13 +77,13 @@
         },
         methods : {
             preloadImages(){
-               /*  console.log('preload'); */
+                console.log('preload');
                 let images = [];
                 this.product.images.forEach(image => {
                     let img = new Image();
                     img.src = image.url;
                     images.push(img);
-                   /*  console.log(img); */
+                    console.log(img);
                 });
             },
             close(){
