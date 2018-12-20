@@ -12,11 +12,14 @@
           <div class="image-container">
             <transition  leave-active-class=" animated slideOutRight faster position-absolute">
             
-                <img v-if="product.images && product.images.length > 0" 
+               <img v-if="product.images && product.images.length > 0" 
                         :key="product.images[i].id"
                         class="w-100 " 
                         :src="product.images[i].url" 
                         :alt="product.name">
+
+                
+               
             </transition>  
                 <img v-if="!product.images || ! product.images.length > 0" src="/storage/images/app/no-image.png" :alt="product.name">
 
@@ -69,9 +72,20 @@
         watch:{
             product(){
                 this.show=true;
+                this.preloadImages();
             }
         },
         methods : {
+            preloadImages(){
+               /*  console.log('preload'); */
+                let images = [];
+                this.product.images.forEach(image => {
+                    let img = new Image();
+                    img.src = image.url;
+                    images.push(img);
+                   /*  console.log(img); */
+                });
+            },
             close(){
                 this.i = 0;
                 this.$emit('close');
@@ -124,6 +138,7 @@
             
         
     },
+
   
 }
 </script>

@@ -2,6 +2,8 @@
 <div>
 
     <div v-if="meta" class="container m-auto">
+       <!--  <a target="_blank"  href="/admin/catalogo" class="button btn btn-block btn-danger">CATALOGO</a> -->
+       <br/>
         <form>
             <div class="row">
                 <label class="col-12 col-lg-4" for="">Meta titulo</label>
@@ -9,7 +11,7 @@
                     v-model.lazy="meta.metatitle" rows="2" 
                     class="form-control col-12 col-lg-6"></textarea>
             </div>
-            <div class="row">
+            <div rg="row">
                 <label class="col-12 col-lg-4"> Meta descripcion </label>
                 <textarea  @change="update('metadescription')" 
                     v-model.lazy="meta.metadescription" rows="5"

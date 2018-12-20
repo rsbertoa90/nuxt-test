@@ -21,6 +21,8 @@ class CreateProductImagesTable extends Migration
             $table->boolean('first')->default(0);
             $table->timestamps();
         });
+
+        
     }
 
     /**

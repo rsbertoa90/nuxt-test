@@ -15,6 +15,8 @@
 Auth::routes();
 
 Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
+
+    Route::get('/catalogo','PDFController@catalogo');
     
     Route::post('/categories/image','CategoryController@uploadImage');
 

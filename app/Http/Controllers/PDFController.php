@@ -35,4 +35,19 @@ class PDFController extends Controller
 
 
     }
+
+
+    public function catalogo()
+    {
+        $categories = Category::all();
+        $today = Carbon::now()->format('d/m/Y');
+
+         $html = View::make('pdf.Catalogo',compact('categories','today'))->render();
+        
+         $pdf = PDF::loadHTML($html);
+
+        return $pdf->download('catalogo.pdf');
+
+
+    }
 }
