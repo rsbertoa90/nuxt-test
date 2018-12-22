@@ -91,36 +91,7 @@
                 this.$emit('close');
             },
 
-            save :  function(event){
-                var vm =this;
-                var file = $('input[type="file"]')[0].files[0];
-                this.file = file;
-                // console.log(file);
-                
-                
-                var fdata =  new FormData();
-                fdata.append('image',file);
-                fdata.append('product',this.product.id)
-                // console.log(fdata);
-                
-
-                $.ajax({
-                    url: "/admin/product/image",
-                    type: "post",
-                    data: fdata,
-                    // async: false,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    files : true,
-                    success: function () {
-                       $('#image-modal').modal('hide');
-                        vm.$emit('refresh');
-                    },
-                });
-
-        
-        },
+          
 
         changeImage(where){
             if (where == 'next'){

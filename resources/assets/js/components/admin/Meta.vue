@@ -2,7 +2,7 @@
 <div>
 
     <div v-if="meta" class="container m-auto">
-       <!--  <a target="_blank"  href="/admin/catalogo" class="button btn btn-block btn-danger">CATALOGO</a> -->
+        <a target="_blank"  href="/admin/catalogo" class="button btn btn-block btn-danger">CATALOGO</a>
        <br/>
         <form>
             <div class="row">

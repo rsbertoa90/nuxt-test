@@ -1,81 +1,65 @@
   @extends('pdf.blankbase')
 
-@section('style')
-    .bordered{
-        border: 2px solid #fff;
-    }      
-@endsection
-  
-@section('content')
-  
-      
-  
-  
+  @section('content')
 
-@foreach ($categories as $category)
-    <header>
-        <div style=" position:fixed; top:-80px;left:-20px; background-color:pink ; width:100vw ; padding:20px">
-                {{$category->name}}
-            </div>
-            
-        </header>  
-        <main>
-            
-            
-         
-            {{-- @php
-                dd($product->images[0]->tobase());
-                
-                @endphp --}}
-              
-                 
-                <table class=""  >
-                  <thead>
-                      <tr>
-                          <td>Codigo</td>
-                          <td>Nombre</td>
-                          <td>Precio</td>
-                          <td>Llevando mas de</td>
-                          <td>Precio X Mayor </td>
-                      </tr>
-                    
-                  </thead>
+ 
+  <main>
+      
+       
+
+      @foreach ($categories as $category)
+       {{-- <div class="breakNow"></div> --}}
+          <hr>
+          {{-- <div style="text-align: center ; width :100vw"></div>
+              <h2> {{strtoupper($category->name)}} </h2>
+          </div> --}}
+          <hr>                 
+          
+              <table class=""  >
+             
                   
                   <tbody>
                       
                       @foreach ($category->products as $key => $product)
-                  
+                    @if (isset($product->images[0]))
+                        
+                    
                       <tr>
-                          <td> {{$product->code}} </td>
-                          <td> {{$product->name}} </td>
-                          @if ($product->price > 0)
-                            <td> ${{number_format($product->price,2)}} </td>  
-                          @else
-                              <td> - </td>
-                          @endif
-
-                          @if ($product->pck_units > 1)
-                            <td> {{$product->pck_units}} </td>  
-                            <td> ${{number_format($product->pck_price,2)}} </td>
-                          @else
-                              <td> Venta X unidad </td>
-                              <td> - </td>
-                          @endif
-                      </tr>
-
-                     
-
-
+                        <td> <img width="200px" src="{{$product->images[0]->tobase()}}" alt=""> </td>
+                        <td>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td style="font-size:1.3rem ;  font-weight:bold"> {{$product->name}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <br> </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:1.3rem ">
+                                            $
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @foreach ($product->images as $key => $image)
+                                                @if ($key > 0)
+                                                   <img width="90px" style="margin-left:10px ; margin-top: 10px" src="{{$image->tobase()}}" /> 
+                                                     
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                      </td>    
+                     </tr>
+                     @endif
                       @endforeach
                   </tbody>
               </table>
-
-           
-           
-                    
-            <p style="page-break-before: always;"> - </p>
-        </main>
-@endforeach
+      @endforeach
+  </main>
       
      
   @endsection
