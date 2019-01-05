@@ -47,14 +47,11 @@ class PDFController extends Controller
         
        /*  return view('pdf.Catalogo',compact('categories','today')); */
         
-        
         $html = View::make('pdf.Catalogo',compact('categories','today'))->render();
         
-
         $pdf = PDF::loadHTML($html);
 
         return $pdf->download('catalogo.pdf');
-
 
     }
 }

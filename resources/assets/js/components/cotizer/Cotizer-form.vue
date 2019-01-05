@@ -116,7 +116,7 @@ export default{
             message : '',
             phone : '',
             email : '',
-            shipping: false,
+            shipping: true,
             city: null,
             address:'',
             transport:'',
@@ -165,9 +165,10 @@ export default{
                 if (data.shipping)
                 {
                     data.shipping = 1;
-                }
+                } else {data.shipping = 0;}
+
                 data.list = JSON.stringify(this.list);
-                data.total = this.total
+                data.total = this.total;
                 
                 var vm = this;
                 vm.loading = true;
