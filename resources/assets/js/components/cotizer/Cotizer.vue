@@ -138,7 +138,7 @@
                                        <span v-if="product.price > 0"> ${{product.price | price}} </span>
                                        <span v-else> - </span> 
                                        <br>
-                                       <div v-if="product.pck_units > 1">
+                                       <div v-if="product.pck_units > 1 && product.price > 0 ">
                                             <span> - de {{product.pck_units}}  </span>
                                             <br>
                                             <span>Unidades</span>
