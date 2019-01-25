@@ -25,7 +25,8 @@ class PDFController extends Controller
     public function pricesList()
     {
         
-        $categories = Category::all();
+        $categories = Category::orderBy('name')->get();
+       
         $today = Carbon::now()->format('d/m/Y');
 
          $html = View::make('pdf.ListaDePrecios',compact('categories','today'))->render();
@@ -42,7 +43,8 @@ class PDFController extends Controller
     {
         set_time_limit(300);
 
-        $categories = Category::all();
+       $categories = Category::orderBy('name')->get();
+        
         $today = Carbon::now()->format('d/m/Y');
         
        /*  return view('pdf.Catalogo',compact('categories','today')); */

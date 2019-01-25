@@ -9,7 +9,9 @@ use app\Product;
 class CategoryController extends Controller
 {
     public function getAll(){
-        return Category::with('products.images')->get();
+        return Category::with('products.images')->orderBy('name')->get();
+        
+        
     }
 
     public function get($id)
