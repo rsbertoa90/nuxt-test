@@ -10,7 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 /* use Illuminate\Contracts\Bus\SelfHandling; */
 
 use App\Category;
-use Carbon;
+use Carbon\Carbon;
 use PDF;
 use View;
 use App\Metadata;
@@ -19,8 +19,8 @@ class GeneratePricesList implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $html;
-    private $path;
+    private $categories;
+    
     public $tries = 1;
     public $timeout = 3600;
 
@@ -31,10 +31,10 @@ class GeneratePricesList implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($html,$path)
+    public function __construct($categories)
     {
-        $this->html = $html;
-        $this->path = $path;
+        $this->categories = $categories;
+    
     }
 
     /**
@@ -44,16 +44,22 @@ class GeneratePricesList implements ShouldQueue
      */
     public function handle()
     {
-        
-       PDF::loadHTML($this->html)->save($this->path);
+        $path = public_path().'/MAJU-lista-de-precios.pdf';
+
+        $today = Carbon::now()->format('d/m/Y');
+        $categories = $this->categories;
+
+        $html = View::make('pdf.ListaDePrecios',compact('categories','today'))->render();
+
+        PDF::loadHTML($html)->save($path);
 
     }
 
-    public function failed(){
+/*     public function failed(){
       Metadata::create([
           'page' => 'job failed',
           'metatitle' => 'faile',
           'metadescription'=> 'fail!!'
       ]);
-    }
+    } */
 }

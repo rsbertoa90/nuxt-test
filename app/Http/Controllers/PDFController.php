@@ -45,13 +45,11 @@ class PDFController extends Controller
 
         $categories = Category::orderBy('name')->get();
        
-        $today = Carbon::now()->format('d/m/Y');
-
-        $html = View::make('pdf.ListaDePrecios',compact('categories','today'))->render();
+       
         
-        $path = public_path().'/MAJU-lista-de-precios.pdf';
+       
 
-        Queue::push(new GeneratePricesList($html,$path));
+        Queue::push(new GeneratePricesList($categories));
 
       return redirect('/home');
     }
