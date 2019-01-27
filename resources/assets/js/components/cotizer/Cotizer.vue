@@ -33,10 +33,9 @@
                      <span class="fa fa-download"></span> Descargar catalogo digital
                 </a> 
 
-                <button class="btn btn-outline-info btn-lg" 
-                        @click.prevent="downloadPrices">
+                <a class="btn btn-outline-info btn-lg" target="_blank" href="/MAJU-lista-de-precios.pdf" >
                     <span class="fa fa-download"></span> Descargar lista de precios
-                </button> 
+                </a> 
                 
 
                 <a class="btn btn-outline-warning btn-lg" 

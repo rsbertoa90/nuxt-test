@@ -15,6 +15,8 @@ use Mail;
 use PDF;
 use Carbon\Carbon;
 use View;
+use App\Jobs\GeneratePricesList;
+use Queue;
 
 class PDFController extends Controller
 {
@@ -36,6 +38,22 @@ class PDFController extends Controller
         return $pdf->download('MAJU-lista-de-precios.pdf');
 
 
+    }
+    
+    public function dispatchPricesListJob()
+    {
+
+        $categories = Category::orderBy('name')->get();
+       
+        $today = Carbon::now()->format('d/m/Y');
+
+        $html = View::make('pdf.ListaDePrecios',compact('categories','today'))->render();
+        
+        $path = public_path().'/MAJU-lista-de-precios.pdf';
+
+        Queue::push(new GeneratePricesList($html,$path));
+
+      return redirect('/home');
     }
 
 

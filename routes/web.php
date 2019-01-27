@@ -16,6 +16,9 @@ Auth::routes();
 
 Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 
+
+    Route::get('/prices-list-job','PDFController@dispatchPricesListJob');
+
     Route::get('/catalogo','PDFController@catalogo');
     
     Route::post('/categories/image','CategoryController@uploadImage');
@@ -57,6 +60,8 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 
 
 });
+
+
 
 Route::get('/pdf/{order}', 'OrderController@toPDF');
 
