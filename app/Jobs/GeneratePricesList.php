@@ -19,7 +19,7 @@ class GeneratePricesList implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $categories;
+
     
     public $tries = 1;
     public $timeout = 3600;
@@ -31,9 +31,9 @@ class GeneratePricesList implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($categories)
+    public function __construct()
     {
-        $this->categories = $categories;
+        
     
     }
 
@@ -47,7 +47,7 @@ class GeneratePricesList implements ShouldQueue
         $path = public_path().'/MAJU-lista-de-precios.pdf';
 
         $today = Carbon::now()->format('d/m/Y');
-        $categories = $this->categories;
+        $categories = Category::orderBy('name')->get();
 
         $html = View::make('pdf.ListaDePrecios',compact('categories','today'))->render();
 

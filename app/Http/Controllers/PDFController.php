@@ -43,13 +43,8 @@ class PDFController extends Controller
     public function dispatchPricesListJob()
     {
 
-        $categories = Category::orderBy('name')->get();
-       
-       
-        
-       
 
-        Queue::push(new GeneratePricesList($categories));
+        Queue::push(new GeneratePricesList());
 
       return redirect('/home');
     }
