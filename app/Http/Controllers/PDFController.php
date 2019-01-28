@@ -45,7 +45,7 @@ class PDFController extends Controller
     {
 
 
-        Queue::push(new GeneratePricesList());
+      Queue::push(new GeneratePricesList());
 
       return redirect('/home');
     }

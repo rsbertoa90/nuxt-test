@@ -34,7 +34,7 @@
                                   
                                     <td style="width:24%; overflow:hidden">                        
                                             <img  style="width:150px;" src="{{$product1->images[0]->base64}}"> <br>
-                                         <span style='font-size: 0.8rem'> Cod: {{$product1->code}} - {{$product1->name}} </span>
+                                         <span style='font-size: 0.65rem; font-weight:bold'> Cod: {{$product1->code}} - {{$product1->name}} </span>
                                         @if ($product1->price > 0)
                         
                                             <br> <span style="font-size:.65rem ; color:red"> ${{$product1->price}} - de {{$product1->pck_units}} unidades </span>
@@ -51,7 +51,7 @@
                               <td style="width:24%; overflow:hidden">                        
                                     <img  style="width:150px;" src="{{$product2->images[0]->base64}}"> <br>
                                     <div>
-                                        <span style='font-size: 0.8rem'> Cod: {{$product2->code}} - {{$product2->name}} </span>
+                                        <span style='font-size: 0.65rem; font-weight:bold'> Cod: {{$product2->code}} - {{$product2->name}} </span>
                                        @if ($product2->price > 0)
                        
                                         <br> <span style="font-size:.65rem ; color:red"> ${{$product2->price}} - de {{$product2->pck_units}} unidades </span>
@@ -68,7 +68,7 @@
                                   
                               <td style="width:24%; overflow:hidden">                        
                                     <img style="width:150px;"  src="{{$product3->images[0]->base64}}"> <br>
-                                     <span style='font-size: 0.8rem'> Cod: {{$product3->code}} - {{$product3->name}} </span>
+                                     <span style='font-size: 0.65rem; font-weight:bold'> Cod: {{$product3->code}} - {{$product3->name}} </span>
                                     @if ($product3->price > 0)
                     
                                         <br> <span style="font-size:.65rem ; color:red"> ${{$product3->price}} - de {{$product3->pck_units}} unidades </span>
@@ -84,7 +84,7 @@
                                   
                               <td style="width:24%; overflow:hidden ">                        
                                     <img style="width:150px;"  src="{{$product4->images[0]->base64}}"> <br>
-                                     <span style='font-size: 0.8rem'> Cod: {{$product4->code}} - {{$product4->name}} </span>
+                                     <span style='font-size: 0.65rem; font-weight:bold'> Cod: {{$product4->code}} - {{$product4->name}} </span>
                                     @if ($product4->price > 0)
                     
                                         <br> <span style="font-size:.65rem ; color:red"> ${{$product4->price}} - de {{$product4->pck_units}} unidades </span>
