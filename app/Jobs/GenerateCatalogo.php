@@ -47,10 +47,10 @@ class GenerateCatalogo implements ShouldQueue
         $path = public_path().'/MAJU-catalogo.pdf';
         $today = Carbon::now()->format('d/m/Y');
        $categories = Category::whereHas('products', function ($q){
-            $q->orderBy('name')->where('paused',0)->whereHas('images',null,'>=',1);
+            $q->has('images')->orderBy('name')->where('paused',0);
         })->orderBy('name')->get();
 
-        
+
         $html = View::make('pdf.Catalogo3',compact('categories','today'))->render();
 
         PDF::loadHTML($html)->save($path);

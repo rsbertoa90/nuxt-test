@@ -67,9 +67,29 @@ class PDFController extends Controller
 
         $path = public_path().'/MAJU-catalogo.pdf';
         $today = Carbon::now()->format('d/m/Y');
-        $categories = Category::whereHas('products', function ($q){
-            $q->orderBy('name')->where('paused',0)->whereHas('images',null,'>=',1);
-        })->orderBy('name')->get();
+       
+        $categories = Category::with('products.images')->whereHas('products', function ($q){
+            $q->Has('images')->orderBy('name')->where('paused',0);
+        })->has('products.images')->orderBy('name')->get();
+        
+        foreach ($categories as  $c) {
+            foreach ($c->products as $k=>$p) {
+                if (!isset($p->images[0]))
+                {
+                    unset($c->products[$k]);
+                    
+                }
+            }
+        }
+       /*  foreach ($categories as  $c) {
+            foreach ($c->products as $k=>$p) {
+                if (!isset($p->images[0]))
+                {
+                   return $p;
+                    
+                }
+            }
+        } */
 
         $html = View::make('pdf.Catalogo3',compact('categories','today'))->render();
 
