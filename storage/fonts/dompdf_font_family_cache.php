@@ -86,4 +86,7 @@
   'raleway' => array(
     'normal' => $fontDir . '/c643130b9f4a7778f8739a3c72c0a643',
   ),
+  'niramit' => array(
+    'normal' => $fontDir . '/933b7fc9dd5c28552a31084ea40f29f1',
+  ),
 ) ?>
