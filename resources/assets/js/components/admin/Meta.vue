@@ -4,6 +4,9 @@
     <div>
         <a href="/admin/prices-list-job" class="btn btn-md btn-outline-info" > Refrescar lista de precios </a>
     </div>
+    <div>
+        <a href="/admin/catalogo-job" class="btn btn-md btn-outline-info" > Refrescar catalogo </a>
+    </div>
 
     <div v-if="meta" class="container m-auto">
        <!--  <a target="_blank"  href="/admin/catalogo" class="button btn btn-block btn-danger">CATALOGO</a> -->

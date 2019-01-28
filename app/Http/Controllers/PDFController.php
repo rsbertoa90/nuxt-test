@@ -16,8 +16,9 @@ use PDF;
 use Carbon\Carbon;
 use View;
 use App\Jobs\GeneratePricesList;
+use App\Jobs\GenerateCatalogo;
 use Queue;
-
+use App\ProductImage;
 class PDFController extends Controller
 {
     //
@@ -48,6 +49,32 @@ class PDFController extends Controller
 
       return redirect('/home');
     }
+
+     public function dispatchCatalogoJob()
+    {
+        Queue::push(new GenerateCatalogo());
+
+        return redirect('/home');
+    }
+
+    public function testCatalogo(){
+        $images = ProductImage::all();
+        foreach ($images as $img) {
+            $img->base64 = $img->tobase();
+            $img->save();
+        }
+
+
+        $path = public_path().'/MAJU-catalogo.pdf';
+        $today = Carbon::now()->format('d/m/Y');
+        $categories = Category::orderBy('name')->get();
+
+        $html = View::make('pdf.Catalogo3',compact('categories','today'))->render();
+
+        return $html;
+       /*  PDF::loadHTML($html)->save($path); */
+    }
+
 
 
     public function catalogo()

@@ -18,6 +18,7 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 
 
     Route::get('/prices-list-job','PDFController@dispatchPricesListJob');
+    Route::get('/catalogo-job','PDFController@dispatchCatalogoJob');
 
     Route::get('/catalogo','PDFController@catalogo');
     
@@ -62,7 +63,7 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 });
 
 
-
+Route::get('/test','PDFController@testCatalogo');
 Route::get('/pdf/{order}', 'OrderController@toPDF');
 
 

@@ -7,14 +7,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+    <link href="https://fonts.googleapis.com/css?family=Niramit" rel="stylesheet">
     
 </head>
 <body>
     <style>
    
 
+ *{
+        box-sizing: border-box;
+         font-family: 'Niramit',  sans-serif;
 
+      }
 .row {
   display: -ms-flexbox;
   display: flex;
@@ -367,6 +371,10 @@
     
         tbody:before, tbody:after, thead:before,thead:after { display: none; } 
        /*  div.breakNow { page-break-inside:avoid; page-break-after:always; }
+        ul, img, table {
+            page-break-inside: avoid;
+        } */
+      /*   div.breakNow { page-break-inside:avoid; page-break-after:always; }
         ul, img, table {
             page-break-inside: avoid;
         } */

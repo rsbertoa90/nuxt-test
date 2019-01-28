@@ -25,7 +25,7 @@
                         
                     
                       <tr>
-                        <td> <img width="200px" src="{{$product->images[0]->tobase()}}" alt=""> </td>
+                        <td> <img width="200px" src="{{$product->images[0]->base64}}" > </td>
                         <td>
                             <table>
                                 <tbody>
@@ -37,7 +37,14 @@
                                     </tr>
                                     <tr>
                                         <td style="font-size:1.3rem ">
-                                            $
+                                            @if ($product->price > 0)
+                                                <span> ${{$product->price}} </span> /
+                                            @endif
+                                            @if ($product->pck_units > 1)
+                                                 <br>
+                                                <span> {{$product->pck_price}} llevando MAS de {{$product->pck_units}} </span>
+                                            @endif
+
                                         </td>
                                     </tr>
                                     <tr>
