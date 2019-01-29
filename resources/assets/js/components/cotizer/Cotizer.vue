@@ -85,7 +85,7 @@
              </div>
              <hr>
         <div id="accordion">
-            <div v-for="category in poblatedCategories" :key="category.id" class="card flex-wrap">
+            <div v-for="category in categories" :key="category.id" class="card flex-wrap">
                 <div class="card-header" :id="category.id">
                     <h5 class="mb-0 w-100">
                         <button class="btn  btn-link w-100 text-left big" 
@@ -121,7 +121,7 @@
                                <th v-if="$mq == 'lg'" class="">Subtotal</th>
                            </thead>
                            <tbody>
-                               <tr v-for="product in activeProducts(category)" :key="product.id" >
+                               <tr v-for="product in category.products" :key="product.id" >
                                    <td width="10%" @click="show(product)"> 
                                        <v-lazy-image v-if="product.images && product.images.length > 0" 
                                                     class="sampleImage" 
@@ -226,7 +226,7 @@ import imageModal from './Img-modal.vue';
             return {
                 showModal : true,
                 modalProduct:null,
-                loading:false,
+                loading:true,
                 selector:{
                     code:'',
                     name:'',
@@ -277,14 +277,7 @@ import imageModal from './Img-modal.vue';
             }
         },
         computed: {
-            poblatedCategories(){
-                var vm = this;
-                var c = this.categories.filter(el => {
-                    return (vm.activeProducts(el).length > 0);
-                });
-                return c;
-
-            },
+            
             total() {
                 var vm = this;
                 var tot = 0;
@@ -307,15 +300,11 @@ import imageModal from './Img-modal.vue';
         created(){
             var vm = this;
             $.ajax({
-                url : 'api/categories',
+                url : 'api/productsnotpaused',
                 success(response){
                     vm.categories = response;
-                    vm.categories = _.sortBy(vm.categories,'name');
-
-                    vm.categories.forEach(category => {
-                        category.products = _.sortBy(category.products,'name');
-                    });
-                   
+                    vm.loading=false;
+                    console.log(response);
                 }
             });
 
@@ -377,14 +366,7 @@ import imageModal from './Img-modal.vue';
                
                 window.open('/descargar-lista-de-precios','_blank');
             },
-            activeProducts(category)
-            {
-                var active = category.products.filter(pr => {
-                    return (! pr.paused)
-                });
-                active = _.sortBy(active,'name');
-                return active;
-            },
+          
             show(product){
                this.showModal = true;
                this.modalProduct = product;
