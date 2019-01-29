@@ -300,11 +300,11 @@ import imageModal from './Img-modal.vue';
         created(){
             var vm = this;
             $.ajax({
-                url : 'api/productsnotpaused',
+                url : '/api/productsnotpaused',
                 success(response){
                     vm.categories = response;
                     vm.loading=false;
-                    console.log(response);
+                   
                 }
             });
 
