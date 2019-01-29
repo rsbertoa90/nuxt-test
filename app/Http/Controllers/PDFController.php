@@ -58,11 +58,7 @@ class PDFController extends Controller
     }
 
     public function testCatalogo(){
-        $images = ProductImage::all();
-        foreach ($images as $img) {
-            $img->base64 = $img->tobase();
-            $img->save();
-        }
+       
 
 
         $path = public_path().'/MAJU-catalogo.pdf';

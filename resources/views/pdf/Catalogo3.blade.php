@@ -33,7 +33,7 @@
                               @if ($product1)
                                   
                                     <td style="width:24%; overflow:hidden">                        
-                                            <img  style="width:150px;" src="{{$product1->images[0]->base64}}"> <br>
+                                            <img  style="width:150px;" src="{{$product1->images[0]->tobase()}}"> <br>
                                          <span style='font-size: 0.65rem; font-weight:bold'> Cod: {{$product1->code}} - {{$product1->name}} </span>
                                         @if ($product1->price > 0)
                         
@@ -49,7 +49,7 @@
                               @if ($product2)
                                   
                               <td style="width:24%; overflow:hidden">                        
-                                    <img  style="width:150px;" src="{{$product2->images[0]->base64}}"> <br>
+                                    <img  style="width:150px;" src="{{$product2->images[0]->tobase()}}"> <br>
                                     <div>
                                         <span style='font-size: 0.65rem; font-weight:bold'> Cod: {{$product2->code}} - {{$product2->name}} </span>
                                        @if ($product2->price > 0)
@@ -67,7 +67,7 @@
                               @if ($product3)
                                   
                               <td style="width:24%; overflow:hidden">                        
-                                    <img style="width:150px;"  src="{{$product3->images[0]->base64}}"> <br>
+                                    <img style="width:150px;"  src="{{$product3->images[0]->tobase()}}"> <br>
                                      <span style='font-size: 0.65rem; font-weight:bold'> Cod: {{$product3->code}} - {{$product3->name}} </span>
                                     @if ($product3->price > 0)
                     
@@ -83,7 +83,7 @@
                               @if ($product4)
                                   
                               <td style="width:24%; overflow:hidden ">                        
-                                    <img style="width:150px;"  src="{{$product4->images[0]->base64}}"> <br>
+                                    <img style="width:150px;"  src="{{$product4->images[0]->tobase()}}"> <br>
                                      <span style='font-size: 0.65rem; font-weight:bold'> Cod: {{$product4->code}} - {{$product4->name}} </span>
                                     @if ($product4->price > 0)
                     

@@ -15,10 +15,11 @@ class CategoryController extends Controller
     }
     public function getNotPAused(){
 
-        return Category::whereHas('products',function($q){
-            $q->where('paused',0);
-        })->orderby('name')->with('products.images')->orderby('name')->get();
+        $categories = Category::with('products.images')->with(['products' => function($q){
+                $q->where('paused',0)->orderBy('name');
+            }])->orderby('name')->get();
         
+            return $categories;
         
     }
 

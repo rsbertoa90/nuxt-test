@@ -25,7 +25,7 @@
                         
                     
                       <tr>
-                        <td> <img width="200px" src="{{$product->images[0]->base64}}" > </td>
+                        <td> <img width="200px" src="{{$product->images[0]->tobase()}}" > </td>
                         <td>
                             <table>
                                 <tbody>
