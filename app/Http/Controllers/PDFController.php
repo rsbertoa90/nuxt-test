@@ -87,7 +87,7 @@ class PDFController extends Controller
             }
         } */
 
-        $html = View::make('pdf.Catalogo3',compact('categories','today'))->render();
+        $html = View::make('pdf.Catalogo2',compact('categories','today'))->render();
 
         return $html;
        /*  PDF::loadHTML($html)->save($path); */

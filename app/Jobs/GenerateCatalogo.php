@@ -37,11 +37,8 @@ class GenerateCatalogo implements ShouldQueue
     {
         
 
-        $images = ProductImage::all();
-        foreach ($images as $img) {
-            $img->base64 = $img->tobase();
-            $img->save();
-        }
+      
+       
 
 
         $path = public_path().'/MAJU-catalogo.pdf';
@@ -61,7 +58,7 @@ class GenerateCatalogo implements ShouldQueue
         }
 
 
-        $html = View::make('pdf.Catalogo3',compact('categories','today'))->render();
+        $html = View::make('pdf.Catalogo2',compact('categories','today'))->render();
 
         PDF::loadHTML($html)->save($path);
 
