@@ -5,10 +5,14 @@
  
   <main>
       
-     
+    @if ($categories)
+         
+   
 
       @foreach ($categories as $category)
       
+         @if (count($category->products)>0)
+             
          
           <div style="text-align: center ; width : 780px; text-decoration:underline">
               <h4> {{strtoupper($category->name)}} </h4>
@@ -55,7 +59,10 @@
                   </tbody>
               </table>
               <hr>
-      @endforeach
+        @endif
+        @endforeach
+
+    @endif
   </main>
       
      

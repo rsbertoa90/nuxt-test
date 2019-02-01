@@ -47,14 +47,14 @@ class PDFController extends Controller
 
       Queue::push(new GeneratePricesList());
 
-      return redirect('/home');
+      return redirect('/admin');
     }
 
      public function dispatchCatalogoJob()
     {
         Queue::push(new GenerateCatalogo());
 
-        return redirect('/home');
+        return redirect('/admin');
     }
 
     public function testCatalogo(){
@@ -111,5 +111,17 @@ class PDFController extends Controller
 
         return $pdf->download('catalogo.pdf');
 
+    }
+
+
+    public function replaceCatalogo(Request $request)
+    {
+        $catalogo = $request->file('catalogo');
+
+        $path = public_path().'/MAJU-catalogo.pdf';
+
+        move_uploaded_file($catalogo,$path);
+
+        return redirect('/admin');
     }
 }

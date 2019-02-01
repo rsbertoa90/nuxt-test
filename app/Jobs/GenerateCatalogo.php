@@ -12,6 +12,8 @@ use App\ProductImage;
 use Carbon\Carbon;
 use PDF;
 use View;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 class GenerateCatalogo implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -35,11 +37,7 @@ class GenerateCatalogo implements ShouldQueue
      */
     public function handle()
     {
-        
-
-      
-       
-
+     
 
         $path = public_path().'/MAJU-catalogo.pdf';
         $today = Carbon::now()->format('d/m/Y');
@@ -60,7 +58,7 @@ class GenerateCatalogo implements ShouldQueue
 
         $html = View::make('pdf.Catalogo2',compact('categories','today'))->render();
 
-        PDF::loadHTML($html)->save($path);
+        PDF::loadHTML($html)->save($path); 
 
         
     }

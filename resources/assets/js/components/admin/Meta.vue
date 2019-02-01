@@ -8,6 +8,16 @@
         <a href="/admin/catalogo-job" class="btn btn-md btn-outline-info" > Refrescar catalogo </a>
     </div>
 
+    <div>
+        <form method="post" action="/admin/replace-catalogo" enctype="multipart/form-data">
+            <input type="hidden" name="_token" :value="csrf">
+            <label class="btn btn-md btn-outline-info mt-3">Subir catalogo comprimido
+                <input @change="catalogosubido=true" style="display:none" type="file" name="catalogo">
+            </label>
+            <button type="submit" v-if="catalogosubido">Guardar</button>
+        </form>
+    </div>
+
     <div v-if="meta" class="container m-auto">
        <!--  <a target="_blank"  href="/admin/catalogo" class="button btn btn-block btn-danger">CATALOGO</a> -->
        <br/>
@@ -45,7 +55,9 @@ export default {
     components:{adminCategories, adminCustomtexts},
     data(){
         return {
-            meta:null
+            meta:null,
+            catalogosubido:false,
+            csrf:window.csrf
         }
     },
 
