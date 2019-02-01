@@ -14,7 +14,7 @@
             <label class="btn btn-md btn-outline-info mt-3">Subir catalogo comprimido
                 <input @change="catalogosubido=true" style="display:none" type="file" name="catalogo">
             </label>
-            <button type="submit" v-if="catalogosubido">Guardar</button>
+            <button type="submit" class="btn btn-outline-success" v-if="catalogosubido">Guardar</button>
         </form>
     </div>
 

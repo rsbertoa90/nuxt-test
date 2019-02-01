@@ -47,14 +47,14 @@ class PDFController extends Controller
 
       Queue::push(new GeneratePricesList());
 
-      return redirect('/admin');
+      return redirect('/admin/metadata');
     }
 
      public function dispatchCatalogoJob()
     {
         Queue::push(new GenerateCatalogo());
 
-        return redirect('/admin');
+        return redirect('/admin/metadata');
     }
 
     public function testCatalogo(){
@@ -122,6 +122,6 @@ class PDFController extends Controller
 
         move_uploaded_file($catalogo,$path);
 
-        return redirect('/admin');
+        return redirect('/admin/metadata');
     }
 }
