@@ -17,6 +17,23 @@
             <button type="submit" class="btn btn-outline-success" v-if="catalogosubido">Guardar</button>
         </form>
     </div>
+    <div class="row">
+        
+        <div class="d-flex flex-column col-12 col-lg-6 ">
+            <h3>Generar catalogo de una categoria:</h3>
+            <select  class="form-control" v-model="selectedCategory">
+                <option v-for="cat in categories" :key="cat.id" :value="cat.id">
+                    {{cat.name}}
+                </option>
+            </select>
+            <button v-if="selectedCategory" class="btn btn-outline-info" @click="categoryCatalog()"> Generar PDF </button>
+            <a target="_blank" href="/CATEGORY-catalogo.pdf" class="mt-2 btn btn-outline-success">Descargar</a>
+        </div>
+
+      
+    </div>
+
+    <hr>
 
     <div v-if="meta" class="container m-auto">
        <!--  <a target="_blank"  href="/admin/catalogo" class="button btn btn-block btn-danger">CATALOGO</a> -->
@@ -57,7 +74,9 @@ export default {
         return {
             meta:null,
             catalogosubido:false,
-            csrf:window.csrf
+            csrf:window.csrf,
+            categories:null,
+            selectedCategory:null
         }
     },
 
@@ -66,9 +85,20 @@ export default {
         this.$http.get('/api/metadata/home')
             .then(response => {
                 vm.meta = response.data;
-            })
+            });
+
+        vm.$http.get('/api/categories')
+            .then(res => {
+                vm.categories = res.data;
+            });
     },
     methods:{
+        categoryCatalog(){
+            this.$http.get('/admin/category-catalogo-job/'+this.selectedCategory)
+                .then(res => {
+                    swal('Trabajo en cola','Revisa el resultado en unos minutos','success');
+                });
+        },
         update(field)
         {
             var data={
@@ -78,6 +108,7 @@ export default {
             }
             this.$http.put('/admin/metadata',data);
         }
-    }
+    },
+    
 }
 </script>

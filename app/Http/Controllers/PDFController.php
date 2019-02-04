@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use View;
 use App\Jobs\GeneratePricesList;
 use App\Jobs\GenerateCatalogo;
+use App\Jobs\GenerateCategoryCatalogo;
 use Queue;
 use App\ProductImage;
 class PDFController extends Controller
@@ -57,7 +58,16 @@ class PDFController extends Controller
         return redirect('/admin/metadata');
     }
 
+    public function dispatchCategoryCatalogJob($id)
+    {
+        Queue::push(new GenerateCategoryCatalogo($id));
+
+        return redirect('/admin/metadata');
+    }
+
+
     public function testCatalogo(){
+        
        
 
 

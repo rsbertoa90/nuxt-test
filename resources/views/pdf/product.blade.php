@@ -1,6 +1,14 @@
 
 <td style="width:24%; overflow:hidden; ">                        
-    <img style="width:150px; "  src="{{public_path().$product->images[0]->url}}"> 
+    @if (isset($product->images[0]))
+        
+        <img style="width:150px; "  src="{{public_path().$product->images[0]->url}}"> 
+    @endif
+    @if (!isset($product->images[0]))
+        
+        <img style="width:150px; "  src="{{public_path().'/storage/images/app/no-image.png'}}"> 
+    @endif
+    
     <div style="margin-top:-16px; margin-left:10px;">  <br>
         @if ($product->price > 0)
         
