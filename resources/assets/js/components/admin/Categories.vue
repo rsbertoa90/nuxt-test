@@ -13,6 +13,7 @@
             <hr>
             <div v-for="category in categories" :key="category.id" class="d-flex flex-column m-2">
                 <textarea v-model.lazy="category.name" @change="update('category',category)"> </textarea>
+                <textarea v-model.lazy="category.description" placeholder="descripcion" @change="updateCategoryDescription(category)"> </textarea>
                 <div>
                     <div v-if="category.image">
                         <v-lazy-image width="150px" :src="category.image" :alt="category.name"></v-lazy-image>
@@ -105,6 +106,14 @@ export default {
                         vm.newsup = null;
                     });
             }
+        },
+        updateCategoryDescription(category){
+            let data = {
+                id : category.id,
+                field: 'description',
+                value : category.description
+            }
+            this.$http.put('/admin/category',data);
         },
         update(type,obj)
         {

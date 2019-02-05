@@ -7,8 +7,11 @@
     
       
          
-          <div style="text-align: center ; width : 780px; text-decoration:underline">
-              <h4> {{category.name}} </h4>
+          <div style="text-align: center">
+              <h1> {{category.name}} </h1>
+          </div>
+          <div v-if="category.description" class="text-center mt-4">
+              <p> {{category.description}} </p>
           </div>
           <br>
           <div class="container">
