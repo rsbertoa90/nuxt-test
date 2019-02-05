@@ -14,9 +14,7 @@ class CategoryController extends Controller
         
     }
 
-    public function getOne($id){
-        return Category::find($id)->with('products.images')->get()->first();
-    }
+    
 
 
     public function getNotPAused(){
@@ -84,8 +82,8 @@ class CategoryController extends Controller
     {   
         $slug = '/'.$slug;
         $category = Category::where('slug','=',$slug)->get()->first();
-        
         if ($category){
+            
             $id = $category->id;
             return view('category',compact('id'));
         }
