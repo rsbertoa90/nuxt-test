@@ -59,6 +59,7 @@
    <meta name="google-site-verification" content="y8lLm8a1Q9LWzq7c8pQ8w-01zPjhn-GfdxpOSaKanCM" />
 </head>
 <body>
+
     @if (Auth::check())
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary font-weight-bold">
             <a class="navbar-brand" href="/">MAJU</a>
@@ -86,6 +87,29 @@
             </div>
         </nav>
     @endif
+    @if (!auth::check())
+            {{--  NAV user --}}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-fucsia font-weight-bold">
+                <a class="navbar-brand" href="/">MAJU</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Hace tu pedido <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://hipermaju.com/contactenos">Contactate con nosotros</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            {{--/NAV user --}}
+    @endif
+
+
 
     <div id="app">
         <main class="py-4">

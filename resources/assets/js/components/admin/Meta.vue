@@ -22,12 +22,13 @@
         <div class="d-flex flex-column col-12 col-lg-6 ">
             <h3>Generar catalogo de una categoria:</h3>
             <select  class="form-control" v-model="selectedCategory">
-                <option v-for="cat in categories" :key="cat.id" :value="cat.id">
+                <option v-for="cat in categories" :key="cat.id" :value="cat">
                     {{cat.name}}
                 </option>
             </select>
             <button v-if="selectedCategory" class="btn btn-outline-info" @click="categoryCatalog()"> Generar PDF </button>
             <a target="_blank" href="/CATEGORY-catalogo.pdf" class="mt-2 btn btn-outline-success">Descargar</a>
+            <span v-if="selectedCategory"> Link:  <a :href="selectedCategory.slug"> https://mayoristamaju.com{{selectedCategory.slug}} </a> </span>
         </div>
 
       
@@ -94,7 +95,7 @@ export default {
     },
     methods:{
         categoryCatalog(){
-            this.$http.get('/admin/category-catalogo-job/'+this.selectedCategory)
+            this.$http.get('/admin/category-catalogo-job/'+this.selectedCategory.id)
                 .then(res => {
                     swal('Trabajo en cola','Revisa el resultado en unos minutos','success');
                 });

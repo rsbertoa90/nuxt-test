@@ -16,7 +16,9 @@ Auth::routes();
 
 Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 
+    Route::get('/slugify','CategoryController@slugifyAll');
 
+    
     Route::get('/prices-list-job','PDFController@dispatchPricesListJob');
     Route::get('/catalogo-job','PDFController@dispatchCatalogoJob');
     Route::get('/category-catalogo-job/{id}','PDFController@dispatchCategoryCatalogJob');
@@ -83,4 +85,6 @@ Route::post('/cotizer/send', 'OrderController@userOrder');
 
 Route::get('/logout','HomeController@logout');
 
+
 Route::get('/descargar-lista-de-precios','PDFController@pricesList');
+Route::get('/{slug}','CategoryController@categoryPage');

@@ -13,6 +13,12 @@ class CategoryController extends Controller
         
         
     }
+
+    public function getOne($id){
+        return Category::find($id)->with('products.images')->get()->first();
+    }
+
+
     public function getNotPAused(){
 
         $categories = Category::with('products.images')->with(['products' => function($q){
@@ -72,5 +78,30 @@ class CategoryController extends Controller
         }
         return redirect('/admin/metadata');
     }
+    
 
+    public function categoryPage($slug)
+    {
+        $category = Category::where('slug','/'.$slug)->get()->first();
+        
+        if ($category){
+            $id = $category->id;
+            return view('category',compact('id'));
+        }
+        else{
+            return redirect('/');
+        }
+    }
+
+
+    public function slugifyAll(){
+        $cats = Category::all();
+
+        foreach ($cats as  $cat) {
+            $cat->slug = '/'.str_slug($cat->name);
+            $cat->save();
+        }
+
+        return redirect('/');
+    }
 }

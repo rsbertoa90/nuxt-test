@@ -16,4 +16,13 @@ class Category extends Model
     {
         return $this->hasMany(Product::class)->orderBy('name');
     }
+
+    public function setNameAttribute($name)
+    {
+        $this->attributes['name']=$name;
+        $this->attributes['slug']='/'.str_slug($name);
+        $this->save();
+    }
+
+
 }
