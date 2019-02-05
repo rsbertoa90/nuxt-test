@@ -81,8 +81,9 @@ class CategoryController extends Controller
     
 
     public function categoryPage($slug)
-    {
-        $category = Category::where('slug','/'.$slug)->get()->first();
+    {   
+        $slug = '/'.$slug;
+        $category = Category::where('slug','=',$slug)->get()->first();
         
         if ($category){
             $id = $category->id;
