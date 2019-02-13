@@ -28,15 +28,12 @@
                   </div>
                </div> 
 
-                <div v-if="user && user.role_id < 3" class="col-12 row form-group-row">
-                   <label class="col-4 col-lg-2" for="">Nombre del Vendedor</label>
-                   <input  type="text" v-model="formData.seller"  class="form-control col-8 col-lg-4">
-                </div> 
+                
 
                <div class="col-12 row form-group-row">
                    <label class="col-4 col-lg-2" for="">
                        Nombre y Apellido 
-                       <span v-if="user && user.role_id < 3"> (del cliente) </span> 
+                      
                     </label>
                    <input required type="text" v-model="formData.name"  class="form-control col-8 col-lg-4">
                 </div>
@@ -172,21 +169,8 @@ export default{
                 
                 var vm = this;
                 vm.loading = true;
-                if (this.user && this.user.role_id < 3){
-                     $.ajax({
-                        method : 'post',
-                        data : data,
-                        url : '/admin/cotizacion',
-                        success(){
-                            vm.loading = false;
-                            swal('Pedido guardado', 'Podras hacer seguimiento desde el panel de pedidos', 'success')
-                                .then(() => {
-                                    window.location.replace('/');
-                                });
-                        } 
-                    });
-                }
-                else {
+               
+   
 
                     $.ajax({
                         method : 'post',
@@ -200,7 +184,7 @@ export default{
                                 });
                         } 
                     });
-                }
+                
             }
         }
     },
