@@ -15,6 +15,9 @@ use PDF;
 use Carbon\Carbon;
 use View;
 
+use Queue;
+use App\Jobs\SaveNewOrder;
+
 class OrderController extends Controller
 {
 
@@ -41,54 +44,15 @@ class OrderController extends Controller
     {
         
             $request->validate([
-            'email'=>'required|email',
-            'list'=>'required'
+                'email'=>'required|email',
+                'list'=>'required'
             ]);
-             
-      $products = json_decode($request->list);
-      $phone = $request->phone;
-      $message = $request->message;
-      $email = $request->email;
-      $total = $request->total;
+        
+            Queue::push(new SaveNewOrder($request->all()));
+
+            return;
+
             
-      $order = Order::create([
-          'email'=>$email,
-          'phone'=>$phone,
-          'message'=>$request->message,
-          'name'=>$request->name,
-          'source'=>'online'
-      ]);
-
-      if ($request->shipping)
-      {
-          $order->shipping = 1;
-          $order->cp = $request->cp;
-          $order->city_id = $request->city;
-          $order->address = $request->address;
-          $order->transport = $request->transport;
-          $order->save();
-      }
-
-      foreach ($products as $p)
-      {
-         
-        if ($p->units >= $p->pck_units){
-            $price = $p->pck_price;
-        }else {
-            $price = $p->price;
-        }
-        OrderProduct::create([
-              'product_id' => $p->id,
-              'order_id'=>$order->id,
-              'units'=>$p->units,
-              'price'=>$price,
-              ]);
-      }
-
-      $order = Order::find($order->id);
-       
-       Mail::to($order->email)
-            ->send(new Cotizacion($order));
 
       
             
