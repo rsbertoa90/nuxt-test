@@ -13,7 +13,7 @@
         <meta name="description" content="{{$meta->metadescription }}">
     @endif
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('/js/app.js') }}" defer></script>
     {{-- font awesome --}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!-- Fonts -->
@@ -21,7 +21,9 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+  
+    {{-- animaciones --}}
     <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
