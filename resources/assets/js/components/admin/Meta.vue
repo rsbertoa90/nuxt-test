@@ -7,6 +7,9 @@
     <div>
         <a href="/admin/catalogo-job" class="btn btn-md btn-outline-info" > Refrescar catalogo </a>
     </div>
+    <div>
+        <a href="/admin/failed-jobs" class="btn btn-md btn-outline-danger" > failed jobs </a>
+    </div>
 
     <div>
         <form method="post" action="/admin/replace-catalogo" enctype="multipart/form-data">

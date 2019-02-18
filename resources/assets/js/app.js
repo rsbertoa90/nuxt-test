@@ -41,6 +41,7 @@ Vue.use(DatatableFactory);
 import moment from 'moment';
 window.moment = moment;
 
+Vue.component('admin-failed-jobs', require('./components/admin/FailedJobs.vue'));
 Vue.component('dot-loader', require('vue-spinner/src/DotLoader.vue'));
 Vue.component('app-cotizer', require('./components/cotizer/Cotizer.vue'));
 Vue.component('cotizer-form', require('./components/cotizer/Cotizer-form.vue'));

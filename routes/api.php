@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/api/failed-jobs','AdminController@getFailedJobs');
+
 Route::get('/categories','CategoryController@getAll');
 Route::get('/category/{id}','CategoryController@get');
 Route::get('/products','ProductController@getAll');

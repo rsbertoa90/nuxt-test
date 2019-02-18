@@ -14,4 +14,15 @@ class AdminController extends Controller
     public function report(){
         return view('admin.report');
     }
+
+
+    public function getFailedJobs()
+    {
+        return FailedJob::all()->orderBy('failed_at','desc');
+    }
+
+    public function failedJobs()
+    {
+        return view('admin.failedJobs');
+    }
 }
