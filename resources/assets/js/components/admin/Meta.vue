@@ -1,8 +1,6 @@
 <template>
 <div>
-    <div>
-        <h1>test hashed version</h1>
-    </div>
+    
 
     <div>
         <a href="/admin/prices-list-job" class="btn btn-md btn-outline-info" > Refrescar lista de precios </a>
