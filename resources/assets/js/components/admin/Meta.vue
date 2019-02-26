@@ -12,6 +12,17 @@
         <a href="/admin/failed-jobs" class="btn btn-md btn-outline-danger" > failed jobs </a>
     </div>
 
+    <div class="row" v-if="configs">
+        <div class="col-12">
+            minimo compra en local
+            <input type="number" v-model.lazy="configs.minbuy" @change="updateconfigs('minbuy')">
+        </div>
+        <div class="col-12">
+            minimo compra envios
+            <input type="number" v-model.lazy="configs.minbuy_ship" @change="updateconfigs('minbuy_ship')">
+        </div>
+    </div>
+
     <div>
         <form method="post" action="/admin/replace-catalogo" enctype="multipart/form-data">
             <input type="hidden" name="_token" :value="csrf">
@@ -81,7 +92,8 @@ export default {
             catalogosubido:false,
             csrf:window.csrf,
             categories:null,
-            selectedCategory:null
+            selectedCategory:null,
+            configs:null,
         }
     },
 
@@ -96,8 +108,19 @@ export default {
             .then(res => {
                 vm.categories = res.data;
             });
+        vm.$http.get('/config')
+            .then(res => {
+                vm.configs = res.data;
+            });
     },
     methods:{
+        updateconfigs(field){
+            let data={
+                field:field,
+                value: this.configs[field]
+            }
+            this.$http.put('/admin/config',data);
+        },
         categoryCatalog(){
             this.$http.get('/admin/category-catalogo-job/'+this.selectedCategory.id)
                 .then(res => {

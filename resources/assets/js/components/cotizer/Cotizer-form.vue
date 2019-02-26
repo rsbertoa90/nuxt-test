@@ -103,6 +103,7 @@ export default{
     },
 
     data(){return{
+        configs:null,
         states:[],
         state:null,
         cities:[],
@@ -124,10 +125,12 @@ export default{
 
     methods : {
          minBuy(){
-            if (this.formData.shipping){
-                return 4000;
-            }
-            else {return 1500;}
+             if(this.configs){
+                 if (this.formData.shipping){
+                     return this.configs.minbuy_ship;
+                 }
+                 else {return this.configs.minbuy;}
+             }
         },
         formValid()
         {   
@@ -188,14 +191,14 @@ export default{
             }
         }
     },
-    created()
-    {
-        var vm = this;
-        this.$http.get('/api/states')
-            .then(response => {
-                vm.states = response.data;
-            });
+    created(){
+        var vm=this;
+         this.$http.get('/config')
+                .then(response => {
+                    vm.configs = response.data;
+                }); 
     }
+    
 }
 
 </script>

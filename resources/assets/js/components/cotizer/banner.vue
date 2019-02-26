@@ -8,8 +8,8 @@
         <span class="fa fa-arrow-down"
             :class="{todaright:!pos, todaleft:pos}"></span>
     </h2>
-    <h4 >
-        Compra mínima en el local $1500, para envíos $4000.
+    <h4 v-if="configs">
+        Compra mínima en el local ${{configs.minbuy}}, para envíos ${{configs.minbuy_ship}}.
     </h4>
     <div v-if="customText">
         <h5 >
@@ -23,11 +23,18 @@
 export default {
     data(){
         return{
+            configs:null,
             pos:true,
             customText:null
         }
     },
     created(){
+        var vm=this;
+          this.$http.get('/config')
+                .then(response => {
+                    vm.configs = response.data;
+                }); 
+
 
         this.$http.get('/api/custom-text/banner')
             .then(res => {
