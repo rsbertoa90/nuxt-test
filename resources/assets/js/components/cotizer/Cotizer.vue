@@ -92,7 +92,8 @@
                                 data-toggle="collapse" 
                                 :data-target="'#cat'+category.id" 
                                 aria-expanded="true" 
-                                :aria-controls="category.id">
+                                :aria-controls="category.id"
+                                @click="selectedCategory=category.id">
                                 
                                 <div class="d-flex">
                                     <div class="category-image-container ml-lg-2">
@@ -109,7 +110,7 @@
                 </div>
                 <div :id="'cat'+category.id" class="collapse collapsed " aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                       <table class="table table-striped table-bordered ">
+                       <table class="table table-striped table-bordered " v-if="selectedCategory == category.id">
                            <thead class="">
                                <th>Foto</th>
                                <th v-if="user && user.role_id < 3">Codigo</th>
@@ -224,6 +225,7 @@ import imageModal from './Img-modal.vue';
         components:{imageModal,pedido,appBanner,cotizerTutorial},
         data(){
             return {
+                selectedCategory:null,
                 showModal : true,
                 modalProduct:null,
                 loading:true,
