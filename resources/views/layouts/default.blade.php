@@ -15,20 +15,21 @@
     <!-- Scripts -->
     <script src="{{ mix('/js/app.js') }}" defer></script>
     {{-- font awesome --}}
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link defer rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    <link defer rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link defer href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet" defer>
   
     {{-- animaciones --}}
-    <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
+    <link defer href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126973762-1"></script>
-    <script>
+    <script defer async src="https://www.googletagmanager.com/gtag/js?id=UA-126973762-1"></script>
+    <script defer>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -37,7 +38,7 @@
     </script>
 
       <!-- Facebook Pixel Code -->
-        <script>
+        <script defer>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
