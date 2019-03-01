@@ -68,6 +68,7 @@
 
 
     <div id="app">
+        <app-frame></app-frame>
         <header>
             <app-nav></app-nav>
         </header>    

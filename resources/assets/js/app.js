@@ -43,6 +43,7 @@ window.moment = moment;
 
 Vue.component('admin-failed-jobs', require('./components/admin/FailedJobs.vue'));
 Vue.component('dot-loader', require('vue-spinner/src/DotLoader.vue'));
+Vue.component('app-frame', require('./components/layout/frame.vue'));
 Vue.component('app-cotizer', require('./components/cotizer/Cotizer.vue'));
 Vue.component('app-nav', require('./components/layout/navbar.vue'));
 Vue.component('cotizer-form', require('./components/cotizer/Cotizer-form.vue'));
