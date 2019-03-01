@@ -18,10 +18,10 @@
     <div v-else class="container w-100" :class="{'bg-white' : user != null && user.role_id > 2}">   
         <div class="row w-100 d-flex justify-content-center">
             <div class="col-12 col-lg-3 text-center">
-                <img src="/storage/images/app/MAJU.jpg" 
+                <!-- <img src="/storage/images/app/MAJU.jpg" 
                 :class="{'smlogo':$mq != 'lg',
                          lglogo:$mq == 'lg'}" 
-                alt="logo" >
+                alt="logo" > -->
             </div>
             <div class="col-12 col-lg-5 text-center" v-if="$mq=='lg'">
               <app-banner></app-banner>

@@ -12,12 +12,13 @@
         right:15px;
         z-index:110;
         background: #fff;
-        border: 1px solid #65BC54;
-        padding: 2px;
-        a{color:#65BC54};
+        border: 1px solid #ff0aaf;
+        padding: 4px;
+        a{color:#ff0aaf};
     }
     .fa-whatsapp{
       font-size: 1.3rem;
+      color:#65BC54;
     }
 
     @media(min-width: 600px){
