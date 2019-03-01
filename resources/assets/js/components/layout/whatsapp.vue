@@ -9,7 +9,7 @@
         position:fixed;
        
         bottom:5px;
-        right:30px;
+        right:15px;
         z-index:110;
         background: #fff;
         border: 1px solid #65BC54;

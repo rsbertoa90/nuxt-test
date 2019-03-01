@@ -1,5 +1,5 @@
 <template>
-<div class="w-100">
+<div class="contain-all">
      <div v-if="loading" class="loader">
             <dot-loader :loading="loading" size="200px"></dot-loader>
     </div>
@@ -193,7 +193,7 @@
     </div>
 
     <whatsappBtn></whatsappBtn>
-    
+
     <cotizer-tutorial></cotizer-tutorial>
 
       <image-modal @close="closedModal" v-if="this.showModal"
@@ -382,6 +382,12 @@ import whatsappBtn from '../layout/whatsapp.vue';
 </script>
 
 <style scoped lang="scss">
+
+.contain-all{
+    width: 100vw;
+    padding:5px;
+    overflow: hidden;
+}
 
     .category-image-container{
         margin-right: 15px;
