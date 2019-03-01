@@ -434,7 +434,7 @@ import whatsappBtn from '../layout/whatsapp.vue';
         /* margin-left:50vw; */
         bottom: 25px;
         left: 33%;
-        z-index: 100;
+        z-index: 900;
     }
    
     img{width:100%}
