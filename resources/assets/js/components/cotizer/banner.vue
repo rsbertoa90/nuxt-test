@@ -8,9 +8,16 @@
         <span class="fa fa-arrow-down"
             :class="{todaright:!pos, todaleft:pos}"></span>
     </h2>
-    <h4 v-if="configs">
-        Compra mínima en el local ${{configs.minbuy}}, para envíos ${{configs.minbuy_ship}}.
-    </h4>
+    <div v-if="configs" class="d-flex flex-column mb-1">
+        <h4 class="text-primary">
+            <span class="fas fa-home "></span>
+            Compra mínima en el local ${{configs.minbuy}}
+        </h4>
+        <h4 class="fucsia">
+            <span class="fas fa-truck "></span>
+            Compra mínima para envíos ${{configs.minbuy_ship}} 
+        </h4>
+    </div>
     <div v-if="customText">
         <h5 >
             {{ customText.text }}

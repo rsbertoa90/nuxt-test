@@ -28,20 +28,6 @@
             </div>
             <div class="col-12 col-lg-3">
                 
-                <a class="btn btn-outline-primary btn-lg" target="_blank"
-                    href="https://drive.google.com/file/d/1PRSqHX-70Eh7uAqOaF8xV-CAZ3BhqPL9/view">
-                     <span class="fa fa-download"></span> Descargar catalogo digital
-                </a> 
-
-                <a class="btn btn-outline-info btn-lg" target="_blank" href="/MAJU-lista-de-precios.pdf" >
-                    <span class="fa fa-download"></span> Descargar lista de precios
-                </a> 
-                
-
-                <a class="btn btn-outline-warning btn-lg" 
-                    href="/">
-                     <span class="fa fa-sync-alt"></span> Resetear Cotizador
-                </a> 
                 <div v-if="user && user.role_id < 3">
                     <button v-if="config && !config.maintenance" @click="toggleMaintenance"
                     class="btn btn-outline-danger btn-lg" >
@@ -195,9 +181,7 @@
                 </div>
             </div>    
         </transition>
-        <div class="whatsapp">
-            <a rel="noreferrer" target="_blank" href="https://wa.me/5491127082683" > <i class="fab fa-whatsapp"></i>  <span v-if="$mq=='lg'"> Atencion por WhatsApp =) </span> </a>
-        </div>
+        
         <hr>
         <div>
             <cotizer-form :user="user" :list="list" :total="total"></cotizer-form>
@@ -207,6 +191,9 @@
              <pedido @change="listChange" v-if="list && list.length > 0" :list=list></pedido>
         </div>
     </div>
+
+    <whatsappBtn></whatsappBtn>
+    
     <cotizer-tutorial></cotizer-tutorial>
 
       <image-modal @close="closedModal" v-if="this.showModal"
@@ -221,8 +208,9 @@ import pedido from './pedido.vue';
 import appBanner from './banner.vue';
 import cotizerTutorial from './tutorial.vue';
 import imageModal from './Img-modal.vue';
+import whatsappBtn from '../layout/whatsapp.vue';
     export default {
-        components:{imageModal,pedido,appBanner,cotizerTutorial},
+        components:{imageModal,pedido,appBanner,cotizerTutorial,whatsappBtn},
         data(){
             return {
                 selectedCategory:null,
@@ -442,20 +430,7 @@ import imageModal from './Img-modal.vue';
         left: 33%;
         z-index: 100;
     }
-    .whatsapp{
-        position:fixed;
-       
-        bottom:0px;
-        right:15px;
-        z-index:110;
-        background: #fff;
-        border: 1px solid #65BC54;
-        padding: 2px;
-        a{color:#65BC54};
-    }
-    .fa-whatsapp{
-      font-size: 1.3rem;
-    }
+   
     img{width:100%}
 
     @media(max-width: 600px){

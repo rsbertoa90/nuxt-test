@@ -63,58 +63,14 @@
 </head>
 <body>
 
-    @if (Auth::check())
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary font-weight-bold">
-            <a class="navbar-brand" href="/">MAJU</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Cotizador <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin">Administrar Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/pedidos">Pedidos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/metadata">Metadata</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Salir</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    @endif
-    @if (!auth::check())
-            {{--  NAV user --}}
-            <nav class="navbar navbar-expand-lg navbar-dark bg-fucsia font-weight-bold">
-                <a class="navbar-brand" href="/">MAJU</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Hace tu pedido <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://hipermaju.com/contactenos">Contactate con nosotros</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-            {{--/NAV user --}}
-    @endif
-
+    
+    
 
 
     <div id="app">
+        <header>
+            <app-nav></app-nav>
+        </header>    
         <main class="py-4">
             @yield('content')
         </main>
