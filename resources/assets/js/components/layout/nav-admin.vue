@@ -9,22 +9,29 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Cotizador <span class="sr-only">(current)</span></a>
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" href="/">Cotizador <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin">Administrar Productos</a>
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" href="/admin">Administrar Productos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/pedidos">Pedidos</a>
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" href="/admin/pedidos">Pedidos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/metadata">Metadata</a>
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" href="/admin/metadata">Metadata</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Salir</a>
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" href="/logout">Salir</a>
                     </li>
                 </ul>
             </div>
         </nav>
 </template>
+
+<style lang="scss">
+    .text-white{
+        color:#fff;
+       
+    }
+</style>
