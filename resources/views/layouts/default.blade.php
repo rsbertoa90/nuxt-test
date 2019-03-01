@@ -8,6 +8,18 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#ff0aaf">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#ff0aaf">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#ff0aaf">
+
+
+
+   
+
     @if ($meta =  App\Metadata::findOrCreate('home'))
         <title>{{$meta->metatitle }}</title>
         <meta name="description" content="{{$meta->metadescription }}">
