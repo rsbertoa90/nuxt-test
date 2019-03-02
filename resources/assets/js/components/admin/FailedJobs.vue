@@ -50,7 +50,6 @@ td{
 
 .truncate {
 
-  width: 250px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

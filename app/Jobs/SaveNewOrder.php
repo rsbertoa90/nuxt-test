@@ -89,6 +89,7 @@ class SaveNewOrder implements ShouldQueue
       $order = Order::find($order->id);
        
        Mail::to($order->email)
+       ->cc('roominagii@gmail.com')
             ->send(new Cotizacion($order));
     }
 }
