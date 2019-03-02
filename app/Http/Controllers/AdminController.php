@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\FailedJob;
 class AdminController extends Controller
 {
     public function admin(){
@@ -18,7 +18,7 @@ class AdminController extends Controller
 
     public function getFailedJobs()
     {
-        return FailedJob::all()->orderBy('failed_at','desc');
+        return FailedJob::orderBy('failed_at','desc')->get();
     }
 
     public function failedJobs()

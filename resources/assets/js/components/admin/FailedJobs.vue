@@ -3,15 +3,15 @@
         <table v-if="rows && rows.length>0" class="table table-striped">
             <thead>
                 <th>failed_at</th>
-                <th>payload</th>
+               <!--  <th>payload</th> -->
                 <th>exception</th>
-                <th> - </th>
+                <!-- <th> - </th> -->
             </thead>
             <tbody>
                 <tr v-for="row in rows" :key="row.id">
-                    <td> {{row.failed_at}} </td>
-                    <td> {{row.payload}} </td>
-                    <td> {{row.exception}} </td>
+                    <td style="width:80px"> {{row.failed_at}} </td>
+                    <!-- <td> {{row.payload}} </td> -->
+                    <td class=" truncate"> {{row.exception}} </td>
                 </tr>
             </tbody>
         </table>
@@ -38,3 +38,21 @@ export default {
     }
 }
 </script>
+
+<style scoped lang="scss">
+    
+td{
+    max-width: 30vw;
+    max-height: 300px;
+    white-space: normal;
+    max-height: 100px;
+}
+
+.truncate {
+
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
