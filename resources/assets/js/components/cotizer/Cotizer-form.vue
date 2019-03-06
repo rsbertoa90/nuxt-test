@@ -197,7 +197,12 @@ export default{
                 .then(response => {
                     vm.configs = response.data;
                 }); 
-    }
+
+        this.$http.get('/api/states')
+            .then(res => {
+                this.states = res.data;
+            });
+    }   
     
 }
 
