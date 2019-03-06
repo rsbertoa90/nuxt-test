@@ -156,7 +156,7 @@ export default{
                 swal('Hay algo mal con el mail','','error');
                 return false;
             }
-            else if (this.formData.email.length < 4 && this.user.role_id > 2 )
+            else if (this.formData.email.length < 4  )
             {
                 swal('Hay algo mal con el mail','','error');
                 return false;
