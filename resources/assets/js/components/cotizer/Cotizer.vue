@@ -71,7 +71,7 @@
              </div>
              <hr>
         <div id="accordion">
-            <div v-for="category in categories" :key="category.id" class="card flex-wrap">
+            <div v-for="category in categories" :key="category.id" class="card flex-wrap" >
                 <div class="card-header" :id="category.id">
                     <h5 class="mb-0 w-100">
                         <button class="btn  btn-link w-100 text-left big" 
