@@ -38,10 +38,15 @@ export default {
 
 <style scoped>
     .table{
-        font-size:0.66rem;
+        font-size:0.8rem;
         margin-left: -2%;
     }
     .form-control{
         max-width: 80px;
     }
+
+     .form-control{
+        max-width: 80px;
+    }
+    
 </style>

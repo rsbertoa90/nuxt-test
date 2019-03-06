@@ -1,6 +1,6 @@
 <template>
 <div class="contain-all">
-     <div v-if="loading" class="loader">
+     <div v-if="!categories || categories.length < 1 || !user || !config" class="loader">
             <dot-loader :loading="loading" size="200px"></dot-loader>
     </div>
     
@@ -15,189 +15,44 @@
         </div>
     </div>
 
-    <div v-else class="container w-100" :class="{'bg-white' : user != null && user.role_id > 2}">   
+    <div v-if="categories && config && !config.maintenance" class="container w-100" :class="{'bg-white' : user != null && user.role_id > 2}">   
         <div class="row w-100 d-flex justify-content-center">
-            <div class="col-12 col-lg-3 text-center">
-                <!-- <img src="/storage/images/app/MAJU.jpg" 
-                :class="{'smlogo':$mq != 'lg',
-                         lglogo:$mq == 'lg'}" 
-                alt="logo" > -->
+           
+            <div class="col-12 col-lg-12" v-if="user && user.role_id < 3">
+               <hideOptbutton></hideOptbutton>
             </div>
-            <div class="col-12 col-lg-5 text-center" v-if="$mq=='lg'">
-              <app-banner></app-banner>
-            </div>
-            <div class="col-12 col-lg-3">
-                
-                <div v-if="user && user.role_id < 3">
-                    <button v-if="config && !config.maintenance" @click="toggleMaintenance"
-                    class="btn btn-outline-danger btn-lg" >
-                        Ocultar cotizador al publico        
-                    </button> 
 
-                    <button v-else @click="toggleMaintenance"
-                    class="btn btn-outline-success btn-lg" >
-                        Mostrar cotizador al publico
-                    </button> 
-                </div>
-            </div>
-            <div class="col-12 col-lg-4 text-center neg-margins" v-if="$mq!='lg'">
-                <app-banner></app-banner>
+            <div :class="{'col-12 col-lg-5 text-center':$mq=='lg',
+                         'col-12 col-lg-4 text-center neg-margins':$mq!='lg'}" >
+                 <app-banner></app-banner>
             </div>
         </div>
-       
-
-             <hr v-if="user && user.role_id < 3">
-             <div v-if="user && user.role_id < 3" class="row">
-                <form   @submit.prevent="addSelectorProduct"
-                        class="form form-inline w-100 d-flex  " 
-                        :class="{'flex-column align-items-start justify-items-between':$mq != 'lg'}">
-                    <div class=" d-flex ml-3 mt-2 " >
-                        <label for="">Codigo</label>
-                        <input type="text" v-model="selector.code" class="form-control ml-2">
-                    </div>
-                    <div class=" d-flex ml-3 mt-2 " >
-                        <label for="">Producto</label>
-                        <label class="text-info ml-4"> {{selector.name}} </label>
-                    </div>
-                    <div class=" d-flex ml-3 mt-2 " >
-                        <label class="mr-2" for="">Unidades</label>
-                        <input type="number" min="0"  class="form-control" v-model="selector.units">
-                    </div>
-                    <button type="submit" class="btn btn-md btn-secondary ml-2" :class="{'btn-outline-success':selector.product && selector.units > 0}"> <span class="fa fa-plus"></span> </button>
-                </form>
-                <div class="w-100">
-                   <pedido @change="listChange" v-if="list && list.length > 0" :list="list"></pedido>
-                </div>
-             </div>
-             <hr>
-        <div id="accordion">
-            <div v-for="category in categories" :key="category.id" class="card flex-wrap" >
-                <div class="card-header" :id="category.id">
-                    <h5 class="mb-0 w-100">
-                        <button class="btn  btn-link w-100 text-left big" 
-                                data-toggle="collapse" 
-                                :data-target="'#cat'+category.id" 
-                                aria-expanded="true" 
-                                :aria-controls="category.id"
-                                @click="selectedCategory=category.id">
-                                
-                                <div class="d-flex">
-                                    <div class="category-image-container ml-lg-2">
-                                        <v-lazy-image v-if="category.image" :src="category.image" 
-                                        :alt="category.name" class="category-image">
-                                        </v-lazy-image>
-                                    </div>
-                                    <span class="d-flex align-items-center" style="width:65%">
-                                        {{category.name | uc}}
-                                    </span>
-                                </div>
-                        </button>
-                    </h5>
-                </div>
-                <div :id="'cat'+category.id" class="collapse collapsed " aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-                       <table class="table table-striped table-bordered " v-if="selectedCategory == category.id">
-                           <thead class="">
-                               <th>Foto</th>
-                               <th v-if="user && user.role_id < 3">Codigo</th>
-                               <th class="nametd">Nombre</th>
-                               <th class="">Precio</th>
-                               <!-- <th  class="">Llevando mas de</th> -->
-                               <th   class="">Precio x mayor</th>
-                               <th class="">Quiero</th>
-                               <th v-if="$mq == 'lg'" class="">Subtotal</th>
-                           </thead>
-                           <tbody>
-                               <tr v-for="product in category.products" :key="product.id" >
-                                   <td width="10%" @click="show(product)"> 
-                                       <v-lazy-image v-if="product.images && product.images.length > 0" 
-                                                    class="sampleImage" 
-                                                    :src="product.images[0].url" 
-                                                    :alt="product.name" />
-                                        <v-lazy-image v-else :alt="product.name" 
-                                                    src="/storage/images/app/no-image.png" /> 
-                                                    
-                                    </td>
-                                   <td v-if="user && user.role_id < 3"> {{product.code}} </td>
-                                   <td style="cursor:pointer" @click="show(product)">  {{product.name | ucFirst}} </td>
-                                   <td class="text-info text-center"> 
-                                       <span v-if="product.price > 0"> ${{product.price | price}} </span>
-                                       <span v-else> - </span> 
-                                       <br>
-                                       <div v-if="product.pck_units > 1 && product.price > 0 ">
-                                            <span> - de {{product.pck_units}}  </span>
-                                            <br>
-                                            <span>Unidades</span>
-                                       </div>
-                                    </td>
-                               <!--     <td class="text-center">
-                                      <span v-if="product.pck_units > 1"> {{product.pck_units}} </span>
-                                      <span v-else> Venta x unidad </span>
-                                    </td> -->
-                                   <td  class="text-center text-success font-weight-bold"> 
-                                        <span v-if="product.pck_units > 1"> ${{product.pck_price | price}} </span>
-                                        <span v-else> - </span> <br>
-                                        <div v-if="product.pck_units > 1">
-                                            <span> + de {{product.pck_units}}  </span>
-                                            <br>
-                                            <span>Unidades</span>
-                                        </div>
-                                    </td>
-
-                                   <td><input type="number" min="0" class="form-control " v-model="product.units">
-                                        
-                                        <div v-if="$mq != 'lg' && product.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center">
-                                            
-                                            <span v-if="product.units < product.pck_units">  ${{(product.price * product.units) | price}} </span>
-                                            <span v-if="product.units >= product.pck_units">  ${{(product.pck_price * product.units) | price}} </span>
-                                            
-                                        </div>
-                                   
-                                   </td>
-                                   
-                                   <td v-if="! product.units && $mq == 'lg'"> 0 </td>
-                                   <td v-else-if="product.units < product.pck_units & $mq == 'lg'">$ {{ (product.units * product.price).toFixed(2) }}  </td>
-                                   <td v-else-if="$mq == 'lg'"> ${{ (product.units * product.pck_price).toFixed(2) }} </td>
-                               </tr>
-                           </tbody>
-                       </table>
-                </div>
-                </div>
-            </div>
-        </div>
-        
-        <transition enter-active-class="animated bounceIn" leave-active-class="animated fadeOutDown">
-            <div v-if="total > 0" id="total">
-                <div  class="bg-success p-1">
-                    <div class=" bg-white d-flex justify-content-center p-1">
-                    TOTAL : ${{total | price}}
-                    </div>
-                </div>
                
-                <div  class="bg-success p-1">
-                    <div class="bg-white d-flex justify-content-center p-1">
-                        <a href="#form"> Terminar pedido </a>
-                    </div>
-                </div>
-            </div>    
-        </transition>
+        <code-selector v-if="user && user.role_id < 3" :list="list"></code-selector>
+    
+        <hr>
+        
+        <categories-acordion></categories-acordion>
+        
+        <total-bouncer :total="total" v-if="total"></total-bouncer>
         
         <hr>
+        
         <div>
-            <cotizer-form :user="user" :list="list" :total="total"></cotizer-form>
-            
+            <cotizer-form  :list="list" :total="total"></cotizer-form>    
         </div>
+        
+        
         <div v-if="!user || user.role_id > 2">
-             <pedido @change="listChange" v-if="list && list.length > 0" :list=list></pedido>
+             <pedido  v-if="list && list.length > 0" :list=list></pedido>
         </div>
     </div>
 
-    <whatsappBtn></whatsappBtn>
+    <whatsappBtn v-if="!user || user.role_id > 2 "></whatsappBtn>
 
-    <cotizer-tutorial></cotizer-tutorial>
+    <cotizer-tutorial v-if="!user || user.role_id > 2 "></cotizer-tutorial>
 
-      <image-modal @close="closedModal" v-if="this.showModal"
-                    :product="modalProduct"  ref="modal" ></image-modal>
+   
 
 
 </div>
@@ -207,46 +62,36 @@
 import pedido from './pedido.vue';
 import appBanner from './banner.vue';
 import cotizerTutorial from './tutorial.vue';
-import imageModal from './Img-modal.vue';
+
 import whatsappBtn from '../layout/whatsapp.vue';
+import hideOptbutton from './hide-opt-button.vue';
+import codeSelector from './code-selector.vue';
+import categoriesAcordion from './categories-acordion.vue';
+import totalBouncer from './total-bouncer.vue';
     export default {
-        components:{imageModal,pedido,appBanner,cotizerTutorial,whatsappBtn},
+        components:{
+            categoriesAcordion,
+            totalBouncer,
+            codeSelector,
+            pedido,
+            appBanner,
+            cotizerTutorial,
+            whatsappBtn,
+            hideOptbutton
+            },
         data(){
             return {
-                selectedCategory:null,
-                showModal : true,
-                modalProduct:null,
+                
                 loading:true,
-                selector:{
-                    code:'',
-                    name:'',
-                    product:null,
-                    units:0
-                },
-                categories : [],
+               
+               /*  categories : [], */
                 list : [],
-                user : null,
-                config:null
+               /*  user : null, */
+               /*  config:null */
             }
         },
         watch : {
-            'selector.code'(){
-                var  vm = this;
-                var res =false;
-                this.categories.forEach(cat => {
-                    cat.products.forEach(prod => {
-                        if (vm.selector.code == prod.code){
-                            vm.selector.product = prod;
-                            vm.selector.name = prod.name;
-                            res = true;
-                        }
-                    });
-                });
-                if (!res){
-                    vm.selector.product = null;
-                    vm.selector.name='';
-                }
-            },
+           
             total() {
                    var result = [];
                    var vm = this;
@@ -268,6 +113,16 @@ import whatsappBtn from '../layout/whatsapp.vue';
         },
         computed: {
             
+            categories(){
+                return this.$store.getters.getCategories;
+            },
+            config(){
+                return this.$store.getters.getConfig;
+            },
+            user(){
+                return this.$store.getters.getUser;
+            },
+
             total() {
                 var vm = this;
                 var tot = 0;
@@ -287,91 +142,12 @@ import whatsappBtn from '../layout/whatsapp.vue';
                 return tot;
             }
         },
-        created(){
-            var vm = this;
-            $.ajax({
-                url : '/api/productsnotpaused',
-                success(response){
-                    vm.categories = response;
-                    vm.loading=false;
-                   
-                }
-            });
-
-            this.$http.get('/config')
-                .then(response => {
-                    vm.config = response.data;
-                }); 
-
-          
-        },
-        mounted() {
-              this.$http.get('/getuser')
-                .then(response => {
-                    this.user = response.data;
-                });
-        },
+      
+       
         methods:
         {
            
-            listChange(event){
-                let product = this.list.find(prod => {
-                    return prod.id == event.id;
-                });
-                product.units = event.units;
-
-            },
-            addSelectorProduct(){
-                var vm = this;
-                if (vm.selector.units > 0 && vm.selector.product != null ){
-                    let prod = this.selector.product;
-                    if (prod.units == undefined)
-                    {
-                        Vue.set(prod,'units',0);
-                    }
-                   prod.units = this.selector.units;
-                   vm.selector.product = null;
-                   vm.selector.code = '';
-                   vm.selector.units = 0;
-                   vm.selector.name ='';
-                   
-                }
-            },
-            toggleMaintenance(){
-                if (this.config.maintenance){
-                    this.config.maintenance = 0;
-                }else {this.config.maintenance =1;}
-
-                this.$http.put('/admin/config',{field:'maintenance',value:this.config.maintenance})
-            },
-            userRole(){
-                
-                if (this.user){
-                    return this.user.role_id;
-                }
-                return 3;
-            },
-          
-            downloadPrices(){
-               
-                window.open('/descargar-lista-de-precios','_blank');
-            },
-          
-            show(product){
-               this.showModal = true;
-               this.modalProduct = product;
-               /* this.$refs.modal.$forceUpdate(); */
-               
-               let element = this.$refs.modal.$el;
-               $(element).modal('show');
-            },
-             closedModal(){
-                 this.modalProduct = null;
-                 this.showModal = false;
-                setTimeout(() => {
-                    this.showModal=true;
-                }, 100);
-             },
+         
         },
         filters : {
             price(value){
@@ -389,23 +165,7 @@ import whatsappBtn from '../layout/whatsapp.vue';
     overflow: hidden;
 }
 
-    .category-image-container{
-        margin-right: 15px;
-        height:100%;
-    
-        min-width:70px;
-    }
-
-    .category-image{
-       
-    }
-
-    .card-header{
-        padding: 5px;
-        display: flex;
-        align-items:center;
-    }
-
+   
  
 
 
@@ -421,64 +181,15 @@ import whatsappBtn from '../layout/whatsapp.vue';
     
     }
 
-    .sampleImage{
-        width: 50px;
-    }
+    
 
-    .form-control{
-        max-width: 80px;
-    }
-   .btn-link {color : black;}
-    #total {
-        position: fixed;
-        /* margin-left:50vw; */
-        bottom: 25px;
-        left: 33%;
-        z-index: 900;
-    }
+   
+   
+   
    
     img{width:100%}
 
-    @media(max-width: 600px){
-        
-          .fa-whatsapp{
-            font-size: 3rem;
-        }
-        .whatsapp{
-            border:none;
-        }
-
-
-        td { white-space : normal;}
-        #accordion{
-            margin: 0 -3%;
-        }
-        table {
-            table-layout: fixed;
-            width:95vw;
-            font-size: 0.66rem;
-            font-weight: bold;
-        }
-        input[type="number"]{
-            max-width: 70px;
-        }
-       
-        .card-body,table th, table td{padding:5px;}
-    }
-    
-    @media(min-width: 600px){
-        
-         #total {
-             left:45%;
-         }
-         .sampleImage{
-            width: 150px;
-        }
-        table{ font-size: 1rem; font-weight: normal}
-        td {white-space: normal;}
-        .card-body,.container{padding:1.25rem}
-        
-    }
+   
 
     .loader {
     position : fixed;
@@ -494,11 +205,7 @@ import whatsappBtn from '../layout/whatsapp.vue';
     padding-top: 5%;
 }
 
-.big{
-    font-size: 1.7rem;
-    white-space: normal;
-    padding: 0;
-}
+
 
 
 </style>

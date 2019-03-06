@@ -96,10 +96,12 @@ export default{
     props : {
         list : {default : []},
         total : {default : 0},
-        user: {default:{}},
+       
     },
     computed:{
-       
+       user(){
+           return this.$store.getters.getUser;
+       }
     },
 
     data(){return{
@@ -132,6 +134,12 @@ export default{
                  else {return this.configs.minbuy;}
              }
         },
+        validateEmail(email) {
+      
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       
+            return re.test(String(email).toLowerCase());
+        },
         formValid()
         {   
             if (this.formData.shipping && !this.formData.city)
@@ -144,7 +152,11 @@ export default{
                  swal('El campo "Nombre y Apellido" es obligatorio ','','error');
                  return false; 
             }
-            else if (this.formData.email.length < 4 && this.user.role_id > 2)
+            else if (!this.validateEmail(this.formData.email)){
+                swal('Hay algo mal con el mail','','error');
+                return false;
+            }
+            else if (this.formData.email.length < 4 && this.user.role_id > 2 )
             {
                 swal('Hay algo mal con el mail','','error');
                 return false;

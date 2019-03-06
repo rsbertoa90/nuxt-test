@@ -86,6 +86,35 @@ String.prototype.ucfirst = function () {
     let str = this.toLowerCase(); 
     return str.charAt(0).toUpperCase() + this.slice(1);
 }
+
+import {
+    store
+} from './store/store.js'
+
+import {
+    mapActions
+} from 'vuex'
+/* import filters from './filters.js'; */
+
+
+
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store,
+    methods: {
+            ...mapActions({
+                fetchCategories: 'fetchCategories',
+                fetchUser: 'fetchUser',
+                fetchConfig: 'fetchConfig',
+                fetchStates: 'fetchStates',
+            }),
+
+
+        },
+        created() {
+            this.fetchCategories();
+            this.fetchUser();
+            this.fetchConfig();
+            this.fetchStates();
+        }
 });
