@@ -19,9 +19,16 @@ class CategoryController extends Controller
 
     public function getNotPAused(){
 
-        $categories = Category::with('products.images')->whereHas('products' , function($q){
+        $categories = Category::with('products.images')
+                    ->with(['products' => function($q){
+                        $q->where('paused',0);
+                    }])
+                    ->whereHas('products' , function($q){
                 $q->where('paused',0)->orderBy('name');
         })->orderby('name')->get();
+
+         
+        
         
             return $categories;
         
