@@ -26,7 +26,7 @@
                 <div :id="'cat'+category.id" class="collapse collapsed " aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
 
-                        <products-table v-if="selectedCategory == category.id" :products="category.products"></products-table>
+                        <products-table @show="show" v-if="selectedCategory == category.id" :products="category.products"></products-table>
 
                 </div>
             </div>
@@ -60,6 +60,14 @@ export default {
         }
     },
     methods:{
+        show(product){
+               this.showModal = true;
+               this.modalProduct = product;
+               /* this.$refs.modal.$forceUpdate(); */
+               
+               let element = this.$refs.modal.$el;
+               $(element).modal('show');
+        },
         closedModal(){
                  this.modalProduct = null;
                  this.showModal = false;

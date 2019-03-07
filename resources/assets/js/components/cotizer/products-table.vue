@@ -76,12 +76,8 @@ export default {
     },
     methods:{
          show(product){
-               this.showModal = true;
-               this.modalProduct = product;
-               /* this.$refs.modal.$forceUpdate(); */
+             this.$emit('show',product);
                
-               let element = this.$refs.modal.$el;
-               $(element).modal('show');
         },
     }
 }
