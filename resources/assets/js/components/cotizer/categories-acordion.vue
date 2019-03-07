@@ -25,71 +25,9 @@
                 </div>
                 <div :id="'cat'+category.id" class="collapse collapsed " aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                       <table class="table table-striped table-bordered " v-if="selectedCategory == category.id">
-                           <thead class="">
-                               <th>Foto</th>
-                               <th v-if="user && user.role_id < 3">Codigo</th>
-                               <th class="nametd">Nombre</th>
-                               <th class="">Precio</th>
-                               <!-- <th  class="">Llevando mas de</th> -->
-                               <th   class="">Precio x mayor</th>
-                               <th class="">Quiero</th>
-                               <th v-if="$mq == 'lg'" class="">Subtotal</th>
-                           </thead>
-                           <tbody>
-                               <tr v-for="product in category.products" :key="product.id" >
-                                   <td width="10%" @click="show(product)"> 
-                                       <v-lazy-image v-if="product.images && product.images.length > 0" 
-                                                    class="sampleImage" 
-                                                    :src="product.images[0].url" 
-                                                    :alt="product.name" />
-                                        <v-lazy-image v-else :alt="product.name" 
-                                                    src="/storage/images/app/no-image.png" /> 
-                                                    
-                                    </td>
-                                   <td v-if="user && user.role_id < 3"> {{product.code}} </td>
-                                   <td style="cursor:pointer" @click="show(product)">  {{product.name | ucFirst}} </td>
-                                   <td class="text-info text-center"> 
-                                       <span v-if="product.price > 0"> ${{product.price | price}} </span>
-                                       <span v-else> - </span> 
-                                       <br>
-                                       <div v-if="product.pck_units > 1 && product.price > 0 ">
-                                            <span> - de {{product.pck_units}}  </span>
-                                            <br>
-                                            <span>Unidades</span>
-                                       </div>
-                                    </td>
-                               <!--     <td class="text-center">
-                                      <span v-if="product.pck_units > 1"> {{product.pck_units}} </span>
-                                      <span v-else> Venta x unidad </span>
-                                    </td> -->
-                                   <td  class="text-center text-success font-weight-bold"> 
-                                        <span v-if="product.pck_units > 1"> ${{product.pck_price | price}} </span>
-                                        <span v-else> - </span> <br>
-                                        <div v-if="product.pck_units > 1">
-                                            <span> + de {{product.pck_units}}  </span>
-                                            <br>
-                                            <span>Unidades</span>
-                                        </div>
-                                    </td>
 
-                                   <td><input type="number" min="0" class="form-control " v-model="product.units">
-                                        
-                                        <div v-if="$mq != 'lg' && product.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center">
-                                            
-                                            <span v-if="product.units < product.pck_units">  ${{(product.price * product.units) | price}} </span>
-                                            <span v-if="product.units >= product.pck_units">  ${{(product.pck_price * product.units) | price}} </span>
-                                            
-                                        </div>
-                                   
-                                   </td>
-                                   
-                                   <td v-if="! product.units && $mq == 'lg'"> 0 </td>
-                                   <td v-else-if="product.units < product.pck_units & $mq == 'lg'">$ {{ (product.units * product.price).toFixed(2) }}  </td>
-                                   <td v-else-if="$mq == 'lg'"> ${{ (product.units * product.pck_price).toFixed(2) }} </td>
-                               </tr>
-                           </tbody>
-                       </table>
+                        <products-table v-if="selectedCategory == category.id" :products="category.products"></products-table>
+
                 </div>
             </div>
         </div>
@@ -99,9 +37,10 @@
 </template>
 
 <script>
+import productsTable from './products-table.vue';
 import imageModal from './Img-modal.vue';
 export default {
-    components:{imageModal},
+    components:{imageModal,productsTable},
     data(){
         return{
             selectedCategory:null,
@@ -121,15 +60,6 @@ export default {
         }
     },
     methods:{
-        show(product){
-               this.showModal = true;
-               this.modalProduct = product;
-               /* this.$refs.modal.$forceUpdate(); */
-               
-               let element = this.$refs.modal.$el;
-               $(element).modal('show');
-        },
-
         closedModal(){
                  this.modalProduct = null;
                  this.showModal = false;

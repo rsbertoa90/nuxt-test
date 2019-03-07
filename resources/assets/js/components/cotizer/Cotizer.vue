@@ -27,13 +27,26 @@
                  <app-banner></app-banner>
             </div>
         </div>
-               
+
+        <!-- Barra de busqueda -->
+       <!--  <div class="row">
+            <input type="text" v-model="searchTerm" 
+                    class="form-control search-bar" placeholder="BUSCAR">
+        </div> -->
+
         <code-selector v-if="user && user.role_id < 3" :list="list"></code-selector>
     
         <hr>
         
-        <categories-acordion></categories-acordion>
+
+        <categories-acordion v-if="searchTerm.trim()==''"></categories-acordion>
         
+        
+        <div class="row" v-if="searchTerm.trim() != ''">
+            <products-table :products="filteredProducts"></products-table>
+        </div>
+
+
         <total-bouncer :total="total" v-if="total"></total-bouncer>
         
         <hr>
@@ -68,8 +81,10 @@ import hideOptbutton from './hide-opt-button.vue';
 import codeSelector from './code-selector.vue';
 import categoriesAcordion from './categories-acordion.vue';
 import totalBouncer from './total-bouncer.vue';
+import productsTable from './products-table.vue';
     export default {
         components:{
+            productsTable,
             categoriesAcordion,
             totalBouncer,
             codeSelector,
@@ -77,11 +92,11 @@ import totalBouncer from './total-bouncer.vue';
             appBanner,
             cotizerTutorial,
             whatsappBtn,
-            hideOptbutton
+            hideOptbutton,
             },
         data(){
             return {
-                
+                searchTerm:'',
                 loading:true,
                
                /*  categories : [], */
@@ -112,7 +127,20 @@ import totalBouncer from './total-bouncer.vue';
             }
         },
         computed: {
-            
+            filteredProducts(){
+                var vm =this;
+                if(this.searchTerm.trim() != ''){
+                    let res = [];
+                    this.categories.forEach(cat => {
+                        cat.products.forEach(prod => {
+                            if (prod.name.toLowerCase().indexOf(vm.searchTerm.trim().toLowerCase()) > -1){
+                                res.push(prod);
+                            } 
+                        });
+                    });  
+                    return res;  
+                }
+            },
             categories(){
                 return this.$store.getters.getCategories;
             },
@@ -204,6 +232,19 @@ import totalBouncer from './total-bouncer.vue';
     align-items: start;
     padding-top: 5%;
 }
+
+.search-bar{
+    border:1px solid #ff0aaf;
+    padding:3px;
+    margin-top:20px;
+    
+
+    &::placeholder{
+        color: #ff0aaf;
+        text-align:center;
+    }
+}
+
 
 
 

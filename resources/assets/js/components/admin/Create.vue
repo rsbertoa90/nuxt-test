@@ -140,8 +140,9 @@
             },
             saveProduct()
                 {
+                    
                     var vm=this;
-                      vm.$http.post('/admin/product/',vm.formData)
+                    vm.$http.post('/admin/product/',vm.formData)
                                         .then(response => {
                                         vm.$emit('productSaved',response.data);
                                     
@@ -153,6 +154,7 @@
                 },
             saveCategory(callback)
                 {
+                  
                    var vm=this;
                         
                          var duplicated = vm.categories.find(function(el){
@@ -172,6 +174,7 @@
                 },
             saveSuplier(callback)
                 {
+                   
                    var vm=this;
                          var duplicated = vm.supliers.find(function(el){
                              return el.name.toLowerCase() == vm.newSuplier.toLowerCase();

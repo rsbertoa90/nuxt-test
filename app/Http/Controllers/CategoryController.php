@@ -34,7 +34,15 @@ class CategoryController extends Controller
 
     public function save(Request $request)
     {
-        $category = Category::create(['name' => $request->name]);
+        $max = Category::withTrashed()->find(\DB::table('categories')->max('id'));
+
+        $id = $max->id+1;
+        $category = new Category();
+        $category->id = $id;
+        $category->name = $request->name;
+
+        $category->save();
+        
 
         return $category;
     }

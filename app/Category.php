@@ -12,6 +12,12 @@ class Category extends Model
     //
      protected $guarded =[];
 
+    protected $attributes = [
+       'description' => "",
+    ];
+
+
+
     public function products()
     {
         return $this->hasMany(Product::class)->orderBy('name');
