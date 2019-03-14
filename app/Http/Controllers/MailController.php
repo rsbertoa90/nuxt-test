@@ -18,8 +18,7 @@ class MailController extends Controller
 
     public static function mailAdmin($email){
                     Mail::to('multibazarmaju@gmail.com')
-                    ->cc('gisellaRomina678@gmail.com')
-                    ->cc('rsbertoa90@gmail.com')
+                    ->bcc('gisellaRomina678@gmail.com')
                     ->send($email);
   }
 

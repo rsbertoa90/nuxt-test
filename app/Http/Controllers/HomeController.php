@@ -31,4 +31,9 @@ class HomeController extends Controller
         Auth::logout();
         return redirect('/');
     }
+
+    public function test()
+    {
+        return view('test');
+    }
 }

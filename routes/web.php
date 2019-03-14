@@ -68,7 +68,8 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 });
 
 
-Route::get('/test','PDFController@testCatalogo');
+Route::get('/test','HomeController@test');
+
 Route::get('/pdf/{order}', 'OrderController@toPDF');
 
 
