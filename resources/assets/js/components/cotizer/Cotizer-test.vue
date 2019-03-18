@@ -31,8 +31,11 @@
         <!-- Barra de busqueda -->
          <div class="row">
             <input type="text" v-model="searchTerm" 
-                    class="form-control search-bar" placeholder="BUSCAR">
+                    class="form-control search-bar" placeholder="¿ QUE ESTAS BUSCANDO ?">
         </div> 
+        <div class="row d-flex flex-column align-items-center mt-4" v-if="searchTerm.trim() != ''">
+            <button class="btn btn-info">Buscar</button>
+        </div>
 
         <code-selector v-if="user && user.role_id < 3" :list="list"></code-selector>
     
