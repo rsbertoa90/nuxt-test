@@ -3,3 +3,4 @@ Disallow: /admin/
 Disallow: /super/
 Disallow: /login
 Disallow: /logout
+Disallow: /test

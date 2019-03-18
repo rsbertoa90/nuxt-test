@@ -45,6 +45,7 @@ Vue.component('admin-failed-jobs', require('./components/admin/FailedJobs.vue'))
 Vue.component('dot-loader', require('vue-spinner/src/DotLoader.vue'));
 Vue.component('app-frame', require('./components/layout/frame.vue'));
 Vue.component('app-cotizer', require('./components/cotizer/Cotizer.vue'));
+Vue.component('app-cotizer-test', require('./components/cotizer/Cotizer-test.vue'));
 Vue.component('app-nav', require('./components/layout/navbar.vue'));
 Vue.component('cotizer-form', require('./components/cotizer/Cotizer-form.vue'));
 Vue.component('admin-form', require('./components/admin/Form.vue'));
