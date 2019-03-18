@@ -132,24 +132,24 @@ import productsTable from './products-table.vue';
                 var vm =this;
                 if(this.searchTerm.trim() != ''){
                     let terms = vm.searchTerm.split(' ');
-                    terms.forEach(term => {
-                        term = term.toString().toLowerCase().trim();
-                    });
-
+                    
+                  
                     let res = [];
                     this.categories.forEach(cat => {
                         let categoryName = cat.name.toString().toLowerCase().trim();
                         cat.products.forEach(prod => {
                             let productName = prod.name.toString().toLowerCase().trim();
                             let addtores = true;
-
+                            
                             terms.forEach(term => {
-                                
+                                term = term.toLowerCase();
+                               
                                 if (    
                                             productName.indexOf(term) < 0 
                                              && categoryName.indexOf(term) < 0  
                                     ){
-                                        addtores = false;    
+                                        addtores = false;   
+                                       
                                     } 
                             });
                             if (addtores){
