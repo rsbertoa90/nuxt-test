@@ -51,7 +51,7 @@ export default {
 
     @media(max-width:600px){
         .table{
-            font-size:0.65rem;
+            font-size:0.6rem;
         }
     }
     

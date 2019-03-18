@@ -131,14 +131,30 @@ import productsTable from './products-table.vue';
             filteredProducts(){
                 var vm =this;
                 if(this.searchTerm.trim() != ''){
+                    let terms = vm.searchTerm.split(' ');
+                    terms.forEach(term => {
+                        term = term.toLowerCase().trim();
+                    });
+
                     let res = [];
                     this.categories.forEach(cat => {
+                        let categoryName = cat.name.toLowerCase().trim();
                         cat.products.forEach(prod => {
-                            if (prod.name.toLowerCase().indexOf(vm.searchTerm.trim().toLowerCase()) > -1
-                                || cat.name.toLowerCase().indexOf(vm.searchTerm.trim().toLowerCase()) > -1
-                                ){
+                            let productName = prod.name.toLowerCase().trim();
+                            let addtores = true;
+
+                            terms.forEach(term => {
+                                
+                                if (    
+                                            productName.indexOf(term) < 0 
+                                             && categoryName.indexOf(term) < 0  
+                                    ){
+                                        addtores = false;    
+                                    } 
+                            });
+                            if (addtores){
                                 res.push(prod);
-                            } 
+                            }
                         });
                     });  
                     return res;  
