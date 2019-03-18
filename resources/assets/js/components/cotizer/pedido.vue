@@ -48,5 +48,11 @@ export default {
      .form-control{
         max-width: 80px;
     }
+
+    @media(max-width:600px){
+        .table{
+            font-size:0.65rem;
+        }
+    }
     
 </style>
