@@ -27,21 +27,21 @@
     <!-- Scripts -->
     <script src="{{ mix('/js/app.js') }}" defer></script>
     {{-- font awesome --}}
-    <link defer rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+    <link  rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
           integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!-- Fonts -->
-    <link defer rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link defer href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    {{-- <link  rel="dns-prefetch" href="https://fonts.gstatic.com"> --}}
+    <link  href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet" defer>
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet" >
   
     {{-- animaciones --}}
-    <link defer href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
+    <link  href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script defer async src="https://www.googletagmanager.com/gtag/js?id=UA-126973762-1"></script>
-    <script defer>
+    <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
