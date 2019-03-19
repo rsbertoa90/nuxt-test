@@ -29,10 +29,10 @@
     {{-- font awesome --}}
     {{-- <link  rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
           integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --}}
-          <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
-    <!-- Fonts -->
-    {{-- <link  rel="dns-prefetch" href="https://fonts.gstatic.com"> --}}
-    
+          <!-- Fonts -->
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+    <link  rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Niramit" rel="stylesheet" lazyload>
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" >
   
