@@ -31,8 +31,7 @@
           integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --}}
           <!-- Fonts -->
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
-    <link  rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Niramit" rel="stylesheet" lazyload>
+    {{-- <link  rel="dns-prefetch" href="https://fonts.gstatic.com"> --}}
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" >
   
