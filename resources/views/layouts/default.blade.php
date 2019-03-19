@@ -32,15 +32,15 @@
           <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
     <!-- Fonts -->
     {{-- <link  rel="dns-prefetch" href="https://fonts.gstatic.com"> --}}
-    <link  href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
+    
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" >
   
     {{-- animaciones --}}
-    <link  href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
-
+    {{-- <link  href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
+ --}}
     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <link rel="preconnect" href="https://www.google-analytics.com">
     <script defer async src="https://www.googletagmanager.com/gtag/js?id=UA-126973762-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
