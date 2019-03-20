@@ -1,6 +1,8 @@
 <template>
     <div class="container">   
-        
+          <div v-if="loading" class="loader">
+            <dot-loader :loading="loading" size="200px"></dot-loader>
+         </div> 
          <div v-if="$mq == 'sm'" class="w-100 d-flex flex-column align-items-center jusify-content-center">
             <h2 class="text-warning">
                 Lo sentimos. El administrador no esta disponible en dispositivos moviles.
@@ -51,6 +53,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12 row mt-3 mb-3 ml-2">
+                    <input v-model.lazy="searchTerm" placeholder="BUSCAR" class="form-control col-4">
+                    <button class="btn btn-outline-success ml-2" @click="search">Buscar</button>
+                </div>
+                
                 <div class="row mt-4 ml-2">
                   <paginator :selectedPage="selectedPage"   
                             :products="filterProducts" 
@@ -119,6 +126,9 @@ import paginator from './admin/paginator.vue';
         },
         data(){
             return {
+                loading:false,
+                searchMode:false,
+                searchTerm:'',
                 selectedPage:1,
                 productsPerPage:30,
                 selector : {id :'all', checked : false},
@@ -146,20 +156,25 @@ import paginator from './admin/paginator.vue';
             },
          
             filterProducts(){
-                if (this.products.length > 0)
-                {
-                    var prop = null;
-                    if (this.orderBy == 'category.name'){prop = 'category'}
-                    else if (this.orderBy == 'suplier.name'){prop = 'suplier'}
-                    
-                    if (prop && this.selector.id != 'all'){
-                        var filtered = this.products.filter(prod => {
-                                return prod[prop].id == this.selector.id;     
-                        });
-                        return _.orderBy(filtered,this.orderBy)
-                    } else{ return _.orderBy(this.products,this.orderBy) }
+                if (this.searchMode){
+                    return this.searchFilter();
                 }
-                return [];
+                else {
+                    if (this.products.length > 0)
+                    {
+                        var prop = null;
+                        if (this.orderBy == 'category.name'){prop = 'category'}
+                        else if (this.orderBy == 'suplier.name'){prop = 'suplier'}
+                        
+                        if (prop && this.selector.id != 'all'){
+                            var filtered = this.products.filter(prod => {
+                                    return prod[prop].id == this.selector.id;     
+                            });
+                            return _.orderBy(filtered,this.orderBy)
+                        } else{ return _.orderBy(this.products,this.orderBy) }
+                    }
+                    return [];
+                }
             },
             filteredProducts()
             {
@@ -171,19 +186,72 @@ import paginator from './admin/paginator.vue';
          watch : {
             orderBy(){
                 this.products = _.sortBy(this.products,this.orderBy);
-                this.resetCheckboxes();
                 this.selector.id ='all';
-                this.selectedPage = 1;
+                this.resetFilters();
             },
             'selector.id'()
             {
-                this.resetCheckboxes();
-                this.selectedPage = 1;
+                this.resetFilters();
             }
 
 
         },
         methods : {
+            resetFilters(){
+                this.resetCheckboxes();
+                this.selectedPage = 1;
+                this.searchMode=false;
+                this.searchTerm='';
+            },
+            search(){
+                this.loading=true;
+                let term = this.searchTerm;
+                this.selector.id = 'all';
+                this.selectedPage = 1;
+                setTimeout(() => {
+                    this.searchTerm = term;
+                    this.searchMode = true;
+                    this.loading=false;
+                }, 100);
+                this.searchMode = true;  
+            },
+            searchComparision(term,prod){
+                  let prodName = prod.name.toLowerCase().trim();
+                  term = term.toLowerCase().trim();
+                  let categoryName = prod.category.name.toLowerCase().trim();
+                  let suplierName = prod.suplier.name.toLowerCase().trim();
+                  let code = prod.code.toLowerCase().trim();
+
+                  if (
+                      prodName.indexOf(term) > -1
+                      || categoryName.indexOf(term) > -1
+                      || suplierName.indexOf(term) > -1
+                      || code.indexOf(term) > -1
+                  ){return true;}
+                  else{return false;}
+            },
+            searchFilter(){
+                this.loading=true;
+                let terms = this.searchTerm.split(' ');
+                let res = [];
+                this.products.forEach(prod => {
+                    let include = true;
+                    terms.forEach(term => {
+                        if (include && !this.searchComparision(term,prod))
+                        {
+                            include = false;
+                        }
+                    });
+                    if (include){
+                        res.push(prod);
+                    }
+                });
+                this.loading=false;
+                return res;
+
+                
+                
+            },
             paginate(array,page){
                 if(array && array.length>0){
                     page--; 
@@ -318,6 +386,21 @@ import paginator from './admin/paginator.vue';
 
 <style scoped>
 
+ .loader {
+    position : fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 110;
+    background-color: #ddddddaa;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding-top: 5%;
+}
+
+
 input[type="checkbox"]{
     width: 25px;
     margin:  10px;
@@ -344,4 +427,6 @@ td {min-width: 120px;}
         
        .nametd {width: 25vw;}
    }
+
+
 </style>
