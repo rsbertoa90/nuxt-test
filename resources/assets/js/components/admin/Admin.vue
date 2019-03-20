@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="col-12 row mt-3 mb-3 ml-2">
-                    <input v-model.lazy="searchTerm" placeholder="BUSCAR" class="form-control col-4">
+                    <input v-model.lazy="searchTerm" placeholder="BUSCAR" @keyup.enter="search" class="form-control col-4">
                     <button class="btn btn-outline-success ml-2" @click="search">Buscar</button>
                 </div>
                 
@@ -197,6 +197,7 @@ import paginator from './admin/paginator.vue';
 
         },
         methods : {
+            
             resetFilters(){
                 this.resetCheckboxes();
                 this.selectedPage = 1;
