@@ -14,7 +14,6 @@
              </div>
              <hr>
              <div class="col-12">
-                <h4>Nuevo Producto:</h4>
                 <admin-create :supliers="supliers" :categories="categories" @productSaved="refresh"></admin-create>
              </div>
              <hr>

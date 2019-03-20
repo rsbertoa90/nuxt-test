@@ -1,7 +1,7 @@
 <template>
   <div>
-     
-         <form ref="form" @submit.prevent="save" class="form form-inline row ml-1 d-flex align-items-end">
+         <button class="btn btn-lg btn-info" @click="showForm=!showForm">Nuevo Producto</button>
+         <form v-if="showForm" ref="form" @submit.prevent="save" class="form form-inline row ml-1 d-flex align-items-end">
             <!-- codigo -->
             <div class="col-2 row">
                  <label for="" class="col-12">Codigo</label>
@@ -78,6 +78,7 @@
         props : ['categories','supliers'],
         data(){
             return {
+                showForm:false,
                 editProvider:false,
                 editCategory:false,
                 newCategory :null,
@@ -149,7 +150,7 @@
                                          swal('Producto guardado','','success');
                                           vm.resetForm();
                                           vm.$emit('productSaved');
-                                        
+                                          vm.showForm=false;
                                     });
                 },
             saveCategory(callback)
