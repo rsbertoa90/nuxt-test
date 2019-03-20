@@ -127,7 +127,6 @@
                     files : true,
                     success: function () {
                        $('#image-modal').modal('hide');
-                        vm.$emit('closedModal');
                         vm.$emit('refresh');
                     },
                 });

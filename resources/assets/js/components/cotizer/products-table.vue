@@ -4,9 +4,8 @@
                 <th>Foto</th>
                 <th v-if="user && user.role_id < 3">Codigo</th>
                 <th class="nametd">Nombre</th>
-                <th class="">Precio</th>
+                <th colspan="2" class="text-center">Precio</th>
                 <!-- <th  class="">Llevando mas de</th> -->
-                <th   class="">Precio x mayor</th>
                 <th class="">Quiero</th>
                 <th v-if="$mq == 'lg'" class="">Subtotal</th>
             </thead>

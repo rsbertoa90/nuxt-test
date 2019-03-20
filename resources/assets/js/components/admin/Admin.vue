@@ -6,30 +6,25 @@
                 Lo sentimos. El administrador no esta disponible en dispositivos moviles.
             </h2>
         </div>
-        <div v-else class="w-100">
+
+        <div v-else class="row">
             
-             <div class="row w-100 d-flex justify-content-center">
+             <div class="col-12 d-flex justify-content-center">
                  <img src="/storage/images/app/MAJU.jpg" style="width : 200px ; height: 110px" alt="logo">
              </div>
              <hr>
-             <h4>Nuevo Producto:</h4>
+             <div class="col-12">
+                <h4>Nuevo Producto:</h4>
                 <admin-create :supliers="supliers" :categories="categories" @productSaved="refresh"></admin-create>
-                <hr>
-                <div class="row d-flex flex-column justify-content-center align-items-center">
-                         <div class="col-4 d-flex flex-column justify-content-center align-items-center">
-                        <h4>Cambiar precios masivo</h4>
-                        <h5>  <span class="text-info">{{selectedProducts.length}}</span>  Productos seleccionados </h5>
-                        <div class="d-flex justify-content-center"> 
-                            <button class="mr-2" @click="variation-=1">-</button>
-                            <input style="width:45px; text-align-center" type="number" v-model="variation"> %
-                            <button class="ml-2" @click="variation+=1">+</button>
-                        
-                        </div>
-                            <button class="btn btn-md btn-outline-success mt-1" v-if="variation != 0 && selectedProducts.length > 0" @click="applyVariation">Aplicar</button>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
+             </div>
+             <hr>
+            <!-- <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                <change-prices :selectedProducts="selectedProducts"
+                            @refresh="refresh()" @resetCheckboxes="resetCheckboxes()"></change-prices>
+            </div> -->
+            <hr class="w-100">
+            
+            <div class="col-12 row">
                     <div class="col-6 row">
                         <label class="text-info font-weight-bold col-4">Ordenar por</label>
                         <select class="form-control col-6" v-model="orderBy" id="">
@@ -57,7 +52,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="row mt-4 ml-2">
+                  <paginator :selectedPage="selectedPage"   
+                            :products="filterProducts" 
+                            :productsPerPage="productsPerPage"
+                            @selectPage="selectedPage=$event">
 
+                </paginator>
+                </div>
                 <table id="table" class="table table-striped table-bordered ">
                                 <thead class="">
                                     <th>imagen</th>
@@ -67,86 +69,27 @@
                                     <th>Producto</th>
                                     <th>Precio</th>
                                     <th >Unidades x bulto</th>
-                                    <th >Precio x mayor</th>
+                                    <th >Precio en bulto</th>
                                 </thead>
-                                <transition-group tag="tbody" 
+                                <!-- <transition-group tag="tbody" 
                                                     enter-active-class="animated slideInLeft faster "
                                                     leave-active-class="animated slideOutRight faster position-absolute ">
-                                    <tr v-for="product in filteredProducts" :key="product.id">
-                                       <td>
-                                           <img v-if="product.images && product.images.length > 0" 
-                                                :src="product.images[0].url" 
-                                                style="width :150px" 
-                                                :alt="product.name" 
-                                                @click="imgModal(product)">
-                                            <img v-else src="/storage/images/app/no-image.png" :alt="product.name"  @click="imgModal(product)">
-                                       </td>
-                                       <td>
-                                           <input v-model.lazy="product.code" @change="saveChange(product,'code')" 
-                                                  type="text" class="form-control smallField">
-                                       </td>
-                                       <td >
-                                            <select class="form-control" v-model="product.suplier_id" 
-                                                    @change="changed(product,'suplier')">
-                                               <option v-for="suplier in supliers" 
-                                                        :key="suplier.id" 
-                                                        :value="suplier.id"
-                                                        :selected="suplier.id == product.suplier_id"> 
-                                                    {{suplier.name}} 
-                                                </option>
-                                           </select>
-                                       </td>
-                                       <td>
-                                           <select class="form-control" v-model="product.category_id"
-                                                    @change="changed(product,'category')" >
-                                               <option v-for="category in categories" 
-                                                        :key="category.id" 
-                                                        :value="category.id"
-                                                        :selected ="product.category.id == category.id"
-                                                        > 
-                                                    {{category.name}} 
-                                                </option>
-                                           </select>
-                                       </td>
-                                       <td >
-                                           <textarea rows="4" type="text" v-model.lazy="product.name" 
-                                                  @change="saveChange(product,'name')" class="form-control"></textarea>
-                                       </td>
-                                       <td>
-                                           <div class="row w-100 d-flex align-items-center">
-                                                $<input v-model.lazy="product.price" @change="saveChange(product,'price')"
-                                                        type="number" step=".01" class=" form-control smallField">
-                                                        
-                                           </div>
-                                        
-                                       </td>
-                                       <td    class="smallField">
-                                           <input step="1" v-model.lazy="product.pck_units" @change="saveChange(product,'pck_units')"
-                                                type="number" class="form-control smallField ">
-                                       </td>
-                                      <td>
-                                           <div class="row w-100 d-flex align-items-center">
-                                               
-                                               $<input  v-model.lazy="product.pck_price" 
-                                                        @change="saveChange(product,'pck_price')"
-                                                     
-                                                type="number" step=".01" class="form-control smallField">
-                                           </div>
-                                        
-                                       </td>
-                                        <td class="d-flex flex-column justify-content-center align-items-center p-0">
-                                            <input class="form-control" type="checkbox" v-model="product.selected">
-                                            <button @click.prevent="deleteProduct(product)" class="btn btn-sm btn-outline-danger m-1">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                            <button @click.prevent="togglePause(product)" class="btn btn-sm m-1" :class="{'btn-info' : !product.paused, 'btn-success': product.paused}">
-                                                <i :class="{'fa fa-pause-circle' : !product.paused , 'fa fa-play' : product.paused}"></i>
-                                            </button>
-                                            
-                                        </td>
+                                 -->   <tr is="product-row" v-for="product in filteredProducts" 
+                                                :key="product.id" 
+                                                :product="product"
+                                                :supliers="supliers"
+                                                :categories="categories"
+                                                @refresh="refresh"
+                                                >
                                     </tr>
-                                </transition-group>
+                              <!--   </transition-group> -->
                 </table>
+                <paginator :selectedPage="selectedPage"   
+                            :products="filterProducts" 
+                            :productsPerPage="productsPerPage"
+                            @selectPage="selectedPage=$event">
+
+                </paginator>
                           
                
                 
@@ -161,17 +104,24 @@
 </template>
 
 <script>
-import imageModal from './Img-modal.vue';
-import adminCreate from './Create.vue';
-import adminReport from './Report.vue';
+import imageModal from './admin/Img-modal.vue';
+import adminCreate from './admin/Create.vue';
+import changePrices from './admin/Change-prices.vue';
+/* import adminReport from './Report.vue'; */
+import productRow from './admin/Product-row.vue';
+import paginator from './admin/paginator.vue';
     export default {
         components : {
-            adminReport,
-            imageModal : imageModal,
-            adminCreate : adminCreate
+            paginator,
+            changePrices,
+            imageModal,
+            adminCreate,
+            productRow
         },
         data(){
             return {
+                selectedPage:1,
+                productsPerPage:30,
                 selector : {id :'all', checked : false},
                 variation:0,
                 products : [],
@@ -195,8 +145,8 @@ import adminReport from './Report.vue';
                     });
                 return list;
             },
-            filteredProducts()
-            {
+         
+            filterProducts(){
                 if (this.products.length > 0)
                 {
                     var prop = null;
@@ -211,6 +161,12 @@ import adminReport from './Report.vue';
                     } else{ return _.orderBy(this.products,this.orderBy) }
                 }
                 return [];
+            },
+            filteredProducts()
+            {
+              let prods = this.filterProducts;
+      
+              return this.paginate(prods,this.selectedPage);  
             }
         },
          watch : {
@@ -218,15 +174,24 @@ import adminReport from './Report.vue';
                 this.products = _.sortBy(this.products,this.orderBy);
                 this.resetCheckboxes();
                 this.selector.id ='all';
+                this.selectedPage = 1;
             },
             'selector.id'()
             {
                 this.resetCheckboxes();
+                this.selectedPage = 1;
             }
 
 
         },
         methods : {
+            paginate(array,page){
+                if(array && array.length>0){
+                    page--; 
+                   return array.slice(page * this.productsPerPage, (page + 1) * this.productsPerPage);
+                }
+            },
+
             closedModal(){
                 this.product = null;
                 
@@ -283,60 +248,9 @@ import adminReport from './Report.vue';
 
 
             },
-            changed(product,field){ 
-               this.saveChange(product,field+'_id');
-                
-            },
-            togglePause(product){
-                var vm = this;
-                product.paused = !product.paused;
-                vm.saveChange(product,'paused');
-                for (const key in vm.categories) {
-                    if (vm.categories.hasOwnProperty(key)) {
-                        const category = vm.categories[key];
-                        for (const k in category.products) {
-                            if (category.products.hasOwnProperty(k)) {
-                                const prod = category.products[k];
-                                if (prod.id == product.id )
-                                {
-                                    vm.categories[key].products[k].paused = product.paused;
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                
-            },
-            deleteProduct(product){
-                var vm = this;
-                swal({
-                    title: "¿Estas seguro de elimiar este producto?",
-                    text: "",
-                    type: "warning",
-                    buttons: [
-                        'Cancelar',
-                        'Borrar!'
-                    ],
-                    dangerMode: true,
-                    confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'Borrar!',
-                    cancelButtonText: "Cancelar!",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                }).then((isConfirm) => {
-                    if (isConfirm){
-                         this.$http.delete('/admin/product/'+product.id)
-                            .then(response => {
-                         vm.refresh();   
-                    });
-
-                    } 
-                })      
-                
-               
-            },
+           
+          
+         
          
             refresh(){
                 var vm = this;
@@ -376,16 +290,7 @@ import adminReport from './Report.vue';
                     url : '/admin/product/update'
                 });
             },
-            imgModal(product){
-
-                
-               
-                this.product = product;
-                this.showModal = true;
-               
-                let element = this.$refs.modal.$el;
-                $(element).modal('show');
-            },
+          
                selectAllProducts()
             {
                     this.products.forEach(prod => {
@@ -398,20 +303,7 @@ import adminReport from './Report.vue';
                         }
                     });
             },
-            applyVariation()
-            {
-                var vm =this;
-                var variation = 1+(this.variation/100);
-                this.selectedProducts.forEach(prod => {
-                    prod.price = prod.price * variation;
-                    prod.pck_price = prod.pck_price * variation;
-                    vm.saveChange(prod,'price');
-                    vm.saveChange(prod,'pck_price');
-                });
-                vm.variation = 0;
-                vm.resetCheckboxes();
-                vm.refresh();
-            }
+         
         },
         created(){
             this.refresh();
