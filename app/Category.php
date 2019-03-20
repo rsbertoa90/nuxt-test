@@ -30,5 +30,16 @@ class Category extends Model
         $this->save();
     }
 
+    public static function notPaused()
+    {
+        return Category::with('products.images')
+                    ->with(['products' => function($q){
+                        $q->where('paused',0);
+                    }])
+                    ->whereHas('products' , function($q){
+                $q->where('paused',0)->orderBy('name');
+        })->orderby('name')->get();
+    }
+
 
 }

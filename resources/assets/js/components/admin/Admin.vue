@@ -126,7 +126,7 @@ import paginator from './admin/paginator.vue';
         },
         data(){
             return {
-                loading:false,
+                loading:true,
                 searchMode:false,
                 searchTerm:'',
                 selectedPage:1,
@@ -341,6 +341,7 @@ import paginator from './admin/paginator.vue';
                 success(response){
                     vm.products = response;
                     vm.products = _.sortBy(vm.products, vm.orderBy);
+                    vm.loading=false;
                     
                 }
             });

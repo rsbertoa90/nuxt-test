@@ -29,7 +29,7 @@ class PDFController extends Controller
     public function pricesList()
     {
         
-        $categories = Category::orderBy('name')->get();
+        $categories = Category::notPaused();
        
         $today = Carbon::now()->format('d/m/Y');
 

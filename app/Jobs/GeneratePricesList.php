@@ -47,9 +47,7 @@ class GeneratePricesList implements ShouldQueue
         $path = public_path().'/MAJU-lista-de-precios.pdf';
 
         $today = Carbon::now()->format('d/m/Y');
-        $categories = Category::whereHas('products', function ($q){
-            $q->orderBy('name')->where('paused',0);
-        })->orderBy('name')->get();
+        $categories = Category::notPaused();
 
         $html = View::make('pdf.ListaDePrecios',compact('categories','today'))->render();
 
