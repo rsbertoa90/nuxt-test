@@ -30,7 +30,8 @@ class OrderController extends Controller
         return $order;
     }
 
-    public function panel(){
+    public function panel()
+    {
         return view('admin.orders');
     }
 
@@ -43,10 +44,7 @@ class OrderController extends Controller
     public function userOrder(Request $request)
     {
         
-            $request->validate([
-                'email'=>'required|email',
-                'list'=>'required'
-            ]);
+            
         
             Queue::push(new SaveNewOrder($request->all()));
 
