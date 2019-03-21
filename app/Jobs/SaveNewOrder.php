@@ -46,12 +46,26 @@ class SaveNewOrder implements ShouldQueue
     {
       $request = $this->req;
 
-      $products = json_decode($request['list']);
       $phone = $request['phone'];
       $message = $request['message'];
       $email = $request['email'];
       $total = $request['total'];
-            
+      
+      $list = json_decode($request['list']);
+      $listOfIds = array_column($list, 'id');
+      
+      $products = Product::findMany($listOfIds);
+
+      foreach ($list as $li) {
+          foreach ($products as $p) {
+              if ($li->id == $p->id)
+              {
+                  $p->units = $li->units;
+              }
+          }
+      }
+      
+      
       $order = Order::create([
           'email'=>$email,
           'phone'=>$phone,
@@ -72,18 +86,18 @@ class SaveNewOrder implements ShouldQueue
 
       foreach ($products as $p)
       {
-         
-        if ($p->units >= $p->pck_units){
-            $price = $p->pck_price;
-        }else {
-            $price = $p->price;
+        
+        /* $product = Product::find($p->id); */
+
+        if ($p){
+            $price = $p->units >= $p->pck_units ? $p->pck_price : $p->price ;
+            OrderProduct::create([
+                  'product_id' => $p->id,
+                  'order_id'=>$order->id,
+                  'units'=>$p->units,
+                  'price'=>$price,
+                  ]);
         }
-        OrderProduct::create([
-              'product_id' => $p->id,
-              'order_id'=>$order->id,
-              'units'=>$p->units,
-              'price'=>$price,
-              ]);
       }
 
       $order = Order::find($order->id);

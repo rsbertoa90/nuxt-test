@@ -170,6 +170,19 @@ export default{
                 return false;
             } else {return true;}
         },
+        compressList(){
+            let res = [];
+            this.list.forEach(item => {
+                let compresedItem = {
+                    id : item.id,
+                    units: item.units
+                }
+                res.push(compresedItem);
+            });
+            
+            return res;
+
+        },
         send(){
             if (this.formValid()){
 
@@ -179,7 +192,10 @@ export default{
                     data.shipping = 1;
                 } else {data.shipping = 0;}
 
-                data.list = JSON.stringify(this.list);
+                let list = this.compressList();
+
+
+                data.list = JSON.stringify(list);
                 data.total = this.total;
                 
                 var vm = this;
