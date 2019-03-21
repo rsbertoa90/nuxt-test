@@ -17,6 +17,11 @@
 @import "~animate.css/source/bouncing_entrances/bounceIn.css";
 /* @import "~animate.css/animate.min.css"; */
 
+@font-face{
+  font-family: 'Niramit';
+  src: local('Niramit');
+  font-display: swap;
+}
 
 .navbar-laravel {
   background-color: #fff;
