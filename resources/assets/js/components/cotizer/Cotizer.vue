@@ -43,7 +43,14 @@
         
         
         <div class="row" v-if="searchTerm.trim() != ''">
-            <products-table :products="filteredProducts"></products-table>
+             <paginator class="col-12"
+                            :selectedPage="selectedPage"   
+                            :products="filteredProducts" 
+                            :productsPerPage="productsPerPage"
+                            @selectPage="selectedPage=$event">
+
+                </paginator>
+            <products-table class="col-12" :products="paginatedProducts"></products-table>
         </div>
 
 
@@ -96,6 +103,8 @@ import productsTable from './products-table.vue';
             },
         data(){
             return {
+                selectedPage:1,
+                productsPerPage:30,
                 searchTerm:'',
                 loading:true,
                
@@ -106,7 +115,9 @@ import productsTable from './products-table.vue';
             }
         },
         watch : {
-           
+           searchTerm(){
+              this.selectedPage = 1;
+           },
             total() {
                    var result = [];
                    var vm = this;

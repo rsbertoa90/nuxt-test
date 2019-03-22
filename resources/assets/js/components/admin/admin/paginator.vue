@@ -1,5 +1,5 @@
 <template>
-<nav v-if="total > 1" aria-label="Page navigation example">
+<nav v-if="total > 1" aria-label="Paginator">
   <ul class="pagination">
     <li class="page-item" :class="{'disabled':selectedPage==1}">
       <a class="page-link" 
@@ -61,6 +61,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.pagination{
+    display: flex;
+    flex-wrap: wrap;
+}
 </style>
 

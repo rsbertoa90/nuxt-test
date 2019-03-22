@@ -30,7 +30,7 @@
 
         <!-- Barra de busqueda -->
          <div class="row">
-            <input type="text" v-on:input="searchTerm = $event.target.value" 
+            <input type="text" v-on:input="searchTerm = $event.target.value"  @change="selectedPage=1"
                     class="form-control search-bar" placeholder="¿ QUE ESTAS BUSCANDO ?">
         </div> 
         
@@ -40,11 +40,27 @@
         <hr>
         
 
-        <categories-acordion v-if="searchTerm.trim()==''"></categories-acordion>
+        <categories-acordion v-if="searchTerm.trim().length < 3"></categories-acordion>
         
         
-        <div class="row" v-if="searchTerm.trim() != ''">
-            <products-table :products="filteredProducts"></products-table>
+         <div class="row" v-if="searchTerm.trim().length > 2 ">
+            <paginator class="col-12"
+                            :selectedPage="selectedPage"   
+                            :products="filteredProducts" 
+                            :productsPerPage="productsPerPage"
+                            @selectPage="selectedPage=$event">
+
+            </paginator>
+            
+            <products-table class="col-12" :products="paginatedProducts"></products-table>
+            
+            <paginator class="col-12"
+                            :selectedPage="selectedPage"   
+                            :products="filteredProducts" 
+                            :productsPerPage="productsPerPage"
+                            @selectPage="selectedPage=$event">
+
+                </paginator>
         </div>
 
 
@@ -76,7 +92,7 @@
 import pedido from './pedido.vue';
 import appBanner from './banner.vue';
 import cotizerTutorial from './tutorial.vue';
-
+import paginator from '../admin/admin/paginator.vue';
 import whatsappBtn from '../layout/whatsapp.vue';
 import hideOptbutton from './hide-opt-button.vue';
 import codeSelector from './code-selector.vue';
@@ -85,6 +101,7 @@ import totalBouncer from './total-bouncer.vue';
 import productsTable from './products-table.vue';
     export default {
         components:{
+            paginator,
             productsTable,
             categoriesAcordion,
             totalBouncer,
@@ -97,6 +114,8 @@ import productsTable from './products-table.vue';
             },
         data(){
             return {
+                selectedPage:1,
+                 productsPerPage:30,
                 searchTerm:'',
                 loading:true,
                
@@ -107,7 +126,9 @@ import productsTable from './products-table.vue';
             }
         },
         watch : {
-           
+            searchTerm(){
+              this.selectedPage = 1;
+           },
             total() {
                    var result = [];
                    var vm = this;
@@ -128,6 +149,12 @@ import productsTable from './products-table.vue';
             }
         },
         computed: {
+            paginatedProducts(){
+                if (this.filteredProducts)
+                {
+                   return this.paginate(this.filteredProducts, this.selectedPage);
+                }
+            },
             filteredProducts(){
                 var vm =this;
                 if(this.searchTerm.trim() != ''){
@@ -193,7 +220,12 @@ import productsTable from './products-table.vue';
        
         methods:
         {
-           
+            paginate(array,page){
+                if(array && array.length>0){
+                    page--; 
+                   return array.slice(page * this.productsPerPage, (page + 1) * this.productsPerPage);
+                }
+            },
          
         },
         filters : {
