@@ -5,6 +5,8 @@ use App\Product;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
+
 
 class Category extends Model
 {
@@ -32,13 +34,16 @@ class Category extends Model
 
     public static function notPaused()
     {
-        return Category::with('products.images')
+       return Cache::rememberForever('productsNotPaused', function () {
+            return Category::with('products.images')
                     ->with(['products' => function($q){
                         $q->where('paused',0);
                     }])
                     ->whereHas('products' , function($q){
                 $q->where('paused',0)->orderBy('name');
-        })->orderby('name')->get();
+            })->orderby('name')->get();
+        });
+        
     }
 
 

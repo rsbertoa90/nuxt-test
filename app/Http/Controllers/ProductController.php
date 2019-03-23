@@ -8,7 +8,7 @@ use App\ProductImage;
 use App\Category;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use  Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Support\Facades\Cache;
 class ProductController extends Controller
 {
 
@@ -20,6 +20,7 @@ class ProductController extends Controller
 
     public function update(Request $request) 
     {
+         Cache::forget('productsNotPaused');
         $product = Product::find($request->product);
         $field = $request->field;
         if ($request->field == 'paused'){
@@ -32,6 +33,7 @@ class ProductController extends Controller
 
     public function uploadImage(Request $request)
     {
+          Cache::forget('productsNotPaused');
         $file = $request->file('image');
         
 
@@ -50,6 +52,7 @@ class ProductController extends Controller
 
     public function save(Request $request)
     {
+          Cache::forget('productsNotPaused');
         if ( $request->pck_price == 0 )
         {
             $request->pck_price = $request->price;
@@ -61,6 +64,7 @@ class ProductController extends Controller
 
     public function delete($id)
     {
+          Cache::forget('productsNotPaused');
         $product = Product::find($id);
         $category = $product->category;
         
@@ -79,7 +83,7 @@ class ProductController extends Controller
     }
 
     public function deleteImage(Request $request){
-
+          Cache::forget('productsNotPaused');
         $pi = ProductImage::find($request->id);
         $pi->delete();
 
@@ -88,6 +92,7 @@ class ProductController extends Controller
     }
 
     public function setFirstImage(Request $request){
+          Cache::forget('productsNotPaused');
         $product =Product::find($request->product);
 
         foreach ($product->images as  $image) {

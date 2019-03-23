@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use app\Product;
-
+use Illuminate\Support\Facades\Cache;
 class CategoryController extends Controller
 {
     public function getAll(){
@@ -32,6 +32,7 @@ class CategoryController extends Controller
 
     public function save(Request $request)
     {
+         Cache::forget('productsNotPaused');
         $max = Category::withTrashed()->find(\DB::table('categories')->max('id'));
 
         $id = $max->id+1;
@@ -41,26 +42,30 @@ class CategoryController extends Controller
 
         $category->save();
         
-
+     
         return $category;
     }
 
     public function update(Request $request)
     {
+        Cache::forget('productsNotPaused');
+
         $category = Category::find($request->id);
         $field = $request->field;
         $category->$field = $request->value;
         $category->save();
+
     }
 
     public function destroy($id){
         Category::destroy($id);
+         Cache::forget('productsNotPaused');
     }
 
       public function uploadImage(Request $request)
     {   
         
-       
+        Cache::forget('productsNotPaused');
         $category = Category::find($request->id);
         $file = $request->file('image');
         if ($file){
