@@ -29,28 +29,38 @@
         </div>
 
         <!-- Barra de busqueda -->
-       <!--  <div class="row">
-            <input type="text" v-model="searchTerm" 
-                    class="form-control search-bar" placeholder="BUSCAR">
-        </div> -->
+         <div class="row">
+            <input type="text" v-on:input="searchTerm = $event.target.value"  @change="selectedPage=1"
+                    class="form-control search-bar" placeholder="¿ QUE ESTAS BUSCANDO ?">
+        </div> 
+        
 
         <code-selector v-if="user && user.role_id < 3" :list="list"></code-selector>
     
         <hr>
         
 
-        <categories-acordion v-if="searchTerm.trim()==''"></categories-acordion>
+        <categories-acordion v-if="searchTerm.trim().length < 3"></categories-acordion>
         
         
-        <div class="row" v-if="searchTerm.trim() != ''">
-             <paginator class="col-12"
+         <div class="row" v-if="searchTerm.trim().length > 2 ">
+            <paginator class="col-12"
+                            :selectedPage="selectedPage"   
+                            :products="filteredProducts" 
+                            :productsPerPage="productsPerPage"
+                            @selectPage="selectedPage=$event">
+
+            </paginator>
+            
+            <products-table class="col-12" :products="paginatedProducts"></products-table>
+            
+            <paginator class="col-12"
                             :selectedPage="selectedPage"   
                             :products="filteredProducts" 
                             :productsPerPage="productsPerPage"
                             @selectPage="selectedPage=$event">
 
                 </paginator>
-            <products-table class="col-12" :products="paginatedProducts"></products-table>
         </div>
 
 
@@ -82,7 +92,7 @@
 import pedido from './pedido.vue';
 import appBanner from './banner.vue';
 import cotizerTutorial from './tutorial.vue';
-
+import paginator from '../admin/admin/paginator.vue';
 import whatsappBtn from '../layout/whatsapp.vue';
 import hideOptbutton from './hide-opt-button.vue';
 import codeSelector from './code-selector.vue';
@@ -91,6 +101,7 @@ import totalBouncer from './total-bouncer.vue';
 import productsTable from './products-table.vue';
     export default {
         components:{
+            paginator,
             productsTable,
             categoriesAcordion,
             totalBouncer,
@@ -104,7 +115,7 @@ import productsTable from './products-table.vue';
         data(){
             return {
                 selectedPage:1,
-                productsPerPage:30,
+                 productsPerPage:30,
                 searchTerm:'',
                 loading:true,
                
@@ -115,7 +126,7 @@ import productsTable from './products-table.vue';
             }
         },
         watch : {
-           searchTerm(){
+            searchTerm(){
               this.selectedPage = 1;
            },
             total() {
@@ -138,15 +149,39 @@ import productsTable from './products-table.vue';
             }
         },
         computed: {
+            paginatedProducts(){
+                if (this.filteredProducts)
+                {
+                   return this.paginate(this.filteredProducts, this.selectedPage);
+                }
+            },
             filteredProducts(){
                 var vm =this;
                 if(this.searchTerm.trim() != ''){
+                    let terms = vm.searchTerm.split(' ');
                     let res = [];
+                    
+                  
                     this.categories.forEach(cat => {
+                        let categoryName = cat.name.toString().toLowerCase().trim(); 
                         cat.products.forEach(prod => {
-                            if (prod.name.toLowerCase().indexOf(vm.searchTerm.trim().toLowerCase()) > -1){
+                            let productName = prod.name.toString().toLowerCase().trim();
+                            let addtores = true;
+                            
+                            terms.forEach(term => {
+                                
+                                term = term.toLowerCase();
+                                if (    addtores 
+                                        && productName.indexOf(term) < 0 
+                                        && categoryName.indexOf(term) < 0  
+                                    ){
+                                        addtores = false;   
+                                    } 
+
+                            });
+                            if (addtores){
                                 res.push(prod);
-                            } 
+                            }
                         });
                     });  
                     return res;  
@@ -185,7 +220,12 @@ import productsTable from './products-table.vue';
        
         methods:
         {
-           
+            paginate(array,page){
+                if(array && array.length>0){
+                    page--; 
+                   return array.slice(page * this.productsPerPage, (page + 1) * this.productsPerPage);
+                }
+            },
          
         },
         filters : {
@@ -248,6 +288,7 @@ import productsTable from './products-table.vue';
     border:1px solid #ff0aaf;
     padding:3px;
     margin-top:20px;
+    text-align: center;
     
 
     &::placeholder{
