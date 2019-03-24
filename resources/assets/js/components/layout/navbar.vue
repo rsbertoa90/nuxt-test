@@ -11,17 +11,10 @@ import navUser from './nav-user.vue';
 import navAdmin from './nav-admin.vue';
 export default {
     components:{navUser,navAdmin},
-    data(){
-        return{
-            user:null,
+    computed:{
+        user(){
+            return this.$store.getters.getUser;
         }
-    },
-    mounted(){
-        this.$http.get('/getuser')
-            .then(res => {
-                this.user = res.data;
-            });
-
     }
 
 }
