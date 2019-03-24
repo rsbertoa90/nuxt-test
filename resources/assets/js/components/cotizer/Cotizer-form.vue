@@ -99,14 +99,20 @@ export default{
        
     },
     computed:{
+        states(){
+            return this.$store.getters.getStates;
+        },
+        configs(){
+            return this.$store.getters.getConfig;
+        },
        user(){
            return this.$store.getters.getUser;
        }
     },
 
     data(){return{
-        configs:null,
-        states:[],
+       
+      
         state:null,
         cities:[],
         loading : false,
@@ -219,18 +225,7 @@ export default{
             }
         }
     },
-    created(){
-        var vm=this;
-         this.$http.get('/config')
-                .then(response => {
-                    vm.configs = response.data;
-                }); 
-
-        this.$http.get('/api/states')
-            .then(res => {
-                this.states = res.data;
-            });
-    }   
+   
     
 }
 
