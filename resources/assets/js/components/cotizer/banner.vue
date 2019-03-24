@@ -30,19 +30,20 @@
 export default {
     data(){
         return{
-            configs:null,
+            
             pos:true,
             customText:null
         }
     },
+    computed:{
+        configs()
+        {
+            return this.$store.getters.getConfig;
+        }
+    },
     created(){
         var vm=this;
-          this.$http.get('/config')
-                .then(response => {
-                    vm.configs = response.data;
-                }); 
-
-
+          
         this.$http.get('/api/custom-text/banner')
             .then(res => {
                 this.customText = res.data;
