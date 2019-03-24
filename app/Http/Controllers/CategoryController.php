@@ -16,23 +16,30 @@ class CategoryController extends Controller
 
     
 
+    public function forgetCaches(){
+         Cache::forget('productsNotPaused');
+          Cache::forget('categories');
+          Cache::forget('products');
+    }
 
     public function getNotPAused(){
 
-        $categories = Category::notPaused();
-        
-            return $categories;
-        
+       return Category::notPaused();   
+    
     }
 
+
     public function get($id)
-    {
-        return Category::with('products.images')->find($id);
+    {        
+       return Cache::rememberForever('categories', function () {
+            return Category::with('products.images')->find($id);
+        });
     }
 
     public function save(Request $request)
     {
-         Cache::forget('productsNotPaused');
+        $this->forgetCaches();
+       
         $max = Category::withTrashed()->find(\DB::table('categories')->max('id'));
 
         $id = $max->id+1;
@@ -48,7 +55,7 @@ class CategoryController extends Controller
 
     public function update(Request $request)
     {
-        Cache::forget('productsNotPaused');
+          $this->forgetCaches();
 
         $category = Category::find($request->id);
         $field = $request->field;
@@ -59,13 +66,13 @@ class CategoryController extends Controller
 
     public function destroy($id){
         Category::destroy($id);
-         Cache::forget('productsNotPaused');
+          $this->forgetCaches();
     }
 
       public function uploadImage(Request $request)
     {   
         
-        Cache::forget('productsNotPaused');
+          $this->forgetCaches();
         $category = Category::find($request->id);
         $file = $request->file('image');
         if ($file){
@@ -105,6 +112,7 @@ class CategoryController extends Controller
 
 
     public function slugifyAll(){
+          $this->forgetCaches();
         $cats = Category::all();
 
         foreach ($cats as  $cat) {

@@ -12,15 +12,26 @@ use Illuminate\Support\Facades\Cache;
 class ProductController extends Controller
 {
 
-    public function getAll()
-    {
-        return Product::with('category')->with('suplier')->with('images')->get();
+      public function forgetCaches(){
+         Cache::forget('productsNotPaused');
+          Cache::forget('categories');
+          Cache::forget('products');
+    }
 
+
+    public function getAll()
+    {   
+        return Cache::rememberForever('products', function () {
+             return Product::with('category')->with('suplier')->with('images')->get();
+
+        }); 
+       
     }
 
     public function update(Request $request) 
     {
-         Cache::forget('productsNotPaused');
+        $this->forgetCaches();
+
         $product = Product::find($request->product);
         $field = $request->field;
         if ($request->field == 'paused'){
@@ -33,7 +44,7 @@ class ProductController extends Controller
 
     public function uploadImage(Request $request)
     {
-          Cache::forget('productsNotPaused');
+      $this->forgetCaches();
         $file = $request->file('image');
         
 
@@ -52,7 +63,7 @@ class ProductController extends Controller
 
     public function save(Request $request)
     {
-          Cache::forget('productsNotPaused');
+        $this->forgetCaches();
         if ( $request->pck_price == 0 )
         {
             $request->pck_price = $request->price;
@@ -64,7 +75,7 @@ class ProductController extends Controller
 
     public function delete($id)
     {
-          Cache::forget('productsNotPaused');
+        $this->forgetCaches();
         $product = Product::find($id);
         $category = $product->category;
         
@@ -83,7 +94,7 @@ class ProductController extends Controller
     }
 
     public function deleteImage(Request $request){
-          Cache::forget('productsNotPaused');
+        $this->forgetCaches();
         $pi = ProductImage::find($request->id);
         $pi->delete();
 
@@ -92,7 +103,7 @@ class ProductController extends Controller
     }
 
     public function setFirstImage(Request $request){
-          Cache::forget('productsNotPaused');
+       $this->forgetCaches();
         $product =Product::find($request->product);
 
         foreach ($product->images as  $image) {

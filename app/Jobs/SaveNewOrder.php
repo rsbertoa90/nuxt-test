@@ -20,7 +20,7 @@ use Mail;
 use PDF;
 use Carbon\Carbon;
 use View;
-
+use Illuminate\Support\Facades\Cache;
 
 class SaveNewOrder implements ShouldQueue
 {
@@ -44,6 +44,9 @@ class SaveNewOrder implements ShouldQueue
      */
     public function handle()
     {
+
+        Cache::forget('orders');
+        
       $request = $this->req;
 
       $phone = $request['phone'];

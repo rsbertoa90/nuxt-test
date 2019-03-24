@@ -17,12 +17,13 @@ use View;
 
 use Queue;
 use App\Jobs\SaveNewOrder;
-
+use Illuminate\Support\Facades\Cache;
 class OrderController extends Controller
 {
 
     public function update(Request $request)
     {
+        Cache::forget('orders');
         $order = Order::find($request->order);
         $field = $request->field;
         $order->$field = $request->value;
@@ -38,7 +39,11 @@ class OrderController extends Controller
 
     public function get()
     {
-        return Order::with('orderProducts.product.category')->with('city.state')->get();
+         return Cache::rememberForever('orders', function () {
+               return Order::with('orderProducts.product.category')->with('city.state')->get();
+        }); 
+
+      
     }
 
     public function userOrder(Request $request)
