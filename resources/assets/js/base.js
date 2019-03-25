@@ -1,5 +1,3 @@
-
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -101,26 +99,3 @@ Vue.component('app-cotizer', require('./components/cotizer/Cotizer.vue'));
  */
 Vue.component('app-category', require('./components/category/Category.vue'));
 Vue.component('app-cotizer-test', require('./components/cotizer/Cotizer-test.vue'));
-
-
-
-const app = new Vue({
-    el: '#app',
-    store,
-    methods: {
-        ...mapActions({
-            fetchCategories: 'fetchCategories',
-            fetchUser: 'fetchUser',
-            fetchConfig: 'fetchConfig',
-            fetchStates: 'fetchStates',
-        }),
-        
-        
-        },
-        created() {
-            this.fetchCategories();
-            this.fetchUser();
-            this.fetchConfig();
-            this.fetchStates();
-        }
-});

@@ -1,5 +1,5 @@
 
-@extends('layouts.default')
+@extends('admin.layout')
 
 @section('content')
     <admin-report></admin-report>

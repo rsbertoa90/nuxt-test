@@ -1,4 +1,5 @@
 let mix = require('laravel-mix');
+let webpack = require('webpack');
 require('laravel-mix-purgecss');
 
 /*
@@ -12,10 +13,19 @@ require('laravel-mix-purgecss');
  |
  */
 
+mix.webpackConfig({
+    plugins: [
+        // ...
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    ],
+    // list of additional plugins
+});
 
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css') ;
+    .js('resources/assets/js/admin.js', 'public/js')
+   .sass('resources/assets/sass/app.scss', 'public/css') 
+   ;
 
 if (mix.inProduction()) {
     mix.version().purgeCss();

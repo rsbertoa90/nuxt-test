@@ -37,7 +37,8 @@
         <meta name="description" content="{{$meta->metadescription }}">
     @endif
     <!-- Scripts -->
-    <script src="{{ mix('/js/app.js') }}" defer></script>
+    
+    <script src="{{ mix('/js/admin.js') }}" defer></script>
     {{-- font awesome --}}
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -91,10 +92,9 @@
 
     
     
-
-
+    
     <div id="app">
-        <app-frame></app-frame>
+      {{--   <app-frame></app-frame> --}}
         <header>
             <app-nav></app-nav>
         </header>    

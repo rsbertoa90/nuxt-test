@@ -99,8 +99,10 @@ import codeSelector from './code-selector.vue';
 import categoriesAcordion from './categories-acordion.vue';
 import totalBouncer from './total-bouncer.vue';
 import productsTable from './products-table.vue';
+import cotizerForm from './Cotizer-form.vue';
     export default {
         components:{
+            cotizerForm,
             paginator,
             productsTable,
             categoriesAcordion,

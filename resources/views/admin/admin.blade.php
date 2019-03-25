@@ -1,11 +1,11 @@
-@extends('layouts.default')
+@extends('admin.layout')
 
 @section('content')
-    <div>
+    
         <app-admin></app-admin>
-    </div>
+    
 @endsection
 
 @section('js')
-
+   
 @endsection
