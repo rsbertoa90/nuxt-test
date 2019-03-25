@@ -111,6 +111,8 @@
                 var vm =this;
                 var file = $('input[type="file"]')[0].files[0];
                 this.file = file;
+                console.log($('input[type="file"]'));
+                console.log($('input[type="file"]')[0]);
                  console.log(file);
                 
                 
