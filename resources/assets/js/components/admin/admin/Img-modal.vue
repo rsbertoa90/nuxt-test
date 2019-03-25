@@ -121,7 +121,7 @@
                 
                 this.$http.post('/admin/product/image',fdata, {  emulateHTTP: true, emulateJSON: true, headers: { 'X-File-Name': 'image',  'Content-Type': 'multipart/form-data', 'Content-Type': 'application/x-www-form-urlencoded' } } )
                 .then(res => {
-                    console.log(res);
+                   
                       $('#image-modal').modal('hide');
                         vm.$emit('refresh'); 
                          vm.$emit('closedModal');
