@@ -119,21 +119,14 @@
                 fdata.append('product',this.product.id)
                 // console.log(fdata);
                 
-
-                $.ajax({
-                    url: "/admin/product/image",
-                    type: "post",
-                    data: fdata,
-                    // async: false,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    files : true,
-                    success: function () {
-                       $('#image-modal').modal('hide');
-                        vm.$emit('refresh');
-                    },
+                this.$http.post('/admin/product/image',fdata, {  emulateHTTP: true, emulateJSON: true, headers: { 'X-File-Name': 'image',  'Content-Type': 'multipart/form-data', 'Content-Type': 'application/x-www-form-urlencoded' } } )
+                .then(res => {
+                    console.log(res);
+                   /*   $('#image-modal').modal('hide');
+                        vm.$emit('refresh'); */
                 });
+
+              
 
         
         },
