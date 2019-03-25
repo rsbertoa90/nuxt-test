@@ -13,7 +13,7 @@
           <div class="image-container">
             <transition  leave-active-class=" animated slideOutRight faster position-absolute">
             
-                <img v-if="product.images && product.images.length > 0" 
+                <img v-if="product.images && product.images.length > 0 && product.images[i]" 
                         :key="product.images[i].id"
                         class="w-100 " 
                         :src="product.images[i].url" 
@@ -30,11 +30,9 @@
                 </span>
             </div>
 
-            <form v-if="product.images && product.images.length > 0"  action="/admin/product/deleteImage" method="POST">
-                <input type="hidden" name="_token" :value="csrf">
-                <input type="hidden" name="id"  :value="product.images[i].id">
-                <button type="submit" class="close-button btn btn-danger btn-sm">X</button>
-            </form>
+           
+            <button v-if="product.images && product.images.length > 0" type="submit" class="close-button btn btn-danger btn-sm" @click="destroyImage()">X</button>
+            
 
             <button v-if="product.images && product.images.length > 0"   
                     @click="setFirst()" class="btn btn-info set-first">Definir primera imagen</button>
@@ -77,10 +75,22 @@
         watch:{
             product(){
                 this.show=true;
-        
+
             }
         },
         methods : {
+            destroyImage(){
+                var vm = this;
+                let data = {
+                    id : vm.product.images[vm.i].id
+                }
+                this.$http.post('/admin/product/deleteImage',data)
+                    .then(res => {
+                        console.log('deleted');
+                        vm.product.images.splice(vm.i,1);
+                        vm.i = 0 ;
+                    });
+            },
            setFirst(){
                var vm = this;
                this.product.images.forEach(image => {
