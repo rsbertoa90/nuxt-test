@@ -46,7 +46,7 @@
                 <label class="text-info text-center">  
                     Subir una imagen   
                 </label>
-                 <input type="file" name="file"  accept="image/x-png,image/gif,image/jpeg" class="display-none" >
+                 <input type="file" ref="daFile" name="file"  accept="image/x-png,image/gif,image/jpeg" class="display-none" >
             </div>   
            
           </form>
@@ -112,6 +112,8 @@
                 var file = $('input[type="file"]')[0].files[0];
                
                  console.log(file);
+                 let dafile = vm.$refs.daFile.files[0];
+                 console.log(dafile);
                 
                 
                 var fdata =  new FormData();
