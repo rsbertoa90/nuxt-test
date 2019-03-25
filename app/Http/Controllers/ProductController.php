@@ -44,7 +44,7 @@ class ProductController extends Controller
 
     public function uploadImage(Request $request)
     {
-        $this->forgetCaches();
+      
         return $request->all();
         $file = $request->file('image');
         
@@ -59,6 +59,8 @@ class ProductController extends Controller
                 'url' => $path,
                 'product_id' => $product->id
                 ]);
+            
+              $this->forgetCaches();
                 
         } else { return "Error No File" ; }
         return;
