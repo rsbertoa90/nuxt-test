@@ -110,14 +110,12 @@
             save :  function(event){
                 var vm =this;
                 var file = $('input[type="file"]')[0].files[0];
-                this.file = file;
-                console.log($('input[type="file"]'));
-                console.log($('input[type="file"]')[0]);
+               
                  console.log(file);
                 
                 
                 var fdata =  new FormData();
-                console.log(file);
+              
                 fdata.append('image',file);
                 fdata.append('product',this.product.id)
                 console.log(fdata);
