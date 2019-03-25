@@ -109,24 +109,21 @@
 
             save :  function(event){
                 var vm =this;
-                var file = $('input[type="file"]')[0].files[0];
-               
-                 console.log(file);
-                 let dafile = vm.$refs.daFile.files[0];
-                 console.log(dafile);
+                 
+                var file = vm.$refs.daFile.files[0];
+                 
                 
                 
                 var fdata =  new FormData();
               
                 fdata.append('image',file);
                 fdata.append('product',this.product.id)
-                console.log(fdata);
                 
                 this.$http.post('/admin/product/image',fdata, {  emulateHTTP: true, emulateJSON: true, headers: { 'X-File-Name': 'image',  'Content-Type': 'multipart/form-data', 'Content-Type': 'application/x-www-form-urlencoded' } } )
                 .then(res => {
                     console.log(res);
-                   /*   $('#image-modal').modal('hide');
-                        vm.$emit('refresh'); */
+                      $('#image-modal').modal('hide');
+                        vm.$emit('refresh'); 
                 });
 
               

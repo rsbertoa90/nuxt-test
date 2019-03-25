@@ -48,7 +48,7 @@ class ProductController extends Controller
         
         $file = $request->file('image');
         
-        if ($file){
+        
 
             
             $path = $file->storePublicly('/images/products');
@@ -62,7 +62,7 @@ class ProductController extends Controller
             
               $this->forgetCaches();
                 
-        } else { return "Error No File" ; }
+       
         return;
 
     }
