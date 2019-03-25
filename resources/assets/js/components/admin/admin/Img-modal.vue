@@ -117,7 +117,7 @@
                 var fdata =  new FormData();
                 fdata.append('image',file);
                 fdata.append('product',this.product.id)
-                // console.log(fdata);
+                console.log(fdata);
                 
                 this.$http.post('/admin/product/image',fdata, {  emulateHTTP: true, emulateJSON: true, headers: { 'X-File-Name': 'image',  'Content-Type': 'multipart/form-data', 'Content-Type': 'application/x-www-form-urlencoded' } } )
                 .then(res => {
