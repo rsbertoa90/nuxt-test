@@ -71,8 +71,9 @@
             </button>
             
         </td>
-        <image-modal v-if="product" :product="product"  
-                            ref="modal" @refresh="refresh()">
+        <image-modal v-if="product && showModal" :product="product"  
+                            ref="modal" @refresh="refresh()"
+                        @closedModal="showModal=false">
         </image-modal>
     </tr>
 </template>
@@ -82,6 +83,9 @@ import imageModal from './Img-modal.vue';
 export default {
     components:{imageModal},
     props:['product','supliers','categories'],
+    data(){return{
+        showModal:false
+    }},
     methods:{
             refresh(){
                 this.$emit('refresh');
@@ -138,13 +142,13 @@ export default {
             },
             imgModal(){
 
-                
-               
-               
+            
                 this.showModal = true;
-               
-                let element = this.$refs.modal.$el;
-                $(element).modal('show');
+
+               setTimeout(() => {
+                   let element = this.$refs.modal.$el;
+                   $(element).modal('show');
+               }, 100);
             },
     }
 }

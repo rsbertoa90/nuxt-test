@@ -124,6 +124,7 @@
                     console.log(res);
                       $('#image-modal').modal('hide');
                         vm.$emit('refresh'); 
+                         vm.$emit('closedModal');
                 });
 
               
@@ -155,8 +156,8 @@
 
 <style lang="scss" scoped>
 
-    #image-modal{
-        height: 80vh;
+    .modal-content{
+        height: 90vh;
         overflow-y:auto;
     }
 
