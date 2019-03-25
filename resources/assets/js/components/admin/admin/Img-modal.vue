@@ -162,6 +162,11 @@
 
 <style lang="scss" scoped>
 
+    #image-modal{
+        height: 80vh;
+        overflow-y:auto;
+    }
+
     .chevron-button{
         
         font-size: 1.5rem;

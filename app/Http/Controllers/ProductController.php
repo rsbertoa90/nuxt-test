@@ -45,18 +45,22 @@ class ProductController extends Controller
     public function uploadImage(Request $request)
     {
         $this->forgetCaches();
+
         $file = $request->file('image');
         
+        if ($file){
 
-        $path = $file->storePublicly('/images/products');
-        $path = '/storage/'.$path;
-        $product = Product::find($request->product);
-        
-        $productImage = ProductImage::create([
-            'url' => $path,
-            'product_id' => $product->id
-            ]);
-        
+            
+            $path = $file->storePublicly('/images/products');
+            $path = '/storage/'.$path;
+            $product = Product::find($request->product);
+            
+            $productImage = ProductImage::create([
+                'url' => $path,
+                'product_id' => $product->id
+                ]);
+                
+        } else { return "Error No File" ; }
         return;
 
     }
