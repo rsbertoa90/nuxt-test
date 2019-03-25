@@ -23,12 +23,12 @@ mix.webpackConfig({
 
 
 mix.js('resources/assets/js/app.js', 'public/js')
-    .js('resources/assets/js/admin.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css') 
    ;
 
 if (mix.inProduction()) {
     mix.version().purgeCss();
+   
 }
 /* if (mix.inProduction()) {
     mix.babel('public/js/app.js', 'public/js/app.js').version();

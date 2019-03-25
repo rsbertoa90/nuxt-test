@@ -35,9 +35,9 @@ Vue.use(VueMq, {
 });
 
 
-import DatatableFactory from 'vuejs-datatable';
+/* import DatatableFactory from 'vuejs-datatable';
 
-Vue.use(DatatableFactory);
+Vue.use(DatatableFactory); */
 
 import moment from 'moment';
 window.moment = moment;
@@ -102,7 +102,7 @@ Vue.component('app-cotizer', require('./components/cotizer/Cotizer.vue'));
 Vue.component('app-category', require('./components/category/Category.vue'));
 Vue.component('app-cotizer-test', require('./components/cotizer/Cotizer-test.vue'));
 
-
+require('./admin-components');
 
 const app = new Vue({
     el: '#app',
