@@ -5,7 +5,7 @@
                 :src="product.images[0].url" 
                 style="width :150px" 
                 :alt="product.name" 
-                @click="imgModal(product)">
+                @click="imgModal()">
             <img v-else src="/storage/images/app/no-image.png" :alt="product.name"  @click="imgModal(product)">
         </td>
         <td>
@@ -71,7 +71,7 @@
             </button>
             
         </td>
-        <image-modal :product="product"  
+        <image-modal v-if="product" :product="product"  
                             ref="modal" @refresh="refresh()">
         </image-modal>
     </tr>
@@ -136,11 +136,11 @@ export default {
                this.saveChange(product,field+'_id');
                 
             },
-            imgModal(product){
+            imgModal(){
 
                 
                
-                this.product = product;
+               
                 this.showModal = true;
                
                 let element = this.$refs.modal.$el;

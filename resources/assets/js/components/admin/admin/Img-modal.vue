@@ -22,8 +22,12 @@
                 <img v-if="!product.images || ! product.images.length > 0" src="/storage/images/app/no-image.png" :alt="product.name">
 
             <div class="controls"  v-if="product.images && product.images.length > 1" >
-                <span class="fa fa-chevron-left text-info" @click="changeImage('prev')" ></span>
-                <span class="fa fa-chevron-right text-info" @click="changeImage('next')" ></span>
+                <span class="chevron-button" v-on:click.prevent="changeImage('prev')" >
+                    <i  class="fa fa-chevron-left text-info "></i>
+                </span>
+                <span class="chevron-button" v-on:click.prevent="changeImage('next')" >
+                    <i class="fa fa-chevron-right text-info "></i>
+                </span>
             </div>
 
             <form v-if="product.images && product.images.length > 0"  action="/admin/product/deleteImage" method="POST">
@@ -135,6 +139,7 @@
         },
 
         changeImage(where){
+       
             if (where == 'next'){
                 this.i++;
                 if (! this.product.images[this.i]){
@@ -146,6 +151,7 @@
                         this.i = this.product.images.length - 1
                     }
                 }
+           
         }
             
         
@@ -155,6 +161,16 @@
 </script>
 
 <style lang="scss" scoped>
+
+    .chevron-button{
+        
+        font-size: 1.5rem;
+        padding: 3px;
+        cursor: pointer;
+        z-index: 300;
+        background-color: #0000;
+
+    }
 
     .image-container{
         position:relative;

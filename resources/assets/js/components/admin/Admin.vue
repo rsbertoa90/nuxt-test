@@ -99,9 +99,7 @@
                           
                
                 
-                    <image-modal :product="product"  
-                            ref="modal" @refresh="refresh()"
-                            @closedModal="closedModal()"></image-modal>
+                  
                  
         </div>
 
@@ -110,7 +108,7 @@
 </template>
 
 <script>
-import imageModal from './admin/Img-modal.vue';
+
 import adminCreate from './admin/Create.vue';
 import changePrices from './admin/Change-prices.vue';
 /* import adminReport from './Report.vue'; */
@@ -120,7 +118,7 @@ import paginator from './admin/paginator.vue';
         components : {
             paginator,
             changePrices,
-            imageModal,
+           
             adminCreate,
             productRow
         },
@@ -137,7 +135,7 @@ import paginator from './admin/paginator.vue';
                 categories :[],
                 list : [],
                 supliers : [],
-                product : null,
+               
                 showModal : false,
                 orderBy : 'suplier.name'
             }
@@ -260,10 +258,7 @@ import paginator from './admin/paginator.vue';
                 }
             },
 
-            closedModal(){
-                this.product = null;
-                
-            },
+           
             resetCheckboxes(){
                 this.selector.checked =false;
                 this.products.forEach(prod => {
