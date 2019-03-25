@@ -45,7 +45,7 @@ class ProductController extends Controller
     public function uploadImage(Request $request)
     {
         $this->forgetCaches();
-        return $request->file('image');
+        return $request->all();
         $file = $request->file('image');
         
         if ($file){
