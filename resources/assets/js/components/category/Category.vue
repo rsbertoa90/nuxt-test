@@ -16,7 +16,7 @@
           <br>
           <div class="container">
                 <div class="row">
-                    <div v-for="product in category.products" :key="product.id" class="col-lg-3 col-12">
+                    <div v-for="product in productsNotPaused" :key="product.id" class="col-lg-3 col-12">
                         <productCard :product="product" class="mt-4"></productCard>
                     </div>
                 </div>
@@ -46,6 +46,17 @@ export default {
                 });
         
 
+    },
+    computed(){
+        productsNotPaused()
+        {
+            if (this.category)
+            {
+                return this.category.products.filter(prod => {
+                    return !prod.paused;
+                });
+            }
+        }
     }
 }
 </script>
