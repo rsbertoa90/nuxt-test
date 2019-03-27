@@ -72,11 +72,10 @@ class CategoryController extends Controller
       public function uploadImage(Request $request)
     {   
         
-        $this->forgetCaches();
-
+        
         $category = Category::find($request->id);
         $file = $request->file('image');
-
+        
         if ($file){
             
             
@@ -88,7 +87,7 @@ class CategoryController extends Controller
                 if(file_exists($imageurl)){
                     unlink($imageurl);
                 }
-   
+                
             }
             
             
@@ -98,6 +97,7 @@ class CategoryController extends Controller
             return;
         }
         
+        $this->forgetCaches();
         return redirect('/admin/metadata');
     }
     
