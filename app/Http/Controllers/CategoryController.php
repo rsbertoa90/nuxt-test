@@ -78,17 +78,14 @@ class CategoryController extends Controller
         $file = $request->file('image');
 
         if ($file){
-            $ext = $file->getClientOriginalExtension();
             
-            $filename = public_path('storage/images/categories/'.str_slug($category->name).'.'.$ext) ;
             
-            if(file_exists($filename)){
+            if(file_exists($category->image)){
                 
                 
-                unlink($filename);
+                unlink($category->image);
                 $imageurl = getcwd() . $category->image;
                 if(file_exists($imageurl)){
-                   
                     unlink($imageurl);
                 }
    
