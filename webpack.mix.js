@@ -23,6 +23,7 @@ mix.webpackConfig({
 
 
 mix.js('resources/assets/js/app.js', 'public/js')
+    .extract(['vue', 'bootstrap', 'vue-mq', 'moment', 'v-lazy-image', 'vuex'])
    .sass('resources/assets/sass/app.scss', 'public/css') 
    ;
 
