@@ -31,9 +31,9 @@ class CategoryController extends Controller
 
     public function get($id)
     {        
-       return Cache::rememberForever('categories', function () {
+       
             return Category::with('products.images')->find($id);
-        });
+        
     }
 
     public function save(Request $request)
