@@ -95,7 +95,7 @@ class CategoryController extends Controller
             }
             
             
-            $path = $file->storeAs('/images/categories',str_slug($category->name).'.'.$ext);
+            $path = $file->storePublicly('/images/categories');
             $category->image = '/storage/'.$path;
             $category->save();
             return;
