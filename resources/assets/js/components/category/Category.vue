@@ -47,7 +47,7 @@ export default {
         
 
     },
-    computed(){
+    computed:{
         productsNotPaused()
         {
             if (this.category)
