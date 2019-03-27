@@ -84,7 +84,7 @@ class CategoryController extends Controller
             
             if(file_exists($filename)){
                 
-                echo('unlink')
+                echo('unlink');
                 unlink($filename);
    
             }
