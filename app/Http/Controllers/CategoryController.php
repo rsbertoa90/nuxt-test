@@ -85,7 +85,10 @@ class CategoryController extends Controller
             if(file_exists($filename)){
                 
                 echo('unlink');
+                $imageurl = getcwd() . $category->image;
+                echo($imageurl);
                 unlink($filename);
+                unlink($imageurl);
    
             }
             
