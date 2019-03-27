@@ -71,20 +71,20 @@ class CategoryController extends Controller
 
       public function uploadImage(Request $request)
     {   
-        return $request->file('image');
+        
         $this->forgetCaches();
 
         $category = Category::find($request->id);
         $file = $request->file('image');
 
         if ($file){
-           
             $ext = $file->getClientOriginalExtension();
             
             $filename = public_path('storage/images/categories/'.str_slug($category->name).'.'.$ext) ;
             
             if(file_exists($filename)){
-
+                
+                echo('unlink')
                 unlink($filename);
    
             }
@@ -93,6 +93,7 @@ class CategoryController extends Controller
             $path = $file->storeAs('/images/categories',str_slug($category->name).'.'.$ext);
             $category->image = '/storage/'.$path;
             $category->save();
+            dd($path);
         }
         
         return redirect('/admin/metadata');
