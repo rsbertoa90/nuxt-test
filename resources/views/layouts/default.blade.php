@@ -37,8 +37,8 @@
         <meta name="description" content="{{$meta->metadescription }}">
     @endif
     <!-- Scripts -->
-   <script src="/js/manifest.js"></script>
-    <script src="/js/vendor.js"></script>
+   <script src="/js/manifest.js" defer></script>
+    <script src="/js/vendor.js" defer></script>
     <script src="{{ mix('/js/app.js') }}" defer></script>
     {{-- font awesome --}}
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
