@@ -85,11 +85,10 @@ class CategoryController extends Controller
             if(file_exists($filename)){
                 
                 
-                echo('unlink-'.$filename);
                 unlink($filename);
                 $imageurl = getcwd() . $category->image;
                 if(file_exists($imageurl)){
-                    echo('unlingk'.$imageurl);
+                   
                     unlink($imageurl);
                 }
    
@@ -99,7 +98,7 @@ class CategoryController extends Controller
             $path = $file->storeAs('/images/categories',str_slug($category->name).'.'.$ext);
             $category->image = '/storage/'.$path;
             $category->save();
-            dd($path);
+            return;
         }
         
         return redirect('/admin/metadata');
