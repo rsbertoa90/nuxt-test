@@ -49,7 +49,7 @@ class OrderController extends Controller
     public function userOrder(Request $request)
     {
         
-            
+            Cache::forget('orders');
         
             Queue::push(new SaveNewOrder($request->all()));
 
