@@ -51,6 +51,11 @@
                         <th>Visto</th>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td colspan="3">
+                                <input type="text" class="form-control" v-model="searchTerm">
+                            </td>
+                        </tr>
                         <tr  v-for="order in filteredOrders" 
                                 :key="'order'+order.id"
                                 @click ="selected = order"
@@ -82,6 +87,7 @@ export default {
     },
     data(){
         return {
+            searchTerm:'',
             orders : [],
             status : 'pendiente',
             source : 'online',
@@ -126,6 +132,14 @@ export default {
                 return (order.source == vm.source 
                         && order.status == vm.status);
             });
+
+            let st = this.searchTerm.trim().toLowerCase();
+            if (st){
+                res = res.filter(order => {
+                    return order.name.trim().toLowerCase().indexOf(st) > -1 ;
+                });
+            }
+
             res = _.sortBy(res,'created_at');
             res = res.reverse();
          
