@@ -12,27 +12,29 @@
 */
 
 
-Auth::routes();
+/* Auth::routes(); */
+Route::post('/login','Auth\LoginController@login');
+Route::get('/logout','Auth\LoginController@logout');
 
 Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 
-    Route::get('/slugify','CategoryController@slugifyAll');
+   /*  Route::get('/slugify','CategoryController@slugifyAll'); */
 
-    Route::get('/failed-jobs','AdminController@failedJobs');
+  /*   Route::get('/failed-jobs','AdminController@failedJobs'); */
     
     Route::get('/prices-list-job','PDFController@dispatchPricesListJob');
     Route::get('/catalogo-job','PDFController@dispatchCatalogoJob');
     Route::get('/category-catalogo-job/{id}','PDFController@dispatchCategoryCatalogJob');
     Route::post('/replace-catalogo','PDFController@replaceCatalogo');
 
-    Route::get('/catalogo','PDFController@catalogo');
+   /*  Route::get('/catalogo','PDFController@catalogo'); */
     
     Route::post('/categories/image','CategoryController@uploadImage');
 
-    Route::get('/','AdminController@admin');
-    Route::get('/reporte','AdminController@report');
+   /*  Route::get('/','AdminController@admin'); */
+    /* Route::get('/reporte','AdminController@report'); */
 
-    Route::get('/pedidos','OrderController@panel');
+   /*  Route::get('/pedidos','OrderController@panel'); */
 
     Route::put('/product/update','ProductController@update');
 
@@ -59,7 +61,7 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 
     Route::put('/config','ConfigController@update');
 
-    Route::get('/metadata','MetadataController@page');
+   /*  Route::get('/metadata','MetadataController@page'); */
     Route::put('/metadata','MetadataController@update');
     
     Route::put('/customtext','CustomTextController@update');
@@ -68,8 +70,8 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 });
 
 
-Route::get('/test','HomeController@test');
-
+/* Route::get('/test','HomeController@test');
+ */
 Route::get('/pdf/{order}', 'OrderController@toPDF');
 
 
@@ -77,16 +79,23 @@ Route::get('/config','ConfigController@get');
 
 Route::get('/getuser','UserController@get');
 
+Route::get('/logout','HomeController@logout');
+
+Route::post('/cotizer/send', 'OrderController@userOrder');
+
+Route::get('/descargar-lista-de-precios','PDFController@pricesList');
+
+
+
+Route::get('/{any}','SinglePageController@index')->where('any', '.*');
+/* 
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/cotizer/send', 'OrderController@userOrder');
-
-Route::get('/logout','HomeController@logout');
 
 
-Route::get('/descargar-lista-de-precios','PDFController@pricesList');
-Route::get('/{slug}','CategoryController@categoryPage');
+
+Route::get('/{slug}','CategoryController@categoryPage'); */

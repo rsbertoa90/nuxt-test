@@ -74,7 +74,7 @@
 </head>
 <body>
     <div id="app">
-       <h1>hi</h1>
+       <my-app></my-app>
     </div>
 </body>
 </html>

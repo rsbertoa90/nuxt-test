@@ -9,9 +9,13 @@ export const store = new Vuex.Store({
         user: null,
         config: null,
         states: [],
-        categories:[]
+        categories:[],
+        meta:[]
     },
     getters: {
+        getMeta(store){
+            return store.meta;
+        },
         getUser(store) {
             return store.user;
         },
@@ -27,6 +31,10 @@ export const store = new Vuex.Store({
         
     },
     mutations: {
+        setMeta(state, payload) {
+            state.meta = payload;
+
+        },
         setUser(state, payload) {
             state.user = payload;
 
@@ -43,6 +51,7 @@ export const store = new Vuex.Store({
 
     },
     actions: {
+
         fetchUser: ({
             commit
         }, payload) => {
@@ -51,6 +60,15 @@ export const store = new Vuex.Store({
                 .then(response => {
                     commit('setUser', response.data);
 
+                });
+        },
+        fetchMeta: ({
+            commit
+        }, payload) => {
+
+            Vue.http.get('/api/meta')
+                .then(response => {
+                    commit('setMeta', response.data);
                 });
         },
         fetchConfig: ({

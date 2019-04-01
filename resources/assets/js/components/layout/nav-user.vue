@@ -1,22 +1,22 @@
 <template>
          <nav class="navbar navbar-expand-lg navbar-dark bg-fucsia font-weight-bold">
-                <a class="navbar-brand " href="/">
+                <router-link class="navbar-brand " to="/">
                     <v-lazy-image style="width:100px" src="/storage/images/app/logo.png" alt="Bazar Mayorista Maju" />
-                </a>
+                </router-link>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon text-white"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item text-white">
-                            <a class="nav-link text-white" href="/">
+                            <router-link class="nav-link text-white" to="/cotizador">
                             <span class="fa fa-shopping-cart"></span> Hace tu pedido <span class="sr-only">(current)</span>
-                            </a>
+                            </router-link>
                         </li>
                         <li class="nav-item text-white">
-                            <a class="nav-link text-white" href="https://hipermaju.com/contactenos">
-                                <span class="fa fa-phone"></span>    Contactate con nosotros
-                            </a>
+                            <router-link class="nav-link text-white" to="/contactanos">
+                                <span class="fa fa-phone"></span>  Contactate con nosotros
+                            </router-link>
                         </li>
                         <li class="nav-item text-white">
                              <a class="nav-link text-white" target="_blank" href="/MAJU-lista-de-precios.pdf" >
