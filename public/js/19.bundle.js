@@ -1,6 +1,6 @@
-webpackJsonp([7],{
+webpackJsonp([19],{
 
-/***/ 190:
+/***/ 108:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9,28 +9,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            csrf: $('meta[name="csrf-token"]').attr('content')
-        };
+    computed: {
+        categories: function categories() {
+            return this.$store.getters.getNotPaused;
+        }
     }
 });
 
 /***/ }),
 
-/***/ 191:
+/***/ 109:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("input", {
-    attrs: { type: "hidden", name: "_token" },
-    domProps: { value: _vm.csrf }
-  })
+  return _c("div", [
+    _c("h1", [_vm._v("HOME")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "d-flex flex-column" },
+      _vm._l(_vm.categories, function(category) {
+        return _c(
+          "router-link",
+          { key: category.id, attrs: { to: category.slug } },
+          [_vm._v("\n           " + _vm._s(category.name) + "\n       ")]
+        )
+      })
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38,21 +57,21 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c529ed8a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-3a7dd8a8", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 99:
+/***/ 92:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(190)
+var __vue_script__ = __webpack_require__(108)
 /* template */
-var __vue_template__ = __webpack_require__(191)
+var __vue_template__ = __webpack_require__(109)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69,7 +88,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/csrf.vue"
+Component.options.__file = "resources/assets/js/components/home/Home.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -78,9 +97,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c529ed8a", Component.options)
+    hotAPI.createRecord("data-v-3a7dd8a8", Component.options)
   } else {
-    hotAPI.reload("data-v-c529ed8a", Component.options)
+    hotAPI.reload("data-v-3a7dd8a8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

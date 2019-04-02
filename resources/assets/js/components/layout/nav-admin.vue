@@ -10,7 +10,7 @@
                 <ul class="navbar-nav">
                     
                     <li class="nav-item ">
-                        <router-link class="nav-link text-white" to="/">Cotizador <span class="sr-only">(current)</span></router-link>
+                        <router-link class="nav-link text-white" to="/cotizador">Cotizador <span class="sr-only">(current)</span></router-link>
                     </li>
                     <li class="nav-item ">
                         <router-link class="nav-link text-white" to="/admin">Administrar Productos</router-link>

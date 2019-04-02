@@ -9,7 +9,7 @@
                
                 <div  class="bg-success p-1">
                     <div class="bg-white d-flex justify-content-center p-1">
-                        <a href="#form"> Terminar pedido </a>
+                        <router-link to="/terminar-pedido" >  Terminar pedido </router-link>
                     </div>
                 </div>
             </div>    

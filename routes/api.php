@@ -30,7 +30,7 @@ Route::get('/supliers', 'SuplierController@getAll');
 
 Route::get('/orders','OrderController@get');
 
-Route::get('/metadata/{page}', 'MetadataController@get');
+Route::get('/meta','MetadataController@getAll');
 
 Route::get('/states','StateController@get');
 

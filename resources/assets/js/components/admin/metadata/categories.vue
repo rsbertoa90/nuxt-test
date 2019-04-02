@@ -20,18 +20,19 @@
 
                 <div class="p2 row">
                     <label class="col-12 col-lg-4">
+                        URL
+                    </label>
+                    <textarea rows="2" v-model.lazy.trim="selected.slug" @change="saveSlug(selected)" 
+                        type="text" class="col-12 col-lg-8 form-control"></textarea>
+                </div>
+                <div class="p2 row">
+                    <label class="col-12 col-lg-4">
                         Descripcion
                     </label>
                     <textarea rows="5" v-model.lazy.trim="selected.description" @change="save(selected,'description')" 
                         type="text" class="col-12 col-lg-8 form-control"></textarea>
                 </div>
-                <div class="p2 row">
-                    <label class="col-12 col-lg-4">
-                        Descripcion para HOME
-                    </label>
-                    <textarea rows="5" v-model.lazy.trim="selected.homedescription" @change="save(selected,'homedescription')" 
-                        type="text" class="col-12 col-lg-8 form-control"></textarea>
-                </div>
+               
                 <div class="p2 row">
                     <label class="col-12 col-lg-4">
                         Meta Titutlo
@@ -48,7 +49,7 @@
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-6">
+                    <div class="col-6 overflow-hidden">
                         <img :src="selected.image" :alt="selected.name">
                     </div>
                     <div class="col-6 d-flex align-items-end">
@@ -97,8 +98,35 @@ export default {
                 value : category[field]
             }
             this.$http.put('/admin/category',data);
+        },
+        saveSlug(category){
+            this.selected.slug  = this.selected.slug.replace(/\s+/g, '-').toLowerCase().trim();
+            
+            let dups = this.categories.find(c => {
+                return c.slug === this.selected.slug && c.id != this.selected.id;
+            });
+
+            if (dups){
+                swal('Cuidado!','Ya existe una categoria con esa URL','warning');
+            }else{
+                this.save(category,'slug');
+            }
+        }
+    },
+    watch:{
+        'selected.slug'(){
+            this.selected.slug  = this.selected.slug.replace(/\s+/g, '-').toLowerCase().trim();
         }
     }
 
 }
 </script>
+
+<style scoped>
+img{
+    width: 100%;
+}
+    .overflow-hidden{
+        overflow: hidden;
+    }
+</style>

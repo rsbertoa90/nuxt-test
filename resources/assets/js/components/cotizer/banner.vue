@@ -1,12 +1,14 @@
 <template>
 <div class="neg-margins">
       <h2  class="mt-4 font-weight-bold"
-            :class="{dared:pos,dablue:!pos}">
-        <span class="fa fa-arrow-down"
-            :class="{todaright:pos, todaleft:!pos}"></span>
+            :class="{dared:!pos,dablue:pos}">
+        <span :class="{'todaright colorRed':pos, 'todaleft colorBlue':!pos}">
+            <i class="fa fa-arrow-down"></i>
+        </span>
             HACE TU PEDIDO
-        <span class="fa fa-arrow-down"
-            :class="{todaright:!pos, todaleft:pos}"></span>
+        <span :class="{'todaright colorBlue':!pos, 'todaleft colorRed':pos}">
+             <i class="fa fa-arrow-down"></i>
+        </span>
     </h2>
     <div v-if="configs" class="d-flex flex-column mb-1">
         <h4 class="text-primary">
@@ -67,13 +69,15 @@ export default {
      transition: ease 1s;
 }
     .todaright{
+          display: inline-flex;
         transform: rotate(15deg);
-        color:blue;
+       
         transition: ease 1s;
     }
     .todaleft{
+        display: inline-flex;
          transform: rotate(-15deg);
-         color:red;
+        
          transition: 1s ease;
     }
 

@@ -32,22 +32,35 @@
 import productCard from './productcard.vue';
 export default {
     components:{productCard},
-    props:['category_id'],
-    data() {
-        return {
-            category:null
+    metaInfo () {
+        return{
+            title: this.metatitle
         }
     },
-    created(){
-        
-            this.$http.get('/api/category/'+this.category_id)
-                .then(res=>{
-                    this.category = res.data;
-                });
-        
-
+    data() {
+        return {
+           
+        }
     },
+  
     computed:{
+        metatitle(){
+            return (this.category && this.category.metatitle.trim()) ? this.category.metatitle : 'Bazar Mayorista Maju';
+        },
+        categories(){
+            return this.$store.getters.getCategories;
+        },
+        category()
+        {
+            var  vm = this;
+            if (this.categories){
+                return this.categories.find(cat => {
+                    return cat.slug == '/'+vm.$route.params.category_slug;
+                    console.log(cat.slug);
+                    console.log('/'+vm.$route.params.category_slug);
+                });
+            }
+        },
         productsNotPaused()
         {
             if (this.category)
@@ -60,3 +73,4 @@ export default {
     }
 }
 </script>
+

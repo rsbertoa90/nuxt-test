@@ -63,22 +63,9 @@
                 </paginator>
         </div>
 
-
-        <total-bouncer :total="total" v-if="total"></total-bouncer>
-        
-        <hr>
-        
-        <div>
-            <cotizer-form  :list="list" :total="total"></cotizer-form>    
-        </div>
-        
-        
-        <div v-if="!user || user.role_id > 2">
-             <pedido  v-if="list && list.length > 0" :list=list></pedido>
-        </div>
     </div>
 
-    <whatsappBtn v-if="!user || user.role_id > 2 "></whatsappBtn>
+   
 
     <cotizer-tutorial v-if="!user || user.role_id > 2 "></cotizer-tutorial>
 
@@ -89,29 +76,25 @@
 </template>
 
 <script>
-import pedido from './pedido.vue';
 import appBanner from './banner.vue';
 import cotizerTutorial from './tutorial.vue';
 import paginator from '../admin/admin/paginator.vue';
-import whatsappBtn from '../layout/whatsapp.vue';
+
 import hideOptbutton from './hide-opt-button.vue';
 import codeSelector from './code-selector.vue';
 import categoriesAcordion from './categories-acordion.vue';
-import totalBouncer from './total-bouncer.vue';
+
 import productsTable from './products-table.vue';
-import cotizerForm from './Cotizer-form.vue';
+
     export default {
         components:{
-            cotizerForm,
+          
             paginator,
             productsTable,
             categoriesAcordion,
-            totalBouncer,
             codeSelector,
-            pedido,
             appBanner,
             cotizerTutorial,
-            whatsappBtn,
             hideOptbutton,
             },
         data(){
@@ -120,37 +103,18 @@ import cotizerForm from './Cotizer-form.vue';
                  productsPerPage:30,
                 searchTerm:'',
                 loading:true,
-               
-               /*  categories : [], */
-                list : [],
-               /*  user : null, */
-               /*  config:null */
+             
             }
         },
         watch : {
             searchTerm(){
               this.selectedPage = 1;
            },
-            total() {
-                   var result = [];
-                   var vm = this;
-                    vm.categories.forEach(function(category){
-                    var prods = category.products.filter(function(el){     
-                        return ( el.units != null & el.units > 0 );
-                    });
-                    if (prods.length > 0){
-                        result.push(prods);
-                        
-                    }
-                    
-                });
-                
-                
-                vm.list = [].concat.apply([], result);
-               
-            }
         },
         computed: {
+            list(){
+                return this.$store.getters.getList;
+            },
             paginatedProducts(){
                 if (this.filteredProducts)
                 {
@@ -190,7 +154,7 @@ import cotizerForm from './Cotizer-form.vue';
                 }
             },
             categories(){
-                return this.$store.getters.getCategories;
+                return this.$store.getters.getNotPaused;
             },
             config(){
                 return this.$store.getters.getConfig;
@@ -200,22 +164,7 @@ import cotizerForm from './Cotizer-form.vue';
             },
 
             total() {
-                var vm = this;
-                var tot = 0;
-                vm.categories.forEach(function(category){
-                    category.products.forEach(function(product){
-                        if (product.units > 0)
-                        {
-                            if (product.units < product.pck_units){
-                                tot+= product.price * product.units;
-                            }
-                            else {
-                                tot+= product.pck_price * product.units
-                            }
-                        }
-                    });
-                });
-                return tot;
+               return this.$store.getters.getTotal;
             }
         },
       

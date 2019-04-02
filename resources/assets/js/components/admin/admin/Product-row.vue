@@ -11,6 +11,7 @@
         <td>
             <input v-model.lazy="product.code" @change="saveChange(product,'code')" 
                     type="text" class="form-control smallField">
+
         </td>
         <td >
             <select class="form-control" v-model="product.suplier_id" 
@@ -69,6 +70,9 @@
             <button @click.prevent="togglePause(product)" class="btn btn-sm m-1" :class="{'btn-info' : !product.paused, 'btn-success': product.paused}">
                 <i :class="{'fa fa-pause-circle' : !product.paused , 'fa fa-play' : product.paused}"></i>
             </button>
+            <button @click.prevent="toggleOffer(product)" class="btn btn-sm m-1" :class="{'btn-secondary' : !product.offer, 'btn-info': product.offer}">
+                Oferta
+            </button>
             
         </td>
         <image-modal v-if="product && showModal" :product="product"  
@@ -102,6 +106,12 @@ export default {
             togglePause(product){
                 var vm = this;
                 product.paused = !product.paused;
+                vm.saveChange(product,'paused');
+                
+            },
+            toggleOffer(product){
+                var vm = this;
+                product.offer = !product.offer;
                 vm.saveChange(product,'paused');
               
 

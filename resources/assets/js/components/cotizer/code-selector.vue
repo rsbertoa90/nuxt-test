@@ -17,18 +17,16 @@
                     </div>
                     <button type="submit" class="btn btn-md btn-secondary ml-2" :class="{'btn-outline-success':selector.product && selector.units > 0}"> <span class="fa fa-plus"></span> </button>
                 </form>
-                <div class="w-100">
-                   <pedido v-if="list && list.length > 0" :list="list"></pedido>
-                </div>
+               
     </div>
 </template>
 
 
 <script>
-import pedido from './pedido.vue';
+
 export default {
     props:['list'],
-    components:{pedido},
+   
     computed:{
         categories(){
             return this.$store.getters.getCategories;

@@ -2,12 +2,12 @@
 import Vue from 'vue';
 
 import VueRouter from 'vue-router';
-import Meta from 'vue-meta';
+import VueMeta from 'vue-meta';
 
 import {store} from './store/store.js';
 
 Vue.use(VueRouter);
-Vue.use(Meta);
+Vue.use(VueMeta);
 
 
 
@@ -54,6 +54,11 @@ const Login = () => import('./components/login/Login.vue');
 
 const Home = () =>  import('./components/home/Home.vue') ; 
 const Cotizer = () => import('./components/cotizer/Cotizer.vue');
+const Contact = () => import('./components/contact/Contact.vue');
+const Category = () => import('./components/category/Category.vue');
+const Cart = () => import('./components/shoppingCart/ShoppingCart.vue');
+
+
 
 const Admin = () => import('./components/admin/Admin.vue');
 const Orders = () => import('./components/admin/Orders.vue'); 
@@ -93,12 +98,26 @@ const router = new VueRouter({
             name:'home',
             component:Home
         },
-        
+        {
+            path: '/terminar-pedido',
+            name:'cart',
+            component: Cart
+        },
+        {
+            path:'/contacto',
+            name:'contacto',
+            component:Contact
+        },
         {
             path:'/cotizador',
             name:'cotizador',
             component: Cotizer
-        }
+        },
+        {
+            path:'/:category_slug',
+            name:'category',
+            component:Category
+        },
     ]
     
 });

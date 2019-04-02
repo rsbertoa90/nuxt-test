@@ -1,6 +1,6 @@
 <template>
     
-    <div class="row mt-4">
+    <div class="row mt-4 p-4">
         <div class="col-12">
             <a href="/admin/lista-de-precios" class="btn btn-outline-info">  
                 Refrescar Lista de Precios

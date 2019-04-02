@@ -132,7 +132,7 @@ import paginator from './admin/paginator.vue';
                 selector : {id :'all', checked : false},
                 variation:0,
                 products : [],
-                categories :[],
+               
                 list : [],
                 supliers : [],
                
@@ -141,6 +141,9 @@ import paginator from './admin/paginator.vue';
             }
         },
         computed:{
+            categories(){
+                return this.$store.getters.getCategories;
+            },
             selectedProducts()
             {
                 var list =[];
@@ -317,13 +320,8 @@ import paginator from './admin/paginator.vue';
          
             refresh(){
                 var vm = this;
-                $.ajax({
-                    url : 'api/categories',
-                    success(response){
-                        vm.categories = response;
-                        vm.categories = _.sortBy(vm.categories,'name');
-                    }
-                });
+                this.$store.dispatch('fetchCategories');
+
                 $.ajax({
                     url : 'api/supliers',
                     success(response){
@@ -331,6 +329,7 @@ import paginator from './admin/paginator.vue';
                          vm.supliers = _.sortBy(vm.supliers,'name');
                     }
                 });
+                
                 $.ajax({
                 url : 'api/products',
                 success(response){

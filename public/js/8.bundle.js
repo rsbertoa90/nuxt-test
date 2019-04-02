@@ -1,6 +1,6 @@
-webpackJsonp([7],{
+webpackJsonp([8],{
 
-/***/ 190:
+/***/ 144:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11,26 +11,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
+    metaInfo: function metaInfo() {
         return {
-            csrf: $('meta[name="csrf-token"]').attr('content')
+            title: 'Contacto'
         };
     }
 });
 
 /***/ }),
 
-/***/ 191:
+/***/ 145:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("input", {
-    attrs: { type: "hidden", name: "_token" },
-    domProps: { value: _vm.csrf }
-  })
+  return _c("h1", [_vm._v("contacto")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38,21 +35,21 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c529ed8a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-628e4fca", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 99:
+/***/ 94:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(190)
+var __vue_script__ = __webpack_require__(144)
 /* template */
-var __vue_template__ = __webpack_require__(191)
+var __vue_template__ = __webpack_require__(145)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69,7 +66,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/csrf.vue"
+Component.options.__file = "resources/assets/js/components/contact/Contact.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -78,9 +75,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c529ed8a", Component.options)
+    hotAPI.createRecord("data-v-628e4fca", Component.options)
   } else {
-    hotAPI.reload("data-v-c529ed8a", Component.options)
+    hotAPI.reload("data-v-628e4fca", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

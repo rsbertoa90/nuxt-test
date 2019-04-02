@@ -25,7 +25,11 @@
 
 <script>
 export default {
-    props:['list'],
+   computed:{
+       list(){
+           return this.$store.getters.getList;
+       }
+   },
     methods:{
         del(product)
         {
