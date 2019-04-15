@@ -3,11 +3,11 @@
       <h2  class="mt-4 font-weight-bold"
             :class="{dared:!pos,dablue:pos}">
         <span :class="{'todaright colorRed':pos, 'todaleft colorBlue':!pos}">
-            <i class="fa fa-arrow-down"></i>
+           <fa-icon icon="arrow-down"></fa-icon>
         </span>
             HACE TU PEDIDO
         <span :class="{'todaright colorBlue':!pos, 'todaleft colorRed':pos}">
-             <i class="fa fa-arrow-down"></i>
+              <fa-icon icon="arrow-down"></fa-icon>
         </span>
     </h2>
     <div v-if="configs" class="d-flex flex-column mb-1">

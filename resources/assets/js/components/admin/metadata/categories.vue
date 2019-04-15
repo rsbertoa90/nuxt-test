@@ -5,7 +5,7 @@
             <hr>
         </div>
         
-        <div class="col-12 col-lg-4 d-flex flex-column">
+        <div class="col-12 col-lg-4 d-flex flex-column scroll-y">
             <button v-for="category in categories" 
                     :key="category.id"
                     @click="selected=category"
@@ -50,7 +50,7 @@
 
                 <div class="row mt-4">
                     <div class="col-6 overflow-hidden">
-                        <img :src="selected.image" :alt="selected.name">
+                        <img :src="selected.image" :alt="selected.name" style="width:100px">
                     </div>
                     <div class="col-6 d-flex align-items-end">
                         <label class="btn btn-block btn-outline-info btn-file">
@@ -79,16 +79,23 @@ export default {
     },
     methods :{
         bindFile(e){
+            var vm=this;
              var fileUploadFormData=new FormData();
             var file = e.target.files[0];
             var ext = file.name.split('.').pop();
             if (ext == 'png' || ext == 'jpg' || ext == 'jpeg' || ext == 'gif' || ext == webp){
                 fileUploadFormData.append('image', e.target.files[0]);
                 fileUploadFormData.append('id', this.selected.id);
-                this.$http.post('/super/category/image', fileUploadFormData)
-                        .then(response => {
-                           window.location.replace('/super');
-                        });
+                this.$http.post('/admin/category/image', fileUploadFormData)
+                    .then(res => {
+                        vm.$store.dispatch('fetchCategories');
+                        setTimeout(() => {
+                            vm.selected = vm.categories.find(c=>{
+                                return vm.selected.id == c.id;
+                            });
+                        }, 200);
+                    });
+                       
             }
         },
         save(category,field){
@@ -100,24 +107,31 @@ export default {
             this.$http.put('/admin/category',data);
         },
         saveSlug(category){
-            this.selected.slug  = this.selected.slug.replace(/\s+/g, '-').toLowerCase().trim();
-            
-            let dups = this.categories.find(c => {
-                return c.slug === this.selected.slug && c.id != this.selected.id;
-            });
+            if(this.selected.slug){
 
-            if (dups){
-                swal('Cuidado!','Ya existe una categoria con esa URL','warning');
-            }else{
-                this.save(category,'slug');
+                this.selected.slug  = this.selected.slug.replace(/\s+/g, '-').toLowerCase().trim();
+                
+                let dups = this.categories.find(c => {
+                    return c.slug === this.selected.slug && c.id != this.selected.id;
+                });
+
+                if (dups){
+                    swal('Cuidado!','Ya existe una categoria con esa URL','warning');
+                }else{
+                    this.save(category,'slug');
+                }
             }
         }
     },
     watch:{
         'selected.slug'(){
-            this.selected.slug  = this.selected.slug.replace(/\s+/g, '-').toLowerCase().trim();
+            if(this.selected.slug){
+
+                this.selected.slug  = this.selected.slug.replace(/\s+/g, '-').toLowerCase().trim();
+            }
         }
-    }
+    },
+    
 
 }
 </script>
@@ -129,4 +143,10 @@ img{
     .overflow-hidden{
         overflow: hidden;
     }
+
+.scroll-y{
+    height:500px;
+    overflow-y:scroll;
+
+}
 </style>

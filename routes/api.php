@@ -38,3 +38,5 @@ Route::get('/city/{id}','StateController@getCity');
 
 Route::get('/custom-text/{code}','CustomTextController@get');
 Route::get('/custom-texts','CustomTextController@getAll');
+
+Route::get('/slides','SlideController@get');

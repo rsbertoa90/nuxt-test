@@ -1,6 +1,6 @@
 <template>
     <div class="whatsapp">
-        <a rel="noreferrer" target="_blank" href="https://api.whatsapp.com/send?phone=5491127082683&text=Hola!%20te%20escribo%20desde%20la%20pagina%20web,%20tengo%20una%20pregunta" > <i class="fab fa-whatsapp"></i>  <span> ¿Te podemos ayudar? </span> </a>
+        <a rel="noreferrer" target="_blank" href="https://api.whatsapp.com/send?phone=5491127082683&text=Hola!%20te%20escribo%20desde%20la%20pagina%20web,%20tengo%20una%20pregunta" > <fa-icon class="fa-whatsapp" :icon="['fab','whatsapp']"></fa-icon>  <span> ¿Te podemos ayudar? </span> </a>
     </div>
 </template>
 

@@ -1,7 +1,8 @@
 <template>
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column p-4">
         <cotizer-form></cotizer-form>
         <list></list>
+        <div class="col-12" style="height:100px"></div>
     </div> 
 </template>
 

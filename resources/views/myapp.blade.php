@@ -43,14 +43,11 @@
     <script src="{{ mix('/js/vendor.js') }}" defer></script>
     <script src="{{ mix('/js/app.js') }}" defer></script>
     
-    {{-- font awesome --}}
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://ajax.googleapis.com" crossorigin>
     
-    <!-- Fonts -->
-    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
-   
+    
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" >
     

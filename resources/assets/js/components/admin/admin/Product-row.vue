@@ -11,7 +11,6 @@
         <td>
             <input v-model.lazy="product.code" @change="saveChange(product,'code')" 
                     type="text" class="form-control smallField">
-
         </td>
         <td >
             <select class="form-control" v-model="product.suplier_id" 
@@ -65,10 +64,11 @@
         <td class="d-flex flex-column justify-content-center align-items-center p-0">
             <input class="form-control" type="checkbox" v-model="product.selected">
             <button @click.prevent="deleteProduct(product)" class="btn btn-sm btn-outline-danger m-1">
-                <i class="fa fa-trash"></i>
+                <fa-icon icon="trash"></fa-icon>
             </button>
             <button @click.prevent="togglePause(product)" class="btn btn-sm m-1" :class="{'btn-info' : !product.paused, 'btn-success': product.paused}">
-                <i :class="{'fa fa-pause-circle' : !product.paused , 'fa fa-play' : product.paused}"></i>
+                <fa-icon v-if="product.paused" icon="play" class="text-success"></fa-icon>
+                <fa-icon v-else icon="pause-circle" class="text-info"></fa-icon>
             </button>
             <button @click.prevent="toggleOffer(product)" class="btn btn-sm m-1" :class="{'btn-secondary' : !product.offer, 'btn-info': product.offer}">
                 Oferta

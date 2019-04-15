@@ -11,10 +11,13 @@
 |
 */
 
-
-/* Auth::routes(); */
 Route::post('/login','Auth\LoginController@login');
 Route::get('/logout','Auth\LoginController@logout');
+Route::get('/sitemap.xml','SitemapController@sitemap');
+
+/* Auth::routes(); */
+
+
 
 Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 
@@ -29,7 +32,7 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 
    /*  Route::get('/catalogo','PDFController@catalogo'); */
     
-    Route::post('/categories/image','CategoryController@uploadImage');
+    Route::post('/category/image','CategoryController@uploadImage');
 
    /*  Route::get('/','AdminController@admin'); */
     /* Route::get('/reporte','AdminController@report'); */
@@ -79,8 +82,6 @@ Route::get('/config','ConfigController@get');
 
 Route::get('/getuser','UserController@get');
 
-Route::get('/logout','HomeController@logout');
-
 Route::post('/cotizer/send', 'OrderController@userOrder');
 
 Route::get('/descargar-lista-de-precios','PDFController@pricesList');
@@ -88,14 +89,3 @@ Route::get('/descargar-lista-de-precios','PDFController@pricesList');
 
 
 Route::get('/{any}','SinglePageController@index')->where('any', '.*');
-/* 
-Route::get('/', 'HomeController@index')->name('home');
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-
-
-Route::get('/{slug}','CategoryController@categoryPage'); */

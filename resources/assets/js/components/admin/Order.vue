@@ -72,14 +72,14 @@
             <div class="col-12 col-lg-4" v-if="order.status == 'pagado'">
                 <button  @click="setStatus('enviado')"
                     class="btn btn-block btn-outline-info">
-                    <span class="fa fa-truck"></span>
+                    <fa-icon icon="truck"></fa-icon>
                     Marcar como enviado
                 </button>
             </div>
             <div class="col-12 col-lg-4" v-if="order.status != 'pagado' && order.status != 'cancelado'">
                 <button  @click="setStatus('pagado')"
                     class="btn btn-block btn-outline-success">
-                     <span class="fa fa-dollar-sign"></span>
+                     <fa-icon icon="dollar-sign"></fa-icon>
                     Marcar como pagado
                 </button>
             </div>
@@ -87,14 +87,14 @@
                 <button 
                         @click="setStatus('cancelado')"
                     class="btn btn-block btn-outline-danger">
-                     <span class="fa fa-times"></span>
+                     <fa-icon icon="times"></fa-icon>
                     Marcar como Cancelado
                 </button>
             </div>
             <div class="col-12 col-lg-4" v-if="order.status != 'pendiente' && order.status != 'enviado'">
                 <button  @click="setStatus('pendiente')"
                     class="btn btn-block btn-outline-warning">
-                     <span class="far fa-clock"></span>
+                     <fa-icon icon="clock"></fa-icon>
                     Marcar como Pendiente
                 </button>
             </div>

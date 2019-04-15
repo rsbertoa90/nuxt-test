@@ -23,10 +23,11 @@
 
             <div class="controls"  v-if="product.images && product.images.length > 1" >
                 <span class="chevron-button" v-on:click.prevent="changeImage('prev')" >
-                    <i  class="fa fa-chevron-left text-info "></i>
+                    <fa-icon icon="chevron-left" class="text-info"></fa-icon>
+                
                 </span>
-                <span class="chevron-button" v-on:click.prevent="changeImage('next')" >
-                    <i class="fa fa-chevron-right text-info "></i>
+                <span class="chevron-button text-info" v-on:click.prevent="changeImage('next')" >
+                    <fa-icon icon="chevron-right"></fa-icon>
                 </span>
             </div>
 

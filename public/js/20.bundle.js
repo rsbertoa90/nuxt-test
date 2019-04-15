@@ -1,6 +1,6 @@
 webpackJsonp([20],{
 
-/***/ 144:
+/***/ 109:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9,25 +9,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    metaInfo: function metaInfo() {
-        return {
-            title: 'Contacto'
-        };
+    computed: {
+        categories: function categories() {
+            return this.$store.getters.getNotPaused;
+        }
     }
 });
 
 /***/ }),
 
-/***/ 145:
+/***/ 110:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("contacto")])
+  return _c("div", [
+    _c("h1", [_vm._v("HOME")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "d-flex flex-column" },
+      _vm._l(_vm.categories, function(category) {
+        return _c(
+          "router-link",
+          { key: category.id, attrs: { to: category.slug.trim() } },
+          [_vm._v("\n           " + _vm._s(category.name) + "\n       ")]
+        )
+      })
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -35,21 +57,21 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-628e4fca", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-3a7dd8a8", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 94:
+/***/ 92:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(144)
+var __vue_script__ = __webpack_require__(109)
 /* template */
-var __vue_template__ = __webpack_require__(145)
+var __vue_template__ = __webpack_require__(110)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -66,7 +88,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/contact/Contact.vue"
+Component.options.__file = "resources/assets/js/components/home/Home.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -75,9 +97,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-628e4fca", Component.options)
+    hotAPI.createRecord("data-v-3a7dd8a8", Component.options)
   } else {
-    hotAPI.reload("data-v-628e4fca", Component.options)
+    hotAPI.reload("data-v-3a7dd8a8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

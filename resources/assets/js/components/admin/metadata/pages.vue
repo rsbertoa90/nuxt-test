@@ -25,7 +25,7 @@
                     <label class="col-12 col-lg-4">
                         Meta Titutlo
                     </label>
-                    <textarea rows="2" v-model.lazy.trim="selected.metatitle" @change="save(selected,'metatitle')" 
+                    <textarea rows="5" v-model.lazy.trim="selected.metatitle" @change="save(selected,'metatitle')" 
                         type="text" class="col-12 col-lg-8 form-control"></textarea>
                 </div>
                 <div class="p2 row">
@@ -59,11 +59,11 @@ export default {
     methods :{
         save(meta,field){
             var data = {
-                page : meta.page,
+                id : meta.id,
                 field : field,
                 value : meta[field]
             }
-            this.$http.put('/super/metadata',data);
+            this.$http.put('/admin/metadata',data);
         }
     }
 

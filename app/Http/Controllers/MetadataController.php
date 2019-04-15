@@ -25,22 +25,24 @@ class MetadataController extends Controller
      public function getAll(){
         
         if ( Cache::has('metadatas') ){
+            
             return Cache::get('metadatas');
         }
         else{
 
-            $pages = ['home',
+            return Cache::rememberForever('metadatas', function(){
+                $pages = ['home',
                       'cotizador',
                       'contacto',];
             
-            $res = [];
-    
-            foreach ($pages as $page)
-            {
-                $res[] = Metadata::findOrCreate($page);
-            }
-    
-            return $res;
+                $res = [];
+        
+                foreach ($pages as $page)
+                {
+                    $res[] = Metadata::findOrCreate($page);
+                }
+                return $res;
+            });
         }
         
     }

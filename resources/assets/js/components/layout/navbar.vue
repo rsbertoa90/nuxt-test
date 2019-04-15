@@ -1,16 +1,17 @@
 <template>
     <div>
-        <navAdmin v-if="user && user.role_id < 3"></navAdmin>
-        <navUser v-else></navUser>
+       <navMobile v-if="$mq!='lg'"></navMobile>
+       <navWide v-if="$mq == 'lg'"></navWide>
     </div>
 </template>
 
 
 <script>
-import navUser from './nav-user.vue';
-import navAdmin from './nav-admin.vue';
+import navMobile from './nav/mobile.vue';
+import navWide from './nav/wide.vue';
+/* import navWide from './nav-admin.vue'; */
 export default {
-    components:{navUser,navAdmin},
+    components:{navMobile,navWide},
     computed:{
         user(){
             return this.$store.getters.getUser;

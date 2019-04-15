@@ -55,8 +55,10 @@ const Login = () => import('./components/login/Login.vue');
 const Home = () =>  import('./components/home/Home.vue') ; 
 const Cotizer = () => import('./components/cotizer/Cotizer.vue');
 const Contact = () => import('./components/contact/Contact.vue');
-const Category = () => import('./components/category/Category.vue');
 const Cart = () => import('./components/shoppingCart/ShoppingCart.vue');
+const Category = () => import('./components/category/Category.vue');
+const CategoryIndex = () => import('./components/category/categoryIndex.vue');
+const Product = () => import('./components/category/product/Product.vue');
 
 
 
@@ -99,8 +101,8 @@ const router = new VueRouter({
             component:Home
         },
         {
-            path: '/terminar-pedido',
-            name:'cart',
+            path: '/carrito',
+            name:'carrito',
             component: Cart
         },
         {
@@ -114,10 +116,21 @@ const router = new VueRouter({
             component: Cotizer
         },
         {
-            path:'/:category_slug',
-            name:'category',
-            component:Category
-        },
+            path: '/:category_slug',
+            component: Category,
+            children: [{
+                    path: '',
+                    component: CategoryIndex,
+                    name: 'category'
+                },
+                {
+                    path: ':product_slug',
+                    component: Product,
+                    name: 'product'
+                }
+            ]
+
+        }
     ]
     
 });

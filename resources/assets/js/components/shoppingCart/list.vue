@@ -1,6 +1,6 @@
 <template>
-    <div v-if="list && list.length > 0" class="mt-5">
-        <h5>Pedido actual:</h5>
+    <div v-if="list && list.length > 0" class="mt-5 p-4">
+        <h5>Tu pedido:</h5>
         <table class="table table-striped">
             <thead>
                 <th>Codigo</th>
@@ -16,7 +16,7 @@
                     <td>  <input type="number" class="form-control" style="width:100px" v-model.lazy="product.units" > </td>
                     <td v-if="product.units < product.pck_units"> ${{ product.price * product.units | price }} </td>
                     <td v-else> ${{ product.pck_price * product.units | price }} </td>
-                    <td> <button class="btn btn-sm btn-outline-danger" @click="del(product)"> <span class="fa fa-times"></span> </button> </td>
+                    <td> <button class="btn btn-sm btn-outline-danger" @click="del(product)"> <fa-icon icon="times"></fa-icon> </button> </td>
                 </tr>
             </tbody>
         </table>
@@ -41,8 +41,8 @@ export default {
 </script>
 
 <style scoped>
-    .table{
-        font-size:0.8rem;
+    .table .td{
+        font-size:1rem;
         margin-left: -2%;
     }
     .form-control{
@@ -54,7 +54,7 @@ export default {
     }
 
     @media(max-width:600px){
-        .table{
+        .table .td{
             font-size:0.6rem;
         }
     }

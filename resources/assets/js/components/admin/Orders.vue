@@ -8,7 +8,7 @@
                         class="btn btn-block "
                         :class="{'btn-outline-warning':status != 'pendiente',
                                 'btn-warning' : status == 'pendiente'}">
-                        <span class="far fa-clock"></span>
+                        <fa-icon icon="clock"></fa-icon>
                         Pendientes
                     </button>
                 </div>
@@ -17,7 +17,7 @@
                         class="btn btn-block"
                         :class="{'btn-outline-success':status != 'pagado',
                                 'btn-success' : status == 'pagado'}">
-                        <span class="fa fa-dollar-sign"></span>
+                        <fa-icon icon="dollar-sign"></fa-icon>
                         Pagadas
                     </button>
                 </div>
@@ -26,7 +26,7 @@
                         class="btn btn-block"
                         :class="{'btn-outline-info':status != 'enviado',
                                 'btn-info' : status == 'enviado'}">
-                        <span class="fa fa-truck"></span>
+                        <fa-icon icon="truck"></fa-icon>
                         Enviadas
                     </button>
                 </div>
@@ -35,7 +35,7 @@
                         class="btn btn-block"
                         :class="{'btn-outline-danger':status != 'cancelado',
                                 'btn-danger' : status == 'cancelado'}">
-                      <span class="fa fa-times"></span>
+                      <fa-icon  icon="times"></fa-icon>
                        Canceladas
                     </button>
                 </div>
