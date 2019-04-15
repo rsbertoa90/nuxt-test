@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="mt-4 p-4">
+        <h2>Slider</h2>
         <!-- Sample -->
         <div class="row" v-if="this.slides && this.slides[this.selected]">
             <div class="col-12 img-container">
@@ -10,9 +11,13 @@
                 <label for="">Leyenda</label>
                 <input type="text" v-model="selected.alt">
             </div>
+            <div class="col-12">
+                <label for="">URL destino</label>
+                <input type="text" v-model="selected.url">
+            </div>
         </div>
 
-        <button @click="shoNewSlidePannel = !shoNewSlidePannel">Nueva Slide</button>
+        <button @click="shoNewSlidePannel = !shoNewSlidePannel" class="btn btn-outline-info">Nueva Slide</button>
         <!-- New slide -->
         <div class="form row" v-if="shoNewSlidePannel">
             <div class="col-12">
@@ -27,7 +32,7 @@
                 <label class="btn btn-block btn-outline-info btn-file">
                     Cargar imagen <input @change="fileSelected =true"  type="file" style="display: none;" accept="image/*">
                 </label>
-                <span> Imagen subida </span>
+                <span v-if="fileSelected"> Imagen subida </span>
             </div>
             <div class="col-12">
                 <button class="btn btn-outiline-info" v-if="valid" @click="send">
@@ -74,7 +79,7 @@ export default {
         },
         send()
         {
-            
+
         }
     }
 

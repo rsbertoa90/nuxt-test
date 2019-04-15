@@ -72,6 +72,9 @@
                                 <router-link class="nav-link text-white" to="/admin/metadata"> <fa-icon icon="user-cog"></fa-icon> Metadata</router-link>
                             </li>
                             <li class="nav-item " v-if="user && user.role_id < 3">
+                                <router-link class="nav-link text-white" to="/admin/config"> <fa-icon icon="user-cog"></fa-icon> Configs </router-link>
+                            </li>
+                            <li class="nav-item " v-if="user && user.role_id < 3">
                                 <a class="nav-link text-white" href="/logout"> <fa-icon icon="user-cog"></fa-icon> Salir</a>
                             </li>
                         </ul>
@@ -143,7 +146,7 @@ export default {
         font-size:2rem;
         position:relative;
         color:#fff;
-        margin-top:5px;
+        margin-top:-5px;
 
         .nro-carrito{
             display: flex;

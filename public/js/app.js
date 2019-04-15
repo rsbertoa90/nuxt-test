@@ -24354,6 +24354,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -24900,6 +24903,28 @@ var render = function() {
                     1
                   )
                 ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.user && _vm.user.role_id < 3
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item " },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link text-white",
+                        attrs: { to: "/admin/config" }
+                      },
+                      [
+                        _c("fa-icon", { attrs: { icon: "user-cog" } }),
+                        _vm._v(" Configs ")
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
               : _vm._e()
           ])
         ]
@@ -25004,7 +25029,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.nav-list {\n  list-style: none;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n  -webkit-box-pack: start;\n          justify-content: flex-start;\n  margin: 0;\n  margin-left: -15px;\n  font-size: 1rem;\n  padding-left: 0;\n}\n.navbar-brand {\n  margin-top: -5px;\n  width: 100%;\n}\n.navbar-brand img {\n    width: 100%;\n}\na:hover {\n  color: #fff;\n}\n.text-white {\n  color: #fff;\n}\n.navbar {\n  padding: 0 .5rem 0 30px;\n  background-color: #D52B1E;\n}\n.carrito {\n  font-size: 2rem;\n  position: relative;\n  color: #fff;\n  margin-top: 5px;\n}\n.carrito .nro-carrito {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    width: 25px;\n    height: 25px;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    background-color: #fff;\n    border: 1px solid #868686;\n    color: #D52B1E;\n    position: absolute;\n    top: 0;\n    right: -3px;\n    border-radius: 50%;\n    font-size: .7rem;\n}\n", ""]);
+exports.push([module.i, "\n.nav-list {\n  list-style: none;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n  -webkit-box-pack: start;\n          justify-content: flex-start;\n  margin: 0;\n  margin-left: -15px;\n  font-size: 1rem;\n  padding-left: 0;\n}\n.navbar-brand {\n  margin-top: -5px;\n  width: 100%;\n}\n.navbar-brand img {\n    width: 100%;\n}\na:hover {\n  color: #fff;\n}\n.text-white {\n  color: #fff;\n}\n.navbar {\n  padding: 0 .5rem 0 30px;\n  background-color: #D52B1E;\n}\n.carrito {\n  font-size: 2rem;\n  position: relative;\n  color: #fff;\n  margin-top: -5px;\n}\n.carrito .nro-carrito {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    width: 25px;\n    height: 25px;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    background-color: #fff;\n    border: 1px solid #868686;\n    color: #D52B1E;\n    position: absolute;\n    top: 0;\n    right: -3px;\n    border-radius: 50%;\n    font-size: .7rem;\n}\n", ""]);
 
 // exports
 
@@ -25017,6 +25042,9 @@ exports.push([module.i, "\n.nav-list {\n  list-style: none;\n  display: -webkit-
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wide_search_bar_vue__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wide_search_bar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__wide_search_bar_vue__);
+//
+//
+//
 //
 //
 //
@@ -25552,6 +25580,28 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.user && _vm.user.role_id < 3
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item " },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link text-white",
+                            attrs: { to: "/admin/config" }
+                          },
+                          [
+                            _c("fa-icon", { attrs: { icon: "user-cog" } }),
+                            _vm._v(" Configs ")
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.user && _vm.user.role_id < 3
                   ? _c("li", { staticClass: "nav-item " }, [
                       _c(
                         "a",
@@ -25722,39 +25772,42 @@ import "core-js/modules/es6.array.iterator";
  */
 
 var Login = function Login() {
-    return __webpack_require__.e/* import() */(7).then(__webpack_require__.bind(null, 106));
+    return __webpack_require__.e/* import() */(22).then(__webpack_require__.bind(null, 106));
 };
 
 var Home = function Home() {
-    return __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 107));
+    return __webpack_require__.e/* import() */(16).then(__webpack_require__.bind(null, 107));
 };
 var Cotizer = function Cotizer() {
-    return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 108));
+    return __webpack_require__.e/* import() */(15).then(__webpack_require__.bind(null, 108));
 };
 var Contact = function Contact() {
-    return __webpack_require__.e/* import() */(9).then(__webpack_require__.bind(null, 109));
+    return __webpack_require__.e/* import() */(23).then(__webpack_require__.bind(null, 109));
 };
 var Cart = function Cart() {
-    return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 110));
+    return __webpack_require__.e/* import() */(19).then(__webpack_require__.bind(null, 110));
 };
 var Category = function Category() {
-    return __webpack_require__.e/* import() */(11).then(__webpack_require__.bind(null, 111));
+    return __webpack_require__.e/* import() */(25).then(__webpack_require__.bind(null, 111));
 };
 var CategoryIndex = function CategoryIndex() {
-    return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 112));
+    return __webpack_require__.e/* import() */(20).then(__webpack_require__.bind(null, 112));
 };
 var Product = function Product() {
-    return __webpack_require__.e/* import() */(10).then(__webpack_require__.bind(null, 113));
+    return __webpack_require__.e/* import() */(24).then(__webpack_require__.bind(null, 113));
 };
 
 var Admin = function Admin() {
-    return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 114));
+    return __webpack_require__.e/* import() */(18).then(__webpack_require__.bind(null, 114));
 };
 var Orders = function Orders() {
-    return __webpack_require__.e/* import() */(6).then(__webpack_require__.bind(null, 115));
+    return __webpack_require__.e/* import() */(21).then(__webpack_require__.bind(null, 115));
 };
 var Metadata = function Metadata() {
-    return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 116));
+    return __webpack_require__.e/* import() */(17).then(__webpack_require__.bind(null, 116));
+};
+var Config = function Config() {
+    return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 258));
 };
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
@@ -25778,6 +25831,11 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         path: '/admin/metadata',
         name: 'meta',
         component: Metadata,
+        beforeEnter: guardAdmin
+    }, {
+        path: '/admin/config',
+        name: 'config',
+        component: Config,
         beforeEnter: guardAdmin
     }, {
         path: '/',

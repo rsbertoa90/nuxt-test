@@ -65,6 +65,7 @@ const Product = () => import('./components/category/product/Product.vue');
 const Admin = () => import('./components/admin/Admin.vue');
 const Orders = () => import('./components/admin/Orders.vue'); 
 const Metadata = () => import('./components/admin/metadata/Super.vue');
+const Config = () => import('./components/admin/configs/Configs.vue');
 
 
 const router = new VueRouter({
@@ -92,6 +93,12 @@ const router = new VueRouter({
             path:'/admin/metadata',
             name:'meta',
             component:Metadata,
+            beforeEnter:guardAdmin
+        },
+        {
+            path:'/admin/config',
+            name:'config',
+            component:Config,
             beforeEnter:guardAdmin
         },
 

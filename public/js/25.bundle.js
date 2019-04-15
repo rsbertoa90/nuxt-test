@@ -1,14 +1,14 @@
-webpackJsonp([23],{
+webpackJsonp([25],{
 
-/***/ 109:
+/***/ 111:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(185)
+var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(186)
+var __vue_template__ = __webpack_require__(199)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/contact/Contact.vue"
+Component.options.__file = "resources/assets/js/components/category/Category.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-628e4fca", Component.options)
+    hotAPI.createRecord("data-v-7fd20288", Component.options)
   } else {
-    hotAPI.reload("data-v-628e4fca", Component.options)
+    hotAPI.reload("data-v-7fd20288", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,34 +48,14 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 185:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    metaInfo: function metaInfo() {
-        return {
-            title: 'Contacto'
-        };
-    }
-});
-
-/***/ }),
-
-/***/ 186:
+/***/ 199:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("contacto")])
+  return _c("div", [_c("router-view")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -83,7 +63,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-628e4fca", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7fd20288", module.exports)
   }
 }
 
