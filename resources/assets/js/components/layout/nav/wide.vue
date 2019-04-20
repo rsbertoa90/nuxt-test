@@ -140,6 +140,11 @@ export default {
     .navbar{
         padding:0 .5rem 0 30px;
         background-color: #D52B1E;
+        position:fixed;
+        top:0;
+        left:0;
+        z-index:999;
+          box-shadow: 2px 2px 5px #999;
     }
 
     .carrito{

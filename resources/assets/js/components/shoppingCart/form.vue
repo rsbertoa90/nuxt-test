@@ -4,13 +4,18 @@
             <dot-loader :loading="loading" size="200px"></dot-loader>
         </div>
 
-        <h5>Envianos tu pedido</h5>
-        <p>Nos estaremos comunicando para confirmar tu presupuesto</p>
-        <form class="col-12" id="form">
-                <csrf></csrf>
+        <div class="d-flex flex-column mb-2">
+            <h5> <b>Termine mi pedido!</b></h5>
+            <div> <fa-icon icon="check-square" class="text-red check"></fa-icon> Si queres rechequear o hacer algun cambio, debajo del formulario tenes el detalle de tu compra. </div>
+            <div><fa-icon icon="check-square" class="text-red check"></fa-icon> Una vez que envíes tu pedido te llegará una copia al mail que hayas puesto en el formulario. </div>
+            <div><fa-icon icon="check-square" class="text-red check"></fa-icon> Nos estaremos comunicando para confirmar tu presupuesto dentro de las 24hs. </div>
 
-              <div class="col-12 row form-group-row mb-3">
-                  <div class="col-12 col-lg-4">
+        </div>
+        <form class="col-12 row" id="form">
+                <csrf></csrf>
+         
+              <div class="col-12 col-lg-4 row form-group-row mb-3">
+                  <div class="col-12 col-lg-8">
                     <input  type="radio"
                            v-model="formData.shipping" :value="false"> 
                      <span @click="formData.shipping=false"  class="text-secondary radioText" :class="{'text-success':!formData.shipping}">
@@ -18,8 +23,8 @@
                      </span>
                   </div>
               </div>
-              <div class="col-12 row form-group-row mb-3">
-                  <div class="col-12 col-lg-4">
+              <div class="col-12 col-lg-4 row form-group-row mb-3">
+                  <div class="col-12 col-lg-8">
                     <input  type="radio"
                            v-model="formData.shipping" :value="true"> 
                     <span  @click="formData.shipping=true" class="text-secondary radioText" :class="{'text-success':formData.shipping}">
@@ -28,63 +33,72 @@
                   </div>
                </div> 
 
-                
-
-               <div class="col-12 row form-group-row">
-                   <label class="col-4 col-lg-2" for="">
-                       Nombre y Apellido 
-                      
-                    </label>
-                   <input required type="text" v-model="formData.name"  class="form-control col-8 col-lg-4">
+                <div class="col-12 col-lg-6 row mt-2 ">
+                    <div class="col-12 row form-group-row">
+                        <label class="col-12 col-lg-4" for="">
+                            Nombre y Apellido     
+                        </label>
+                        <input required type="text" v-model="formData.name"  class="form-control col-12 col-lg-8">
+                    </div>
+                    <div class="col-12 row form-group-row mt-2 ">
+                        <label class="col-12 col-lg-4" for="">Email</label>
+                        <input required type="email" v-model="formData.email"  class="form-control col-12 col-lg-8">
+                    </div> 
+                    <div class="col-12 row form-group-row mt-2 ">
+                        <label class="col-12 col-lg-4" for="">Telefono</label>
+                        <input v-model="formData.phone" type="text" class="form-control col-12 col-lg-8">
+                    </div> 
+                    <div class="col-12 row form-group-row mt-2 ">
+                        <label class="col-12 col-lg-4" for="">Mensaje</label>
+                        <textarea v-model="formData.message" name="msg" class="form-control col-12 col-lg-8"></textarea>
+                    </div> 
                 </div>
 
+
                 <!-- DATOS DE ENVIO -->
-                <div v-if="formData.shipping">
+                <div v-if="formData.shipping"  class="col-12 col-lg-6 row">
                     
-                    <div class="col-12 row form-group-row">
-                        <label class="col-4 col-lg-2" for=""> Provincia </label>
-                        <select v-if="states.length > 0" v-model="state" class="form-control col-8 col-lg-4">
+                    <div class="col-12 row form-group-row mt-2">
+                        <label class="col-12 col-lg-4" > Provincia </label>
+                        <select v-if="states.length > 0" v-model="state" class="form-control col-12 col-lg-8">
                             <option v-for="opt in states" :key="opt.id" :value="opt"> 
                                 {{opt.name}}
                             </option>
                         </select>
                     </div>
-                    <div class="col-12 row form-group-row">
-                        <label class="col-4 col-lg-2" for=""> Ciudad </label>
-                        <select v-if="state" v-model="formData.city" class="form-control col-8 col-lg-4">
+                    <div class="col-12 row form-group-row mt-2">
+                        <label class="col-12 col-lg-4" for=""> Ciudad </label>
+                        <select v-if="state" v-model="formData.city" class="form-control col-12 col-lg-8">
                             <option v-for="opt in state.cities" :key="opt.id" :value="opt.id"> 
                                 {{opt.name}}
                             </option>
                         </select>
                     </div>
-                    <div class="col-12 row form-group-row">
-                        <label class="col-4 col-lg-2" for=""> Direccion </label>
-                        <input  type="text" v-model="formData.address"  class="form-control col-8 col-lg-4">
+                    <div class="col-12 row form-group-row mt-2">
+                        <label class="col-12 col-lg-4" for=""> Direccion </label>
+                        <input  type="text" v-model="formData.address"  class="form-control col-12 col-lg-8">
                     </div>
-                    <div class="col-12 row form-group-row">
-                        <label class="col-4 col-lg-2" for=""> Transporte </label>
-                        <input  type="text" v-model="formData.transport"  class="form-control col-8 col-lg-4">
+                    <div class="col-12 row form-group-row mt-2">
+                        <label class="col-12 col-lg-4" for=""> Transporte </label>
+                        <input  type="text" v-model="formData.transport"  class="form-control col-12 col-lg-8">
                     </div>
-                    <div class="col-12 row form-group-row">
-                        <label class="col-4 col-lg-2" for=""> Codigo Postal </label>
-                        <input  type="text" v-model="formData.cp"  class="form-control col-8 col-lg-4">
+                    <div class="col-12 row form-group-row mt-2">
+                        <label class="col-12 col-lg-4" for=""> Codigo Postal </label>
+                        <input  type="text" v-model="formData.cp"  class="form-control col-12 col-lg-8">
                     </div>
                 </div>
+                <div class="col-12 col-lg-6" v-else></div>
                 <!-- /DATOS DE ENVIO -->
 
-               <div class="col-12 row form-group-row">
-                   <label class="col-4 col-lg-2" for="">Email</label>
-                   <input required type="email" v-model="formData.email"  class="form-control col-8 col-lg-4">
-                </div> 
-               <div class="col-12 row form-group-row">
-                   <label class="col-4 col-lg-2" for="">Telefono</label>
-                   <input v-model="formData.phone" type="text" class="form-control col-8 col-lg-4">
-                </div> 
-               <div class="col-12 row form-group-row">
-                   <label class="col-4 col-lg-2" for="">Mensaje</label>
-                   <textarea v-model="formData.message" name="msg" class="form-control col-8 col-lg-4"></textarea>
-                </div> 
-                <button class="button btn-lg btn-outline-success offset-2 mt-2" @click.prevent.stop="send">Enviar</button>
+               <div class="col-12 mt-2 mb-2">
+                   <span class="alert text-danger">* Por favor revise que sus datos de contacto sean correctos antes de enviar el formulario.</span>
+               </div>
+               <div class="col-12 row">
+
+                <button class="btn btn-lg btn-outline-danger col-12 col-lg-4 mt-2" @click.prevent.stop="send"> <fa-icon icon="envelope" class="mb-1 mr-2"></fa-icon> Enviar mi pedido </button>
+
+                <router-link to="/cotizador" class="ml-4 offset-lg-1 btn btn-lg btn-outline-secondary col-12 col-lg-4 mt-2" > <fa-icon icon="arrow-left" class="mb-1 mr-2"></fa-icon> Volver al cotizador </router-link>
+               </div>
 
         </form>
             
@@ -262,5 +276,14 @@ input[type="radio"] {
 }
 .radioText{
     font-size:1.2rem;
+}
+
+.text-red{
+    color:#D52B1E;
+}
+
+.check{
+    font-size:1.5rem;
+    margin-bottom:5px;
 }
 </style>

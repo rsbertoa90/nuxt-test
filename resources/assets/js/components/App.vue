@@ -5,7 +5,7 @@
             <app-nav></app-nav>
         </header>    
         <div class="py-4 row">
-            
+            <div class="nav-space"></div>
             <div class="col-12 p-4">
                 <transition enter-active-class="animated fadeIn fast faster ">
                     <keep-alive include="carrito">
@@ -13,21 +13,23 @@
                     </keep-alive>
                 </transition>
             </div>
+            <div class="bottom-space"></div>
         </div>
+        <app-footer v-if="$mq=='lg'"></app-footer>
          <whatsappBtn v-if="!user || user.role_id > 2 "></whatsappBtn>
-         <total-bouncer :total="total" v-if="total"></total-bouncer>
+         <total-bouncer :total="total" v-if="total && $route.path != '/carrito'" ></total-bouncer>
     </div>
 </template>
 
 <script>
 
-import totalBouncer from './app/total-bouncer.vue'
+import totalBouncer from './layout/total-bouncer/total-bouncer.vue';
 import whatsappBtn from './layout/whatsapp.vue';
-
+import appFooter from './layout/footer/Footer.vue';
 import appNav from './layout/navbar.vue';
 
 export default {
-    components:{appNav,whatsappBtn,totalBouncer,},
+    components:{appNav,whatsappBtn,totalBouncer,appFooter},
     computed:{
         user(){
             return this.$store.getters.getUser;
@@ -35,6 +37,9 @@ export default {
         total(){
             return this.$store.getters.getTotal;
         }
+    },
+    mounted(){
+      
     }
 }
 </script>
@@ -55,5 +60,15 @@ export default {
         cursor: pointer;
         font-size: 2rem;
 
+    }
+
+    .nav-space{
+        width:100vw;
+        height:80px;
+    }
+
+    .bottom-space{
+        width:100vw;
+        height:100px;
     }
 </style>

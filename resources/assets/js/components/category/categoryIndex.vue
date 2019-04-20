@@ -1,38 +1,49 @@
 <template>
-<div v-if="category && category.products" class="d-flex flex-column">
+<div v-if="category && category.products" class="row">
+    <div class="col-3">
+        <div class="fixed-pannel"   :style="yStyle">
+            <categories-pannel></categories-pannel>
+        </div>
+    </div>
+    <div class="col-9 row">    
+        <div class="red-ribbon col-12">
+            <div class="logo-square" v-if="category.image">
+                <v-lazy-image :src="category.image" :alt="category.name"></v-lazy-image>
+            </div>
+            <h2  class=" font-weight-bold" v-if="category.image">
+                 {{category.name|uc}}
+            </h2>
+            <div col-lg-3>
 
-         
-   
+            </div>
+        </div>
+        <div class="col-12 descri" v-if="category.description">
+           <p> {{category.description |ucFirst}} </p>
+        </div>
+        <div class="col-12 mt-4 row">
+            <div class="col-12 col-lg-4" v-for="p in category.products" :key="p.code">
+                <productCard :product="p"></productCard>
+            </div>
+        </div>
+    </div>
 
-    
-      
         
-          <div style="text-align: center">
-              <v-lazy-image v-if="category.image" :src="category.image"></v-lazy-image>
-              <h1 v-if="!category.image"> {{category.name |uc}} </h1>
-          </div>
-          <div v-if="category.description" class="text-center mt-4">
-              <p> {{category.description}} </p>
-          </div>
-          <br>
-          <div class="row">
-                    <div v-for="product in category.products" :key="product.id" class=" col-12 col-lg-3">
-                     
-                            <productCard :product="product" class="mt-4"></productCard>
-                
-                    </div>
-          </div>
            
-         
-        
 </div>
 </template>
 
 
 <script>
-import productCard from './product/card.vue';
+import productCard from './product/small-card.vue';
+import categoriesPannel from '../home/categories-pannel.vue';
 export default {
-    components:{productCard},
+    components:{productCard,categoriesPannel},
+    data(){
+        return{
+            yStyle:'top:90px'
+            
+        }
+    },
     metaInfo(){
         return{
             title: this.metatitle,
@@ -41,7 +52,26 @@ export default {
             ]
         }
     },
-   
+   methods:{
+        handleScroll(e){
+            let def = 90;
+            let ypos=window.scrollY;
+           let wh = window.document.documentElement.clientHeight;
+           let innerh = window.innerHeight;
+           let scrollh = document.body.scrollHeight;
+           let posicion = scrollh - (innerh+ypos);
+           
+            let fixedy =90;
+            if (posicion < 450)
+            {
+                 fixedy = posicion - 450 + 90;
+            }
+            
+            
+            this.yStyle = 'top:'+fixedy+'px';
+        
+        }
+    },
     computed:{
         metatitle(){
             if (this.category)
@@ -68,6 +98,53 @@ export default {
                 });
             }
         }
-    }
+    },
+     created () {
+    window.addEventListener('scroll', this.handleScroll);
+
+    
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+
+.descri{
+    font-size:1.3rem;
+}
+    .fixed-pannel{
+        position:fixed;
+        top:45px;
+        left:20px;
+    }
+
+    .red-ribbon{
+    background-color: #D52B1E;
+    width:100%;
+    height:50px;
+    display:flex;
+    align-items:center;
+    justify-content: space-around;
+    color:#fff;
+    margin-bottom:20px;
+    margin-top:10px;
+    
+    .logo-square{
+        background-color: #fff;
+        border: 3px solid #868686;
+        font-size:2rem;
+        color:#D52B1E;
+        /* padding:5px; */
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        height:75px;
+        width:75px;
+    }
+}
+
+
+</style>

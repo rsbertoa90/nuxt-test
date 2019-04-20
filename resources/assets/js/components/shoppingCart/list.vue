@@ -1,6 +1,6 @@
 <template>
     <div v-if="list && list.length > 0" class="mt-5 p-4">
-        <h5>Tu pedido:</h5>
+        <h5>Detalle de tu pedido:</h5>
         <table class="table table-striped">
             <thead>
                 <th>Codigo</th>
@@ -20,6 +20,9 @@
                 </tr>
             </tbody>
         </table>
+        <div class="total" v-if="total">
+           TOTAL ${{ total |price }}
+        </div>
     </div>
 </template>
 
@@ -28,6 +31,9 @@ export default {
    computed:{
        list(){
            return this.$store.getters.getList;
+       },
+       total(){
+           return this.$store.getters.getTotal;
        }
    },
     methods:{
@@ -41,6 +47,17 @@ export default {
 </script>
 
 <style scoped>
+    .total{
+        max-width:300px;
+        padding:7px;
+        border:4px solid #D52B1E;
+        color:#D52B1E;
+        font-size:2rem;
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        border-radius:15%;
+    }
     .table .td{
         font-size:1rem;
         margin-left: -2%;

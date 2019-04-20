@@ -1,5 +1,5 @@
 <template>
-    <div class="row mt-4 d-flex align-items-stretch">
+    <div class="row mt-4 d-flex align-items-stretch p-4" v-if="offers && offers.length > 0">
         <div v-for="product in offers" :key="product.id" class="col-12 col-lg-3">
             <productCard :product="product"></productCard>
         </div>
@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import productCard from '../category/product/card.vue';
+import productCard from '../category/product/small-card.vue';
 export default {
     components:{productCard},
     computed:{
@@ -18,18 +18,6 @@ export default {
             return this.$store.getters.getCategories;
         }
     },
-    methods:{
-        getUrl(product){
-            let category = this.categories.find(c => {
-                return c.id === product.category_id;
-            });
-
-            let res = category.slug + '/' + product.slug;
-            res = res.replace('//','/');
-
-            return res;
-            
-        }
-    }
+    
 }
 </script>

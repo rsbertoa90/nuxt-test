@@ -21,7 +21,7 @@
                         <span>Haz Click en una categoria para desplegar los productos</span>
                     </div>
         </transition>
-        <button class="btn btn-block btn-danger" style="max-width:400px"  @click="viewed=true"> Cerrar </button>
+        <button class="btn btn-block btn-danger" style="max-width:400px"  @click="setViewed"> Cerrar </button>
     </div>
 </transition>
 </template>
@@ -44,6 +44,10 @@ export default {
         }
     },
     methods: {
+        setViewed(){
+            this.viewed=true;
+            this.$store.commit('setTutoSeen');
+        },
     handleScroll () {
         if (!this.scrolled){
             this.scrolled = window.scrollY > 50;

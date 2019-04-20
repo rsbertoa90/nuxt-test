@@ -1,9 +1,10 @@
 <template>
     <div class="search-bar row mr-2 ml-4 d-flex align-items-center bg-white justify-content-between pr-3">
         <input placeholder="BUSCAR" type="text" @focus="focused = true" 
-                @blur="focused=false" class=" search-field" >
+                @blur="focused=false" class=" search-field" 
+                v-model="term" @keyup.enter="search">
         |
-        <button class="search-btn">
+        <button class="search-btn" @click="search">
             <fa-icon icon="search"></fa-icon>
         </button>
     
@@ -14,7 +15,38 @@
 export default {
     data(){
         return{
-            focused:false
+            focused:false,
+            term:'',
+        }
+    },
+    mounted(){
+        if (this.searchTerm){
+            this.term = this.searchTerm;
+        }
+    },
+    computed:{
+        searchTerm()
+        {
+            return this.$store.getters.getSearchTerm;
+        }
+    },
+    methods:{
+        search(){
+            if (this.term.trim().length > 1){
+                this.$store.commit('setSearchTerm',this.term);
+                if(this.$route.path != "/cotizador")
+                {
+                    this.$router.push('/cotizador');
+                }
+            }
+        }
+    },
+    watch:{
+        searchTerm(){
+            if (this.searchTerm.trim() == "")
+            {
+                this.term = "";
+            }
         }
     }
 

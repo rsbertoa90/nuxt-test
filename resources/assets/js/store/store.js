@@ -6,13 +6,44 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
+        tutoSeen:false,
         user: null,
         config: null,
         states: [],
         categories:[],
-        meta:[]
+        meta:[],
+        searchTerm:'',
     },
     getters: {
+        getSearchTerm(store){
+            return store.searchTerm;
+        },
+        getTutoSeen(store){
+            return store.tutoSeen;
+        },
+        getProductSlug:(store) => (product) =>{
+            let category = store.categories.find(c => {
+                return c.id == product.category_id;
+            });
+            if (category && category.slug && product.slug){
+                let res = category.slug + '/' + product.slug;
+                res = res.replace('//','/');
+                return res;
+            }
+        },
+        getOffers(store) {
+            let res = [];
+            store.categories.forEach(cat => {
+                let prods = cat.products.filter(prod => {
+                    return !prod.paused && prod.offer;
+                });
+                if (prods.length > 0) {
+                  
+                    res = res.concat(prods);
+                }
+            });
+            return res;
+        },
         getMeta(store){
             return store.meta;
         },
@@ -31,7 +62,8 @@ export const store = new Vuex.Store({
         getNotPaused(store){
             let res = [];
             store.categories.forEach(cat => {
-                cat.products =  cat.products.filter(prod => {
+                
+                cat.products = cat.products.filter(prod => {
                     return !prod.paused;
                 });
                 if (cat.products.length > 0){
@@ -40,6 +72,7 @@ export const store = new Vuex.Store({
             });
             return res;
         },
+       
         getTotal(store){
              var tot = 0;
              store.categories.forEach(function (category) {
@@ -71,10 +104,14 @@ export const store = new Vuex.Store({
 
 
                    return [].concat.apply([], result);
-        }
+        },
+        
         
     },
     mutations: {
+        setSearchTerm(state,payload){
+            state.searchTerm = payload;
+        },
         setMeta(state, payload) {
             state.meta = payload;
 
@@ -92,6 +129,9 @@ export const store = new Vuex.Store({
         setCategories(state, payload) {
             state.categories = payload
         },
+        setTutoSeen(state){
+            state.tutoSeen=true;
+        }
 
     },
     actions: {

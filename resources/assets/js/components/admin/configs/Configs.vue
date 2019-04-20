@@ -1,19 +1,19 @@
 <template>
     <div class="row">
-         <div class="col-12">
+         <div class="col-12 mt-4">
             <a href="/admin/lista-de-precios" class="btn btn-outline-info">  
                 Refrescar Lista de Precios
             </a>
-            <a href="/super/failed-jobs" class="btn btn-outline-danger">  
+          <!--   <a href="/super/failed-jobs" class="btn btn-outline-danger">  
                 Failed jobs
-            </a>
+            </a> -->
         </div>
         <div class="col-12 row" v-if="configs">
-            <div class="col-12">
+            <div class="col-12 mt-2">
                 compra minima local: 
                 <input type="number" @change="updateconfig('minbuy')" v-model.lazy="configs.minbuy">
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-2">
                 compra minima envios: 
                 <input type="number" @change="updateconfig('minbuy_ship')" v-model.lazy="configs.minbuy_ship">
             </div>

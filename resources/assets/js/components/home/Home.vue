@@ -1,10 +1,6 @@
 <template>
     <div>
-        <div class="row mb-3">
-            <div class="col-12 d-flex justify-content-center">
-                <h1>Bazar Mayorista Maju</h1>
-            </div>
-        </div>
+       
         <home-banners></home-banners>
         <homeInfo class="mt-4"></homeInfo>
         <homeOffers></homeOffers>

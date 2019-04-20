@@ -80,7 +80,7 @@ export default {
     methods :{
         bindFile(e){
             var vm=this;
-             var fileUploadFormData=new FormData();
+            var fileUploadFormData=new FormData();
             var file = e.target.files[0];
             var ext = file.name.split('.').pop();
             if (ext == 'png' || ext == 'jpg' || ext == 'jpeg' || ext == 'gif' || ext == webp){

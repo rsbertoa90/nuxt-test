@@ -67,8 +67,8 @@
                 <fa-icon icon="trash"></fa-icon>
             </button>
             <button @click.prevent="togglePause(product)" class="btn btn-sm m-1" :class="{'btn-info' : !product.paused, 'btn-success': product.paused}">
-                <fa-icon v-if="product.paused" icon="play" class="text-success"></fa-icon>
-                <fa-icon v-else icon="pause-circle" class="text-info"></fa-icon>
+                <fa-icon v-if="product.paused" icon="play" class="text-white"></fa-icon>
+                <fa-icon v-else icon="pause-circle" class="text-white"></fa-icon>
             </button>
             <button @click.prevent="toggleOffer(product)" class="btn btn-sm m-1" :class="{'btn-secondary' : !product.offer, 'btn-info': product.offer}">
                 Oferta
@@ -112,7 +112,7 @@ export default {
             toggleOffer(product){
                 var vm = this;
                 product.offer = !product.offer;
-                vm.saveChange(product,'paused');
+                vm.saveChange(product,'offer');
               
 
                 

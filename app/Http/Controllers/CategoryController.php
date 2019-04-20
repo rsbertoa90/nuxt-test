@@ -78,8 +78,9 @@ class CategoryController extends Controller
         
         if ($file){
             
-            
-            if(file_exists($category->image)){
+            $imagePath = public_path().'/'.$category->image;
+            $imagePath = str_replace('//','/',$imagePath);
+            if(file_exists($imagePath)){
                 
                 
                 unlink($category->image);

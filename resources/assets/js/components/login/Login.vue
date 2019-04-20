@@ -59,18 +59,28 @@ export default {
 
         }
     },
+    computed:{
+        user(){
+            return this.$store.getters.getUser;
+        }
+    },
     methods:{
         send()
         {
             this.$http.post('/login',this.formData)
                 .then(res => {
                     if (res.data){
-                        this.$store.dispatch('fetchUser').then(r=>{
-                            this.$router.go('/admin');
-                        });
+                        this.$store.dispatch('fetchUser');
                     }
                     
                 });
+        }
+    },
+    watch:{
+        user(){
+            if (this.user && this.user.role_id < 3 ){
+                this.$router.push('/admin');
+            }
         }
     }
     

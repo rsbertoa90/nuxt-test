@@ -53,7 +53,7 @@
                                 <fa-icon icon="chevron-down" v-if="!collapsed && showCategories"></fa-icon> 
                                 <fa-icon icon="chevron-right" v-else></fa-icon> 
                             </a>
-                            <transition enter-active-class="animated slideInDown">
+                           
                                 <ul v-if="categories && showCategories" class="categories-list">
                                     <li v-for="category in categories" :key="category.name">
                                         <router-link :to="category.slug" >
@@ -61,7 +61,7 @@
                                         </router-link>
                                     </li>
                                 </ul>
-                            </transition>
+                           
                         </li>
                         <!-- ADMIN -->
                          <li class="nav-item " v-if="user && user.role_id < 3">

@@ -32,13 +32,13 @@ mix.config.webpackConfig.output = {
 
 mix.js('resources/assets/js/app.js', 'public/js')
     .extract(['vue', 'bootstrap', 'vue-mq', 'moment', 'v-lazy-image', 'vuex'])
-   .sass('resources/assets/sass/app.scss', 'public/css') 
+   .sass('resources/assets/sass/app.scss', 'public/css').version()
    ;
 
-if (mix.inProduction()) {
-    mix.version().purgeCss();
+/* if (mix.inProduction()) {
+    mix.purgeCss();
    
-}
+} */
 /* if (mix.inProduction()) {
     mix.babel('public/js/app.js', 'public/js/app.js').version();
 } */

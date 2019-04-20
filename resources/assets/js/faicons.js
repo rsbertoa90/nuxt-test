@@ -34,11 +34,20 @@ import {
     faArrowLeft,
     faChevronDown,
     faAward,
-    faUserCog
+    faUserCog,
+    faPlus,
+    faMinus,
+    faChevronUp,
+    faEnvelope,
+    faCheckSquare
 } from '@fortawesome/free-solid-svg-icons'
 
 
 library.add(faPauseCircle,
+            faCheckSquare,
+            faEnvelope,
+            faPlus,
+            faMinus,
             faUserCog,
             faAward,
             faList,
@@ -53,6 +62,7 @@ library.add(faPauseCircle,
             faChevronLeft,
             faChevronRight,
             faChevronDown,
+            faChevronUp,
             faPhone,
             faDownload,
             faHome,

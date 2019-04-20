@@ -34,6 +34,8 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
     
     Route::post('/category/image','CategoryController@uploadImage');
 
+    Route::post('/slider','SlideController@create');
+
    /*  Route::get('/','AdminController@admin'); */
     /* Route::get('/reporte','AdminController@report'); */
 

@@ -9,12 +9,12 @@
         position:fixed;
        
         bottom:5px;
-        right:15px;
+        left:15px;
         z-index:110;
         background: #fff;
-        border: 1px solid #ff0aaf;
+        border: 1px solid #D52B1E;
         padding: 4px;
-        a{color:#ff0aaf};
+        a{color:#D52B1E};
     }
     .fa-whatsapp{
       font-size: 1.3rem;

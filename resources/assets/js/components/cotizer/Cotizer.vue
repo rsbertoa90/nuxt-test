@@ -1,6 +1,7 @@
 <template>
 <div class="contain-all">
-     <div v-if="!categories || categories.length < 1 || !user || !config" class="loader">
+
+     <div v-if="!categories || categories.length < 1  || !config" class="loader">
             <dot-loader :loading="loading" size="200px"></dot-loader>
     </div>
     
@@ -15,59 +16,12 @@
         </div>
     </div>
 
-    <div v-if="categories && config && !config.maintenance" class="container w-100" :class="{'bg-white' : user != null && user.role_id > 2}">   
-        <div class="row w-100 d-flex justify-content-center">
-           
-            <div class="col-12 col-lg-12" v-if="user && user.role_id < 3">
-               <hideOptbutton></hideOptbutton>
-            </div>
-
-            <div :class="{'col-12 col-lg-5 text-center':$mq=='lg',
-                         'col-12 col-lg-4 text-center neg-margins':$mq!='lg'}" >
-                 <app-banner></app-banner>
-            </div>
-        </div>
-
-        <!-- Barra de busqueda -->
-         <div class="row">
-            <input type="text" v-on:input="searchTerm = $event.target.value"  @change="selectedPage=1"
-                    class="form-control search-bar" placeholder="¿ QUE ESTAS BUSCANDO ?">
-        </div> 
-        
-
-        <code-selector v-if="user && user.role_id < 3" :list="list"></code-selector>
-    
-        <hr>
-        
-
-        <categories-acordion v-if="searchTerm.trim().length < 3"></categories-acordion>
-        
-        
-         <div class="row" v-if="searchTerm.trim().length > 2 ">
-            <paginator class="col-12"
-                            :selectedPage="selectedPage"   
-                            :products="filteredProducts" 
-                            :productsPerPage="productsPerPage"
-                            @selectPage="selectedPage=$event">
-
-            </paginator>
-            
-            <products-table class="col-12" :products="paginatedProducts"></products-table>
-            
-            <paginator class="col-12"
-                            :selectedPage="selectedPage"   
-                            :products="filteredProducts" 
-                            :productsPerPage="productsPerPage"
-                            @selectPage="selectedPage=$event">
-
-                </paginator>
-        </div>
-
+    <div v-if="categories && config && !config.maintenance" class=" w-100" :class="{'bg-white' : user != null && user.role_id > 2}">   
+        <mobileCotizer v-if="$mq!='lg'"></mobileCotizer>
+        <web-cotizer v-if="$mq=='lg'"></web-cotizer>
     </div>
 
    
-
-    <cotizer-tutorial v-if="!user || user.role_id > 2 "></cotizer-tutorial>
 
    
 
@@ -76,26 +30,17 @@
 </template>
 
 <script>
+import webCotizer from './web/cotizer.vue';
+import mobileCotizer from './mobile/cotizer.vue'
 import appBanner from './banner.vue';
-import cotizerTutorial from './tutorial.vue';
-import paginator from '../admin/admin/paginator.vue';
 
-import hideOptbutton from './hide-opt-button.vue';
-import codeSelector from './code-selector.vue';
-import categoriesAcordion from './categories-acordion.vue';
 
-import productsTable from './products-table.vue';
+
 
     export default {
         components:{
-          
-            paginator,
-            productsTable,
-            categoriesAcordion,
-            codeSelector,
-            appBanner,
-            cotizerTutorial,
-            hideOptbutton,
+          webCotizer,mobileCotizer,
+         
             },
         data(){
             return {
@@ -112,6 +57,9 @@ import productsTable from './products-table.vue';
            },
         },
         computed: {
+            tutoSeen(){
+                return this.$store.getters.getTutoSeen;
+            },
             list(){
                 return this.$store.getters.getList;
             },
@@ -236,14 +184,14 @@ import productsTable from './products-table.vue';
 }
 
 .search-bar{
-    border:1px solid #ff0aaf;
+    border:1px solid #D52B1E;
     padding:3px;
     margin-top:20px;
     text-align: center;
     
 
     &::placeholder{
-        color: #ff0aaf;
+        color: #D52B1E;
         text-align:center;
     }
 }
