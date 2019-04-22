@@ -5,6 +5,9 @@
             
                 <div class="image-container">
                     <v-lazy-image :src="image.url"></v-lazy-image>
+                     <div class="offer-ribbon" v-if="product.offer">
+                        <v-lazy-image src="/storage/images/app/oferta.png"></v-lazy-image>
+                    </div>
                 </div>
             
             <div class="prices-container" v-if="config && !config.hide_prices">
@@ -102,8 +105,18 @@ export default {
     }
 
     .image-container{
+        
         width:55%;
         overflow: hidden;
+        position:relative;
+        .offer-ribbon{
+            width:120px;
+            position:absolute;
+            top:0;
+            left:0;
+             display: block;
+            transform: rotate(-23deg);
+        }
       /*  padding:10px;
        border:1px solid #868686; */
         img{

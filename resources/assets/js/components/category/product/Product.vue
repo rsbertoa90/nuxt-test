@@ -1,11 +1,13 @@
 <template>
-    <dir v-if="product">
-        <h1>{{product.name}}</h1>
-    </dir>
+    <div v-if="product">
+        <productCard :product="product"></productCard>
+    </div>
 </template>
 
 <script>
+import productCard from './small-card.vue';
 export default {
+    components:{productCard},
     metaInfo(){
         return{
             title:this.metatitle,
@@ -20,8 +22,9 @@ export default {
         metatitle(){
             if (this.product )
             {
+                
                 return this.product.metatitle ? this.product.metatitle : this.product.name+' por mayor'
-            }
+            }else{return ''}
             
         },
         metadescription(){
@@ -36,7 +39,7 @@ export default {
                 }
                 else return this.product.name+" "+'por mayor';
                     
-            }  
+            }  else{return ''}
             
         },
         categories(){
@@ -48,13 +51,20 @@ export default {
              this.categories.forEach(c => {
                  let p = c.products.find(pr => {
                      if(pr.slug){
-                         return pr.slug.trim().toLowerCase() == '/'+vm.$route.params.product_slug.trim().toLowerCase(); 
+                       
+                         let productSlug = '/'+pr.slug;
+                         productSlug = productSlug.replace('//','/');
+                         let routeParam = '/'+vm.$route.params.product_slug;
+                         routeParam = routeParam.replace('//','/');
+                        
+                         return routeParam.trim().toLowerCase() == productSlug.trim().toLowerCase(); 
                      }
                    
                  });
                  if (p){
                      res = p;
-                     return;
+                  
+                     return res;
                  }
             });
             return res;

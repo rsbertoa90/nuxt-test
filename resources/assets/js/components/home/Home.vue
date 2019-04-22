@@ -1,19 +1,21 @@
 <template>
     <div>
        
-        <home-banners></home-banners>
+        <home-top-row></home-top-row>
         <homeInfo class="mt-4"></homeInfo>
+        <homeBanners class="mt-4"></homeBanners>
         <homeOffers></homeOffers>
     </div>
 </template>
 
 <script>
 import categoriesPannel from './categories-pannel.vue';
-import homeBanners from './banners.vue';
+import homeTopRow from './top-row.vue';
 import homeInfo from './info.vue';
 import  homeOffers from './offers.vue';
+import homeBanners from'./banners.vue';
 export default {
-    components:{homeOffers,homeBanners,homeInfo,categoriesPannel},
+    components:{homeOffers,homeTopRow,homeInfo,categoriesPannel,homeBanners},
     metaInfo(){return{
         title: this.metadata ? this.metadata.metatitle : 'Mayorista  del Mate',
         meta:[

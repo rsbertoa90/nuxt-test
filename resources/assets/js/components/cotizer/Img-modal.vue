@@ -116,9 +116,17 @@
 
 <style lang="scss" scoped>
 
+
+   .modal-dialog{
+            max-width: 400px;
+        }
     .image-container{
         position:relative;
         overflow: hidden;
+       
+        img{
+            width:100%;
+        }
     }
 
     .close-button{
@@ -140,6 +148,12 @@
             cursor: pointer;
         }
 
+    }
+
+    @media(max-width:600){
+        .modal-dialog{
+            max-width: 300px;
+        }
     }
 
 </style>

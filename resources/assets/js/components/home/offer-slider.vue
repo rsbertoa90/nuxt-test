@@ -1,7 +1,7 @@
 <template>
     <div v-if="offers && offers[selected]" class="slider-container">
          
-           <router-link :to="getSlug(offers[selected])" class="overflow-hidden">
+           <router-link to="/ofertas" class="overflow-hidden">
                 <transition leave-active-class="position-absolute animated slideOutRight">
                         <offerCard :product="offers[selected]" :key="offers[selected].name" class="bg-white"></offerCard>
                 </transition>

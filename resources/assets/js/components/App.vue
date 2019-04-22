@@ -5,13 +5,13 @@
             <app-nav></app-nav>
         </header>    
         <div class="py-4 row">
-            <div class="nav-space"></div>
+            <div class="nav-space" v-if="$mq=='lg'"></div>
             <div class="col-12 p-4">
+            <keep-alive include="carrito">
                 <transition enter-active-class="animated fadeIn fast faster ">
-                    <keep-alive include="carrito">
                         <router-view></router-view>
-                    </keep-alive>
                 </transition>
+            </keep-alive>
             </div>
             <div class="bottom-space"></div>
         </div>

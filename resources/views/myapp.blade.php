@@ -10,11 +10,11 @@
 
 
     <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#ff0aaf">
+    <meta name="theme-color" content="#D52B1E">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#ff0aaf">
+    <meta name="msapplication-navbutton-color" content="#D52B1E">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="#ff0aaf">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#D52B1E">
 
     <title>Mayorista Bazar Maju</title>
 

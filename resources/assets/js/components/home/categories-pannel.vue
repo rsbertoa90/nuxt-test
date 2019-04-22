@@ -61,7 +61,7 @@ export default {
         border:1px solid #D52B1E;
         background-color: #fff;
        
-        height: 450px;
+        height: 529px;
         max-width:300px;
         overflow-y: auto;
         overflow-x:overlay;

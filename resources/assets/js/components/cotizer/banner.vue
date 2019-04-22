@@ -8,18 +8,11 @@
                 HACE TU PEDIDO
         </h2>
         <div col-lg-3>
-
+            
         </div>
     </div>
-    <div v-if="configs" class="col-12 row">
-        <h4 class=" col-12 col-lg-6 text-center banner-font">
-            <fa-icon icon="home" class="text-red"></fa-icon>
-            Compra mínima para retirar en el local ${{configs.minbuy}}. Pago en efectivo.
-        </h4>
-        <h4 class="col-12 col-lg-6 text-center banner-font">
-            <fa-icon icon="truck" class="text-red"></fa-icon>
-            Compra mínima para envíos ${{configs.minbuy_ship}}. Pago depósito / transferencia bancaria.
-        </h4>
+    <div class="col-12">
+        <info-row></info-row>
     </div>
     <div v-if="customText" class="mt-3">
         <h5 >
@@ -30,7 +23,11 @@
 </template>}
 
 <script>
+import infoRow from '../layout/info-row.vue';
 export default {
+    components:{
+        infoRow
+    },
     data(){
         return{
             

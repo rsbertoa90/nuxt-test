@@ -9,6 +9,30 @@
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
 }
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+          animation-name: fadeIn;
+}
 @-webkit-keyframes bounceIn {
   from,
   20%,

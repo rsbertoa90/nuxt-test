@@ -13,9 +13,9 @@
         </div>
 
         <!-- Barra de busqueda -->
-         <div class="row">
-            <input type="text" v-on:input="searchTerm = $event.target.value"  @change="selectedPage=1"
-                    class="form-control search-bar" placeholder="¿ QUE ESTAS BUSCANDO ?">
+         <div class="row search-bar-container">
+            <input type="text" v-on:input="localTerm = $event.target.value"  @change="selectedPage=1"
+                    class="col-12 form-control search-bar" placeholder="¿ QUE ESTAS BUSCANDO ?">
         </div> 
         
 
@@ -36,7 +36,7 @@
 
             </paginator>
             
-            <products-table class="col-12" :products="paginatedProducts"></products-table>
+            <products-table class="col-10 offset-1" :products="paginatedProducts"></products-table>
             
             <paginator class="col-12"
                             :selectedPage="selectedPage"   
@@ -47,19 +47,20 @@
                 </paginator>
         </div>
 
-    <cotizer-tutorial v-if="!user || user.role_id > 2 && !tutoSeen"></cotizer-tutorial>
-
+    <!-- <cotizer-tutorial v-if="!user || user.role_id > 2 && !tutoSeen"></cotizer-tutorial>
+ -->
     </div>
 </template>
 
 
 <script>
-import productsTable from '../products-table.vue';
-import categoriesAcordion from '../categories-acordion.vue';
+import productsTable from './products-table.vue';
+import categoriesAcordion from './categories-acordion.vue';
 import codeSelector from '../code-selector.vue';
 import appBanner from '../banner.vue';
 import hideOptbutton from '../hide-opt-button.vue';
 import cotizerTutorial from '../tutorial.vue';
+import paginator from '../../admin/admin/paginator.vue';
  export default {
         components:{
               cotizerTutorial,
@@ -67,24 +68,31 @@ import cotizerTutorial from '../tutorial.vue';
             categoriesAcordion,
             codeSelector,
             appBanner,
-           
+           paginator,
             hideOptbutton,
             },
         data(){
             return {
                 selectedPage:1,
                  productsPerPage:30,
-                searchTerm:'',
+               localTerm:'',
                 loading:true,
              
             }
         },
         watch : {
+            localTerm(){
+                this.$store.commit('setSearchTerm',this.localTerm);
+            },
             searchTerm(){
               this.selectedPage = 1;
            },
         },
+      
         computed: {
+              searchTerm(){
+                    return this.$store.getters.getSearchTerm;
+                },
             tutoSeen(){
                 return this.$store.getters.getTutoSeen;
             },
@@ -166,6 +174,7 @@ import cotizerTutorial from '../tutorial.vue';
 
 <style lang="scss" scoped>
 
+
 .contain-all{
     width: 100vw;
     padding:5px;
@@ -212,12 +221,16 @@ import cotizerTutorial from '../tutorial.vue';
     padding-top: 5%;
 }
 
+.search-bar-container{
+    padding: 5px 5%;
+}
+
 .search-bar{
     border:1px solid #D52B1E;
     padding:3px;
     margin-top:20px;
     text-align: center;
-    
+    width:98%;
 
     &::placeholder{
         color: #D52B1E;

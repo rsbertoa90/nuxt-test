@@ -7,11 +7,11 @@
 
             <div class="col-12 row d-flex justify-content-center">
             
-                <div class="col-12 col-lg-12" v-if="user && user.role_id < 3">
-                <hideOptbutton></hideOptbutton>
+                <div class="col-12 " v-if="user && user.role_id < 3">
+                    <hideOptbutton></hideOptbutton>
                 </div>
 
-                <div class=" col-12 text-center" :class="{'neg-margins':$mq!='lg'}" >
+                <div class=" col-12 text-center"  >
                     <app-banner></app-banner>
                 </div>
             </div>
@@ -54,7 +54,7 @@
 
 <script>
 import productsGrid from './products-grid.vue';
-import categoriesAcordion from '../categories-acordion.vue';
+
 import codeSelector from '../code-selector.vue';
 import appBanner from '../banner.vue';
 import hideOptbutton from '../hide-opt-button.vue';
@@ -64,7 +64,7 @@ import paginator from '../../admin/admin/paginator.vue';
         components:{
             paginator,
             productsGrid,  floatingCategories,
-            categoriesAcordion,
+          
             codeSelector,
             appBanner,
              

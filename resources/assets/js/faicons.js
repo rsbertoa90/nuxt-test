@@ -39,11 +39,13 @@ import {
     faMinus,
     faChevronUp,
     faEnvelope,
-    faCheckSquare
+    faCheckSquare,
+    faMapMarkerAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 
 library.add(faPauseCircle,
+            faMapMarkerAlt,
             faCheckSquare,
             faEnvelope,
             faPlus,

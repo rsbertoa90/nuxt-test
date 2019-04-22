@@ -1,10 +1,15 @@
 <template>
-    <div class="d-flex flex-column align-items-center product-card  justify-content-between h-100" v-if="product">
-        <h2 class="text-center title">{{product.name | uc}}</h2>
+    <div class="ml-2 d-flex flex-column align-items-center product-card  justify-content-between h-100" v-if="product">
+        <router-link :to="productUrl">
+            <h2 class="text-center title">{{product.name | uc}}</h2>
+        </router-link>
         <div class="d-flex w-100 flex-column">
             
-            <div class="image-container">
+            <div class="image-container" @click="show">
                 <v-lazy-image :src="image.url"></v-lazy-image>
+                <div class="offer-ribbon" v-if="product.offer">
+                    <v-lazy-image src="/storage/images/app/oferta.png"></v-lazy-image>
+                </div>
             </div>
             
             <div class="prices-container" v-if="config && !config.hide_prices">
@@ -34,22 +39,45 @@
        <div class="shop-button-container">
          <shop-button :product="product" ></shop-button>
        </div>
+        <image-modal  @close="closedModal" v-if="this.showModal"
+                    :product="product"  ref="modal" ></image-modal>
     </div>    
 </template>
 
 
 <script>
 import shopButton from './shop-button.vue';
+import imageModal from '../../cotizer/Img-modal.vue';
 export default {
     props:['product'],
     components:{
-        shopButton
+        shopButton,
+        imageModal
     },
     data(){
         return{
+            showModal : true,
             index:0
         }
     },
+    methods:{
+         show(){
+               this.showModal = true;
+             
+               /* this.$refs.modal.$forceUpdate(); */
+               
+               let element = this.$refs.modal.$el;
+               $(element).modal('show');
+        },
+        closedModal(){
+                 this.modalProduct = null;
+                 this.showModal = false;
+                setTimeout(() => {
+                    this.showModal=true;
+                }, 100);
+        },
+    },
+    
     computed:{
         productUrl(){
             let cats = this.$store.getters.getCategories;
@@ -83,8 +111,16 @@ export default {
 
 .min-sign{
     font-size: .85rem;
+    padding:7px;
+    text-align:center;
+    white-space:normal;
+    display:flex;
+    justify-content: center;
+    
 }
-
+a:hover{
+    color:#000;
+}
 .price,.pck_price{
     text-align:center
 }
@@ -109,6 +145,16 @@ export default {
     .image-container{
         width:100%;
         overflow: hidden;
+        cursor:pointer;
+        position:relative;
+        .offer-ribbon{
+            width:80px;
+            position:absolute;
+            top:0;
+            left:0;
+             display: block;
+            transform: rotate(-23deg);
+        }
       /*  padding:10px;
        border:1px solid #868686; */
         img{

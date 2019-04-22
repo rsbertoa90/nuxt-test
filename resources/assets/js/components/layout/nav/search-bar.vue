@@ -2,7 +2,7 @@
     <div class="search-bar row mr-2">
         <fa-icon v-if="!focused" icon="search" class="in-form-icon"></fa-icon>
         <fa-icon v-else icon="arrow-left" class="search-back-arrow" ></fa-icon> 
-        <input placeholder="BUSCAR" type="text" @focus="focused = true" @blur="focused=false" class=" search-field" >
+        <input @keyup.enter="search"  v-model="term" placeholder="BUSCAR" type="text" @focus="focused = true" @blur="focused=false" class=" search-field" >
       
     
     </div>
@@ -12,14 +12,41 @@
 export default {
     data(){
         return{
-            focused:false
+            focused:false,
+            term:'',
+        }
+    },
+    mounted(){
+        if (this.searchTerm){
+            this.term = this.searchTerm;
+        }
+    },
+    computed:{
+        searchTerm()
+        {
+            return this.$store.getters.getSearchTerm;
+        }
+    },
+    methods:{
+        search(){
+            if (this.term.trim().length > 1){
+                this.$store.commit('setSearchTerm',this.term);
+                if(this.$route.path != "/cotizador")
+                {
+                    this.$router.push('/cotizador');
+                }
+            }
+        }
+    },
+    watch:{
+        searchTerm(){
+            this.term=this.searchTerm;
         }
     }
 
     /* Hacer interaccion con searchTerm de store */
 }
 </script>
-
 
 <style lang="scss" scoped>
     .search-bar{

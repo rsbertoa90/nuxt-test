@@ -1,4 +1,6 @@
 <template>
+<div>
+
     <table class="table table-striped table-bordered" >
             <thead class="">
                 <th>Foto</th>
@@ -46,7 +48,7 @@
                         </div>
                     </td>
 
-                    <td><input type="number" min="0" class="form-control " v-model="product.units">
+                    <td><input type="number" :min="getMin(product)" class="form-control " v-model="product.units">
                         
                         <div v-if="$mq != 'lg' && product.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center">
                             
@@ -63,21 +65,49 @@
                 </tr>
             </tbody>
     </table>
+      <image-modal @close="closedModal" v-if="this.showModal"
+                    :product="modalProduct"  ref="modal" ></image-modal>
+</div>
 </template>
 
 <script>
+import imageModal from '../Img-modal.vue';
 export default {
+    components:{imageModal},
     props:['products'],
+    data(){
+        return{
+            showModal : true,
+            modalProduct:null,
+        }
+    },
     computed:{
         user(){
             return this.$store.getters.getUser;
         },
     },
     methods:{
-         show(product){
-             this.$emit('show',product);
-               
+        getMin(product){
+            return product.price == 0 ? product.pck_units : 1;
         },
+       
+         
+        show(product){
+               this.showModal = true;
+               this.modalProduct = product;
+               /* this.$refs.modal.$forceUpdate(); */
+               
+               let element = this.$refs.modal.$el;
+               $(element).modal('show');
+        },
+        closedModal(){
+                 this.modalProduct = null;
+                 this.showModal = false;
+                setTimeout(() => {
+                    this.showModal=true;
+                }, 100);
+        },
+    
     }
 }
 </script>

@@ -112,9 +112,10 @@ export default {
         background-color: #fff;
         position:fixed;
             top:90px;
-            left:20px;
+            left:10px;
         height: 450px;
-        max-width:300px;
+        max-width:275px;
+        
         overflow-y: auto;
         overflow-x:overlay;
         width:100%;

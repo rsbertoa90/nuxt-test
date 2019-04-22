@@ -1,11 +1,11 @@
 <template>
 <div v-if="category && category.products" class="row">
-    <div class="col-3">
+    <div class="col-3" v-if="$mq=='lg'">
         <div class="fixed-pannel"   :style="yStyle">
             <categories-pannel></categories-pannel>
         </div>
     </div>
-    <div class="col-9 row">    
+    <div class="col-12 col-lg-9 row p-0 m-0">    
         <div class="red-ribbon col-12">
             <div class="logo-square" v-if="category.image">
                 <v-lazy-image :src="category.image" :alt="category.name"></v-lazy-image>
@@ -17,11 +17,14 @@
 
             </div>
         </div>
+        <div class="col-12">   
+            <info-row></info-row>
+        </div>
         <div class="col-12 descri" v-if="category.description">
            <p> {{category.description |ucFirst}} </p>
         </div>
         <div class="col-12 mt-4 row">
-            <div class="col-12 col-lg-4" v-for="p in category.products" :key="p.code">
+            <div class="col-12 col-lg-4 mt-2" v-for="p in category.products" :key="p.code">
                 <productCard :product="p"></productCard>
             </div>
         </div>
@@ -34,10 +37,11 @@
 
 
 <script>
+import infoRow from '../layout/info-row.vue';
 import productCard from './product/small-card.vue';
 import categoriesPannel from '../home/categories-pannel.vue';
 export default {
-    components:{productCard,categoriesPannel},
+    components:{productCard,categoriesPannel,infoRow},
     data(){
         return{
             yStyle:'top:90px'
@@ -143,6 +147,17 @@ export default {
         align-items:center;
         height:75px;
         width:75px;
+    }
+}
+
+@media(max-width:600px){
+    .red-ribbon{
+        margin-top: 20px;
+        width:100vw;
+        h2{
+            margin-left:10px;
+            font-size:1rem;
+        }
     }
 }
 

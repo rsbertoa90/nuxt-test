@@ -140,6 +140,7 @@ import appBanner from './banner.vue';
 .contain-all{
     width: 100vw;
     padding:5px;
+    margin-left:-3%;
     overflow: hidden;
 }
 
