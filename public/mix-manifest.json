@@ -1,8 +1,9 @@
 {
-    "/js/admin-chunk.bundle.js": "/js/admin-chunk.bundle.js?id=77725d843d28a3a0aa71",
-    "/js/example-component.bundle.js": "/js/example-component.bundle.js?id=c47de578afd62818c2f2",
-    "/js/app.js": "/js/app.js?id=ec07dca20eb483c4ccd9",
+    "/js/user-chunk.bundle.js": "/js/user-chunk.bundle.js?id=2d46d68992ed22e82988",
+    "/js/admin-chunk.bundle.js": "/js/admin-chunk.bundle.js?id=6d6c4b3a2c0ad083e43b",
+    "/js/example-component.bundle.js": "/js/example-component.bundle.js?id=dbfe5811d546925509bf",
+    "/js/app.js": "/js/app.js?id=53d2d552e1fd3c4ed7eb",
     "/css/app.css": "/css/app.css?id=b152a7fd5a34038f5791",
-    "/js/vendor.js": "/js/vendor.js?id=11f929d820be8954d2e5",
-    "/js/manifest.js": "/js/manifest.js?id=b01b92ec690be1da6657"
+    "/js/vendor.js": "/js/vendor.js?id=0fab4956ce2269c4822f",
+    "/js/manifest.js": "/js/manifest.js?id=2364dcad871b42dc8cc4"
 }
