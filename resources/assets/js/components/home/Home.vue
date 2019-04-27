@@ -2,9 +2,11 @@
     <div>
        
         <home-top-row></home-top-row>
-        <homeInfo class="mt-4"></homeInfo>
-        <homeBanners class="mt-4"></homeBanners>
-        <homeOffers></homeOffers>
+        <homeInfo class="mt-4 mb-4"></homeInfo>
+        <homeBanners class="mt-4 ml-lg-4"></homeBanners>
+        <homeTexts></homeTexts>
+        <homeOffers v-if="config && !config.maintenance"></homeOffers>
+        <fbComments></fbComments>
     </div>
 </template>
 
@@ -14,26 +16,18 @@ import homeTopRow from './top-row.vue';
 import homeInfo from './info.vue';
 import  homeOffers from './offers.vue';
 import homeBanners from'./banners.vue';
+import homeTexts from './texts.vue';
+import fbComments from './fbcomments.vue';
+import metaMixin from '../metadataMixin';
 export default {
-    components:{homeOffers,homeTopRow,homeInfo,categoriesPannel,homeBanners},
-    metaInfo(){return{
-        title: this.metadata ? this.metadata.metatitle : 'Mayorista  del Mate',
-        meta:[
-            {name:'description', content: this.metadata ? this.metadata.metadescription : ''}
- 
- ]
-    }},
+    mixins:[metaMixin],
+    components:{fbComments,homeTexts,homeOffers,homeTopRow,homeInfo,categoriesPannel,homeBanners},
+  
     computed:{
-        metadatas(){
-            return this.$store.getters.getMeta;
+        config(){
+            return this.$store.getters.getConfig;
         },
-        metadata(){
-            if (this.metadatas){
-                return this.metadatas.find(m => {
-                    return m.page == 'home'
-                });
-            }
-        },
+       
         categories(){
             return this.$store.getters.getNotPaused;
         }

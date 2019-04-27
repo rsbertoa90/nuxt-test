@@ -33,7 +33,10 @@ class MetadataController extends Controller
             return Cache::rememberForever('metadatas', function(){
                 $pages = ['home',
                       'cotizador',
-                      'contacto',];
+                      'contacto',
+                      'ofertas',
+                      'carrito',
+                       ];
             
                 $res = [];
         

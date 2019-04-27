@@ -85,6 +85,9 @@
 import adminCategories from './Categories.vue';
 import adminCustomtexts from './customs.vue';
 export default {
+     metaInfo(){return{
+        title: 'ADMIN'   }},
+        
     components:{adminCategories, adminCustomtexts},
     data(){
         return {

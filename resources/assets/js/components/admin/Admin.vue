@@ -115,6 +115,8 @@ import changePrices from './admin/Change-prices.vue';
 import productRow from './admin/Product-row.vue';
 import paginator from './admin/paginator.vue';
     export default {
+        metaInfo(){return{
+        title: 'ADMIN'   }},
         components : {
             paginator,
             changePrices,

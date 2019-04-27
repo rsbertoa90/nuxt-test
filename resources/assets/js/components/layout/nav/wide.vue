@@ -4,7 +4,7 @@
                 <router-link class="navbar-brand col-7 " to="/">
                     <v-lazy-image  src="/storage/images/app/logo.png" alt="Bazar Mayorista Maju" />
                 </router-link>
-                <router-link to="/carrito" class="carrito col-4">
+                <router-link to="/carrito" class="carrito col-4" v-if="config && !config.maintenance">
                             <fa-icon icon="shopping-cart"></fa-icon>
                             <span class="nro-carrito" v-if="list">{{list.length}}</span>
                 </router-link>
@@ -25,28 +25,28 @@
                    
                     <div class="d-flex justify-content-start" >
                         <ul class="nav-list">
-                            <li class="nav-item text-white">
+                            <li class="nav-item text-white" v-if="config && !config.maintenance">
                                 <router-link to="/ofertas" class="nav-link text-white">
                                     <fa-icon icon="award"></fa-icon> Ofertas
                                 </router-link > 
                             </li>
                           
-                            <li class="nav-item text-white">
+                            <li class="nav-item text-white" v-if="config && !config.maintenance">
                                 <router-link class="nav-link text-white" to="/cotizador">
                                 <fa-icon icon="shopping-cart"></fa-icon> Cotizador <span class="sr-only">(current)</span>
                                 </router-link>
                             </li>
                             <li class="nav-item text-white">
-                                <router-link class="nav-link text-white" to="/contactanos">
+                                <router-link class="nav-link text-white" to="/contacto">
                                     <fa-icon icon="phone"></fa-icon>  Contactate
                                 </router-link>
                             </li>
-                            <li class="nav-item text-white">
+                            <li class="nav-item text-white" v-if="config && !config.maintenance">
                                 <a class="nav-link text-white" target="_blank" href="/MAJU-lista-de-precios.pdf" >
                                     <fa-icon icon="download"></fa-icon> Lista de precios
                                 </a> 
                             </li>
-                            <li class="nav-item text-white">
+                            <li class="nav-item text-white" v-if="config && !config.maintenance">
                                 <a class="nav-link text-white" target="_blank" rel="noreferrer"
                                     href="https://drive.google.com/file/d/1PRSqHX-70Eh7uAqOaF8xV-CAZ3BhqPL9/view">
                                     <fa-icon icon="download"></fa-icon> Catalogo digital
@@ -94,6 +94,9 @@ export default {
        
     }},
     computed:{
+        config(){
+            return this.$store.getters.getConfig;
+        },
         list(){
             return this.$store.getters.getList;
         },

@@ -11,10 +11,14 @@
 <script>
 import cotizerForm from './form.vue';
 import list from './list.vue';
+import metaMixin from '../metadataMixin';
 export default {
+    mixins:[metaMixin],
     name:'carrito',
     components:{
         cotizerForm,list
-    }
+    },
+   
+   
 }
 </script>

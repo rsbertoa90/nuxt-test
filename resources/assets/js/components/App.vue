@@ -5,7 +5,7 @@
             <app-nav></app-nav>
         </header>    
         <div class="py-4 row">
-            <div class="nav-space" v-if="$mq=='lg'"></div>
+            <div class="nav-space" :class="{'admin-nav-space':user && user.role_id<3}" v-if="$mq=='lg'"></div>
             <div class="col-12 p-4">
             <keep-alive include="carrito">
                 <transition enter-active-class="animated fadeIn fast faster ">
@@ -64,7 +64,11 @@ export default {
 
     .nav-space{
         width:100vw;
-        height:80px;
+        height:41px;
+    }
+
+    .admin-nav-space{
+        height: 80px;
     }
 
     .bottom-space{

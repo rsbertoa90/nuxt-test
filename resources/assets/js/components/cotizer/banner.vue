@@ -4,9 +4,9 @@
         <div class="cart-logo-square">
             <fa-icon icon="shopping-cart"></fa-icon>
         </div>
-        <h2  class=" font-weight-bold">
+        <h1  class=" font-weight-bold">
                 HACE TU PEDIDO
-        </h2>
+        </h1>
         <div col-lg-3>
             
         </div>
@@ -14,9 +14,9 @@
     <div class="col-12">
         <info-row></info-row>
     </div>
-    <div v-if="customText" class="mt-3">
+    <div v-if="description" class="mt-3">
         <h5 >
-            {{ customText.text }}
+            {{ description }}
         </h5>
     </div>
 </div>
@@ -39,6 +39,16 @@ export default {
         configs()
         {
             return this.$store.getters.getConfig;
+        },
+        description(){
+            let allMeta = this.$store.getters.getMeta;
+            let cotizerMeta = allMeta.find(m => {
+                return m.page == 'cotizador';
+            });
+            if(cotizerMeta){
+                return cotizerMeta.description;
+            }
+
         }
     },
     created(){
@@ -119,10 +129,18 @@ export default {
 
     .neg-margins{
     margin-right: -7%;
-    margin-left: -3%;
+    margin-left: -4.3%;
+    margin-top:-5px;
 }
-h2{
+h1{
+    font-size: 2rem;
     white-space: nowrap;
+}
+
+@media(max-width:600px){
+    h1{
+        font-size: 1.6rem;
+    }
 }
 
 </style>

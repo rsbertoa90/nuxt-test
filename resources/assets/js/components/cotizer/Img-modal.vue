@@ -2,8 +2,8 @@
     <div  ref="modal" class="modal fade" id="image-modal" tabindex="-1" role="dialog">
    <div class="modal-dialog" role="document">
     <div  v-if="product" class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"> {{product.name}} </h5>
+      <div class="modal-header text-center">
+        <h5 class="modal-title w-100 text-center "> {{product.name}} </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="close()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -23,9 +23,9 @@
             </transition>  
                 <img v-if="!product.images || ! product.images.length > 0" src="/storage/images/app/no-image.png" :alt="product.name">
 
-            <div class="controls"  v-if="product.images && product.images.length > 1" >
-                <span class="fa fa-chevron-left text-info" @click="changeImage('prev')" ></span>
-                <span class="fa fa-chevron-right text-info" @click="changeImage('next')" ></span>
+            <div class="controls"  v-if="product.images && product.images[1]" >
+                <span  @click="changeImage('prev')" class="ctr"> <fa-icon icon="chevron-left"></fa-icon> </span>
+                <span  @click="changeImage('next')" class="ctr"> <fa-icon icon="chevron-right"></fa-icon> </span>
             </div>
 
           <!--   <form v-if="product.images && product.images.length > 0"  action="/admin/product/deleteImage" method="POST">
@@ -143,9 +143,10 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
-        .fa{
+        .ctr{
             font-size:2rem;
             cursor: pointer;
+           
         }
 
     }

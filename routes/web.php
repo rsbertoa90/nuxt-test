@@ -86,6 +86,8 @@ Route::get('/getuser','UserController@get');
 
 Route::post('/cotizer/send', 'OrderController@userOrder');
 
+Route::post('/contacto','MailController@contacto');
+
 Route::get('/descargar-lista-de-precios','PDFController@pricesList');
 
 

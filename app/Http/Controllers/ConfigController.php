@@ -11,7 +11,7 @@ class ConfigController extends Controller
      public function update(Request $request)
     {
         Cache::forget('configs');
-
+       /*  return $request->all(); */
         $config = Config::find(1);
         $field = $request->field;
         $config->$field = $request->value;

@@ -1,7 +1,7 @@
 <template>
 <div v-if="category && category.products" class="row">
     <div class="col-3" v-if="$mq=='lg'">
-        <div class="fixed-pannel"   :style="yStyle">
+        <div >
             <categories-pannel></categories-pannel>
         </div>
     </div>
@@ -10,9 +10,9 @@
             <div class="logo-square" v-if="category.image">
                 <v-lazy-image :src="category.image" :alt="category.name"></v-lazy-image>
             </div>
-            <h2  class=" font-weight-bold" v-if="category.image">
+            <h1  class=" font-weight-bold" >
                  {{category.name|uc}}
-            </h2>
+            </h1>
             <div col-lg-3>
 
             </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="col-12 mt-4 row">
             <div class="col-12 col-lg-4 mt-2" v-for="p in category.products" :key="p.code">
-                <productCard :product="p"></productCard>
+                <productCard class="border-grey" :product="p"></productCard>
             </div>
         </div>
     </div>
@@ -39,13 +39,13 @@
 <script>
 import infoRow from '../layout/info-row.vue';
 import productCard from './product/small-card.vue';
-import categoriesPannel from '../home/categories-pannel.vue';
+import categoriesPannel from '../home/floating-categories-pannel.vue';
 export default {
     components:{productCard,categoriesPannel,infoRow},
     data(){
         return{
-            yStyle:'top:90px'
-            
+            yStyle:'top:100px',
+           
         }
     },
     metaInfo(){
@@ -58,17 +58,17 @@ export default {
     },
    methods:{
         handleScroll(e){
-            let def = 90;
+            let def = 100;
             let ypos=window.scrollY;
            let wh = window.document.documentElement.clientHeight;
            let innerh = window.innerHeight;
            let scrollh = document.body.scrollHeight;
            let posicion = scrollh - (innerh+ypos);
            
-            let fixedy =90;
+            let fixedy =100;
             if (posicion < 450)
             {
-                 fixedy = posicion - 450 + 90;
+                 fixedy = posicion - 450 + 100;
             }
             
             
@@ -119,11 +119,7 @@ export default {
 .descri{
     font-size:1.3rem;
 }
-    .fixed-pannel{
-        position:fixed;
-        top:45px;
-        left:20px;
-    }
+   
 
     .red-ribbon{
     background-color: #D52B1E;
@@ -150,13 +146,22 @@ export default {
     }
 }
 
+h1{
+    font-size: 2rem;
+    white-space: nowrap;
+}
+
+
 @media(max-width:600px){
     .red-ribbon{
         margin-top: 20px;
         width:100vw;
-        h2{
+        height: 60px;
+        h1{
             margin-left:10px;
-            font-size:1rem;
+            font-size:1.3rem;
+            white-space:normal;
+          
         }
     }
 }

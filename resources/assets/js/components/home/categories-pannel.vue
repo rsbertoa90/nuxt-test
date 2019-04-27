@@ -1,9 +1,9 @@
 <template>
-    <div class="scrollable-pannel" v-if="categories">
+    <div  v-if="categories" >
         <div class="heading">
             <h3>Categorias:</h3>
         </div>
-        <ul>
+        <ul class="scrollable-pannel">
             <li v-for="category in categories" :key="category.name"
                 :class="{'selected':$route.path == category.slug}">
                 <router-link class="d-flex" :to="category.slug">
@@ -48,6 +48,9 @@ export default {
         width:100%;
         justify-content: center;
         align-items: center;
+        padding-bottom:5px;
+        border-right:1px solid #fff;
+       
     }
     .selected{
         border-left:2px solid #D52B1E;
@@ -61,7 +64,7 @@ export default {
         border:1px solid #D52B1E;
         background-color: #fff;
        
-        height: 529px;
+        height: 422px;
         max-width:300px;
         overflow-y: auto;
         overflow-x:overlay;
@@ -97,5 +100,9 @@ export default {
             }
         }
     }
+     a:hover{
+        color:#000;
+    }
+
 
 </style>

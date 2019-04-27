@@ -82,6 +82,9 @@
 <script>
 import appOrder from './Order.vue';
 export default {
+     metaInfo(){return{
+        title: 'ADMIN'   }},
+        
     components: {
         appOrder
     },

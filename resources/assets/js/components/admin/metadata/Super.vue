@@ -40,6 +40,8 @@ import metaCategories from './categories.vue';
 import metaPages from './pages.vue'
 import metaProducts from './products.vue'
 export default {
+     metaInfo(){return{
+        title: 'ADMIN'   }},
     components : {
         metaCategories,
         metaPages,

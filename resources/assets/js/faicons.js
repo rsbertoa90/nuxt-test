@@ -13,6 +13,11 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 
 import {
+    faHandPointRight
+}
+from '@fortawesome/free-regular-svg-icons'
+
+import {
     faList,
     faClock,
     faDollarSign,
@@ -40,11 +45,15 @@ import {
     faChevronUp,
     faEnvelope,
     faCheckSquare,
-    faMapMarkerAlt
+    faMapMarkerAlt,
+    faUserCheck,
+    
 } from '@fortawesome/free-solid-svg-icons'
 
 
 library.add(faPauseCircle,
+            faUserCheck,
+            faHandPointRight,
             faMapMarkerAlt,
             faCheckSquare,
             faEnvelope,
@@ -55,7 +64,7 @@ library.add(faPauseCircle,
             faList,
             faArrowLeft,
             faSearch,
-             faBars,
+            faBars,
             faClock,
             faDollarSign,
             faPlay,

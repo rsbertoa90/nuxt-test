@@ -59,7 +59,7 @@ const Cart = () => import('./components/shoppingCart/ShoppingCart.vue');
 const Category = () => import('./components/category/Category.vue');
 const CategoryIndex = () => import('./components/category/categoryIndex.vue');
 const Product = () => import('./components/category/product/Product.vue');
-
+const Offers = ()  => import ('./components/offers/Offers.vue');
 
 
 const Admin = () => import('./components/admin/Admin.vue');
@@ -124,6 +124,11 @@ const router = new VueRouter({
             path:'/cotizador',
             name:'cotizador',
             component: Cotizer
+        },
+        {
+            path:'/ofertas',
+            name:'ofertas',
+            component: Offers
         },
         {
             path: '/:category_slug',

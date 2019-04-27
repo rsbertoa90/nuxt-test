@@ -1,9 +1,9 @@
 <template>
-    <div class="scrollable-pannel" :style="yStyle" v-if="categories">
+    <div class="fixed-pannel" :style="yStyle" v-if="categories">
         <div class="heading">
             <h3>Categorias:</h3>
         </div>
-        <ul>
+        <ul class="scrollable-pannel">
             <li v-for="category in categories" :key="category.name"
                 :class="{'selected':selected == category.id}">
                 <div class="d-flex" @click="selected=category.id">
@@ -25,7 +25,7 @@ export default {
     data(){
         return{
             selected:null,
-            yStyle:'top:90px'
+            yStyle:'top:100px'
             
         }
     },
@@ -40,7 +40,7 @@ export default {
     },
     watch:{
         categories(){
-            if (!this.selected){
+            if (!this.selected && !this.searchTerm){
                 this.selected = this.categories[0].id;
             }
         },
@@ -59,17 +59,17 @@ export default {
     },
     methods:{
         handleScroll(e){
-            let def = 90;
+            let def = 100;
             let ypos=window.scrollY;
            let wh = window.document.documentElement.clientHeight;
            let innerh = window.innerHeight;
            let scrollh = document.body.scrollHeight;
            let posicion = scrollh - (innerh+ypos);
            
-            let fixedy =90;
+            let fixedy =100;
             if (posicion < 450)
             {
-                 fixedy = posicion - 450 + 90;
+                 fixedy = posicion - 450 + 100;
             }
             
             
@@ -92,12 +92,15 @@ export default {
 <style lang="scss" scoped>
 
     .heading{
+        
+
         background-color: #D52B1E;
         color:#fff;
         display: flex;
         width:100%;
         justify-content: center;
         align-items: center;
+        padding-bottom:5px;
     }
     .selected{
         border-left:2px solid #D52B1E;
@@ -106,15 +109,19 @@ export default {
 
 
 
-
+.fixed-pannel{
+    position:fixed;
+    z-index: 50;
+    top:100px;
+    left:10px;
+    height: 450px;
+    max-width:275px;
+}
     .scrollable-pannel{
         border:1px solid #D52B1E;
         background-color: #fff;
-        position:fixed;
-            top:90px;
-            left:10px;
-        height: 450px;
-        max-width:275px;
+         height: 415px;
+
         
         overflow-y: auto;
         overflow-x:overlay;
@@ -147,8 +154,12 @@ export default {
                 transform: scale(1.2);
                 z-index:100;
                 background-color: #D52B1E33;
+
             }
         }
+    }
+    a:hover{
+        color:#000;
     }
 
 </style>

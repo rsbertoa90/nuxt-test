@@ -3,7 +3,8 @@
          
            <router-link to="/ofertas" class="overflow-hidden">
                 <transition leave-active-class="position-absolute animated slideOutRight">
-                        <offerCard :product="offers[selected]" :key="offers[selected].name" class="bg-white"></offerCard>
+                        <offerCard v-if="$mq=='lg'" :product="offers[selected]" :key="offers[selected].name" class="bg-white"></offerCard>
+                        <small-card v-else :product="offers[selected]" :key="offers[selected].name" class="bg-white"></small-card>
                 </transition>
            </router-link>
     </div>
@@ -11,8 +12,10 @@
 
 <script>
 import offerCard from '../category/product/card.vue';
+import smallCard from '../category/product/small-card.vue';
+
 export default {
-    components:{offerCard},
+    components:{offerCard,smallCard},
     data(){
         return{
      
@@ -64,7 +67,7 @@ img{
     border:1px solid #868686;
     padding:5px;
     position:relative;
-    height:470px;
+   /*  height:470px; */
     overflow: hidden;
 }
 

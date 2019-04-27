@@ -1,5 +1,5 @@
 <template>
-    <div class="ml-2 d-flex flex-column align-items-center product-card  justify-content-between h-100" v-if="product">
+    <div @mouseenter="hovered=true" @mouseleave="hovered=false" class="ml-2 d-flex flex-column align-items-center product-card  justify-content-between h-100" v-if="product">
         <router-link :to="productUrl">
             <h2 class="text-center title">{{product.name | uc}}</h2>
         </router-link>
@@ -7,12 +7,12 @@
             
             <div class="image-container" @click="show">
                 <v-lazy-image :src="image.url"></v-lazy-image>
-                <div class="offer-ribbon" v-if="product.offer">
+                <div class="offer-ribbon" :class="{'hovered-ribbon':hovered}" v-if="product.offer && config && !config.maintenance">
                     <v-lazy-image src="/storage/images/app/oferta.png"></v-lazy-image>
                 </div>
             </div>
             
-            <div class="prices-container" v-if="config && !config.hide_prices">
+            <div class="prices-container" v-if="config && !config.maintenance">
                  
                  
 
@@ -28,15 +28,15 @@
                     <div class="price-bg">
                         ${{product.pck_price | price}} C/U
                     </div>
-                    <span class="min-sign" v-if="product.price==0 && product.pck_units > 1" > Minimo {{product.pck_units}} unidades </span>
-                    <span class="min-sign" v-if="product.pck_price < product.price && product.pck_units > 1" > Mas de {{product.pck_units}} unidades </span>
+                    <span class="min-sign" v-if="product.price==0 && product.pck_units > 1" > Mínimo {{product.pck_units}} unidades </span>
+                    <span class="min-sign" v-if="product.pck_price < product.price && product.pck_units > 1" > Más de {{product.pck_units}} unidades </span>
                 </div>
 
                 
 
             </div>
         </div>
-       <div class="shop-button-container">
+       <div class="shop-button-container" v-if="config && !config.maintenance">
          <shop-button :product="product" ></shop-button>
        </div>
         <image-modal  @close="closedModal" v-if="this.showModal"
@@ -49,14 +49,21 @@
 import shopButton from './shop-button.vue';
 import imageModal from '../../cotizer/Img-modal.vue';
 export default {
-    props:['product'],
+    props:{
+        product:Object,
+         i:{
+            Type:Number,
+            default:0
+        }
+    },
     components:{
         shopButton,
         imageModal
     },
     data(){
         return{
-            showModal : true,
+            hovered:false,
+            showModal : false,
             index:0
         }
     },
@@ -65,9 +72,10 @@ export default {
                this.showModal = true;
              
                /* this.$refs.modal.$forceUpdate(); */
-               
-               let element = this.$refs.modal.$el;
-               $(element).modal('show');
+               setTimeout(() => {
+                   let element = this.$refs.modal.$el;
+                   $(element).modal('show');
+               }, 100);
         },
         closedModal(){
                  this.modalProduct = null;
@@ -95,9 +103,9 @@ export default {
         },
         image(){
         
-            if (this.product.images && this.product.images[this.index])
+            if (this.product.images && this.product.images[this.i])
             {
-                return this.product.images[this.index];
+                return this.product.images[this.i];
             } else{
                 return {url:'/storage/images/app/no-image.png'}
             }
@@ -138,7 +146,7 @@ a:hover{
 
     .product-card{
         padding:10px;  
-        border:1px solid #868686;
+       /*  border:1px solid #868686; */
        
     }
 
@@ -148,12 +156,17 @@ a:hover{
         cursor:pointer;
         position:relative;
         .offer-ribbon{
-            width:80px;
+            width:100px;
             position:absolute;
             top:0;
             left:0;
              display: block;
             transform: rotate(-23deg);
+            transition:width 1s;
+        }
+        .hovered-ribbon{
+            width:120px;
+            transition:width 1s;
         }
       /*  padding:10px;
        border:1px solid #868686; */
@@ -179,7 +192,7 @@ a:hover{
             text-align: center;
             justify-content: center;
             font-weight: bold;
-            border-radius: 13%;
+            border-radius: 5%;
             font-size: .90rem;
             
               border-left:2px solid #fff;

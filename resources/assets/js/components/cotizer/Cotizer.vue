@@ -33,11 +33,12 @@
 import webCotizer from './web/cotizer.vue';
 import mobileCotizer from './mobile/cotizer.vue'
 import appBanner from './banner.vue';
-
+import metaMixin from '../metadataMixin';
 
 
 
     export default {
+      mixins:[metaMixin],
         components:{
           webCotizer,mobileCotizer,
          
@@ -46,16 +47,12 @@ import appBanner from './banner.vue';
             return {
                 selectedPage:1,
                  productsPerPage:30,
-                searchTerm:'',
+              
                 loading:true,
              
             }
         },
-        watch : {
-            searchTerm(){
-              this.selectedPage = 1;
-           },
-        },
+     
         computed: {
             tutoSeen(){
                 return this.$store.getters.getTutoSeen;
@@ -63,44 +60,7 @@ import appBanner from './banner.vue';
             list(){
                 return this.$store.getters.getList;
             },
-            paginatedProducts(){
-                if (this.filteredProducts)
-                {
-                   return this.paginate(this.filteredProducts, this.selectedPage);
-                }
-            },
-            filteredProducts(){
-                var vm =this;
-                if(this.searchTerm.trim() != ''){
-                    let terms = vm.searchTerm.split(' ');
-                    let res = [];
-                    
-                  
-                    this.categories.forEach(cat => {
-                        let categoryName = cat.name.toString().toLowerCase().trim(); 
-                        cat.products.forEach(prod => {
-                            let productName = prod.name.toString().toLowerCase().trim();
-                            let addtores = true;
-                            
-                            terms.forEach(term => {
-                                
-                                term = term.toLowerCase();
-                                if (    addtores 
-                                        && productName.indexOf(term) < 0 
-                                        && categoryName.indexOf(term) < 0  
-                                    ){
-                                        addtores = false;   
-                                    } 
-
-                            });
-                            if (addtores){
-                                res.push(prod);
-                            }
-                        });
-                    });  
-                    return res;  
-                }
-            },
+           
             categories(){
                 return this.$store.getters.getNotPaused;
             },
@@ -113,7 +73,8 @@ import appBanner from './banner.vue';
 
             total() {
                return this.$store.getters.getTotal;
-            }
+            },
+            
         },
       
        

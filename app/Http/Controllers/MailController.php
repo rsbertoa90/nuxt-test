@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\Cotizacion;
+use App\Mail\MailContacto;
 use App\Mail\Aviso;
 use App\Order;
 use App\Product;
+use App\City;
 use App\OrderProduct;
 use Mail;
 use PDF;
@@ -24,6 +26,14 @@ class MailController extends Controller
 
 
 
+  public function contacto(request $request)
+  {
+    $data = $request->all();
+    $city = City::find($request->city);
+
+    self::mailAdmin(new MailContacto($data,$city));
+
+  }
 
     public function cotizacion(Request $request)
     {
@@ -64,10 +74,11 @@ class MailController extends Controller
 
       $order = Order::find($order->id);
        
-      Mail::to($order->email)
-            ->send(new Cotizacion($order));
+      Mail::to($order->email)->bcc(['multibazarmaju@gmail.com','roominagii@gmail.com'])
+            ->send(new Cotizacion($order))
+            ;
 
-       self::mailAdmin(new Aviso());
+      
             
           
     }

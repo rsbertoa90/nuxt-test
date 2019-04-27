@@ -36,8 +36,12 @@
             </select>
         </td>
         <td >
-            <textarea rows="4" type="text" v-model.lazy="product.name" 
+            <textarea placeholder="NOMBRE" rows="2" type="text" v-model.lazy="product.name" 
                     @change="saveChange(product,'name')" class="form-control"></textarea>
+        
+            <textarea placeholder="DESCRIPCION" rows="2" type="text" v-model.lazy="product.description" 
+                    @change="saveChange(product,'description')" class="form-control"></textarea>
+        
         </td>
         <td>
             <div class="row w-100 d-flex align-items-center">

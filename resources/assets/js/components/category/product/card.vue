@@ -1,23 +1,25 @@
 <template>
-    <div class="d-flex flex-column align-items-center product-card  justify-content-between h-100" v-if="product">
-        <h2 class="text-center title">{{product.name | uc}}</h2>
+    <div @mouseenter="hovered=true" @mouseleave="hovered=false" class="d-flex flex-column align-items-center product-card  justify-content-between " v-if="product">
+        <router-link :to="productUrl">
+            <h2 v-if="!hideHead" class="text-center title">{{product.name | uc}}</h2>
+        </router-link>
         <div class="d-flex w-100">
             
-                <div class="image-container">
+                <div class="image-container" @click="show">
                     <v-lazy-image :src="image.url"></v-lazy-image>
-                     <div class="offer-ribbon" v-if="product.offer">
+                     <div class="offer-ribbon" :class="{'hovered-ribbon':hovered}" v-if="product.offer">
                         <v-lazy-image src="/storage/images/app/oferta.png"></v-lazy-image>
                     </div>
                 </div>
             
-            <div class="prices-container" v-if="config && !config.hide_prices">
+            <div class="prices-container" v-if="config && !config.maintenance">
                  
                  <div class="pck_price" >
                     <div class="price-bg">
                         ${{product.pck_price | price}} C/U
                     </div>
-                    <span class="min-sign" v-if="product.price==0 && product.pck_units > 1" > Minimo {{product.pck_units}} unidades </span>
-                    <span class="min-sign" v-if="product.pck_price < product.price && product.pck_units > 1" > Mas de {{product.pck_units}} unidades </span>
+                    <span class="min-sign" v-if="product.price==0 && product.pck_units > 1" > Mínimo {{product.pck_units}} unidades </span>
+                    <span class="min-sign" v-if="product.pck_price < product.price && product.pck_units > 1" > Más de {{product.pck_units}} unidades </span>
                 </div>
 
                 <div class="price" v-if="product.price > 0 && product.price != product.pck_price">
@@ -30,24 +32,59 @@
                
             </div>
         </div>
-       <div class="shop-button-container">
+       <div class="shop-button-container" v-if="config && !config.maintenance">
          <shop-button :product="product" ></shop-button>
        </div>
+        <image-modal  @close="closedModal" v-if="this.showModal"
+                    :product="product"  ref="modal" ></image-modal>
     </div>    
 </template>
 
 
 <script>
 import shopButton from './shop-button.vue';
+import imageModal from '../../cotizer/Img-modal.vue';
 export default {
-    props:['product'],
+   
+    props:{
+        product: Object,
+        hideHead:{
+            type:Boolean,
+            default:false
+        },
+        i:{
+            Type:Number,
+            default:0
+        }
+        },
     components:{
-        shopButton
+        shopButton,
+        imageModal
     },
     data(){
         return{
-            index:0
+             showModal : false,
+            index:0,
+            hovered:false,
         }
+    }, 
+    methods:{
+        show(){
+               this.showModal = true;
+             
+               /* this.$refs.modal.$forceUpdate(); */
+               setTimeout(() => {
+                   let element = this.$refs.modal.$el;
+                   $(element).modal('show');
+               }, 100);
+        },
+        closedModal(){
+                 this.modalProduct = null;
+                 this.showModal = false;
+                setTimeout(() => {
+                    this.showModal=true;
+                }, 100);
+        },
     },
     computed:{
         productUrl(){
@@ -66,9 +103,9 @@ export default {
         },
         image(){
         
-            if (this.product.images && this.product.images[this.index])
+            if (this.product.images && this.product.images[this.i])
             {
-                return this.product.images[this.index];
+                return this.product.images[this.i];
             } else{
                 return {url:'/storage/images/app/no-image.png'}
             }
@@ -79,7 +116,9 @@ export default {
 
 
 <style lang="scss" scoped>
-
+ a:hover{
+        color:#000;
+    }
 .min-sign{
     font-size: 1.3rem;
 }
@@ -104,26 +143,35 @@ export default {
        
     }
 
+     img{
+            width: 100%;
+        }
+
+
+
     .image-container{
-        
+        cursor: pointer;
         width:55%;
         overflow: hidden;
         position:relative;
         .offer-ribbon{
             width:120px;
+             transition:width 1s;
             position:absolute;
             top:0;
             left:0;
              display: block;
             transform: rotate(-23deg);
-        }
+            
       /*  padding:10px;
        border:1px solid #868686; */
-        img{
-            width: 100%;
-        }
+       
     }
-
+    .hovered-ribbon{
+                width:150px;
+                transition:width 1s;
+             }
+    }
     .prices-container{
         padding:10px;
         width:45%;
@@ -141,9 +189,10 @@ export default {
             text-align: center;
             justify-content: center;
             font-weight: bold;
-            border-radius: 13%;
+            border-radius: 5%;
             font-size: 2rem;
-          
+           
+        }
             
         }
 
@@ -158,6 +207,6 @@ export default {
                 
             }
         }
-    }
+    
 
 </style>

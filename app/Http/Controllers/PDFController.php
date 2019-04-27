@@ -48,21 +48,21 @@ class PDFController extends Controller
 
       Queue::push(new GeneratePricesList());
 
-      return redirect('/admin/metadata');
+      return ;
     }
 
      public function dispatchCatalogoJob()
     {
         Queue::push(new GenerateCatalogo());
 
-        return redirect('/admin/metadata');
+        return;
     }
 
     public function dispatchCategoryCatalogJob($id)
     {
         Queue::push(new GenerateCategoryCatalogo($id));
 
-        return redirect('/admin/metadata');
+        return ;
     }
 
 

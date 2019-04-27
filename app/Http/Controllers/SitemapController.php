@@ -16,6 +16,9 @@ class SitemapController extends Controller
             '/',
             '/cotizador',
             '/carrito',
+            '/ofertas',
+            '/contacto',
+            
         ] ; 
 
         $categories = Category::notPaused();

@@ -1,14 +1,14 @@
 <template>
 
 
-    <div class="row ml-lg-4">
+    <div class="row mt-4">
       
         
-        <div class="col-12 col-lg-4 row p-lg-4 justify-content-center ">
+        <div class="col-12 col-lg-4 row p-lg-4 justify-content-center mt-4 ">
             <router-link to="/ofertas" class="white-banner row">
                 <div class="col-5">
                     <div class="overlayed-image">
-                        <v-lazy-image src="/storage/images/app/celu.png"></v-lazy-image>
+                        <v-lazy-image src="/storage/images/app/celu_ofertas.png"></v-lazy-image>
                     </div>
                 </div>
                 <div class="col-7 p-2 d-flex flex-column justify-content-around align-items-center">
@@ -20,7 +20,7 @@
             </router-link>
         </div>
 
-        <div class="col-12 col-lg-4 row p-lg-4 justify-content-center ml-lg-2">
+        <div class="col-12 col-lg-4 row p-lg-4 justify-content-center ml-lg-2 mt-4">
             <router-link to="/cotizador" class="red-banner row">
                 <div class="col-5">
                     <div class="overlayed-image">
@@ -36,11 +36,11 @@
             </router-link>
         </div>
 
-         <div class="col-12 col-lg-4 row p-lg-4 justify-content-center ">
-            <a href="/MAJU-lista-de-precios" target="_blank" class="white-banner row">
+         <div class="col-12 col-lg-4 row p-lg-4 justify-content-center mt-4 ">
+            <a href="/MAJU-lista-de-precios.pdf" target="_blank" class="white-banner row">
                 <div class="col-5">
                     <div class="overlayed-image">
-                        <v-lazy-image src="/storage/images/app/celu.png"></v-lazy-image>
+                        <v-lazy-image src="/storage/images/app/celu_precios.png"></v-lazy-image>
                     </div>
                 </div>
                 <div class="col-7 p-2 d-flex flex-column justify-content-around align-items-center">
@@ -64,7 +64,9 @@ export default {
 
 
 <style lang="scss" scoped>
-
+.margin-top{
+    margin-top:50px;
+}
 .white-banner, .red-banner{
     
     width:100%;
@@ -75,8 +77,8 @@ export default {
          box-shadow: 0 0 5px 3px #CCC;
          border-radius: 2%;
          .overlayed-image{
-                 margin-top: -20px;
-                width: 119.5px;
+                 margin-top: -35px;
+                width: 105px;
                 img{
                     width:100%;
                 }

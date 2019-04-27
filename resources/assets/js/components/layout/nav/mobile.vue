@@ -11,7 +11,7 @@
                     <fa-icon icon="times" class="text-white" v-else> </fa-icon>
                 </button>
                 <div @click="closeNav">
-                    <router-link to="/carrito" class="carrito">
+                    <router-link to="/carrito" class="carrito" v-if="config && !config.maintenance">
                         <fa-icon icon="shopping-cart"></fa-icon>
                         <span class="nro-carrito" v-if="list">{{list.length}}</span>
                     </router-link>
@@ -19,27 +19,27 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav" >
                          
-                        <li class="nav-item text-white" @click="closeNav">
+                        <li class="nav-item text-white" @click="closeNav" v-if="config && !config.maintenance">
                             <router-link class="nav-link text-white" to="/ofertas">
                             <fa-icon icon="award"></fa-icon> Ofertas <span class="sr-only">(current)</span>
                             </router-link>
                         </li>
-                        <li class="nav-item text-white" @click="closeNav">
+                        <li class="nav-item text-white" @click="closeNav" v-if="config && !config.maintenance">
                             <router-link class="nav-link text-white" to="/cotizador">
                             <fa-icon icon="shopping-cart"></fa-icon> Cotizador <span class="sr-only">(current)</span>
                             </router-link>
                         </li>
                         <li class="nav-item text-white" @click="closeNav">
-                            <router-link class="nav-link text-white" to="/contactanos">
+                            <router-link class="nav-link text-white" to="/contacto">
                                 <fa-icon icon="phone"></fa-icon>  Contactate
                             </router-link>
                         </li>
-                        <li class="nav-item text-white" @click="closeNav">
+                        <li class="nav-item text-white" @click="closeNav" v-if="config && !config.maintenance">
                              <a class="nav-link text-white" target="_blank" href="/MAJU-lista-de-precios.pdf" >
                                 <fa-icon icon="download"></fa-icon> Lista de precios
                             </a> 
                         </li>
-                        <li class="nav-item text-white" @click="closeNav">
+                        <li class="nav-item text-white" @click="closeNav" v-if="config && !config.maintenance">
                             <a class="nav-link text-white" target="_blank" rel="noreferrer"
                                 href="https://drive.google.com/file/d/1PRSqHX-70Eh7uAqOaF8xV-CAZ3BhqPL9/view">
                                 <fa-icon icon="download"></fa-icon> Catalogo digital
@@ -99,6 +99,9 @@ export default {
         showCategories:false
     }},
     computed:{
+        config(){
+            return this.$store.getters.getConfig;
+        },
         list(){
             return this.$store.getters.getList;
         },

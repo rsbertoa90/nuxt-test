@@ -2,7 +2,7 @@
     <div class="row">
        
             <div class="col-4 mt-2" v-for="p in products" :key="p.code">
-                <productCard :product="p"></productCard>
+                <productCard class="border-grey" :product="p"></productCard>
             </div>
        
     </div>

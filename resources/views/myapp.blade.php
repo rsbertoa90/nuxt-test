@@ -16,7 +16,14 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#D52B1E">
 
-    <title>Mayorista Bazar Maju</title>
+
+    @if ($metadata->metatitle)
+        <title>{{$metadata->metatitle}}</title>
+    @endif
+
+    @if ($metadata->metadescription)
+         <meta name="description" content="{{$metadata->metadescription}}">
+    @endif
 
 
    <script type="text/javascript">
@@ -33,10 +40,7 @@
         })();
     </script>
 
-    @if ($meta =  App\Metadata::findOrCreate('home'))
-        <title>{{$meta->metatitle }}</title>
-        <meta name="description" content="{{$meta->metadescription }}">
-    @endif
+   
     
     <!-- Scripts -->
     <script src="{{ mix('/js/manifest.js') }}" defer></script>
