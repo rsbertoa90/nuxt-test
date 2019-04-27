@@ -7,9 +7,9 @@
 
             <div class="col-12 row d-flex justify-content-center">
             
-                <div class="col-12 " v-if="user && user.role_id < 3">
+               <!--  <div class="col-12 " v-if="user && user.role_id < 3">
                     <hideOptbutton></hideOptbutton>
-                </div>
+                </div> -->
 
                 <div class=" col-12 text-center"  >
                     <app-banner></app-banner>
@@ -46,7 +46,15 @@
                                 @selectPage="selectedPage=$event">
 
                     </paginator>
+                    
             </div>
+
+            <div class="d-flex w-100 justify-content-center text-center" v-if="searchTerm.trim().length > 2 && (!paginatedProducts || paginatedProducts.length < 1)">
+                <h2>
+                    No se encontraron productos que coincidan con "{{searchTerm}}"
+                </h2>
+            </div>
+            
         </div>
     </div>
 </template>

@@ -35,8 +35,9 @@
                             @selectPage="selectedPage=$event">
 
             </paginator>
-            
-            <products-table class="col-10 offset-1" :products="paginatedProducts"></products-table>
+            <div class="p-2 mr-1">
+                <products-table class="col-12" :products="paginatedProducts"></products-table>
+            </div>
             
             <paginator class="col-12"
                             :selectedPage="selectedPage"   
@@ -45,6 +46,13 @@
                             @selectPage="selectedPage=$event">
 
                 </paginator>
+        </div>
+
+
+        <div class="d-flex w-100 justify-content-center text-center" v-if="searchTerm.trim().length > 2 && (!paginatedProducts || paginatedProducts.length < 1)">
+                <h2>
+                    No se encontraron productos que coincidan con "{{searchTerm}}"
+                </h2>
         </div>
 
     <!-- <cotizer-tutorial v-if="!user || user.role_id > 2 && !tutoSeen"></cotizer-tutorial>
@@ -86,7 +94,12 @@ import paginator from '../../admin/admin/paginator.vue';
             },
             searchTerm(){
               this.selectedPage = 1;
+              this.localTerm=this.searchTerm;
            },
+        },
+        mounted(){
+            
+            this.localTerm =this.searchTerm;
         },
       
         computed: {

@@ -1,6 +1,8 @@
 <template>
-     <transition enter-active-class="animated bounceIn" leave-active-class="animated fadeOutDown">
-            <div v-if="total > 0" id="total">
+<transition  enter-active-class="animated bounceIn">
+
+         <router-link to="/carrito" v-if="total>0" key="bouncer" id="total" >
+            <div>
                 <div  class="bg-red p-1">
                     <div class=" bg-white d-flex justify-content-center p-1">
                          <fa-icon icon="shopping-cart" class="red mt-1 mr-2"></fa-icon>
@@ -10,11 +12,12 @@
                
                 <div  class="bg-red p-1">
                     <div class="bg-white d-flex justify-content-center p-1">
-                        <router-link to="/carrito" class="finish" >  Terminar pedido </router-link>
+                        <div class="finish" >  Terminar pedido </div>
                     </div>
                 </div>
             </div>    
-    </transition>
+         </router-link>
+</transition>
 </template>
 
 <script>
@@ -42,15 +45,10 @@ export default {
         position: fixed;
         /* margin-left:50vw; */
         bottom: 25px;
-        right:0;
+        right:10px;
         z-index: 900;
     }
 
-     @media(min-width: 600px){
-        
-         #total {
-             left:45%;
-         }
-     }
+   
 </style>
 

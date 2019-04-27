@@ -24,9 +24,9 @@
                             <fa-icon icon="award"></fa-icon> Ofertas <span class="sr-only">(current)</span>
                             </router-link>
                         </li>
-                        <li class="nav-item text-white" @click="closeNav" v-if="config && !config.maintenance">
-                            <router-link class="nav-link text-white" to="/cotizador">
-                            <fa-icon icon="shopping-cart"></fa-icon> Cotizador <span class="sr-only">(current)</span>
+                        <li class="nav-item text-white" @click="clearSearchTerm" v-if="config && !config.maintetenance">
+                            <router-link class="nav-link text-white" to="/cotizador" >
+                                <fa-icon icon="shopping-cart"></fa-icon> Todos los productos <span class="sr-only">(current)</span>
                             </router-link>
                         </li>
                         <li class="nav-item text-white" @click="closeNav">
@@ -40,8 +40,8 @@
                             </a> 
                         </li>
                         <li class="nav-item text-white" @click="closeNav" v-if="config && !config.maintenance">
-                            <a class="nav-link text-white" target="_blank" rel="noreferrer"
-                                href="https://drive.google.com/file/d/1PRSqHX-70Eh7uAqOaF8xV-CAZ3BhqPL9/view">
+                            <a class="nav-link text-white" target="_blank" 
+                                href="/MAJU-catalogo.pdf">
                                 <fa-icon icon="download"></fa-icon> Catalogo digital
                             </a> 
                         </li>
@@ -116,6 +116,10 @@ export default {
         }
     },
     methods:{
+        clearSearchTerm(){
+            this.$store.commit('setSearchTerm','');
+            this.closeNav();
+        },
         closeNav(){
             if(!this.collapsed){
                 this.$refs.toglerbutton.click();

@@ -1,6 +1,6 @@
 <template>
-     <transition enter-active-class="animated bounceIn" leave-active-class="animated fadeOutDown">
-            <div v-if="total > 0" id="total">
+<transition enter-active-class="animated bounceIn">
+            <div id="total" key="bouncer" v-if="total>0">
                 <div  class="bg-red p-1">
                     <div class="btn-desplegar " @click="desplegar = !desplegar ">
                          <fa-icon icon="shopping-cart" class=" mt-2 mr-2"></fa-icon>
@@ -17,6 +17,7 @@
                             <tr v-for="product in list" :key="product.code">
                                 <td class="nametd">{{product.name}}</td>
                                 <td class="unitstd">{{product.units}}</td>
+                                <td class="btn-td"> <button class="btn btn-sm btn-danger" @click="product.units=0"> <fa-icon icon="times"></fa-icon> </button> </td>
                             </tr>
                         </tbody>
                     </table>
@@ -27,13 +28,14 @@
                     </div>
                 </div>
             </div>    
-    </transition>
+</transition>
+    
 </template>
 
 <script>
 export default {
     data(){return{
-        desplegar:false,
+        desplegar:true,
     }},
    computed:{
        list(){
@@ -47,6 +49,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+
 .border-red{
     border:2px solid red;
     padding:0;
@@ -95,15 +99,19 @@ export default {
 
     table{
         max-width: 250px;
+       
         td{
             font-size:.8rem;
             white-space:normal;
             word-wrap: break-word;
+             .btn-td{
+                    max-width:29px;
+                }
             .nametd{
-                width:80%;
+                width:100px;
             }
             .unitstd{
-                width:20%;
+               max-width:50px;
             }
         }
     }

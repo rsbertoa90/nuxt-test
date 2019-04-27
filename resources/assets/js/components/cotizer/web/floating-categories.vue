@@ -61,6 +61,8 @@ export default {
         handleScroll(e){
             let def = 100;
             let ypos=window.scrollY;
+            
+            
            let wh = window.document.documentElement.clientHeight;
            let innerh = window.innerHeight;
            let scrollh = document.body.scrollHeight;
@@ -72,7 +74,9 @@ export default {
                  fixedy = posicion - 450 + 100;
             }
             
-            
+            if(ypos < 5){
+                fixedy = 100;
+            }
             this.yStyle = 'top:'+fixedy+'px';
         
         }

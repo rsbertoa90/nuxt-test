@@ -66,7 +66,7 @@
         
         </td>
         <td class="d-flex flex-column justify-content-center align-items-center p-0">
-            <input class="form-control" type="checkbox" v-model="product.selected">
+           <!--  <input class="form-control" type="checkbox" v-model="product.selected"> -->
             <button @click.prevent="deleteProduct(product)" class="btn btn-sm btn-outline-danger m-1">
                 <fa-icon icon="trash"></fa-icon>
             </button>

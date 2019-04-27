@@ -95,7 +95,7 @@
                </div>
                <div class="col-12 row">
 
-                <button class="btn btn-lg btn-outline-danger col-12 col-lg-4 mt-2" @click.prevent.stop="send"> <fa-icon icon="envelope" class="mb-1 mr-2"></fa-icon> Enviar mi pedido </button>
+                <div class="btn btn-lg btn-outline-danger col-12 col-lg-4 mt-2" @click="send"> <fa-icon icon="envelope" class="mb-1 mr-2"></fa-icon> Enviar mi pedido </div>
 
                 <router-link to="/cotizador" class="ml-lg-4 offset-lg-1 btn btn-lg btn-outline-secondary col-12 col-lg-4 mt-2" > <fa-icon icon="arrow-left" class="mb-1 mr-2"></fa-icon> Volver al cotizador </router-link>
                </div>

@@ -124,11 +124,15 @@ class PDFController extends Controller
     }
 
 
-    public function replaceCatalogo(Request $request)
+     public function replaceCatalogo(Request $request)
     {
         $catalogo = $request->file('catalogo');
 
         $path = public_path().'/MAJU-catalogo.pdf';
+        if (file_exists($path))
+        {
+            unlink($path);
+        }
 
         move_uploaded_file($catalogo,$path);
 

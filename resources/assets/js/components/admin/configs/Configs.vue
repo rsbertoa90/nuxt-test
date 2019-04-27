@@ -28,6 +28,15 @@
                 <button v-if="configs && configs.maintenance" class="btn btn-outline-success" @click="toggleMaintenance">Mostrar precios</button>
             </div>
         </div>
+        <div class="mt-4 p-2">
+            <form method="post" action="/admin/replace-catalogo" enctype="multipart/form-data">
+                <input type="hidden" name="_token" :value="csrf">
+                <label class="btn btn-md btn-outline-info mt-3">Subir catalogo comprimido
+                    <input @change="catalogosubido=true" style="display:none" type="file" name="catalogo">
+                </label>
+                <button type="submit" class="btn btn-outline-success" v-if="catalogosubido">Guardar</button>
+            </form>
+        </div>
         <!-- <div class="col-12 row">
             <admin-slider></admin-slider>
         </div> -->
@@ -40,6 +49,15 @@ export default {
      metaInfo(){return{
         title: 'ADMIN'   }},
     components:{adminSlider},
+    data(){
+        return {
+            
+            catalogosubido:false,
+            csrf:window.csrf,
+          
+            
+        }
+    },
     computed:{
         configs(){
             return this.$store.getters.getConfig;

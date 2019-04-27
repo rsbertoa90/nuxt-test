@@ -12,7 +12,7 @@
                 <th v-if="$mq == 'lg'" class="">Subtotal</th>
             </thead>
             <tbody>
-                <tr v-for="product in products" :key="product.id" >
+                <tr v-for="product in products" :key="product.slug" >
                     <td width="10%" @click="show(product)"> 
                         <v-lazy-image v-if="product.images && product.images.length > 0" 
                                     class="sampleImage" 

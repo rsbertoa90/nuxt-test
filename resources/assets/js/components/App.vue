@@ -17,7 +17,10 @@
         </div>
         <app-footer v-if="$mq=='lg'"></app-footer>
          <whatsappBtn v-if="!user || user.role_id > 2 "></whatsappBtn>
-         <total-bouncer :total="total" v-if="total && $route.path != '/carrito'" ></total-bouncer>
+     
+         <total-bouncer :total="total" v-if="$route.path != '/carrito'" ></total-bouncer>
+
+       
     </div>
 </template>
 

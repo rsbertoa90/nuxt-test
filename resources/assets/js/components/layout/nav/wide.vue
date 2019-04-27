@@ -33,7 +33,7 @@
                           
                             <li class="nav-item text-white" v-if="config && !config.maintenance">
                                 <router-link class="nav-link text-white" to="/cotizador">
-                                <fa-icon icon="shopping-cart"></fa-icon> Cotizador <span class="sr-only">(current)</span>
+                                <fa-icon icon="shopping-cart"></fa-icon> Todos los productos <span class="sr-only">(current)</span>
                                 </router-link>
                             </li>
                             <li class="nav-item text-white">
@@ -48,7 +48,7 @@
                             </li>
                             <li class="nav-item text-white" v-if="config && !config.maintenance">
                                 <a class="nav-link text-white" target="_blank" rel="noreferrer"
-                                    href="https://drive.google.com/file/d/1PRSqHX-70Eh7uAqOaF8xV-CAZ3BhqPL9/view">
+                                    href="/MAJU-catalogo.pdf">
                                     <fa-icon icon="download"></fa-icon> Catalogo digital
                                 </a> 
                             </li>
