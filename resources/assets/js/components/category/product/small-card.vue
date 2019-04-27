@@ -6,9 +6,9 @@
         <div class="d-flex w-100 flex-column">
             
             <div class="image-container" @click="show">
-                <v-lazy-image :src="image.url"></v-lazy-image>
+                <v-lazy-image :src="image.url" :alt="product.name"></v-lazy-image>
                 <div class="offer-ribbon" :class="{'hovered-ribbon':hovered}" v-if="product.offer && config && !config.maintenance">
-                    <v-lazy-image src="/storage/images/app/oferta.png"></v-lazy-image>
+                    <v-lazy-image src="/storage/images/app/oferta.png" alt="oferta"></v-lazy-image>
                 </div>
             </div>
             

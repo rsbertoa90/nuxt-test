@@ -21,7 +21,7 @@
             
             <div class="google-form">
                 <a href="https://forms.gle/YquHUzfQqSV2PX5r8" target="_blank" rel="noreferrer">
-                    <v-lazy-image src="/storage/images/app/form_google.jpg"></v-lazy-image>
+                    <v-lazy-image src="/storage/images/app/form_google.jpg" alt="Sumate a nuestra lista de difusion"></v-lazy-image>
                 </a>
             </div>
         </div>

@@ -8,7 +8,7 @@
             <router-link to="/ofertas" class="white-banner row">
                 <div class="col-5">
                     <div class="overlayed-image">
-                        <v-lazy-image src="/storage/images/app/celu_ofertas.png"></v-lazy-image>
+                        <v-lazy-image src="/storage/images/app/celu_ofertas.png" alt="Ofertas en Bazar Mayorista Maju"></v-lazy-image>
                     </div>
                 </div>
                 <div class="col-7 p-2 d-flex flex-column justify-content-around align-items-center">
@@ -24,7 +24,7 @@
             <router-link to="/cotizador" class="red-banner row">
                 <div class="col-5">
                     <div class="overlayed-image">
-                        <v-lazy-image src="/storage/images/app/celu.png"></v-lazy-image>
+                        <v-lazy-image src="/storage/images/app/celu.png" alt="Todos los productos de Bazar Mayorista Maju"></v-lazy-image>
                     </div>
                 </div>
                 <div class="col-7 p-2 d-flex flex-column justify-content-around align-items-center">
@@ -40,7 +40,7 @@
             <a href="/MAJU-lista-de-precios.pdf" target="_blank" class="white-banner row">
                 <div class="col-5">
                     <div class="overlayed-image">
-                        <v-lazy-image src="/storage/images/app/celu_precios.png"></v-lazy-image>
+                        <v-lazy-image src="/storage/images/app/celu_precios.png" alt="Lista de Precios"></v-lazy-image>
                     </div>
                 </div>
                 <div class="col-7 p-2 d-flex flex-column justify-content-around align-items-center">
