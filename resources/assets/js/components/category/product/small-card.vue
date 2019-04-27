@@ -146,6 +146,7 @@ a:hover{
 
     .product-card{
         padding:10px;  
+        height:100%;
        /*  border:1px solid #868686; */
        
     }
