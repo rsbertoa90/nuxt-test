@@ -50,7 +50,7 @@ import "core-js/modules/es6.array.iterator";
 
 
 
-const Login = () => import('./components/login/Login.vue');
+const Login = () => import( /* webpackChunkName: "admin-chunk" */  './components/login/Login.vue');
 
 const Home = () =>  import('./components/home/Home.vue') ; 
 const Cotizer = () => import('./components/cotizer/Cotizer.vue');
@@ -62,10 +62,10 @@ const Product = () => import('./components/category/product/Product.vue');
 const Offers = ()  => import ('./components/offers/Offers.vue');
 
 
-const Admin = () => import('./components/admin/Admin.vue');
-const Orders = () => import('./components/admin/Orders.vue'); 
-const Metadata = () => import('./components/admin/metadata/Super.vue');
-const Config = () => import('./components/admin/configs/Configs.vue');
+const Admin = () => import( /* webpackChunkName: "admin-chunk" */ './components/admin/Admin.vue');
+const Orders = () => import( /* webpackChunkName: "admin-chunk" */  './components/admin/Orders.vue');
+const Metadata = () => import( /* webpackChunkName: "admin-chunk" */  './components/admin/metadata/Super.vue');
+const Config = () => import( /* webpackChunkName: "admin-chunk" */  './components/admin/configs/Configs.vue');
 
 
 const router = new VueRouter({

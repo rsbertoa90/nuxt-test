@@ -7,11 +7,11 @@
         <div class="py-4 row">
             <div class="nav-space" :class="{'admin-nav-space':user && user.role_id<3}" v-if="$mq=='lg'"></div>
             <div class="col-12 p-4">
-            <keep-alive include="carrito">
                 <transition enter-active-class="animated fadeIn fast faster ">
-                        <router-view></router-view>
+                    <keep-alive include="carrito">
+                                <router-view></router-view>
+                    </keep-alive>
                 </transition>
-            </keep-alive>
             </div>
             <div class="bottom-space"></div>
         </div>

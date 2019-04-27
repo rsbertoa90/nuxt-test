@@ -38,7 +38,7 @@
                     <div  class="col-6 d-flex flex-column">
                         <div class="d-flex align-items-center ">
                              <label class="text-info font-weight-bold">Filtrar</label>
-                            <input type="checkbox" class="form-control" v-model="selector.checked" @change="checkSelect">
+                           <!--  <input type="checkbox" class="form-control" v-model="selector.checked" @change="checkSelect"> -->
                             <select class="form-control col-4"  v-model="selector.id">
                                 <option value="all"> Todo</option>
                                 <option v-if="orderBy == 'category.name'" 
@@ -202,7 +202,7 @@ import paginator from './admin/paginator.vue';
         methods : {
             
             resetFilters(){
-                this.resetCheckboxes();
+              /*   this.resetCheckboxes(); */
                 this.selectedPage = 1;
                 this.searchMode=false;
                 this.searchTerm='';
@@ -264,7 +264,7 @@ import paginator from './admin/paginator.vue';
             },
 
            
-            resetCheckboxes(){
+           /*  resetCheckboxes(){
                 this.selector.checked =false;
                 this.products.forEach(prod => {
                     if (prod.selected == undefined)
@@ -275,7 +275,7 @@ import paginator from './admin/paginator.vue';
                         prod.selected = false;
                     }
                 });
-            },
+            }, */
             checkSelect(){
                 if (this.selector.id == 'all')
                 {
