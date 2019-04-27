@@ -67,6 +67,13 @@ export default {
 .margin-top{
     margin-top:50px;
 }
+
+.white-banner:hover, .red-banner:hover{
+    transform:scale(1.1);
+     box-shadow: 2px 2px 5px #999;
+}
+
+
 .white-banner, .red-banner{
     
     width:100%;
