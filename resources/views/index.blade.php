@@ -16,7 +16,7 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#ff0aaf">
 
-    <title>Mayorista del Mate</title>
+    
 
 
    <script type="text/javascript">
