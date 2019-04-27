@@ -52,14 +52,14 @@ import "core-js/modules/es6.array.iterator";
 
 const Login = () => import( /* webpackChunkName: "admin-chunk" */  './components/login/Login.vue');
 
-const Home = () =>  import('./components/home/Home.vue') ; 
-const Cotizer = () => import('./components/cotizer/Cotizer.vue');
-const Contact = () => import('./components/contact/Contact.vue');
-const Cart = () => import('./components/shoppingCart/ShoppingCart.vue');
-const Category = () => import('./components/category/Category.vue');
-const CategoryIndex = () => import('./components/category/categoryIndex.vue');
-const Product = () => import('./components/category/product/Product.vue');
-const Offers = ()  => import ('./components/offers/Offers.vue');
+const Home =  import('./components/home/Home.vue') ; 
+const Cotizer =  import('./components/cotizer/Cotizer.vue');
+const Contact =  import('./components/contact/Contact.vue');
+const Cart =  import('./components/shoppingCart/ShoppingCart.vue');
+const Category =  import('./components/category/Category.vue');
+const CategoryIndex =  import('./components/category/categoryIndex.vue');
+const Product =  import('./components/category/product/Product.vue');
+const Offers =  import ('./components/offers/Offers.vue');
 
 
 const Admin = () => import( /* webpackChunkName: "admin-chunk" */ './components/admin/Admin.vue');
