@@ -14,24 +14,34 @@ export default {
            
         }
     },
+    computed:{
+        user(){
+            return this.$store.getters.getUser;
+        }
+    },
       methods:{
         handleScroll(e){
             let def = 100;
+            if (this.user && this.user.role_id<3){
+                def = 120;
+            }
             let ypos=window.scrollY;
            let wh = window.document.documentElement.clientHeight;
            let innerh = window.innerHeight;
            let scrollh = document.body.scrollHeight;
            let posicion = scrollh - (innerh+ypos);
            
-            let fixedy =100;
+            let fixedy =def;
             if (posicion < 450)
             {
-                 fixedy = posicion - 450 + 100;
+                 fixedy = posicion - 450 + def;
             }
             
             
+            if (this.ypos < 3){
+                fixedy = def;
+            }
             this.yStyle = 'top:'+fixedy+'px';
-        
         }
     },
     
@@ -51,7 +61,7 @@ export default {
      .fixed-pannel{
         position:fixed;
         z-index:50;
-        top:55px;
+        top:120px;
         left:20px;
     }
 </style>

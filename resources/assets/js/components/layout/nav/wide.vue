@@ -1,5 +1,6 @@
 <template>
-         <nav class="navbar row" >
+         <nav class="navbar row" :class="{'admin-nav-color':user && user.role_id < 3,
+                                        'bg-red':!user || user.role_id>2}" >
              <div class="col-2 p-0 m-0 row">
                 <router-link class="navbar-brand col-7 " to="/">
                     <v-lazy-image  src="/storage/images/app/logo.png" alt="Bazar Mayorista Maju" />
@@ -111,7 +112,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+.admin-nav-color{
+    background-color: blue;
+}
 .nav-list{
        list-style: none;
     display: -webkit-box;
@@ -142,7 +145,7 @@ export default {
 
     .navbar{
         padding:0 .5rem 0 30px;
-        background-color: #D52B1E;
+       /*  background-color: #D52B1E; */
         position:fixed;
         top:0;
         left:0;

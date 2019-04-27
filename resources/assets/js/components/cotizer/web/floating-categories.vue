@@ -36,6 +36,9 @@ export default {
         categories()
         {
             return this.$store.getters.getNotPaused;
+        },
+        user(){
+            return this.$store.getters.getUser;
         }
     },
     watch:{
@@ -60,6 +63,10 @@ export default {
     methods:{
         handleScroll(e){
             let def = 100;
+            if (this.user && this.user.role_id<3){
+                def = 120;
+            }
+
             let ypos=window.scrollY;
             
             
@@ -68,14 +75,14 @@ export default {
            let scrollh = document.body.scrollHeight;
            let posicion = scrollh - (innerh+ypos);
            
-            let fixedy =100;
+            let fixedy =def;
             if (posicion < 450)
             {
-                 fixedy = posicion - 450 + 100;
+                 fixedy = posicion - 450 + def;
             }
             
             if(ypos < 5){
-                fixedy = 100;
+                fixedy = def;
             }
             this.yStyle = 'top:'+fixedy+'px';
         
