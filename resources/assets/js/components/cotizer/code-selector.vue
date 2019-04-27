@@ -15,7 +15,7 @@
                         <label class="mr-2" for="">Unidades</label>
                         <input type="number" min="0"  class="form-control" v-model="selector.units">
                     </div>
-                    <button type="submit" class="btn btn-md btn-secondary ml-2" :class="{'btn-outline-success':selector.product && selector.units > 0}"> <span class="fa fa-plus"></span> </button>
+                    <button type="submit" class="btn btn-md btn-secondary ml-2" :class="{'btn-outline-success':selector.product && selector.units > 0}"> <fa-icon icon="plus"></fa-icon> </button>
                 </form>
                
     </div>

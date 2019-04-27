@@ -45,9 +45,17 @@ class GeneratePricesList implements ShouldQueue
     public function handle()
     {
         $path = public_path().'/MAJU-lista-de-precios.pdf';
-
+        if (file_exists($path)){
+            unlink($path);
+        }
         $today = Carbon::now()->format('d/m/Y');
-        $categories = Category::notPaused();
+        $categories = Category::with('products.images')
+                    ->with(['products' => function($q){
+                        $q->where('paused',0);
+                    }])
+                    ->whereHas('products' , function($q){
+                $q->where('paused',0)->orderBy('name');
+            })->orderby('name')->get();
 
         $html = View::make('pdf.ListaDePrecios',compact('categories','today'))->render();
 

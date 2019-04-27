@@ -19,8 +19,8 @@
         </div> 
         
 
-        <code-selector v-if="user && user.role_id < 3" :list="list"></code-selector>
-    
+       <!--  <code-selector v-if="user && user.role_id < 3" :list="list"></code-selector>
+     -->
         <hr>
         
 

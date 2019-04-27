@@ -41,9 +41,13 @@ class GenerateCatalogo implements ShouldQueue
 
         $path = public_path().'/MAJU-catalogo.pdf';
         $today = Carbon::now()->format('d/m/Y');
-        $categories = Category::with('products.images')->whereHas('products', function ($q){
-            $q->orderBy('name')->where('paused',0);
-        })->orderBy('name')->get();
+        $categories =Category::with('products.images')
+                    ->with(['products' => function($q){
+                        $q->where('paused',0);
+                    }])
+                    ->whereHas('products' , function($q){
+                $q->where('paused',0)->orderBy('name');
+            })->orderby('name')->get();
         
         foreach ($categories as  $c) {
             foreach ($c->products as $k=>$p) {

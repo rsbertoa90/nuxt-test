@@ -21,10 +21,10 @@
                 <input type="text" v-on:input="searchTerm = $event.target.value"  @change="selectedPage=1"
                         class="form-control search-bar" placeholder="¿ QUE ESTAS BUSCANDO ?">
             </div>  -->
-            
+            <!-- 
 
             <code-selector v-if="user && user.role_id < 3" :list="list"></code-selector>
-        
+         -->
             <hr>
             
             <div class="row">
