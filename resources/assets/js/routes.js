@@ -70,11 +70,16 @@ import Offers from  './components/offers/Offers.vue';
 //const Offers = ()  => import (/* webpackChunkName: "user-chunk" */ './components/offers/Offers.vue');
 
 
-const Login = () => import( /* webpackChunkName: "admin-chunk" */  './components/login/Login.vue');
-const Admin = () => import( /* webpackChunkName: "admin-chunk" */ './components/admin/Admin.vue');
-const Orders = () => import( /* webpackChunkName: "admin-chunk" */  './components/admin/Orders.vue');
-const Metadata = () => import( /* webpackChunkName: "admin-chunk" */  './components/admin/metadata/Super.vue');
-const Config = () => import( /* webpackChunkName: "admin-chunk" */  './components/admin/configs/Configs.vue');
+//const Login = () => import( /* webpackChunkName: "admin-chunk" */  './components/login/Login.vue');
+//const Admin = () => import( /* webpackChunkName: "admin-chunk" */ './components/admin/Admin.vue');
+//const Orders = () => import( /* webpackChunkName: "admin-chunk" */  './components/admin/Orders.vue');
+//const Metadata = () => import( /* webpackChunkName: "admin-chunk" */  './components/admin/metadata/Super.vue');
+//const Config = () => import( /* webpackChunkName: "admin-chunk" */  './components/admin/configs/Configs.vue');
+import Login from  './components/login/Login.vue';
+import Admin from './components/admin/Admin.vue';
+import Orders from  './components/admin/Orders.vue';
+import Metadata from  './components/admin/metadata/Super.vue';
+import Config from  './components/admin/configs/Configs.vue';
 
 
 const router = new VueRouter({

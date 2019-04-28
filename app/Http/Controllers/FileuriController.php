@@ -15,4 +15,25 @@ class FileuriController extends Controller
         return Fileuri::all();
    
     }
+
+    public function redirectCatalogo()
+    {
+        $fileuri = Fileuri::where('name','catalogo')->get()->first();
+        
+        if ($fileuri->url)
+        {
+            return redirect($fileuri->url);
+        }
+        
+    }
+    public function redirectPrecios()
+    {
+        $fileuri = Fileuri::where('name','precios')->get()->first();
+        
+        if ($fileuri->url)
+        {
+            return redirect($fileuri->url);
+        }
+        
+    }
 }

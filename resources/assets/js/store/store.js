@@ -13,7 +13,7 @@ export const store = new Vuex.Store({
         categories:[],
         meta:[],
         searchTerm:'',
-        fileuris:[],
+      
     },
     getters: {
         getSearchTerm(store){
@@ -22,14 +22,7 @@ export const store = new Vuex.Store({
         getTutoSeen(store){
             return store.tutoSeen;
         },
-        getFileuri:(store) => (name) => {
-            let fileuri = store.fileuris.find(f => {
-                return f.name == name;
-            });
-            if(fileuri){
-                return fileuri.url;
-            }
-        },
+       
         getProductSlug:(store) => (product) =>{
             let category = store.categories.find(c => {
                 return c.id == product.category_id;
@@ -138,9 +131,7 @@ export const store = new Vuex.Store({
         setCategories(state, payload) {
             state.categories = payload
         },
-        setFileuris(state, payload) {
-            state.fileuris = payload
-        },
+        
         setTutoSeen(state){
             state.tutoSeen=true;
         }
@@ -192,14 +183,7 @@ export const store = new Vuex.Store({
                     commit('setCategories', response.data);
                 });
         },
-        fetchFileuris: ({
-            commit
-        }, payload) => {
-            Vue.http.get('/api/fileuris')
-                .then(response => {
-                    commit('setFileuris', response.data);
-                });
-        },
+       
     },
    
 

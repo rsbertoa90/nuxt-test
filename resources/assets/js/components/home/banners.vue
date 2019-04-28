@@ -37,7 +37,7 @@
         </div>
 
          <div v-if="precios" class="col-12 col-lg-4 row p-lg-4 justify-content-center mt-4 ">
-            <a :href="precios" target="_blank" class="white-banner row">
+            <a href="/descargar-lista-de-precios" target="_blank" class="white-banner row">
                 <div class="col-5">
                     <div class="overlayed-image">
                         <v-lazy-image src="/storage/images/app/celu_precios.png" alt="Lista de Precios"></v-lazy-image>
@@ -58,14 +58,7 @@
 
 <script>
 export default {
-    computed:{
-        catalogo(){
-            return this.$store.getters.getFileuri('catalogo');
-        },
-        precios(){
-            return this.$store.getters.getFileuri('precios');
-        },
-    }
+   
 }
 </script>
 

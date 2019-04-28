@@ -37,13 +37,13 @@
                             </router-link>
                         </li>
                         <li class="nav-item text-white" @click="closeNav" v-if="config && !config.maintenance">
-                             <a class="nav-link text-white" target="_blank" href="/MAJU-lista-de-precios.pdf" >
+                             <a class="nav-link text-white" target="_blank" href="/descargar-lista-de-precios" >
                                 <fa-icon icon="download"></fa-icon> Lista de precios
                             </a> 
                         </li>
                         <li class="nav-item text-white" @click="closeNav" v-if="config && !config.maintenance">
                             <a class="nav-link text-white" target="_blank" 
-                                href="/MAJU-catalogo.pdf">
+                                href="/descargar-catalogo-digital">
                                 <fa-icon icon="download"></fa-icon> Catalogo digital
                             </a> 
                         </li>
