@@ -76,13 +76,7 @@ import {
 } from 'vuex'
 /* import filters from './filters.js'; */
 
-Vue.component(
-    'csrf',
-    () => import(
-        /* webpackChunkName: "example-component" */
-        './components/csrf.vue'
-    )
-);
+Vue.component('csrf',require( './components/csrf.vue') );
 /* 
 Vue.component('csrf', require('./components/csrf.vue')); */
 Vue.component('dot-loader', require('vue-spinner/src/DotLoader.vue'));
