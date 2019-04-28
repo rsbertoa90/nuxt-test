@@ -14,6 +14,7 @@ use PDF;
 use View;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Fileuri;
 class GenerateCatalogo implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -38,9 +39,17 @@ class GenerateCatalogo implements ShouldQueue
     public function handle()
     {
      
+        $fileuri = Fileuri::findOrCreate('catalogo');
+        if($fileuri->url && file_exists(public_path().$fileuri->url))
+        {
+            unlink(public_path().$fileuri->url);
+        }
 
-        $path = public_path().'/MAJU-catalogo.pdf';
-        $today = Carbon::now()->format('d/m/Y');
+        
+        $date = str_slug(Carbon::now());
+        $fileuri->url = '/catalogo'.$date.'.pdf';
+        $path = public_path().$fileuri->url;
+
         $categories =Category::with('products.images')
                     ->with(['products' => function($q){
                         $q->where('paused',0);
@@ -59,9 +68,10 @@ class GenerateCatalogo implements ShouldQueue
             }
         }
 
-
+        $today = Carbon::now()->format('d/m/Y');
         $html = View::make('pdf.Catalogo2',compact('categories','today'))->render();
 
+        $fileuri->save();
         PDF::loadHTML($html)->save($path); 
 
         

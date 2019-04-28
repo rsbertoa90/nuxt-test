@@ -100,6 +100,7 @@ const app = new Vue({
             fetchConfig: 'fetchConfig',
             fetchStates: 'fetchStates',
             fetchMeta: 'fetchMeta',
+            fetchFileuris:'fetchFileuris'
         }),
 
 
@@ -110,5 +111,6 @@ const app = new Vue({
         this.fetchConfig();
         this.fetchStates();
         this.fetchMeta();
+        this.fetchFileuris();
     }
 });

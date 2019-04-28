@@ -3,7 +3,7 @@
        
         <home-top-row></home-top-row>
         <homeInfo class="mt-4 mb-4"></homeInfo>
-        <homeBanners class="mt-4 ml-lg-4"></homeBanners>
+        <homeBanners class="mt-4 ml-lg-4" v-if="config && !config.maintenance"></homeBanners>
         <homeTexts></homeTexts>
         <homeOffers v-if="config && !config.maintenance"></homeOffers>
         <fbComments></fbComments>

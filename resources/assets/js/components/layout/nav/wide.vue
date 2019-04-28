@@ -42,14 +42,14 @@
                                     <fa-icon icon="phone"></fa-icon>  Contactate
                                 </router-link>
                             </li>
-                            <li class="nav-item text-white" v-if="config && !config.maintenance">
-                                <a class="nav-link text-white" target="_blank" href="/MAJU-lista-de-precios.pdf" >
+                            <li class="nav-item text-white" v-if="config && !config.maintenance && precios" >
+                                <a class="nav-link text-white" target="_blank" :href="precios" >
                                     <fa-icon icon="download"></fa-icon> Lista de precios
                                 </a> 
                             </li>
-                            <li class="nav-item text-white" v-if="config && !config.maintenance">
+                            <li class="nav-item text-white" v-if="config && !config.maintenance && catalogo">
                                 <a class="nav-link text-white" target="_blank" rel="noreferrer"
-                                    href="/MAJU-catalogo.pdf">
+                                    :href="catalogo">
                                     <fa-icon icon="download"></fa-icon> Catalogo digital
                                 </a> 
                             </li>
@@ -95,6 +95,12 @@ export default {
        
     }},
     computed:{
+        catalogo(){
+            return this.$store.getters.getFileuri('catalogo');
+        },
+        precios(){
+            return this.$store.getters.getFileuri('precios');
+        },
         config(){
             return this.$store.getters.getConfig;
         },

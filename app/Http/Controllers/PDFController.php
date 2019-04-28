@@ -10,6 +10,7 @@ use App\Mail\Aviso;
 use App\Order;
 use App\Product;
 use App\Category;
+use App\Fileuri;
 use App\OrderProduct;
 use Mail;
 use PDF;
@@ -20,32 +21,18 @@ use App\Jobs\GenerateCatalogo;
 use App\Jobs\GenerateCategoryCatalogo;
 use Queue;
 use App\ProductImage;
+use Illuminate\Support\Facades\Cache;
 class PDFController extends Controller
 {
     //
 
    
 
-    public function pricesList()
-    {
-        
-        $categories = Category::notPaused();
-       
-        $today = Carbon::now()->format('d/m/Y');
-
-         $html = View::make('pdf.ListaDePrecios',compact('categories','today'))->render();
-        
-         $pdf = PDF::loadHTML($html);
-
-        return $pdf->download('MAJU-lista-de-precios.pdf');
-
-
-    }
     
     public function dispatchPricesListJob()
     {
 
-
+       
       Queue::push(new GeneratePricesList());
 
       return ;
@@ -53,6 +40,7 @@ class PDFController extends Controller
 
      public function dispatchCatalogoJob()
     {
+        
         Queue::push(new GenerateCatalogo());
 
         return;
@@ -60,6 +48,7 @@ class PDFController extends Controller
 
     public function dispatchCategoryCatalogJob($id)
     {
+       
         Queue::push(new GenerateCategoryCatalogo($id));
 
         return ;
@@ -105,35 +94,24 @@ class PDFController extends Controller
 
 
 
-    public function catalogo()
-    {
-        set_time_limit(300);
-
-       $categories = Category::orderBy('name')->get();
-        
-        $today = Carbon::now()->format('d/m/Y');
-        
-       /*  return view('pdf.Catalogo',compact('categories','today')); */
-        
-        $html = View::make('pdf.Catalogo',compact('categories','today'))->render();
-        
-        $pdf = PDF::loadHTML($html);
-
-        return $pdf->download('catalogo.pdf');
-
-    }
-
 
      public function replaceCatalogo(Request $request)
     {
         $catalogo = $request->file('catalogo');
+        $fileuri = Fileuri::findOrCreate('catalogo');
 
-        $path = public_path().'/MAJU-catalogo.pdf';
-        if (file_exists($path))
-        {
-            unlink($path);
+        if($fileuri->url){
+            $path = public_path().$fileuri->url;
+            if (file_exists($path)){
+                unlink($path);
+            }
         }
-
+        
+        $date = str_slug(Carbon::now());
+        $fileuri->url = '/catalogo'.$date.'.pdf';
+        $path = public_path().$fileuri->url;
+        $fileuri->save();
+        
         move_uploaded_file($catalogo,$path);
 
         return redirect('/admin/metadata');

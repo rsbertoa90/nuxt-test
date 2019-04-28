@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="col-7 p-2 d-flex flex-column justify-content-around align-items-center">
-                    <h4 class="text-center">Mira todas las ofertas!</h4>
+                    <h4 class="text-center">Mirá todas las ofertas!</h4>
                     <button class="btn bg-red text-white mt-4">
                        <b>Ver ofertas</b> 
                     </button>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col-7 p-2 d-flex flex-column justify-content-around align-items-center">
-                    <h4>Cotiza online!</h4>
+                    <h4>Mirá todos los productos!</h4>
                     <button class="btn bg-white text-red mt-4">
                         <b>Ir al cotizador</b>  
                     </button>
@@ -36,15 +36,15 @@
             </router-link>
         </div>
 
-         <div class="col-12 col-lg-4 row p-lg-4 justify-content-center mt-4 ">
-            <a href="/MAJU-lista-de-precios.pdf" target="_blank" class="white-banner row">
+         <div v-if="precios" class="col-12 col-lg-4 row p-lg-4 justify-content-center mt-4 ">
+            <a :href="precios" target="_blank" class="white-banner row">
                 <div class="col-5">
                     <div class="overlayed-image">
                         <v-lazy-image src="/storage/images/app/celu_precios.png" alt="Lista de Precios"></v-lazy-image>
                     </div>
                 </div>
-                <div class="col-7 p-2 d-flex flex-column justify-content-around align-items-center">
-                    <h4 class="text-center">Descarga la lista de precios!</h4>
+                <div  class="col-7 p-2 d-flex flex-column justify-content-around align-items-center">
+                    <h4 class="text-center">Descargá la lista de precios!</h4>
                     <button class="btn bg-red text-white mt-4">
                        <b>descargar</b> 
                     </button>
@@ -58,7 +58,14 @@
 
 <script>
 export default {
-    
+    computed:{
+        catalogo(){
+            return this.$store.getters.getFileuri('catalogo');
+        },
+        precios(){
+            return this.$store.getters.getFileuri('precios');
+        },
+    }
 }
 </script>
 
@@ -104,7 +111,8 @@ export default {
         background-color: #D52B1E;
         color:#fff;
          h4{
-            font-size:2rem;
+             text-align:center;
+            font-size:1.5rem;
         }
         
     }
