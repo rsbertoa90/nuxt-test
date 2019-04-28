@@ -36,7 +36,7 @@
             </router-link>
         </div>
 
-         <div v-if="precios" class="col-12 col-lg-4 row p-lg-4 justify-content-center mt-4 ">
+         <div  class="col-12 col-lg-4 row p-lg-4 justify-content-center mt-4 ">
             <a href="/descargar-lista-de-precios" target="_blank" class="white-banner row">
                 <div class="col-5">
                     <div class="overlayed-image">
