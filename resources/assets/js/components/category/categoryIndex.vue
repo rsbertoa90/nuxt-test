@@ -8,7 +8,7 @@
     <div class="col-12 col-lg-9 row p-0 m-0">    
         <div class="red-ribbon col-12">
             <div class="logo-square" v-if="category.image">
-                <v-lazy-image :src="category.image" :alt="category.name"></v-lazy-image>
+                <img :src="category.image" :alt="category.name">
             </div>
             <h1  class=" font-weight-bold" >
                  {{category.name|uc}}

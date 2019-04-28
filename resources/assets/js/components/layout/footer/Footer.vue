@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex justify-content-around footer">
         <div class="logo-container"> 
-            <v-lazy-image src="/storage/images/app/logo.png"></v-lazy-image>
+            <v-lazy-image src="/storage/images/app/logo.png" alt="Logo Maju"></v-lazy-image>
         </div>
         <div class="cat-container">
             <h3>Categorias:</h3>
@@ -51,10 +51,10 @@
             </div>
             <div class="mt-4 social">
                 <a href="https://www.facebook.com/BazarmayoristaMaju/" rel="noreferrer">
-                    <v-lazy-image src="/storage/images/app/social/fb.png"></v-lazy-image>             
+                    <v-lazy-image src="/storage/images/app/social/fb.png" alt="facebook"></v-lazy-image>             
                 </a>
                 <a href="https://www.instagram.com/bazar_mayorista_maju/" rel="noreferrer">
-                    <v-lazy-image src="/storage/images/app/social/instagram.png"></v-lazy-image>             
+                    <v-lazy-image src="/storage/images/app/social/instagram.png" alt="instagram"></v-lazy-image>             
                 </a>
             </div>
 

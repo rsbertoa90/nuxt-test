@@ -3,11 +3,11 @@
     <div class="w-100" >                        
      
          <router-link :to="productSlug()">
-            <v-lazy-image v-if="product.images[0]"   :src="product.images[0].url" /> 
+            <v-lazy-image v-if="product.images[0]"   :src="product.images[0].url" :alt="product.name"/> 
      
      
             
-            <v-lazy-image v-else   src="/storage/images/app/no-image.png" /> 
+            <v-lazy-image v-else   src="/storage/images/app/no-image.png" alt="Sin imagen" /> 
       
         
          </router-link>   
