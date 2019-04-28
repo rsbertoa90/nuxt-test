@@ -50,18 +50,27 @@ import "core-js/modules/es6.array.iterator";
 
 
 
+
+import Home from  './components/home/Home.vue'; 
+import Cotizer from './components/cotizer/Cotizer.vue';
+import Contact from './components/contact/Contact.vue';
+import Cart from './components/shoppingCart/ShoppingCart.vue';
+import Category from './components/category/Category.vue';
+import CategoryIndex from './components/category/categoryIndex.vue';
+import Product from './components/category/product/Product.vue';
+import Offers from  './components/offers/Offers.vue';
+
+//const Home = () =>  import(/* webpackChunkName: "user-chunk" */ './components/home/Home.vue') ; 
+//const Cotizer = () => import(/* webpackChunkName: "user-chunk" */ './components/cotizer/Cotizer.vue');
+//const Contact = () => import(/* webpackChunkName: "user-chunk" */ './components/contact/Contact.vue');
+//const Cart = () => import(/* webpackChunkName: "user-chunk" */ './components/shoppingCart/ShoppingCart.vue');
+//const Category = () => import(/* webpackChunkName: "user-chunk" */ './components/category/Category.vue');
+//const CategoryIndex = () => import(/* webpackChunkName: "user-chunk" */ './components/category/categoryIndex.vue');
+//const Product = () => import(/* webpackChunkName: "user-chunk" */ './components/category/product/Product.vue');
+//const Offers = ()  => import (/* webpackChunkName: "user-chunk" */ './components/offers/Offers.vue');
+
+
 const Login = () => import( /* webpackChunkName: "admin-chunk" */  './components/login/Login.vue');
-
-const Home = () =>  import(/* webpackChunkName: "user-chunk" */ './components/home/Home.vue') ; 
-const Cotizer = () => import(/* webpackChunkName: "user-chunk" */ './components/cotizer/Cotizer.vue');
-const Contact = () => import(/* webpackChunkName: "user-chunk" */ './components/contact/Contact.vue');
-const Cart = () => import(/* webpackChunkName: "user-chunk" */ './components/shoppingCart/ShoppingCart.vue');
-const Category = () => import(/* webpackChunkName: "user-chunk" */ './components/category/Category.vue');
-const CategoryIndex = () => import(/* webpackChunkName: "user-chunk" */ './components/category/categoryIndex.vue');
-const Product = () => import(/* webpackChunkName: "user-chunk" */ './components/category/product/Product.vue');
-const Offers = ()  => import (/* webpackChunkName: "user-chunk" */ './components/offers/Offers.vue');
-
-
 const Admin = () => import( /* webpackChunkName: "admin-chunk" */ './components/admin/Admin.vue');
 const Orders = () => import( /* webpackChunkName: "admin-chunk" */  './components/admin/Orders.vue');
 const Metadata = () => import( /* webpackChunkName: "admin-chunk" */  './components/admin/metadata/Super.vue');
