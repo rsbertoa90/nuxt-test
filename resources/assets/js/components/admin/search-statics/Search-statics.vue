@@ -83,7 +83,7 @@ export default {
 <style lang="scss" scoped>
     .table-container{
         max-width:400px;
-        max-height: 90vh;
+        max-height: 50vh;
         overflow-y: auto;
         margin-top:20px;
     }

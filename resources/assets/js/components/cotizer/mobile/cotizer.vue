@@ -135,12 +135,18 @@ import paginator from '../../admin/admin/paginator.vue';
                                 
                                 term = term.toLowerCase().trim();
                                 let lastChar = term[term.length -1];
-                              
                                 if (lastChar == 's')
                                 {
                                     term = term.substring(0, term.length-1);
                                  
                                 }
+                                lastChar = term[term.length -1];
+                                if (lastChar == 'e')
+                                {
+                                    term = term.substring(0, term.length-1);
+                                 
+                                }
+
                                 if (    addtores 
                                       && productName.indexOf(term) < 0 
                                         && categoryName.indexOf(term) < 0  
