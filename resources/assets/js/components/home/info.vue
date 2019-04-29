@@ -16,8 +16,8 @@
         <div class="info-item" v-if="config">
             <fa-icon icon="shopping-cart" class="icon"></fa-icon>
             <div class="d-flex flex-column ml-2 text-center">
-                <span> Compra mínima en el local {{config.minbuy}} </span>
-                <span>Compra mínima para envíos {{config.minbuy_ship}}</span>
+                <span> Compra mínima en el local ${{config.minbuy}} </span>
+                <span>Compra mínima para envíos ${{config.minbuy_ship}}</span>
             </div>
         </div>
     </div>

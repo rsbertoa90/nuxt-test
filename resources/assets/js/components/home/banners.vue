@@ -125,7 +125,7 @@ export default {
 
         .red-banner h4{
             
-                font-size:1.8rem;
+                font-size:1.5rem;
             
         }
 
