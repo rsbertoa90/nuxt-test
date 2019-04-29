@@ -90,6 +90,8 @@ Route::post('/cotizer/send', 'OrderController@userOrder');
 
 Route::post('/contacto','MailController@contacto');
 
+Route::post('/search-history','SearchHistoryController@save');
+
 Route::get('/descargar-lista-de-precios','FileuriController@redirectPrecios');
 
 Route::get('/descargar-catalogo-digital','FileuriController@redirectCatalogo');

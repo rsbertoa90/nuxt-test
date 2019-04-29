@@ -112,7 +112,11 @@ export const store = new Vuex.Store({
     },
     mutations: {
         setSearchTerm(state,payload){
+            
             state.searchTerm = payload;
+            if(state.searchTerm.trim().length > 2){
+                Vue.http.post('/search-history',{term:state.searchTerm});
+            }
         },
         setMeta(state, payload) {
             state.meta = payload;

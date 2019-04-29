@@ -76,6 +76,9 @@
                                 <router-link class="nav-link text-white" to="/admin/config"> <fa-icon icon="user-cog"></fa-icon> Configs </router-link>
                             </li>
                             <li class="nav-item " v-if="user && user.role_id < 3">
+                                <router-link class="nav-link text-white" to="/admin/busquedas"> <fa-icon icon="user-cog"></fa-icon> Busquedas </router-link>
+                            </li>
+                            <li class="nav-item " v-if="user && user.role_id < 3">
                                 <a class="nav-link text-white" href="/logout"> <fa-icon icon="user-cog"></fa-icon> Salir</a>
                             </li>
                         </ul>

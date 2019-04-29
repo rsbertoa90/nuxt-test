@@ -85,6 +85,9 @@ Vue.component('my-app', require('./components/App.vue'));
 
 
 
+
+
+
 import Routes from './routes.js';
 
 require('./faicons.js');

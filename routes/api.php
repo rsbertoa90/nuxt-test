@@ -42,3 +42,5 @@ Route::get('/custom-texts','CustomTextController@getAll');
 Route::get('/slides','SlideController@get');
 
 Route::get('/fileuris','FileuriController@get');
+
+Route::get('/search-history','SearchHistoryController@get');

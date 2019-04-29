@@ -80,7 +80,7 @@ import Admin from './components/admin/Admin.vue';
 import Orders from  './components/admin/Orders.vue';
 import Metadata from  './components/admin/metadata/Super.vue';
 import Config from  './components/admin/configs/Configs.vue';
-
+import SearchStatics from './components/admin/search-statics/Search-statics.vue';
 
 const router = new VueRouter({
     scrollBehavior() {
@@ -98,6 +98,12 @@ const router = new VueRouter({
             path:'/admin',
             name:'admin',
             component:Admin,
+            beforeEnter:guardAdmin
+        },
+        {
+            path:'/admin/busquedas',
+            name:'searchStatics',
+            component:SearchStatics,
             beforeEnter:guardAdmin
         },
         {
