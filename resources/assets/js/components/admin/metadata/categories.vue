@@ -47,6 +47,13 @@
                     <textarea rows="5" v-model.lazy.trim="selected.metadescription" @change="save(selected,'metadescription')" 
                         type="text" class="col-12 col-lg-8 form-control"></textarea>
                 </div>
+                <div class="p2 row">
+                    <label class="col-12 col-lg-4">
+                        Palabras clave para busqueda
+                    </label>
+                    <textarea rows="5" v-model.lazy.trim="selected.keywords" @change="save(selected,'keywords')" 
+                        type="text" class="col-12 col-lg-8 form-control"></textarea>
+                </div>
 
                 <div class="row mt-4">
                     <div class="col-6 overflow-hidden">

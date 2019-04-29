@@ -134,8 +134,11 @@ import paginator from '../../admin/admin/paginator.vue';
                                 
                                 term = term.toLowerCase();
                                 if (    addtores 
-                                        && productName.indexOf(term) < 0 
+                                         && productName.indexOf(term) < 0 
                                         && categoryName.indexOf(term) < 0  
+                                        && (!cat.description || cat.description.indexOf(term)< 0)
+                                        && (!cat.keywords || cat.keywords.indexOf(term)< 0)
+                                        && (!prod.description || prod.description.indexOf(term) < 0)
                                     ){
                                         addtores = false;   
                                     } 
