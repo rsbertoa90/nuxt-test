@@ -8,7 +8,7 @@
                 <div  v-if="enterhand" class="animation "
                         :class="{redcircle:clicknow}">
                     
-                    <i class="fa fa-mouse-pointer"></i>
+                   <fa-icon icon="mouse-pointer" class="icon"></fa-icon>
                 
                 </div>
                

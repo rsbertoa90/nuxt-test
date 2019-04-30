@@ -54,9 +54,7 @@ import metaMixin from '../metadataMixin';
         },
      
         computed: {
-            tutoSeen(){
-                return this.$store.getters.getTutoSeen;
-            },
+          
             list(){
                 return this.$store.getters.getList;
             },

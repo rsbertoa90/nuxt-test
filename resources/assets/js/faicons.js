@@ -47,11 +47,13 @@ import {
     faCheckSquare,
     faMapMarkerAlt,
     faUserCheck,
+    faMousePointer,
     
 } from '@fortawesome/free-solid-svg-icons'
 
 
 library.add(faPauseCircle,
+            faMousePointer,
             faUserCheck,
             faHandPointRight,
             faMapMarkerAlt,

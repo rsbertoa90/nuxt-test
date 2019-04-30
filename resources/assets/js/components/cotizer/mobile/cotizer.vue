@@ -55,8 +55,8 @@
                 </h2>
         </div>
 
-    <!-- <cotizer-tutorial v-if="!user || user.role_id > 2 && !tutoSeen"></cotizer-tutorial>
- -->
+    <cotizer-tutorial v-if="!user || user.role_id > 2 && !tutoSeen"></cotizer-tutorial>
+
     </div>
 </template>
 
@@ -67,7 +67,7 @@ import categoriesAcordion from './categories-acordion.vue';
 import codeSelector from '../code-selector.vue';
 import appBanner from '../banner.vue';
 import hideOptbutton from '../hide-opt-button.vue';
-import cotizerTutorial from '../tutorial.vue';
+import cotizerTutorial from './tutorial.vue';
 import paginator from '../../admin/admin/paginator.vue';
  export default {
         components:{
