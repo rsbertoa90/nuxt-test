@@ -114,8 +114,10 @@ export const store = new Vuex.Store({
         setSearchTerm(state,payload){
             
             state.searchTerm = payload;
-            if(state.searchTerm.trim().length > 2){
-                Vue.http.post('/search-history',{term:state.searchTerm});
+            if(!state.user || state.user.role_id > 2){
+                if(state.searchTerm.trim().length > 2){
+                    Vue.http.post('/search-history',{term:state.searchTerm});
+                }
             }
         },
         setMeta(state, payload) {

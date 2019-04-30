@@ -4,7 +4,7 @@
     <div v-if="scrolled && !viewed" class="overlay">
         <div class="image-container">
             <v-lazy-image :src="imagesrc"></v-lazy-image>
-            <transition enter-active-class="animate animated slideInUp">
+            <transition enter-active-class=" animated slideInUp">
                 <div  v-if="enterhand" class="animation "
                         :class="{redcircle:clicknow}">
                     
