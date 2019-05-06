@@ -1,11 +1,6 @@
 <template>
-<div v-if="category && category.products" class="row">
-    <div class="col-3" v-if="$mq=='lg'">
-        <div >
-            <categories-pannel></categories-pannel>
-        </div>
-    </div>
-    <div class="col-12 col-lg-9 row p-0 m-0">    
+<div v-if="category && category.products" class="row" :key="$route.path">
+    <div class="col-12 row p-0 m-0">    
         <div class="red-ribbon col-12">
             <div class="logo-square" v-if="category.image">
                 <img :src="category.image" :alt="category.name">
@@ -39,9 +34,9 @@
 <script>
 import infoRow from '../layout/info-row.vue';
 import productCard from './product/small-card.vue';
-import categoriesPannel from '../home/floating-categories-pannel.vue';
+
 export default {
-    components:{productCard,categoriesPannel,infoRow},
+    components:{productCard,infoRow},
     data(){
         return{
             yStyle:'top:100px',

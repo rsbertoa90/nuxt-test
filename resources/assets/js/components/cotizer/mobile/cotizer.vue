@@ -6,6 +6,8 @@
                <hideOptbutton></hideOptbutton>
             </div>
 
+            
+
             <div :class="{'col-12 col-lg-5 text-center':$mq=='lg',
                          'col-12 col-lg-4 text-center neg-margins':$mq!='lg'}" >
                  <app-banner></app-banner>

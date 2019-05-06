@@ -27,7 +27,7 @@ import VueMq from 'vue-mq'
 Vue.use(VueMq, {
     breakpoints: {
         sm: 600,
-        md: 1250,
+        md: 1100,
         lg: Infinity,
     }
 });

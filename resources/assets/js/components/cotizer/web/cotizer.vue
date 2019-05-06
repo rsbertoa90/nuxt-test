@@ -27,7 +27,7 @@
          -->
             <hr>
             
-            <div class="row">
+            <div class="row" v-if="paginatedProducts && paginatedProducts.length > 0">
                 <paginator class="col-12"
                                 :selectedPage="selectedPage"   
                                 :products="filteredProducts" 
@@ -36,8 +36,9 @@
 
                 </paginator>
                 <h2 v-if="selectedCategory">{{selectedCategory.name}}</h2>
-                
-                <products-grid class="col-12" :products="paginatedProducts"></products-grid>
+                <transition enter-active-class="animated slideInUp">
+                    <products-grid class="col-12" :products="paginatedProducts" :key="paginatedProducts[0].slug"></products-grid>
+                </transition>
                 
                 <paginator class="col-12"
                                 :selectedPage="selectedPage"   

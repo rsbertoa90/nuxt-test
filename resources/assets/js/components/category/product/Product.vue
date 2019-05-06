@@ -1,11 +1,6 @@
 <template>
 <div v-if="product" class="row">
-    <div class="col-3" v-if="$mq=='lg'">
-        <div>
-            <categories-pannel></categories-pannel>
-        </div>
-    </div>
-    <div class="col-12 col-lg-9 row p-0 m-0">    
+    <div class="col-12  row p-0 m-0">    
         <div class="red-ribbon col-12" v-if="$mq == 'lg'">
            
             <h1  class=" font-weight-bold" >
@@ -47,12 +42,12 @@
 
 <script>
 import relatedProducts from './related-products.vue';
-import categoriesPannel from '../../home/floating-categories-pannel.vue';
+
 import infoRow from './info.vue';
 import card from './card.vue';
 import smallCard from './small-card.vue';
 export default {
-    components:{card,smallCard,categoriesPannel,infoRow,relatedProducts},
+    components:{card,smallCard,infoRow,relatedProducts},
     metaInfo(){
         return{
             title:this.metatitle,

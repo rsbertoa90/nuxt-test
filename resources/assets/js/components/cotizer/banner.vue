@@ -11,10 +11,14 @@
             
         </div>
     </div>
+    <div v-if="searchTerm && searchTerm.length > 1" class="col-12 mb-4 mt-4">
+            <h2>Resultados de busqueda para "{{searchTerm}}" </h2>
+    </div>
+    
     <div class="col-12">
         <info-row></info-row>
     </div>
-    <div v-if="description" class="mt-3">
+    <div v-if="description" class="mt-3 p-2">
         <h5 >
             {{ description }}
         </h5>
@@ -36,6 +40,9 @@ export default {
         }
     },
     computed:{
+        searchTerm(){
+            return this.$store.getters.getSearchTerm;
+        },
         configs()
         {
             return this.$store.getters.getConfig;
