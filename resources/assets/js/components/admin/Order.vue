@@ -1,9 +1,48 @@
 <template>
     <div class="border border-primary p-3 mt-3">
+         <div class="row">
+            <div class="col-12 offset-lg-9 col-lg-3">
+                <a  :href="`/admin/pdf/${order.id}`" target="_blank"
+                    class="btn btn-block btn-outline-primary">
+                    Generar PDF
+                </a>
+            </div>
+        </div>
+        <div class="row mt-3 mb-3">
+            <div class="col-12 col-lg-4" v-if="order.status == 'pagado'">
+                <button  @click="setStatus('enviado')"
+                    class="btn btn-block btn-outline-info">
+                    <fa-icon icon="truck"></fa-icon>
+                    Marcar como enviado
+                </button>
+            </div>
+            <div class="col-12 col-lg-4" v-if="order.status != 'pagado' && order.status != 'cancelado'">
+                <button  @click="setStatus('pagado')"
+                    class="btn btn-block btn-outline-success">
+                     <fa-icon icon="dollar-sign"></fa-icon>
+                    Marcar como pagado
+                </button>
+            </div>
+            <div class="col-12 col-lg-4" v-if="order.status != 'cancelado'" >
+                <button 
+                        @click="setStatus('cancelado')"
+                    class="btn btn-block btn-outline-danger">
+                     <fa-icon icon="times"></fa-icon>
+                    Marcar como Cancelado
+                </button>
+            </div>
+            <div class="col-12 col-lg-4" v-if="order.status != 'pendiente' && order.status != 'enviado'">
+                <button  @click="setStatus('pendiente')"
+                    class="btn btn-block btn-outline-warning">
+                     <fa-icon icon="clock"></fa-icon>
+                    Marcar como Pendiente
+                </button>
+            </div>
+        </div>
+
         <div>
             <div>
                 <span class="font-weight-bold text-primary">Fecha: {{order.created_at | datetime}} </span> <br>
-                <span class="font-weight-bold text-primary" v-if="order.seller">Vendedor: {{order.seller}} </span>
                 <span v-if="order.comments"
                         class="mt-2"> -- {{order.comments}} -- </span>
             </div>
@@ -60,45 +99,7 @@
                     - Retira en local.
                 </div>
         </div>
-        <div class="row">
-            <div class="col-12 offset-lg-9 col-lg-3">
-                <a  :href="`/admin/pdf/${order.id}`" target="_blank"
-                    class="btn btn-block btn-outline-primary">
-                    Generar PDF
-                </a>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-12 col-lg-4" v-if="order.status == 'pagado'">
-                <button  @click="setStatus('enviado')"
-                    class="btn btn-block btn-outline-info">
-                    <fa-icon icon="truck"></fa-icon>
-                    Marcar como enviado
-                </button>
-            </div>
-            <div class="col-12 col-lg-4" v-if="order.status != 'pagado' && order.status != 'cancelado'">
-                <button  @click="setStatus('pagado')"
-                    class="btn btn-block btn-outline-success">
-                     <fa-icon icon="dollar-sign"></fa-icon>
-                    Marcar como pagado
-                </button>
-            </div>
-            <div class="col-12 col-lg-4" v-if="order.status != 'cancelado'" >
-                <button 
-                        @click="setStatus('cancelado')"
-                    class="btn btn-block btn-outline-danger">
-                     <fa-icon icon="times"></fa-icon>
-                    Marcar como Cancelado
-                </button>
-            </div>
-            <div class="col-12 col-lg-4" v-if="order.status != 'pendiente' && order.status != 'enviado'">
-                <button  @click="setStatus('pendiente')"
-                    class="btn btn-block btn-outline-warning">
-                     <fa-icon icon="clock"></fa-icon>
-                    Marcar como Pendiente
-                </button>
-            </div>
-        </div>
+       
     </div>
 </template>
 
