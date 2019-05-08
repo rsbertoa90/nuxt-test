@@ -83,7 +83,7 @@ class CategoryController extends Controller
             if(file_exists($imagePath)){
                 
                 
-                unlink($category->image);
+                unlink($imagePath);
                 $imageurl = getcwd() . $category->image;
                 if(file_exists($imageurl)){
                     unlink($imageurl);
