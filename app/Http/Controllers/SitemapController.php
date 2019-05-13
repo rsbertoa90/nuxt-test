@@ -16,9 +16,6 @@ class SitemapController extends Controller
             '/',
             '/cotizador',
             '/carrito',
-            '/ofertas',
-            '/contacto',
-            
         ] ; 
 
         $categories = Category::notPaused();
@@ -39,7 +36,7 @@ class SitemapController extends Controller
         }
 
         foreach ($array as $key => $url) {
-            $new = 'mayoristamaju.com/'. $url;
+            $new = 'matesfabi.com/'. $url;
             $new = str_replace('//','/',$new);
             $new = 'https://'.$new;
             $array[$key] = $new;

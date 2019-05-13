@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "453627fa557f208ea56272c0cbdd0119",
+    "content-hash": "3d7f093cf9d53cbe491b831104635c86",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1517,6 +1517,59 @@
                 "php"
             ],
             "time": "2019-02-16T20:54:15+00:00"
+        },
+        {
+            "name": "pallares/laravel-nuxt",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/skyrpex/laravel-nuxt.git",
+                "reference": "8f9c9bb16ac5d011f703935ebf544e7ab3323410"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/skyrpex/laravel-nuxt/zipball/8f9c9bb16ac5d011f703935ebf544e7ab3323410",
+                "reference": "8f9c9bb16ac5d011f703935ebf544e7ab3323410",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.5.*|5.6.*|5.7.*|5.8.*",
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pallares\\LaravelNuxt\\LaravelNuxtServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pallares\\LaravelNuxt\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cristian Pallarés",
+                    "email": "cristian@pallares.io",
+                    "homepage": "https://pallares.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Build a SPA with Laravel and Nuxt",
+            "homepage": "https://github.com/skyrpex/laravel-nuxt",
+            "keywords": [
+                "SPA",
+                "laravel",
+                "nuxt",
+                "vue"
+            ],
+            "time": "2019-03-04T16:12:35+00:00"
         },
         {
             "name": "paragonie/random_compat",

@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->integer('role_id')->unsigned()->default(3);
             $table->foreign('role_id')->references('id')->on('roles');
             $table->string('name');
+            $table->string('avatar')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();

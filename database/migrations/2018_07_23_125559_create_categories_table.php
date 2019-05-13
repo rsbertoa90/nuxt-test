@@ -17,6 +17,13 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('code')->unique()->nullable();
             $table->string('name')->unique();
+            $table->text('description')->nullable();
+            $table->text('homedescription')->nullable();
+
+            $table->text('metatitle')->nullable();
+            $table->text('metadescription')->nullable();
+            $table->string('slug')->unique()->nullable();
+            $table->string('image')->default('/storage/images/app/no-image.png');
             $table->softDeletes();
             $table->timestamps();
         });

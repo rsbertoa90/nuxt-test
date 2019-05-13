@@ -3,85 +3,93 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\Cotizacion;
-use App\Mail\MailContacto;
-use App\Mail\Aviso;
-use App\Order;
-use App\Product;
-use App\City;
-use App\OrderProduct;
-use Mail;
-use PDF;
+use App\Mail\RegalosEmpresariales;
+use App\Mail\Franquicia;
+use App\Mail\Contacto;
 use Carbon\Carbon;
-use View;
-
 class MailController extends Controller
 {
 
-    public static function mailAdmin($email){
-                    Mail::to('multibazarmaju@gmail.com')
-                    ->bcc('gisellaRomina678@gmail.com')
-                    ->send($email);
-  }
-
-
-
-  public function contacto(request $request)
-  {
-    $data = $request->all();
-    $city = City::find($request->city);
-
-    self::mailAdmin(new MailContacto($data,$city));
-
-  }
-
-    public function cotizacion(Request $request)
+       public function imageEmbed($image)
     {
-        $request->validate([
-            'email'=>'required|email',
-            'list'=>'required'
-            ]);
-             
-      $products = json_decode($request->list);
-      $phone = $request->phone;
-      $message = $request->message;
-      $email = $request->email;
-      $total = $request->total;
-            
-      $order = Order::create([
-          'email'=>$email,
-          'phone'=>$phone,
-          'message'=>$request->message,
-          'name'=>$request->name,
-          'source'=>'user'
-      ]);
-
-      foreach ($products as $p)
-      {
-         
-        if ($p->units >= $p->pck_units){
-            $price = $p->pck_price;
-        }else {
-            $price = $p->price;
-        }
-        OrderProduct::create([
-              'product_id' => $p->id,
-              'order_id'=>$order->id,
-              'units'=>$p->units,
-              'price'=>$price,
-              ]);
-      }
-
-      $order = Order::find($order->id);
        
-      Mail::to($order->email)->bcc(['multibazarmaju@gmail.com','roominagii@gmail.com'])
-            ->send(new Cotizacion($order))
-            ;
 
-      
-            
-          
+        // Read image path, convert to base64 encoding
+        $imageData = base64_encode(file_get_contents($image));
+
+        // Format the image SRC:  data:{mime};base64,{data};
+        $src = 'data:'.mime_content_type($image).';base64,'.$imageData;
+
+        // Echo out a sample image
+       return $src;
     }
 
-    
+
+
+    public function regalosEmpresariales(Request $request)
+    {
+        
+        $image = $request->file('image');
+        $image = $this->imageEmbed($image->path());
+        
+        $mail = new RegalosEmpresariales(
+            $request->phone,
+            $request->email,
+            $image,
+            
+            $request->products,
+            $request->name,
+            $request->qty,
+           Carbon::parse($request->date)->format('d/m/Y')
+        );
+
+        MailController::mailAdmin($mail);
+
+        return redirect('/');
+        
+
+    }
+
+    public function franquicia(Request $request)
+    {
+        $mail = new Franquicia(
+            $request->name,
+            $request->mail,
+            $request->phone,
+            $request->msg
+        );
+
+        MailController::mailAdmin($mail);
+        return redirect('/');
+    }
+
+    public function contacto(Request $request)
+    {
+        $mail = new Contacto(
+            $request->name,
+            $request->mail,
+            $request->subject,
+            $request->msg
+        );
+
+        MailController::mailAdmin($mail);
+        return redirect('/');
+    }
+
+     private static function mailAdmin($email){
+        Mail::to('matesfabi@gmail.com')
+        ->bcc('roominagii@gmail.com')
+        ->send($email);
+    }
+
+
+    public static function mailOrderToClient($order)
+    {
+        Mail::to($order->email)
+            ->bcc(["matesfabi@gmail.com","roominagii@gmail.com"])
+            ->send(new Cotizacion($order));
+           
+    }
 }

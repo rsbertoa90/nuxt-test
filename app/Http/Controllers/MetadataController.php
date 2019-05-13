@@ -4,58 +4,44 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Metadata;
-use Illuminate\Support\Facades\Cache;
+
+
+
 class MetadataController extends Controller
 {
+    //
 
-     public function update(Request $request)
+    public function update(Request $request)
     {
-        Cache::forget('metadatas');
+        $meta = Metadata::findOrCreate($request->page);
+       
+        
         $field = $request->field;
-        $meta = Metadata::find($request->id);
+        
         $meta->$field = $request->value;
+        
         $meta->save();
-    }
-
-    public function get($page)
-    {   
-        return Metadata::where('page',$page)->get()->first();
-    }
-
-     public function getAll(){
         
-        if ( Cache::has('metadatas') ){
-            
-            return Cache::get('metadatas');
+        return;
+        
+    }
+
+
+    public function getAll(){
+        $pages = ['home',
+                  'cotizador',
+                  'franquicia',
+                  'regalos-empresariales',
+                  'contacto',
+                  'sucursales'];
+        
+        $res = [];
+
+        foreach ($pages as $page)
+        {
+            $res[] = Metadata::findOrCreate($page);
         }
-        else{
 
-            return Cache::rememberForever('metadatas', function(){
-                $pages = ['home',
-                      'cotizador',
-                      'contacto',
-                      'ofertas',
-                      'carrito',
-                       ];
-            
-                $res = [];
-        
-                foreach ($pages as $page)
-                {
-                    $res[] = Metadata::findOrCreate($page);
-                }
-                return $res;
-            });
-        }
-        
+        return $res;
     }
-
-
-    public function page($page)
-    {
-        $meta = Metadata::where('page',$page)->get()->first();
-        return view('admin.metadatas',compact('meta'));
-    } 
-
-
 }

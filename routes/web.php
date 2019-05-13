@@ -96,4 +96,12 @@ Route::get('/descargar-lista-de-precios','FileuriController@redirectPrecios');
 
 Route::get('/descargar-catalogo-digital','FileuriController@redirectCatalogo');
 
+
+Route::get(
+    '{uri}',
+    '\\'.Pallares\LaravelNuxt\Controllers\NuxtController::class
+)->where('uri', '.*');
+
+/* 
 Route::get('/{any}','SinglePageController@index')->where('any', '.*');
+ */

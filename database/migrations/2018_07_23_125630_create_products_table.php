@@ -19,13 +19,18 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->string('code');
+            $table->foreign('category_id')
+                   ->references('id')
+                   ->on('categories');
+            $table->string('code')->unique();
             $table->string('name');
+            $table->text('description')->nullable();
+            $table->string('slug')->nullable();
             $table->integer('price')->default(0);
+            $table->boolean('paused')->default(false);
             $table->integer('pck_units')->default(1);
             $table->integer('pck_price')->default(0);
-            $table->string('image')->default('/storage/images/app/no-image.png');
+            $table->boolean('offer')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -4,128 +4,106 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
-use App\ProductImage;
-use App\Category;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use  Illuminate\Foundation\Http\FormRequest;
+use App\Metadata;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
+use App\SearchHistory;
+
 class ProductController extends Controller
 {
 
-      public function forgetCaches(){
-         Cache::forget('productsNotPaused');
-          Cache::forget('categories');
-          Cache::forget('products');
+     public function forgetCaches(){
+        Cache::forget('productsNotPaused');
+        Cache::forget('categories');
     }
 
 
-    public function getAll()
-    {   
-        return Cache::rememberForever('products', function () {
-             return Product::with('category')->with('suplier')->with('images')->get();
 
-        }); 
-       
+    public function searchResults(Request $request)
+    {
+    
+      // user can provide double space by accident, or on purpose:
+      $search = $request->input('search');
+
+      /* Guardo en historial de busquedas */
+      $user = Auth::user();
+      if (!$user || $user->role_id > 2)
+      {
+        SearchHistory::create([
+          'term'=>$search
+        ]);
+      }
+
+      // so with explode you get this:
+      $array = explode(' ', $search);
+
+      $products = Product::where('paused',0)->where(function ($q) use ($array) {
+      foreach ($array as $value) {
+        $q->orWhere('name', 'like', "%{$value}%");
+      }
+    })->pluck('id')->toArray();;
+      
+      
+      return view('search-results',compact('products','search'));
+    
+
     }
 
-    public function update(Request $request) 
+      public static function detail($categorySlug,$productSlug)
+    {
+           $slug = '/'.$productSlug;
+           $product = Product::where('slug',$slug)->get()->first();
+           if($product){
+               $meta = new Metadata();
+               $meta->metatitle = $product->name;
+               $meta->metadescription = $product->description;
+               return view('product',compact('product','meta'));
+           } 
+           return redirect('/');
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
+        $this->forgetCaches();
+        
+        return Product::create($request->only(['price',
+                                                'category_id',
+                                                'name',
+                                                'code'
+                                              ]));
+    }
+
+    
+
+
+
+    public function update(Request $request)
     {
         $this->forgetCaches();
 
-        $product = Product::find($request->product);
         $field = $request->field;
-
-        if ($request->field == 'paused'){
-           $request->value = (int) ($request->value == 'true');
-        }
-        if ($request->field == 'offer'){
-           $request->value = (int) ($request->value == 'true');
-        }
-
-
+        $product = Product::find($request->product);
         $product->$field = $request->value;
         $product->save();
-        return $request->all();
+        return $product;
     }
 
-    public function uploadImage(Request $request)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
     {
-      
-        
-        $file = $request->file('image');
-        
-        
-
-            
-            $path = $file->storePublicly('/images/products');
-            $path = '/storage/'.$path;
-            $product = Product::find($request->product);
-            
-            $productImage = ProductImage::create([
-                'url' => $path,
-                'product_id' => $product->id
-                ]);
-            
-              $this->forgetCaches();
-                
-       
+        $this->forgetCaches();
+        Product::destroy($id);
         return;
-
-    }
-
-    public function save(Request $request)
-    {
-        $this->forgetCaches();
-        if ( $request->pck_price == 0 )
-        {
-            $request->pck_price = $request->price;
-        }
-       $product = Product::create($request->except('_token'));
-       $product = Product::with('category')->find($product->id);
-       return $product;
-    }
-
-    public function delete($id)
-    {
-        $this->forgetCaches();
-        $product = Product::find($id);
-        $category = $product->category;
-        
-        $product->code = "del".$product->code;
-        $product->save();
-        $product->delete();
-
-        
-            if( $category->products->count() == 0){
-                $category->delete();
-            }
-        
-
-        return $category;
-
-    }
-
-    public function deleteImage(Request $request){
-        $this->forgetCaches();
-        $pi = ProductImage::find($request->id);
-        $pi->delete();
-
-        return redirect('/admin');
-
-    }
-
-    public function setFirstImage(Request $request){
-       $this->forgetCaches();
-        $product =Product::find($request->product);
-
-        foreach ($product->images as  $image) {
-            if ($image->id == $request->first){
-                $image->first = 1;
-                $image->save();
-            }else{
-                $image->first = 0;
-                $image->save();
-            }
-        }
     }
 }
